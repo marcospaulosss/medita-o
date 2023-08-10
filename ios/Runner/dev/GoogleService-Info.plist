@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>106395996253-47re9j5qpusudfhvpfc8r3n9u8a86d76.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.106395996253-47re9j5qpusudfhvpfc8r3n9u8a86d76</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>106395996253-08bcto7ojojf3aqhnosen8l2dfvq4p8e.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyASSIopeAw71gLaEsXpNYEMHOASPctD5IQ</string>
+	<key>GCM_SENDER_ID</key>
+	<string>106395996253</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>eumedito.org.cincoMinutos.dev</string>
+	<key>PROJECT_ID</key>
+	<string>minutos-3ae7f</string>
+	<key>STORAGE_BUCKET</key>
+	<string>minutos-3ae7f.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:106395996253:ios:fa86692c5f4dffcd03bdb4</string>
+</dict>
+</plist>

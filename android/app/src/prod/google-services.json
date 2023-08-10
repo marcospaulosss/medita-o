@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "106395996253",
+    "project_id": "minutos-3ae7f",
+    "storage_bucket": "minutos-3ae7f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:106395996253:android:aae5cc5b4f1811e303bdb4",
+        "android_client_info": {
+          "package_name": "eumedito.org.cinco_minutos"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "106395996253-m4h2d9u355su1660jtjqjkvr3ndrd6hq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "eumedito.org.cinco_minutos",
+            "certificate_hash": "ff4e61cdbcd87da0baf80b214a697a295ee4afc3"
+          }
+        },
+        {
+          "client_id": "106395996253-caj5abenrbfddoe8mo6r274t35h127kk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBcejDEzpp4eYvt0HJnDU-CrM8ytSqSaJI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "106395996253-caj5abenrbfddoe8mo6r274t35h127kk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

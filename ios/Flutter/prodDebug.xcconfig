@@ -1,0 +1,7 @@
+#include "Generated.xcconfig"
+
+FLUTTER_TARGET=lib/core/flavors/main_prod.dart
+ASSET_PREFIX=prod
+BUNDLE_NAME=5 Minutos
+BUNDLE_DISPLAY_NAME=5 Minutos
+REVERSED_CLIENT_ID=com.googleusercontent.apps.106395996253-1o0qdh69ns2ttodsflvjth1n59j5sadr

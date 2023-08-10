@@ -1,0 +1,7 @@
+#include "Generated.xcconfig"
+
+FLUTTER_TARGET=lib/core/flavors/main_dev.dart
+ASSET_PREFIX=dev
+BUNDLE_NAME=Dev
+BUNDLE_DISPLAY_NAME=Dev
+REVERSED_CLIENT_ID=com.googleusercontent.apps.106395996253-47re9j5qpusudfhvpfc8r3n9u8a86d76

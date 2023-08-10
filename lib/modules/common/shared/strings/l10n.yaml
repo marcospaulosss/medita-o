@@ -1,0 +1,7 @@
+arb-dir: .
+template-arb-file: common_pt.arb
+output-dir: ./localization
+output-localization-file: common_strings.dart
+output-class: CommonStrings
+nullable-getter: false
+synthetic-package: false

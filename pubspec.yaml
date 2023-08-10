@@ -1,0 +1,124 @@
+name: cinco_minutos_meditacao
+description: A new Flutter project.
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.0.6 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.2
+  firebase_auth: ^4.7.2
+  firebase_core: ^2.15.0
+  google_sign_in: ^6.1.4
+  flutter_dotenv: ^5.1.0
+  firebase_analytics: ^10.4.4
+  firebase_crashlytics: ^3.3.4
+  get_it: ^7.6.0
+  auto_route: ^7.8.0
+  intl: ^0.18.0
+  mockito: ^5.4.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^2.0.0
+  flutter_flavorizr: ^2.2.1
+  auto_route_generator: ^7.3.0
+  build_runner: ^2.4.6
+
+flavorizr:
+  app:
+    android:
+      flavorDimensions: "flavor-type"
+
+  flavors:
+    dev:
+      app:
+        name: "Dev"
+      android:
+        applicationId: "eumedito.org.cinco_minutos.dev"
+        icon: "assets/images/icon_app_android.jpeg"
+        firebase:
+          config: "lib/core/firebase/dev/google-services.json"
+
+      ios:
+        bundleId: "eumedito.org.cincoMinutos.dev"
+        buildSettings:
+          # Development Team is visible in the apple developer portal
+          DEVELOPMENT_TEAM: cincoMinutos-dev
+          PROVISIONING_PROFILE_SPECIFIER: "Dev-ProvisioningProfile"
+        icon: "assets/images/icon_app_ios.jpeg"
+        firebase:
+          config: "lib/core/firebase/dev/GoogleService-Info.plist"
+        variables:
+          REVERSED_CLIENT_ID:
+            value: "com.googleusercontent.apps.106395996253-47re9j5qpusudfhvpfc8r3n9u8a86d76"
+          FLUTTER_TARGET:
+            value: "lib/core/flavors/main_dev.dart"
+
+    prod:
+      app:
+        name: "5 Minutos"
+      android:
+        applicationId: "eumedito.org.cinco_minutos"
+        icon: "assets/images/icon_app_android.jpeg"
+        firebase:
+          config: "lib/core/firebase/prod/google-services.json"
+
+      ios:
+        bundleId: "eumedito.org.cincoMinutos"
+        buildSettings:
+          # Development Team is visible in the apple developer portal
+          DEVELOPMENT_TEAM: cincoMinutos-prod
+          PROVISIONING_PROFILE_SPECIFIER: "Prod-ProvisioningProfile"
+        icon: "assets/images/icon_app_ios.jpeg"
+        firebase:
+          config: "lib/core/firebase/prod/GoogleService-Info.plist"
+        variables:
+          REVERSED_CLIENT_ID:
+            value: "com.googleusercontent.apps.106395996253-1o0qdh69ns2ttodsflvjth1n59j5sadr"
+          FLUTTER_TARGET:
+            value: "lib/core/flavors/main_prod.dart"
+
+flutter:
+
+  uses-material-design: true
+
+  assets:
+    - .env.dev
+    - .env
+    - assets/images/
+
+  # An image asset can refer to one or more resolution-specific "variants", see
+  # https://flutter.dev/assets-and-images/#resolution-aware
+
+  # For details regarding adding assets from package dependencies, see
+  # https://flutter.dev/assets-and-images/#from-packages
+
+  # To add custom fonts to your application, add a fonts section here,
+  # in this "flutter" section. Each entry in this list should have a
+  # "family" key with the font family name, and a "fonts" key with a
+  # list giving the asset and other descriptors for the font. For
+  # example:
+  # fonts:
+  #   - family: Schyler
+  #     fonts:
+  #       - asset: fonts/Schyler-Regular.ttf
+  #       - asset: fonts/Schyler-Italic.ttf
+  #         style: italic
+  #   - family: Trajan Pro
+  #     fonts:
+  #       - asset: fonts/TrajanPro.ttf
+  #       - asset: fonts/TrajanPro_Bold.ttf
+  #         weight: 700
+  #
+  # For details regarding fonts from package dependencies,
+  # see https://flutter.dev/custom-fonts/#from-packages
