@@ -50,7 +50,7 @@ jobs:
   build_appbundle:
     if: "!github.event.release.prerelease"
     name: Build Flutter (Android)
-    depends-on: flutter_test
+    needs: flutter_test
     runs-on: ubuntu-latest
     permissions:
       checks: write
