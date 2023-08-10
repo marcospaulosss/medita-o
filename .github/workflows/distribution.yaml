@@ -49,8 +49,8 @@ jobs:
       - name: Upload a Build Artifact to Firebase app distribution
         uses: wzieba/Firebase-Distribution-Github-Action@v1
         with:
-          appId: 1
-          serviceCredentialsFileContent: ${{ steps.read_json.outputs.packageJson }}
+          appId: ${{secrets.FIREBASE_APP_ID}}
+          serviceCredentialsFileContent: ${{ secrets.CREDENTIAL_FILE_CONTENT }}
           groups: testers
           path: build/app/outputs/flutter-apk/app-prod-release.apk
 
