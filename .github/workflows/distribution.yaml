@@ -1,8 +1,9 @@
 name: Firebase Distribution
 
 on:
-  release:
-    types: [published]
+  push:
+    tags:
+      - v*
 
 jobs:
   flutter_test:
