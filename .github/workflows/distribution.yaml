@@ -1,13 +1,12 @@
 name: Firebase Distribution
 
 on:
-  push:
-    tags:
-      - v*
+  release:
+    types: [published]
 
 jobs:
   flutter_test:
-    if: "!github.event.release.prerelease"
+    if: "github.event.release.prerelease"
     name: Flutter Tests
     runs-on: ubuntu-latest
     permissions:
@@ -49,7 +48,7 @@ jobs:
           min_coverage: 50
 
   build_appbundle:
-    if: "!github.event.release.prerelease"
+    if: "github.event.release.prerelease"
     name: Build Flutter (Android)
     needs: flutter_test
     runs-on: ubuntu-latest
