@@ -43,5 +43,5 @@ jobs:
           appId: ${{secrets.FIREBASE_APP_ID}}
           serviceCredentialsFileContent: ${{ secrets.CREDENTIAL_FILE_CONTENT }}
           groups: testers
-          path: build/app/outputs/flutter-apk/app-prod-release.apk
+          file: build/app/outputs/flutter-apk/app-prod-release.apk
 
