@@ -15,15 +15,6 @@ jobs:
       - name: Efetua checkout da branch
         uses: actions/checkout@v3
 
-      - name: Pega a tag gerada
-        id: newtag
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          tag=$(gh release view --json tagName --jq '.tagName')
-          IFS=. read -r major minor patch <<< "$tag"
-          echo "newtag=$major.$minor.$((++patch))" >> "$GITHUB_OUTPUT"
-
       - name: Setup Java
         uses: actions/setup-java@v3
         with:
