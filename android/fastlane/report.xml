@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="fastlane.lanes">
+    
+    
+    
+      
+      <testcase classname="fastlane.lanes" name="0: default_platform" time="0.000372">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="1: Switch to android build_apk lane" time="0.00037">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="2: Switch to android sh_on_root lane" time="0.000213">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="3: cd /Users/marcospaulo/development/cincominutos-app &amp;&amp; fvm use 3.10.6 &amp;&amp; fvm flutter build apk --split-per-abi --flavor dev -t lib/core/flavors/main_dev.dart " time="10.778011">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="4: firebase_app_distribution" time="12.085536">
+        
+      </testcase>
+    
+  </testsuite>
+</testsuites>

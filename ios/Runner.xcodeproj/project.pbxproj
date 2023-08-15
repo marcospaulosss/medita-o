@@ -502,6 +502,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 8A5B9C006AEFFE0C6B6D5F7A /* Pods-Runner.debug-dev.xcconfig */;
 			buildSettings = {
+				INFOPLIST_KEY_CFBundleDisplayName = "";
 				PRODUCT_NAME = Runner;
 			};
 			name = "Debug-dev";
@@ -510,7 +511,11 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 951C7006CEEA0896EB283259 /* Pods-Runner.profile-dev.xcconfig */;
 			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 7DQ9BZ633N;
+				INFOPLIST_KEY_CFBundleDisplayName = "";
 				PRODUCT_NAME = Runner;
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = 5minutosDevDistProfile;
 			};
 			name = "Profile-dev";
 		};
@@ -518,7 +523,11 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A17EA12BC2FD25416342535D /* Pods-Runner.release-dev.xcconfig */;
 			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 7DQ9BZ633N;
+				INFOPLIST_KEY_CFBundleDisplayName = "";
 				PRODUCT_NAME = Runner;
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = 5minutosDevDistProfile;
 			};
 			name = "Release-dev";
 		};
@@ -526,6 +535,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 446E82001978897185B96C14 /* Pods-Runner.debug-prod.xcconfig */;
 			buildSettings = {
+				INFOPLIST_KEY_CFBundleDisplayName = "";
 				PRODUCT_NAME = Runner;
 			};
 			name = "Debug-prod";
@@ -534,6 +544,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 92A30629533D096C9CF8AF64 /* Pods-Runner.profile-prod.xcconfig */;
 			buildSettings = {
+				INFOPLIST_KEY_CFBundleDisplayName = "";
 				PRODUCT_NAME = Runner;
 			};
 			name = "Profile-prod";
@@ -542,6 +553,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 8EE1248B63A3CD11437304D4 /* Pods-Runner.release-prod.xcconfig */;
 			buildSettings = {
+				INFOPLIST_KEY_CFBundleDisplayName = "";
 				PRODUCT_NAME = Runner;
 			};
 			name = "Release-prod";
@@ -651,15 +663,19 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CURRENT_PROJECT_VERSION = "$(FLUTTER_BUILD_NUMBER)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CURRENT_PROJECT_VERSION = 2;
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 7DQ9BZ633N;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Runner/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = eumedito.org.cincoMinutosMeditacao;
+				PRODUCT_BUNDLE_IDENTIFIER = eumedito.org.cincoMinutos;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = 5minutosDevDistProfile;
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -672,7 +688,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = eumedito.org.cincoMinutosMeditacao.RunnerTests;
@@ -690,7 +706,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = eumedito.org.cincoMinutosMeditacao.RunnerTests;
@@ -706,7 +722,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = eumedito.org.cincoMinutosMeditacao.RunnerTests;
@@ -1127,15 +1143,19 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CURRENT_PROJECT_VERSION = "$(FLUTTER_BUILD_NUMBER)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CURRENT_PROJECT_VERSION = 2;
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 7DQ9BZ633N;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Runner/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = eumedito.org.cincoMinutosMeditacao;
+				PRODUCT_BUNDLE_IDENTIFIER = eumedito.org.cincoMinutos;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = 5minutosDevDistProfile;
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -1149,15 +1169,19 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CURRENT_PROJECT_VERSION = "$(FLUTTER_BUILD_NUMBER)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CURRENT_PROJECT_VERSION = 2;
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 7DQ9BZ633N;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Runner/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = eumedito.org.cincoMinutosMeditacao;
+				PRODUCT_BUNDLE_IDENTIFIER = eumedito.org.cincoMinutos;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = 5minutosDevDistProfile;
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";

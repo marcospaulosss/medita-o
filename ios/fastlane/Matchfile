@@ -1,0 +1,2 @@
+git_url("https://github.com/polvo-labs/cincominutos-app/ios")
+git_branch "cert"

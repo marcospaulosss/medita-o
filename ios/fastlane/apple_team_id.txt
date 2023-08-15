@@ -1,0 +1,30 @@
+* Developer Portal Team ID
+
+https://support.customchurchapps.com/hc/en-us/articles/360038612853-Locating-your-Apple-Team-ID
+
+* App Store Connect Team ID
+
+https://stackoverflow.com/questions/42960644/how-to-get-itunes-connect-team-id-and-team-name
+
+https://itunesconnect.apple.com/WebObjects/iTunesConnect.woa/ra/user/detail
+
+
+lane :getTeamNames do
+    require "spaceship" 
+    clientTunes = Spaceship::Tunes.login(ENV["APPLE_ID"], ENV["FASTLANE_PASSWORD"])
+    client = Spaceship::Portal.login(ENV["APPLE_ID"] ,ENV["FASTLANE_PASSWORD"])
+    
+    UI.message "* Developer Portal Team ID:"
+    strDevPortal = "" 
+    client.teams.each do |team|
+        UI.message "#{team['name']} (#{team['teamId']})"
+        strDevPortal << "#{team['name']} (#{team['teamId']})||"
+    end
+
+    UI.message "* App Store Connect Team ID:"
+    strClientTunes = "" 
+    clientTunes.teams.each do |team|
+        UI.message "#{team['contentProvider']['name']} (#{team['contentProvider']['contentProviderId']})"
+        strClientTunes << "#{team['contentProvider']['name']} (#{team['contentProvider']['contentProviderId']})||"
+    end 
+end

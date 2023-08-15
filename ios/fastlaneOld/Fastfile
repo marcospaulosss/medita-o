@@ -1,0 +1,75 @@
+#Ruby version
+ruby_version("3.0.2")
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+fastlane_require 'dotenv'
+
+default_platform(:ios)
+
+platform :ios do
+  # Have an easy way to get the root of the project
+  def root_path
+    Dir.pwd.sub(/.*\Kfastlane/, '').sub(/.*\Kandroid/, '').sub(/.*\Kios/, '').sub(/.*\K\/\//, '')
+  end
+
+  lane :hello do
+    puts "Hello World!"
+  end
+
+  # Have an easy way to run flutter tasks on the root of the project
+  lane :sh_on_root do |options|
+    command = options[:command]
+    sh("cd #{root_path} && #{command}")
+  end
+
+  # Updates XCode project settings to use a different code signing based on method
+  private_lane :archive do |options|
+    method = options[:method]
+    env = ENV['IOS_SCHEME']
+    scheme = env == "dev" ? "dev" : "prod"
+    configuration = env == "dev" ? "Release-dev" : "Release-prod"
+
+    update_code_signing_settings(
+      build_configurations: configuration,
+      use_automatic_signing: true
+    )
+
+    update_project_team(
+      teamid: ENV['IOS_TEAM_ID']
+    )
+
+    build_app(
+      output_directory: "#{root_path}/build/ios",
+      build_path: "#{root_path}/build/ios",
+      archive_path: "#{root_path}/build/ios",
+      export_method: method,
+      scheme: env,
+      configuration: configuration,
+      xcargs: "-allowProvisioningUpdates"
+    )
+  end
+
+  lane :build do |options|
+    env = ENV['IOS_SCHEME']
+
+    params = env == "dev" ? '--flavor dev -t lib/core/flavors/main_dev.dart ' : '--flavor prod -t lib/core/flavors/main_prod.dart '
+    desc("Cleaning...")
+    sh_on_root(command: "fvm use #{ENV['FLUTTER_VERSION']} && fvm flutter clean && rm -Rf ios/Pods && rm -Rf ios/.symlinks && rm -Rf ios/Flutter/Flutter.framework && rm -Rf ios/Flutter/Flutter.podspec")
+    desc("Building...")
+    sh_on_root(command: "fvm use #{ENV['FLUTTER_VERSION']} && fvm flutter build ipa #{params}")
+  end
+
+  lane :deploy_staging do
+    build(sign_enabled: true)
+    archive(method: "ad-hoc")
+
+    firebase_app_distribution(
+      app: ENV['IOS_FIREBASE_APP_DISTRIBUTION_APP'],
+      testers: ENV['IOS_FIREBASE_APP_DISTRIBUTION_TESTERS'],
+      release_notes: ENV['IOS_FIREBASE_APP_DISTRIBUTION_RELEASE_NOTES'],
+      service_credentials_file: ENV['IOS_FIREBASE_APP_DISTRIBUTION_CREDENTIALS_FILE_PATH'],
+    )
+  end
+
+end
