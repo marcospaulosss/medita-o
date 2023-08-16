@@ -32,6 +32,8 @@ migrate_working_dir/
 .pub-cache/
 .pub/
 /build/
+*.ipa
+*.dSYM*
 
 # Symbolication related
 app.*.symbols
