@@ -43,7 +43,7 @@ jobs:
       - run: flutter pub get
       - run: ./localization
       - run: flutter packages pub run build_runner build --delete-conflicting-outputs
-      - run: flutter build ipa --flavor dev -t lib/core/flavors/main_dev.dart --release --no-codesign
+      - run: flutter build ipa --export-options-plist ios/export/Info_dev.plist --flavor dev -t lib/core/flavors/main_dev.dart -v
 
       - name: Setup Fastlane
         run: |
