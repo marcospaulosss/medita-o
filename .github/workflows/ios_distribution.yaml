@@ -5,7 +5,10 @@ on:
 
 jobs:
   build:
-
+    permissions:
+      checks: write
+      contents: write
+      packages: write
     runs-on: macos-latest
 
     steps:
@@ -43,6 +46,8 @@ jobs:
           FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD: ${{ secrets.FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD }}
           MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
           MATCH_KEYCHAIN_PASSWORD: ${{ secrets.MATCH_KEYCHAIN_PASSWORD }}
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build iOS e deploy para testflight
         run: |
@@ -55,3 +60,5 @@ jobs:
           FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD: ${{ secrets.FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD }}
           MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
           MATCH_KEYCHAIN_PASSWORD: ${{ secrets.MATCH_KEYCHAIN_PASSWORD }}
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
