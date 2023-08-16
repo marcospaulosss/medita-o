@@ -9,7 +9,7 @@
 	<key>provisioningProfiles</key>
 	<dict>
 		<key>eumedito.org.cincoMinutos.dev</key>
-		<string>match AdHoc eumedito.org.cincoMinutos.dev</string>
+		<string>eumedito.org.cincoMinutos.dev</string>
 	</dict>
 	<key>signingCertificate</key>
 	<string>Apple Distribution</string>
