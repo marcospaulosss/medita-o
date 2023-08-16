@@ -98,6 +98,13 @@ arquivo .env para ambiente de desenvolvimento
 - firebase_analytics: ^8.3.1
 - firebase_crashlytics: ^2.2.3
 
+## Configurando fastlane
+https://docs.flutter.dev/deployment/cd#fastlane
+```shell
+brew install fastlane
+```
+
+
 # Resolução de problemas com cocopods e flutter
 ```shell
 flutter clean
