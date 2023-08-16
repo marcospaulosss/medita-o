@@ -39,3 +39,4 @@ jobs:
           FIREBASE_DIST_SERVICE_ACCOUNT_FILE: ${{ secrets.CREDENTIAL_FILE_CONTENT }}
           APPLE_ID: ${{ secrets.APPLE_ID }}
           FASTLANE_PASSWORD: ${{ secrets.FASTLANE_PASSWORD }}
+          APP_STORE_CONNECT_APPLE_ID: ${{ secrets.APP_STORE_CONNECT_APPLE_ID }}
