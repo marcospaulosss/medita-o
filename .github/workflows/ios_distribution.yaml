@@ -25,7 +25,9 @@ jobs:
           known_hosts: ${{ secrets.SSH_KNOWN_HOSTS }}
 
       - name: Setup Fastlane
-        run: bundle install
+        run: |
+          cd ios
+          bundle install
 
       - name: Build iOS e deploy do firebase
         run: bundle exec fastlane
