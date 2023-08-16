@@ -1,0 +1,35 @@
+name: iOS distribution
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+
+    runs-on: macos-latest
+
+    steps:
+      - name: Efetua checkout da branch
+        uses: actions/checkout@v3
+
+      - name: Setup Ruby
+        uses: actions/setup-ruby@v1
+        with:
+          ruby-version: 2.7
+
+      - name: Install SSH key
+        uses: shimataro/ssh-key-action@v2
+        with:
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          name: id_rsa
+          known_hosts: ${{ secrets.SSH_KNOWN_HOSTS }}
+
+      - name: Setup Fastlane
+        run: bundle install
+
+      - name: Build iOS e deploy do firebase
+        run: bundle exec fastlane
+        env:
+          FIREBASE_APP_ID: ${{ secrets.FIREBASE_APP_ID }}
+          FIREBASE_TESTER_GROUPS: ${{ secrets.FIREBASE_TESTER_GROUPS }}
+          FIREBASE_DIST_SERVICE_ACCOUNT_FILE: ${{ secrets.CREDENTIAL_FILE_CONTENT }}
