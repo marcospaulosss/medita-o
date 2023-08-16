@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:cinco_minutos_meditacao/core/di/helpers.dart';
+import 'package:cinco_minutos_meditacao/core/flavors/flavors.dart';
 import 'package:cinco_minutos_meditacao/modules/common/screens/home/home_contract.dart';
 import 'package:cinco_minutos_meditacao/modules/common/screens/home/home_presenter.dart';
 import 'package:cinco_minutos_meditacao/modules/common/shared/strings/localization/common_strings.dart';
@@ -33,7 +34,16 @@ class _HomeViewState extends State<HomeView> {
       ),
       body: Container(
         alignment: Alignment.center,
-        child: const Text("Home View"),
+        child: Column(
+          children: [
+            const Text("Home View"),
+            Text(F.title),
+            const SizedBox(height: 20),
+            Text(F.name),
+            const SizedBox(height: 20),
+            Text(F.description),
+          ],
+        ),
       ),
     );
   }

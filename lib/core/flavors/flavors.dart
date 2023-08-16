@@ -1,3 +1,5 @@
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+
 enum Flavor {
   dev,
   prod,
@@ -18,6 +20,8 @@ class F {
         return 'title';
     }
   }
+
+  static String get description => dotenv.get("FOO");
 
   static bool get isDev => appFlavor == Flavor.dev;
   static bool get isProd => appFlavor == Flavor.prod;
