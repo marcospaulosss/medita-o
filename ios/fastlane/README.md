@@ -55,14 +55,6 @@ Build Ad Hoc
 
 Build
 
-### ios app_center
-
-```sh
-[bundle exec] fastlane ios app_center
-```
-
-App Center
-
 ### ios firebase
 
 ```sh

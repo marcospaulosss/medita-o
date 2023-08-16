@@ -41,69 +41,40 @@ platform :ios do
     desc "Build Ad Hoc"
     lane :buildAdHoc do
 
-        #match(type: "adhoc", readonly: true)
+        match(type: "adhoc", readonly: true)
 
         cocoapods
 
         build_app(
             workspace: ENV["WORKSPACE"],
             scheme: ENV["SCHEME"],
-            configuration: ENV["CONFIGURATION"],
-            export_options: {
-                method: "ad-hoc",
-                provisioningProfiles: {
-                    ENV["APP_IDENTIFIER"] => ENV["PROFILE_AD_HOC"]
-                }
-            }
+            configuration: ENV["CONFIGURATION"]
         )
     end
 
     desc "Build"
     lane :build do
 
-        #match(type: "appstore", readonly: true)
+        match(type: "appstore", readonly: true)
 
         cocoapods
         
         build_app(
             workspace: ENV["WORKSPACE"],
-            scheme: ENV["SCHEME"],
-            export_options: {
-                method: "app-store",
-                provisioningProfiles: {
-                    ENV["APP_IDENTIFIER"] => ENV["PROFILE_APP_STORE"]
-                }
-            }
-        )
-    end
-
-    desc "App Center"
-    lane :app_center do
-
-       buildAdHoc
-
-       # https://github.com/microsoft/fastlane-plugin-appcenter
-       # bundle exec fastlane add_plugin appcenter
-       appcenter_upload(
-          api_token: ENV["APP_CENTER_API_TOKEN"],
-          owner_name: ENV["APP_CENTER_OWNER_NAME"],
-          owner_type: ENV["APP_CENTER_OWNER_TYPE"],
-          app_name: ENV["APP_CENTER_APP_NAME"],
-          notify_testers: true,
-          destinations: ENV["APP_CENTER_DESTINATIONS"],
-          release_notes: "appcenter!",
-          file: lane_context[SharedValues::IPA_OUTPUT_PATH]
+            scheme: ENV["SCHEME"]
         )
     end
     
     desc "Deploy to Firebase Distribution"
     lane :firebase do
 
+        inc
+
         buildAdHoc
 
         # https://firebase.google.com/docs/app-distribution/ios/distribute-fastlane
         # bundle exec fastlane add_plugin firebase_app_distribution
-        firebase_app_distribution(
+        release = firebase_app_distribution(
             app: ENV["FIREBASE_APP_ID"],
             testers: ENV["FIREBASE_TESTERS"],
             groups: ENV["FIREBASE_TEST_GROUP"],
@@ -149,11 +120,5 @@ platform :ios do
         increment_build_number({
           build_number: latest_testflight_build_number + 1
         })
-#         build
-#         commit_version_bump(
-#             message: "Fastlane Build Bump",
-#             force: true,
-#         )
-        #push_to_git_remote
     end
 end

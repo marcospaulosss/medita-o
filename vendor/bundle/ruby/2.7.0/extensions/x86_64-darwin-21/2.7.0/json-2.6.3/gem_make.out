@@ -1,0 +1,13 @@
+current directory: /Users/marcospaulo/development/cincominutos-app/vendor/bundle/ruby/2.7.0/gems/json-2.6.3/ext/json
+/Users/marcospaulo/.rbenv/versions/2.7.3/bin/ruby -I /Users/marcospaulo/.rbenv/versions/2.7.3/lib/ruby/2.7.0 -r ./siteconf20230816-17570-bbcxtr.rb extconf.rb
+creating Makefile
+
+current directory: /Users/marcospaulo/development/cincominutos-app/vendor/bundle/ruby/2.7.0/gems/json-2.6.3/ext/json
+make "DESTDIR=" clean
+
+current directory: /Users/marcospaulo/development/cincominutos-app/vendor/bundle/ruby/2.7.0/gems/json-2.6.3/ext/json
+make "DESTDIR="
+make: Nothing to be done for `all'.
+
+current directory: /Users/marcospaulo/development/cincominutos-app/vendor/bundle/ruby/2.7.0/gems/json-2.6.3/ext/json
+make "DESTDIR=" install
