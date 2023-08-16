@@ -37,7 +37,6 @@ platform :android do
       service_credentials_file: ENV['ANDROID_FIREBASE_APP_DISTRIBUTION_CREDENTIALS_FILE_PATH'],
     )
   end
-
 end
 
 
