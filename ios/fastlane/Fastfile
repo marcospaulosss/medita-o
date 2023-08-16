@@ -41,6 +41,14 @@ platform :ios do
     desc "Build Ad Hoc"
     lane :buildAdHoc do
 
+        if is_ci
+            puts "Running on CI!"
+
+            setup_ci(
+                force: true
+            )
+        end
+
         match(type: "adhoc", readonly: true)
 
         cocoapods
@@ -54,6 +62,14 @@ platform :ios do
 
     desc "Build"
     lane :build do
+
+        if is_ci
+            puts "Running on CI!"
+
+            setup_ci(
+                force: true
+            )
+        end
 
         match(type: "appstore", readonly: true)
 
