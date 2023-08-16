@@ -88,14 +88,19 @@ platform :ios do
         build_app(
             workspace: ENV["WORKSPACE"],
             scheme: ENV["SCHEME"],
-            configuration: ENV["CONFIGURATION"]
+            configuration: ENV["CONFIGURATION"],
+            export_options: {
+                provisioningProfiles: {
+                  "eumedito.org.cincoMinutos.dev" => "Provisioning Profile Name Dev",
+                }
+            }
         )
     end
     
     desc "Deploy to Firebase Distribution"
     lane :firebase do
 
-        inc
+        incFirebase
 
         buildAdHoc
 
@@ -146,6 +151,14 @@ platform :ios do
     
         increment_build_number({
           build_number: latest_testflight_build_number + 1
+        })
+    end
+
+    desc "Increment Build Number Firebase"
+    lane :incFirebase do
+
+        increment_build_number({
+          build_number: latest_testflight_build_number
         })
     end
 end
