@@ -87,7 +87,8 @@ platform :ios do
         
         build_app(
             workspace: ENV["WORKSPACE"],
-            scheme: ENV["SCHEME"]
+            scheme: ENV["SCHEME"],
+            configuration: ENV["CONFIGURATION"]
         )
     end
     
