@@ -107,7 +107,7 @@ platform :ios do
             groups: ENV["FIREBASE_TEST_GROUP"],
             ipa_path: lane_context[SharedValues::IPA_OUTPUT_PATH],
             release_notes_file: "fastlane/release_notes.txt",
-            service_credentials_file: ENV["FIREBASE_DIST_SERVICE_ACCOUNT_FILE"]
+            firebase_cli_token: ENV['FIREBASE_TOKEN'],
         )
     end
 
