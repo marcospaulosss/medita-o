@@ -1,8 +1,10 @@
 name: Firebase Distribution
 
 on:
+  workflow_dispatch:
+
   release:
-    types: [published]
+    types: [published, edited]
 
 jobs:
   flutter_test:
@@ -30,6 +32,8 @@ jobs:
           channel: 'stable'
       - run: flutter --version
       - run: flutter pub get
+      - run: ./localization
+      - run: flutter packages pub run build_runner build --delete-conflicting-outputs
       - run: flutter analyze --no-fatal-infos --no-fatal-warnings
       - run: dart format lib/ --set-exit-if-changed
       - run: dart format test/ --set-exit-if-changed
@@ -60,6 +64,10 @@ jobs:
       - name: Efetua checkout da branch
         uses: actions/checkout@v3
 
+      - name: Get Tag
+        id: tag_value
+        run: echo "tag=${GITHUB_REF#refs/*/}" >> $GITHUB_OUTPUT
+
       - name: Setup Java
         uses: actions/setup-java@v3
         with:
@@ -76,13 +84,15 @@ jobs:
       - run: flutter pub get
       - run: ./localization
       - run: flutter packages pub run build_runner build --delete-conflicting-outputs
-      - run: flutter build apk --release --flavor prod -t lib/core/flavors/main_prod.dart -v
+      - run: flutter build apk --release --flavor prod -t lib/core/flavors/main_prod.dart
 
       - name: Upload do APK para o firebase app distribution
         uses: actions/upload-artifact@v2
         with:
           name: appbundle
           path: build/app/outputs/flutter-apk/app-prod-release.apk
+          tag: ${{ steps.vars.outputs.tag }}
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Upload a Build Artifact to Firebase app distribution
         uses: wzieba/Firebase-Distribution-Github-Action@v1
@@ -92,3 +102,56 @@ jobs:
           groups: testers
           file: build/app/outputs/flutter-apk/app-prod-release.apk
 
+  build_ios:
+    name: Build Flutter (iOS)
+    needs: flutter_test
+    runs-on: macos-latest
+    permissions:
+      checks: write
+      contents: write
+      packages: write
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v3
+
+      - name: Setup Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin' # See 'Supported distributions' for available options
+          java-version: '17'
+
+      - name: Setup flutter e builda projeto
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.10.6'
+          channel: 'stable'
+          cache: true
+          cache-key: 'flutter-:os:-:channel:-:version:-:arch:-:hash:' # optional, change this to force refresh cache
+          cache-path: '${{ runner.tool_cache }}/flutter/:channel:-:version:-:arch:' # optional, change this to specify the cache path
+          architecture: x64 # optional, x64 or arm64
+      - run: flutter doctor
+      - run: flutter clean
+      - run: flutter pub get
+      - run: ./localization
+      - run: flutter packages pub run build_runner build --delete-conflicting-outputs
+      - run: |
+          flutter build ipa --flavor prod -t lib/core/flavors/main_prod.dart --release --no-codesign
+          cd build/ios/iphoneos
+          mkdir Payload
+          cd ..
+          zip -r app.ipa Payload
+
+      - name: Envia a realiso do app para o github
+        uses: ncipollo/release-action@v1
+        with:
+          artifacts: build/ios/iphoneos/app.ipa
+          tag: ${{ steps.vars.outputs.tag }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Upload a Build Artifact to Firebase app distribution
+        uses: wzieba/Firebase-Distribution-Github-Action@v1
+        with:
+          appId: ${{secrets.FIREBASE_APP_ID_IOS}}
+          serviceCredentialsFileContent: ${{ secrets.CREDENTIAL_FILE_CONTENT }}
+          groups: testers
+          file: build/ios/iphoneos/app.ipa
