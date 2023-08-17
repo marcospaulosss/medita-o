@@ -105,9 +105,8 @@ platform :ios do
 
         # https://firebase.google.com/docs/app-distribution/ios/distribute-fastlane
         # bundle exec fastlane add_plugin firebase_app_distribution
-        release = firebase_app_distribution(
+        firebase_app_distribution(
             app: ENV["FIREBASE_APP_ID"],
-            testers: ENV["FIREBASE_TESTERS"],
             groups: ENV["FIREBASE_TEST_GROUP"],
             ipa_path: lane_context[SharedValues::IPA_OUTPUT_PATH],
             release_notes_file: "fastlane/release_notes.txt",
