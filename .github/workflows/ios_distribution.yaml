@@ -92,7 +92,7 @@ jobs:
       - name: Build iOS e deploy do firebase
         run: |
           cd ios
-          bundle exec fastlane firebase
+          bundle exec fastlane buildAdHoc
         env:
           FIREBASE_APP_ID: ${{ secrets.FIREBASE_APP_ID }}
           FIREBASE_TESTER_GROUPS: ${{ secrets.FIREBASE_TESTER_GROUPS }}
