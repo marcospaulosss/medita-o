@@ -109,7 +109,7 @@ platform :ios do
         firebase_app_distribution(
             app: ENV["FIREBASE_APP_ID"],
             groups: ENV["FIREBASE_TEST_GROUP"],
-            ipa_path: lane_context[SharedValues::IPA_OUTPUT_PATH],
+            ipa_path: './build/Runner.ipa',
             release_notes_file: "fastlane/release_notes.txt",
             firebase_cli_token: ENV['FIREBASE_TOKEN'],
         )
