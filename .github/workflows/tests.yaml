@@ -8,28 +8,28 @@ on:
 
 jobs:
   flutter_test:
-    if: "github.event.release.prerelease"
     name: Flutter Tests
-    runs-on: ubuntu-latest
+#    runs-on: ubuntu-latest
+    runs-on: [marcOS]
     permissions:
       checks: write
-      contents: read
+      contents: write
       packages: write
     steps:
       - name: Efetua checkout da branch
         uses: actions/checkout@v3
 
-      - name: Setup Java
-        uses: actions/setup-java@v3
-        with:
-          distribution: 'temurin' # See 'Supported distributions' for available options
-          java-version: '17'
+#      - name: Setup Java
+#        uses: actions/setup-java@v3
+#        with:
+#          distribution: 'temurin' # See 'Supported distributions' for available options
+#          java-version: '17'
 
       - name: Setup flutter e builda projeto
-        uses: subosito/flutter-action@v2
-        with:
-          flutter-version: '3.10.6'
-          channel: 'stable'
+#        uses: subosito/flutter-action@v2
+#        with:
+#          flutter-version: '3.10.6'
+#          channel: 'stable'
       - run: flutter --version
       - run: flutter pub get
       - run: ./localization
@@ -39,7 +39,9 @@ jobs:
       - run: dart format test/ --set-exit-if-changed
       - run: flutter test --coverage
       - run: flutter test --machine > test-results.json
-      - uses: dorny/test-reporter@v1.6.0
+
+      - name: Report result tests
+        uses: dorny/test-reporter@v1.6.0
         with:
           name: Flutter results
           path: test-results.json

@@ -111,7 +111,8 @@ flutter clean
 rm -rf ios/Pods
 rm ios/Podfile.lock
 flutter pub get
-cd ios && pod deintegrate && pod clean
-#pod update && pod install
+cd ios
+pod deintegrate
+pod install
 cd ..
 ```
