@@ -93,6 +93,7 @@ jobs:
         run: |
           cd ios
           bundle exec fastlane buildAdHoc
+          ls -la
         env:
           FIREBASE_APP_ID: ${{ secrets.FIREBASE_APP_ID }}
           FIREBASE_TESTER_GROUPS: ${{ secrets.FIREBASE_TESTER_GROUPS }}
