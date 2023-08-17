@@ -95,6 +95,14 @@ Increment Build Number
 
 Increment Build Number Firebase
 
+### ios delete_chain
+
+```sh
+[bundle exec] fastlane ios delete_chain
+```
+
+delete created keychain
+
 ----
 
 This README.md is auto-generated and will be re-generated every time [_fastlane_](https://fastlane.tools) is run.
