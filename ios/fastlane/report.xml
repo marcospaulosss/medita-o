@@ -5,67 +5,17 @@
     
     
       
-      <testcase classname="fastlane.lanes" name="00: Verifying fastlane version" time="0.000472">
+      <testcase classname="fastlane.lanes" name="0: Verifying fastlane version" time="0.001372">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="01: default_platform" time="0.000241">
+      <testcase classname="fastlane.lanes" name="1: default_platform" time="0.000262">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="02: setup_circle_ci" time="0.000672">
-        
-      </testcase>
-    
-      
-      <testcase classname="fastlane.lanes" name="03: app_store_connect_api_key" time="0.006496">
-        
-      </testcase>
-    
-      
-      <testcase classname="fastlane.lanes" name="04: Switch to ios incFirebase lane" time="0.000282">
-        
-      </testcase>
-    
-      
-      <testcase classname="fastlane.lanes" name="05: latest_testflight_build_number" time="2.001755">
-        
-      </testcase>
-    
-      
-      <testcase classname="fastlane.lanes" name="06: increment_build_number" time="0.93856">
-        
-      </testcase>
-    
-      
-      <testcase classname="fastlane.lanes" name="07: Switch to ios buildAdHoc lane" time="0.000218">
-        
-      </testcase>
-    
-      
-      <testcase classname="fastlane.lanes" name="08: is_ci" time="0.00027">
-        
-      </testcase>
-    
-      
-      <testcase classname="fastlane.lanes" name="09: match" time="11.121633">
-        
-      </testcase>
-    
-      
-      <testcase classname="fastlane.lanes" name="10: cocoapods" time="5.768979">
-        
-      </testcase>
-    
-      
-      <testcase classname="fastlane.lanes" name="11: build_app" time="106.969073">
-        
-      </testcase>
-    
-      
-      <testcase classname="fastlane.lanes" name="12: firebase_app_distribution" time="10.806348">
+      <testcase classname="fastlane.lanes" name="2: update_fastlane" time="3.339017">
         
       </testcase>
     

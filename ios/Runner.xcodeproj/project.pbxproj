@@ -502,10 +502,11 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 8A5B9C006AEFFE0C6B6D5F7A /* Pods-Runner.debug-dev.xcconfig */;
 			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 7DQ9BZ633N;
 				INFOPLIST_KEY_CFBundleDisplayName = "";
 				PRODUCT_NAME = Runner;
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "match Development eumedito.org.cincoMinutos.dev";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "match AdHoc eumedito.org.cincoMinutos.dev";
 			};
 			name = "Debug-dev";
 		};
