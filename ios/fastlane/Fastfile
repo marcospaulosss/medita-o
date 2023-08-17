@@ -65,8 +65,7 @@ platform :ios do
 
         build_app(
             workspace: ENV["WORKSPACE"],
-            scheme: ENV["SCHEME"],
-            configuration: ENV["CONFIGURATION"]
+            scheme: ENV["SCHEME"]
         )
     end
 
@@ -160,5 +159,10 @@ platform :ios do
         increment_build_number({
           build_number: latest_testflight_build_number
         })
+    end
+
+    desc "delete created keychain"
+    lane :delete_chain do
+        delete_keychain(name: "fastlane_tmp_keychain-db")
     end
 end
