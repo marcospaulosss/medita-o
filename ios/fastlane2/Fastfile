@@ -47,16 +47,72 @@ platform :ios do
       match(type: "adhoc", readonly: true)
       match(type: "appstore", readonly: true)
     end
+
+    desc "Build Ad Hoc"
+    lane :buildAdHoc do
+
+        if is_ci
+            puts "Running on CI!"
+
+            setup_ci(
+                force: true
+            )
+        end
+
+        match(type: "adhoc", readonly: true, git_basic_authorization: ENV['MATCH_GIT_BASIC_AUTHORIZATION'])
+
+        cocoapods
+
+        build_app(
+            workspace: ENV["WORKSPACE"],
+            scheme: ENV["SCHEME"],
+            output_directory: "./build",
+            xcargs: "-allowProvisioningUpdates"
+        )
+    end
+
+    desc "Build"
+    lane :build do
+
+        if is_ci
+            puts "Running on CI!"
+
+            setup_ci(
+                force: true
+            )
+        end
+
+        match(type: "appstore", readonly: true, git_basic_authorization: ENV['MATCH_GIT_BASIC_AUTHORIZATION'])
+
+        cocoapods
+        
+        build_app(
+            workspace: ENV["WORKSPACE"],
+            scheme: ENV["SCHEME"],
+            configuration: ENV["CONFIGURATION"],
+            export_options: {
+                provisioningProfiles: {
+                  "eumedito.org.cincoMinutos.dev" => "Provisioning Profile Name Dev",
+                }
+            }
+        )
+    end
     
     desc "Deploy to Firebase Distribution"
     lane :firebase do
 
+        incFirebase
+
+        buildAdHoc
+
         # https://firebase.google.com/docs/app-distribution/ios/distribute-fastlane
         # bundle exec fastlane add_plugin firebase_app_distribution
         firebase_app_distribution(
-            app: "1:106395996253:ios:fa86692c5f4dffcd03bdb4",
-            ipa_path: "../build/ios/ipa/Dev.ipa",
-            firebase_cli_token: "1//0hz8oGPSCtw51CgYIARAAGBESNwF-L9Ir-_GruDSLyu6Z7QfpspbLTsh5AN02vP_wTl5oJC5t-n6cse5ez9DgYXFn7qyaI5fgNCY"
+            app: ENV["FIREBASE_APP_ID"],
+            groups: ENV["FIREBASE_TEST_GROUP"],
+            ipa_path: '/Users/marcospaulo/actions-runner/_work/cincominutos-app/cincominutos-app/ios/build/Runner.ipa',
+            release_notes_file: "fastlane/release_notes.txt",
+            firebase_cli_token: ENV['FIREBASE_TOKEN'],
         )
     end
 
@@ -64,26 +120,50 @@ platform :ios do
     lane :tf do
 
         inc
+    
+        build
 
         # https://docs.fastlane.tools/actions/upload_to_testflight
         upload_to_testflight(
-            ipa: "../build/ios/ipa/Dev.ipa",
             skip_waiting_for_build_processing: true,
             apple_id: ENV["APP_STORE_CONNECT_APPLE_ID"]
         )
     end
 
+    desc "Upload to Test Flight - External"
+    lane :tf_external do
+
+        build
+
+        # https://docs.fastlane.tools/actions/upload_to_testflight
+        upload_to_testflight(
+            changelog: "external!",
+            distribute_external: true,
+            notify_external_testers: true,
+            groups: [
+                "External"
+            ],
+        )
+    end
+    
     desc "Increment Build Number"
     lane :inc do
+    
         increment_build_number({
           build_number: latest_testflight_build_number + 1
         })
     end
 
-    lane :increment_version do
-      latest_release = firebase_app_distribution_get_latest_release(
-        app: ENV["FIREBASE_APP_ID"]
-      )
-      increment_build_number({ build_number: latest_release[:buildVersion].to_i + 1 })
+    desc "Increment Build Number Firebase"
+    lane :incFirebase do
+
+        increment_build_number({
+          build_number: latest_testflight_build_number
+        })
+    end
+
+    desc "delete created keychain"
+    lane :delete_chain do
+        delete_keychain(name: "fastlane_tmp_keychain-db")
     end
 end

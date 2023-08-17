@@ -1,4 +1,4 @@
-name: iOS distribution
+name: iOS distribution Dev
 
 on:
   workflow_dispatch:
@@ -9,7 +9,7 @@ jobs:
       checks: write
       contents: write
       packages: write
-    runs-on: [self-hosted, macOS]
+    runs-on: [marcOS]
 
     steps:
       - name: Efetua checkout da branch
@@ -27,12 +27,12 @@ jobs:
 #          name: id_rsa
 #          known_hosts: ${{ secrets.SSH_KNOWN_HOSTS }}
 
-#      - name: Setup Fastlane
-#        run: |
-#          cd ios
-#          bundle install
+      - name: Setup Fastlane
+        run: |
+          cd ios
+          bundle install
 #
-#      - name: Build iOS e deploy para testflight
+#      - name: Download keys match
 #        run: |
 #          cd ios
 #          bundle exec fastlane download_keys
@@ -61,35 +61,32 @@ jobs:
 #      - run: flutter pub get
 #      - run: ./localization
 #      - run: flutter packages pub run build_runner build --delete-conflicting-outputs
-#      - run: flutter build ipa --export-options-plist ios/export/Info_dev.plist --flavor dev -t lib/core/flavors/main_dev.dart -v
+#      - run: flutter build ipa --export-options-plist ios/export/info_dev.plist --flavor dev -t lib/core/flavors/main_dev.dart -v
 
       - name: Setup flutter e builda projeto
-        run: | 
-          flutter --version
+        run: |
+          flutter clean
+          rm -rf ios/Pods
+          rm ios/Podfile.lock
           flutter pub get
           ./localization
           flutter packages pub run build_runner build --delete-conflicting-outputs
-#          flutter build ipa --export-options-plist ios/export/Info_dev.plist --flavor dev -t lib/core/flavors/main_dev.dart -v
+          flutter build ipa --export-options-plist ios/export/info_dev.plist --flavor dev -t lib/core/flavors/main_dev.dart -v
 
-      - name: Setup Fastlane
+      - name: Deploy para testflight
         run: |
           cd ios
-          bundle install
+          bundle exec fastlane tf
+        env:
+          APPLE_ID: ${{ secrets.APPLE_ID }}
+          FASTLANE_PASSWORD: ${{ secrets.FASTLANE_PASSWORD }}
+          APP_STORE_CONNECT_APPLE_ID: ${{ secrets.APP_STORE_CONNECT_APPLE_ID }}
+          FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD: ${{ secrets.FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD }}
+          MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
+          MATCH_KEYCHAIN_PASSWORD: ${{ secrets.MATCH_KEYCHAIN_PASSWORD }}
+          MATCH_GIT_BASIC_AUTHORIZATION: ${{ secrets.MATCH_GIT_BASIC_AUTHORIZATION }}
 
-#      - name: Build iOS e deploy para testflight
-#        run: |
-#          cd ios
-#          bundle exec fastlane tf
-#        env:
-#          APPLE_ID: ${{ secrets.APPLE_ID }}
-#          FASTLANE_PASSWORD: ${{ secrets.FASTLANE_PASSWORD }}
-#          APP_STORE_CONNECT_APPLE_ID: ${{ secrets.APP_STORE_CONNECT_APPLE_ID }}
-#          FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD: ${{ secrets.FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD }}
-#          MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
-#          MATCH_KEYCHAIN_PASSWORD: ${{ secrets.MATCH_KEYCHAIN_PASSWORD }}
-#          MATCH_GIT_BASIC_AUTHORIZATION: ${{ secrets.MATCH_GIT_BASIC_AUTHORIZATION }}
-
-      - name: Build iOS e deploy do firebase
+      - name: Deploy do firebase
         run: |
           cd ios
           bundle exec fastlane firebase
@@ -104,3 +101,4 @@ jobs:
           MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
           MATCH_KEYCHAIN_PASSWORD: ${{ secrets.MATCH_KEYCHAIN_PASSWORD }}
           MATCH_GIT_BASIC_AUTHORIZATION: ${{ secrets.MATCH_GIT_BASIC_AUTHORIZATION }}
+          ITMSTRANSPORTER_FORCE_ITMS_PACKAGE_UPLOAD: false
