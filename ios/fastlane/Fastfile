@@ -67,6 +67,12 @@ platform :ios do
             workspace: ENV["WORKSPACE"],
             scheme: ENV["SCHEME"],
             configuration: ENV["CONFIGURATION"]
+            export_options: {
+                method: "ad-hoc",
+                provisioningProfiles: {
+                  "eumedito.org.cincoMinutos.dev" => "Provisioning Profile Name Dev",
+                }
+            }
         )
     end
 
