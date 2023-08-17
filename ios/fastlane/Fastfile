@@ -59,7 +59,7 @@ platform :ios do
             )
         end
 
-        match(type: "appstore", readonly: true, git_basic_authorization: ENV['MATCH_GIT_BASIC_AUTHORIZATION'])
+        match(type: "adhoc", readonly: true, git_basic_authorization: ENV['MATCH_GIT_BASIC_AUTHORIZATION'])
 
         cocoapods
 
@@ -67,11 +67,7 @@ platform :ios do
             workspace: ENV["WORKSPACE"],
             scheme: ENV["SCHEME"],
             configuration: ENV["CONFIGURATION"],
-            export_options: {
-                provisioningProfiles: {
-                  "eumedito.org.cincoMinutos.dev" => "Provisioning Profile Name Dev",
-                }
-            }
+            clean: true
         )
     end
 
