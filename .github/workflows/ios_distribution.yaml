@@ -9,7 +9,7 @@ jobs:
       checks: write
       contents: write
       packages: write
-    runs-on: macos-latest
+    runs-on: marcoss-MacBook-Pro
 
     steps:
       - name: Efetua checkout da branch
