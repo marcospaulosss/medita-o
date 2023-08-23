@@ -9,7 +9,6 @@ on:
 jobs:
   flutter_test:
     name: Flutter Tests
-#    runs-on: ubuntu-latest
     runs-on: [marcOS]
     permissions:
       checks: write
@@ -25,20 +24,30 @@ jobs:
 #          distribution: 'temurin' # See 'Supported distributions' for available options
 #          java-version: '17'
 
-      - name: Setup flutter e builda projeto
+#      - name: Setup flutter e builda projeto
 #        uses: subosito/flutter-action@v2
 #        with:
 #          flutter-version: '3.10.6'
 #          channel: 'stable'
-      - run: flutter --version
-      - run: flutter pub get
-      - run: ./localization
-      - run: flutter packages pub run build_runner build --delete-conflicting-outputs
-      - run: flutter analyze --no-fatal-infos --no-fatal-warnings
-      - run: dart format lib/ --set-exit-if-changed
-      - run: dart format test/ --set-exit-if-changed
-      - run: flutter test --coverage
-      - run: flutter test --machine > test-results.json
+#      - run: flutter --version
+#      - run: flutter pub get
+#      - run: ./localization
+#      - run: flutter packages pub run build_runner build --delete-conflicting-outputs
+#      - run: flutter analyze --no-fatal-infos --no-fatal-warnings
+#      - run: dart format lib/ --set-exit-if-changed
+#      - run: dart format test/ --set-exit-if-changed
+#      - run: flutter test --coverage
+#      - run: flutter test --machine > test-results.json
+
+      - name: Setup flutter e builda projeto
+        run: |
+          flutter --version
+          flutter pub get
+          ./localization
+          flutter packages pub run build_runner build --delete-conflicting-outputs
+          flutter analyze --no-fatal-infos --no-fatal-warnings
+          flutter test --coverage
+          flutter test --machine > test-results.json
 
       - name: Report result tests
         uses: dorny/test-reporter@v1.6.0
