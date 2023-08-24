@@ -72,7 +72,7 @@ jobs:
           flutter pub get
           ./localization
           flutter packages pub run build_runner build --delete-conflicting-outputs
-          flutter build ipa --export-options-plist ios/export/info_dev.plist --flavor dev -t lib/core/flavors/main_dev.dart -v
+          flutter build ipa --export-options-plist ios/export/info_dev.plist --flavor dev -t lib/core/flavors/main_dev.dart
 
       - name: Deploy para testflight
         run: |

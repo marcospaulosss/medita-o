@@ -8,9 +8,9 @@ platform :ios do
         setup_circle_ci
         app_store_connect_api_key(
           in_house: false,
-          key_id: "4QX6T64C47",
+          key_id: ENV["APP_STORE_KEY_ID"],
           key_filepath: "./fastlane/AuthKey_4QX6T64C47.p8",
-          issuer_id: "69a6de83-5f09-47e3-e053-5b8c7c11a4d1",
+          issuer_id: ENV["APP_STORE_ISSUER_ID"],
         )
     end
 
@@ -54,9 +54,10 @@ platform :ios do
         # https://firebase.google.com/docs/app-distribution/ios/distribute-fastlane
         # bundle exec fastlane add_plugin firebase_app_distribution
         firebase_app_distribution(
-            app: "1:106395996253:ios:fa86692c5f4dffcd03bdb4",
+            app: ENV["FIREBASE_APP_ID"],
             ipa_path: "../build/ios/ipa/Dev.ipa",
-            firebase_cli_token: "1//0hz8oGPSCtw51CgYIARAAGBESNwF-L9Ir-_GruDSLyu6Z7QfpspbLTsh5AN02vP_wTl5oJC5t-n6cse5ez9DgYXFn7qyaI5fgNCY"
+            firebase_cli_token: ENV["FIREBASE_TOKEN"],
+            groups: ENV["FIREBASE_TESTERS"]
         )
     end
 
