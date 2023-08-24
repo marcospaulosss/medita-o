@@ -2,9 +2,10 @@ name: CI Tests
 
 on:
   workflow_dispatch:
+  workflow_call:
 
-  push:
-    branches:
+#  push:
+#    branches:
 
 jobs:
   flutter_test:
