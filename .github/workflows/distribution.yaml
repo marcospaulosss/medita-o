@@ -4,10 +4,11 @@ on:
   workflow_dispatch:
 
 jobs:
-#  tests:
-#    uses: polvo-labs/cincominutos-app/.github/workflows/tests.yaml@main
+  tests:
+    uses: polvo-labs/cincominutos-app/.github/workflows/tests.yaml@main
 
   pre-release:
+    needs: tests
     permissions:
       checks: write
       contents: write
@@ -26,8 +27,12 @@ jobs:
         tag_name: ${{ github.ref }}
         release_name: Release ${{ github.ref }}
         body: |
-          Changes in this Release
+          ### O que foi feito?
           - First Change
           - Second Change
         draft: true
         prerelease: true
+
+    distribution:
+      needs: pre-release
+      uses: polvo-labs/cincominutos-app/.github/workflows/ios_distribution_dev.yaml@main
