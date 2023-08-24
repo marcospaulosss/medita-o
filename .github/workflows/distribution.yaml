@@ -33,6 +33,6 @@ jobs:
         draft: true
         prerelease: true
 
-    distribution:
-      needs: pre-release
-      uses: polvo-labs/cincominutos-app/.github/workflows/ios_distribution_dev.yaml@main
+  ios-distribution-dev:
+    needs: pre-release
+    uses: polvo-labs/cincominutos-app/.github/workflows/ios_distribution_dev.yaml@main
