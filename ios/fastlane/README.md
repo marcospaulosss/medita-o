@@ -39,22 +39,6 @@ For _fastlane_ installation instructions, see [Installing _fastlane_](https://do
 
 Download keys
 
-### ios buildAdHoc
-
-```sh
-[bundle exec] fastlane ios buildAdHoc
-```
-
-Build Ad Hoc
-
-### ios build
-
-```sh
-[bundle exec] fastlane ios build
-```
-
-Build
-
 ### ios firebase
 
 ```sh
@@ -71,14 +55,6 @@ Deploy to Firebase Distribution
 
 Upload to Test Flight
 
-### ios tf_external
-
-```sh
-[bundle exec] fastlane ios tf_external
-```
-
-Upload to Test Flight - External
-
 ### ios inc
 
 ```sh
@@ -87,21 +63,13 @@ Upload to Test Flight - External
 
 Increment Build Number
 
-### ios incFirebase
+### ios increment_version
 
 ```sh
-[bundle exec] fastlane ios incFirebase
+[bundle exec] fastlane ios increment_version
 ```
 
-Increment Build Number Firebase
 
-### ios delete_chain
-
-```sh
-[bundle exec] fastlane ios delete_chain
-```
-
-delete created keychain
 
 ----
 
