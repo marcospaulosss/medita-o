@@ -8,9 +8,9 @@ platform :ios do
         setup_circle_ci
         app_store_connect_api_key(
           in_house: false,
-          key_id: ENV["APP_STORE_KEY_ID"],
+          key_id: "4QX6T64C47",
           key_filepath: "./fastlane/AuthKey_4QX6T64C47.p8",
-          issuer_id: ENV["APP_STORE_ISSUER_ID"],
+          issuer_id: "69a6de83-5f09-47e3-e053-5b8c7c11a4d1",
         )
     end
 
