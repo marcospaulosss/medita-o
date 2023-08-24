@@ -56,8 +56,7 @@ platform :ios do
         firebase_app_distribution(
             app: ENV["FIREBASE_APP_ID"],
             ipa_path: "../build/ios/ipa/Dev.ipa",
-            firebase_cli_token: ENV["FIREBASE_TOKEN"],
-            groups: ENV["FIREBASE_TESTER_GROUPS"]
+            firebase_cli_token: ENV["FIREBASE_TOKEN"]
         )
     end
 
