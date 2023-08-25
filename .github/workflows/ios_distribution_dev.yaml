@@ -78,6 +78,15 @@ jobs:
           cd ..
           flutter build ipa --export-options-plist lib/core/export_plist/Info_dev.plist --flavor dev -t lib/core/flavors/main_dev.dart
 
+  testflight:
+    needs: build
+    permissions:
+      checks: write
+      contents: write
+      packages: write
+    runs-on: [ marcOS ]
+
+    steps:
       - name: Deploy para testflight
         run: |
           cd ios
@@ -93,6 +102,15 @@ jobs:
           APP_STORE_ISSUER_ID: ${{ secrets.APP_STORE_ISSUER_ID }}
           APP_STORE_KEY_ID: ${{ secrets.APP_STORE_KEY_ID }}
 
+  firebase:
+    needs: build
+    permissions:
+      checks: write
+      contents: write
+      packages: write
+    runs-on: [ marcOS ]
+
+    steps:
       - name: Deploy do firebase
         run: |
           cd ios
