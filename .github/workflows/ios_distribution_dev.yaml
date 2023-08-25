@@ -69,6 +69,10 @@ jobs:
           flutter clean
           rm -rf ios/Pods
           rm ios/Podfile.lock
+          cd ios
+          pod deintegrate
+          pod install
+          cd ..
           flutter pub get
           ./localization
           flutter packages pub run build_runner build --delete-conflicting-outputs

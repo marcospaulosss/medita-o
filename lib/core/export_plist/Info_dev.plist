@@ -5,11 +5,11 @@
 	<key>compileBitcode</key>
 	<false/>
 	<key>method</key>
-	<string>ad-hoc</string>
+	<string>app-store</string>
 	<key>provisioningProfiles</key>
 	<dict>
 		<key>eumedito.org.cincoMinutos.dev</key>
-		<string>match AdHoc eumedito.org.cincoMinutos.dev</string>
+		<string>match AppStore eumedito.org.cincoMinutos.dev</string>
 	</dict>
 	<key>signingCertificate</key>
 	<string>Apple Distribution</string>
