@@ -69,13 +69,13 @@ jobs:
           flutter clean
           rm -rf ios/Pods
           rm ios/Podfile.lock
+          flutter pub get
+          ./localization
+          flutter packages pub run build_runner build --delete-conflicting-outputs
           cd ios
           pod deintegrate
           pod install
           cd ..
-          flutter pub get
-          ./localization
-          flutter packages pub run build_runner build --delete-conflicting-outputs
           flutter build ipa --export-options-plist lib/core/export_plist/Info_dev.plist --flavor dev -t lib/core/flavors/main_dev.dart
 
       - name: Deploy para testflight
@@ -98,7 +98,6 @@ jobs:
           cd ios
           bundle exec fastlane firebase
         env:
-          FIREBASE_APP_ID: ${{ secrets.FIREBASE_APP_ID }}
           FIREBASE_TESTER_GROUPS: ${{ secrets.FIREBASE_TESTER_GROUPS }}
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
           APPLE_ID: ${{ secrets.APPLE_ID }}
