@@ -78,6 +78,12 @@ jobs:
           cd ..
           flutter build ipa --export-options-plist lib/core/export_plist/Info_dev.plist --flavor dev -t lib/core/flavors/main_dev.dart
 
+      - name: Upload do ipa
+        uses: actions/upload-artifact@v3
+        with:
+          name: ipa
+          path: build/ios/ipa/Dev.ipa
+
   testflight:
     needs: build
     permissions:
@@ -87,6 +93,12 @@ jobs:
     runs-on: [ marcOS ]
 
     steps:
+      - name: Download ipa
+        uses: actions/download-artifact@v3
+        with:
+          name: ipa
+          path: build/ios/ipa
+
       - name: Deploy para testflight
         run: |
           cd ios
@@ -111,6 +123,12 @@ jobs:
     runs-on: [ marcOS ]
 
     steps:
+      - name: Download ipa
+        uses: actions/download-artifact@v3
+        with:
+          name: ipa
+          path: build/ios/ipa
+
       - name: Deploy do firebase
         run: |
           cd ios

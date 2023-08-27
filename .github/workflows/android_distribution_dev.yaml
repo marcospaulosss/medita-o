@@ -59,6 +59,12 @@ jobs:
           flutter packages pub run build_runner build --delete-conflicting-outputs
           flutter build apk --debug --flavor dev -t lib/core/flavors/main_dev.dart 
 
+      - name: Upload do apk
+        uses: actions/upload-artifact@v3
+        with:
+          name: apk
+          path: build/app/outputs/flutter-apk/app-dev-debug.apk
+
   firebase:
     needs: build
     permissions:
@@ -68,8 +74,15 @@ jobs:
     runs-on: [ marcOS ]
 
     steps:
+      - name: Download apk
+        uses: actions/download-artifact@v3
+        with:
+          name: apk
+          path: build/app/outputs/flutter-apk
+
       - name: Deploy do firebase
         run: |
+          ls -la build/app/outputs/flutter-apk
           cd android
           bundle exec fastlane firebase
         env:
