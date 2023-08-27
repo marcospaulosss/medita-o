@@ -40,7 +40,7 @@ platform :android do
   lane :firebase do
     firebase_app_distribution(
       app: "1:106395996253:android:91b47db80ae6b71503bdb4",
-      groups: ENV["FIREBASE_TESTER_GROUPS"],
+      groups: "testers",
       android_artifact_type: "APK",
       android_artifact_path: "../build/app/outputs/flutter-apk/app-dev-debug.apk",
       firebase_cli_token: ENV['FIREBASE_TOKEN'],
