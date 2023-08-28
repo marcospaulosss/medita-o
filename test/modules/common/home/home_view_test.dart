@@ -46,6 +46,7 @@ main() async {
         ),
       );
 
+      await tester.pump(const Duration(seconds: 4));
       verify(presenter.onOpenScreen()).called(1);
     });
   });
