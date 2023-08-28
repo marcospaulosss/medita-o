@@ -1,0 +1,53 @@
+flavorizr:
+  app:
+    android:
+      flavorDimensions: "flavor-type"
+
+  flavors:
+    dev:
+      app:
+        name: "Dev"
+      android:
+        applicationId: "eumedito.org.cinco_minutos.dev"
+        icon: "assets/images/icon_app_android.jpeg"
+        firebase:
+          config: "lib/core/firebase/dev/google-services.json"
+
+      ios:
+        bundleId: "eumedito.org.cincoMinutos.dev"
+        buildSettings:
+          # Development Team is visible in the apple developer portal
+          DEVELOPMENT_TEAM: cincoMinutos-dev
+          PROVISIONING_PROFILE_SPECIFIER: "Dev-ProvisioningProfile"
+        icon: "assets/images/icon_app_ios.jpeg"
+        firebase:
+          config: "lib/core/firebase/dev/GoogleService-Info.plist"
+        variables:
+          REVERSED_CLIENT_ID:
+            value: "com.googleusercontent.apps.106395996253-47re9j5qpusudfhvpfc8r3n9u8a86d76"
+          FLUTTER_TARGET:
+            value: "lib/core/flavors/main_dev.dart"
+
+    prod:
+      app:
+        name: "5 Minutos"
+      android:
+        applicationId: "eumedito.org.cinco_minutos"
+        icon: "assets/images/icon_app_android.jpeg"
+        firebase:
+          config: "lib/core/firebase/prod/google-services.json"
+
+      ios:
+        bundleId: "eumedito.org.cincoMinutos"
+        buildSettings:
+          # Development Team is visible in the apple developer portal
+          DEVELOPMENT_TEAM: cincoMinutos-prod
+          PROVISIONING_PROFILE_SPECIFIER: "Prod-ProvisioningProfile"
+        icon: "assets/images/icon_app_ios.jpeg"
+        firebase:
+          config: "lib/core/firebase/prod/GoogleService-Info.plist"
+        variables:
+          REVERSED_CLIENT_ID:
+            value: "com.googleusercontent.apps.106395996253-1o0qdh69ns2ttodsflvjth1n59j5sadr"
+          FLUTTER_TARGET:
+            value: "lib/core/flavors/main_prod.dart"
