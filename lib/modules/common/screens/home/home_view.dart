@@ -5,6 +5,7 @@ import 'package:cinco_minutos_meditacao/modules/common/screens/home/home_contrac
 import 'package:cinco_minutos_meditacao/modules/common/screens/home/home_presenter.dart';
 import 'package:cinco_minutos_meditacao/modules/common/shared/strings/localization/common_strings.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 
 @RoutePage()
 class HomeView extends StatefulWidget {
@@ -22,6 +23,8 @@ class _HomeViewState extends State<HomeView> {
   @override
   void initState() {
     presenter.onOpenScreen();
+
+    initialization();
 
     super.initState();
   }
@@ -46,5 +49,10 @@ class _HomeViewState extends State<HomeView> {
         ),
       ),
     );
+  }
+
+  void initialization() async {
+    await Future.delayed(const Duration(seconds: 3));
+    FlutterNativeSplash.remove();
   }
 }
