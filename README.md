@@ -104,6 +104,20 @@ https://docs.flutter.dev/deployment/cd#fastlane
 brew install fastlane
 ```
 
+## Configuração da splash screen do projeto
+- dev_dependencies
+    - flutter_native_splash: ^1.2.1
+
+### Introdução
+Utilizamos o flutter_native_splash para gerar a splash screen nativa do projeto, para isso é necessário configurar o arquivo flutter_native_splash.yaml na raiz do projeto.
+
+Adicionar imagem na pasta assets/images/splash_screen.png
+Executar o comando:
+
+```shell
+flutter pub run flutter_native_splash:create
+```
+
 
 # Resolução de problemas com cocopods e flutter
 ```shell
