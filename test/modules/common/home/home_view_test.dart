@@ -15,7 +15,7 @@ import 'home_view_test.mocks.dart';
 
 @GenerateMocks([HomePresenter])
 main() async {
-  dotenv.testLoad(fileInput: File('.env').readAsStringSync());
+  dotenv.testLoad(fileInput: File('.env.dev').readAsStringSync());
 
   group("Home", () {
     late MockHomePresenter presenter;
