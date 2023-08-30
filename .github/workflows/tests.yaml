@@ -63,4 +63,4 @@ jobs:
       - name: Verifica o coverage
         uses: VeryGoodOpenSource/very_good_coverage@v2.1.0
         with:
-          min_coverage: 50
+          min_coverage: 80
