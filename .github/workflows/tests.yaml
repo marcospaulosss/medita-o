@@ -50,6 +50,8 @@ jobs:
           flutter packages pub run build_runner build --delete-conflicting-outputs
           flutter analyze --no-fatal-infos --no-fatal-warnings
           flutter test --coverage
+          lcov --remove coverage/lcov.info 'lib/core/*' -o coverage/new_lcov.info
+          lcov --remove coverage/new_lcov.info '**/strings/localization/**' -o coverage/new2_lcov.info
           flutter test --machine > test-results.json
 
       - name: Report result tests
@@ -64,4 +66,5 @@ jobs:
         uses: VeryGoodOpenSource/very_good_coverage@v2.1.0
         with:
           min_coverage: 80
-          exclude: 'lib/core/* **/strings/localization/**'
+          exclude: './lib/core/* **/strings/localization/**'
+          path: ./coverage/new2_lcov.info
