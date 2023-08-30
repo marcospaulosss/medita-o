@@ -3,10 +3,9 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i12;
+import 'dart:async' as _i10;
 
-import 'package:auto_route/auto_route.dart' as _i13;
-import 'package:device_info_plus/device_info_plus.dart' as _i11;
+import 'package:device_info_plus/device_info_plus.dart' as _i9;
 import 'package:device_info_plus/src/model/android_device_info.dart' as _i2;
 import 'package:device_info_plus/src/model/ios_device_info.dart' as _i3;
 import 'package:device_info_plus/src/model/linux_device_info.dart' as _i4;
@@ -15,8 +14,6 @@ import 'package:device_info_plus/src/model/web_browser_info.dart' as _i5;
 import 'package:device_info_plus/src/model/windows_device_info.dart' as _i7;
 import 'package:device_info_plus_platform_interface/device_info_plus_platform_interface.dart'
     as _i8;
-import 'package:flutter/foundation.dart' as _i10;
-import 'package:flutter/material.dart' as _i9;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: type=lint
@@ -128,126 +125,76 @@ class _FakeAndroidDisplayMetrics_8 extends _i1.SmartFake
         );
 }
 
-class _FakeState_9<T extends _i9.StatefulWidget> extends _i1.SmartFake
-    implements _i9.State<T> {
-  _FakeState_9(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
-
-  @override
-  String toString(
-          {_i10.DiagnosticLevel? minLevel = _i10.DiagnosticLevel.info}) =>
-      super.toString();
-}
-
-class _FakeStatefulElement_10 extends _i1.SmartFake
-    implements _i9.StatefulElement {
-  _FakeStatefulElement_10(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
-
-  @override
-  String toString(
-          {_i10.DiagnosticLevel? minLevel = _i10.DiagnosticLevel.info}) =>
-      super.toString();
-}
-
-class _FakeDiagnosticsNode_11 extends _i1.SmartFake
-    implements _i10.DiagnosticsNode {
-  _FakeDiagnosticsNode_11(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
-
-  @override
-  String toString({
-    _i10.TextTreeConfiguration? parentConfiguration,
-    _i10.DiagnosticLevel? minLevel = _i10.DiagnosticLevel.info,
-  }) =>
-      super.toString();
-}
-
 /// A class which mocks [DeviceInfoPlugin].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockDeviceInfoPlugin extends _i1.Mock implements _i11.DeviceInfoPlugin {
+class MockDeviceInfoPlugin extends _i1.Mock implements _i9.DeviceInfoPlugin {
   MockDeviceInfoPlugin() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i12.Future<_i2.AndroidDeviceInfo> get androidInfo => (super.noSuchMethod(
+  _i10.Future<_i2.AndroidDeviceInfo> get androidInfo => (super.noSuchMethod(
         Invocation.getter(#androidInfo),
         returnValue:
-            _i12.Future<_i2.AndroidDeviceInfo>.value(_FakeAndroidDeviceInfo_0(
+            _i10.Future<_i2.AndroidDeviceInfo>.value(_FakeAndroidDeviceInfo_0(
           this,
           Invocation.getter(#androidInfo),
         )),
-      ) as _i12.Future<_i2.AndroidDeviceInfo>);
+      ) as _i10.Future<_i2.AndroidDeviceInfo>);
   @override
-  _i12.Future<_i3.IosDeviceInfo> get iosInfo => (super.noSuchMethod(
+  _i10.Future<_i3.IosDeviceInfo> get iosInfo => (super.noSuchMethod(
         Invocation.getter(#iosInfo),
-        returnValue: _i12.Future<_i3.IosDeviceInfo>.value(_FakeIosDeviceInfo_1(
+        returnValue: _i10.Future<_i3.IosDeviceInfo>.value(_FakeIosDeviceInfo_1(
           this,
           Invocation.getter(#iosInfo),
         )),
-      ) as _i12.Future<_i3.IosDeviceInfo>);
+      ) as _i10.Future<_i3.IosDeviceInfo>);
   @override
-  _i12.Future<_i4.LinuxDeviceInfo> get linuxInfo => (super.noSuchMethod(
+  _i10.Future<_i4.LinuxDeviceInfo> get linuxInfo => (super.noSuchMethod(
         Invocation.getter(#linuxInfo),
         returnValue:
-            _i12.Future<_i4.LinuxDeviceInfo>.value(_FakeLinuxDeviceInfo_2(
+            _i10.Future<_i4.LinuxDeviceInfo>.value(_FakeLinuxDeviceInfo_2(
           this,
           Invocation.getter(#linuxInfo),
         )),
-      ) as _i12.Future<_i4.LinuxDeviceInfo>);
+      ) as _i10.Future<_i4.LinuxDeviceInfo>);
   @override
-  _i12.Future<_i5.WebBrowserInfo> get webBrowserInfo => (super.noSuchMethod(
+  _i10.Future<_i5.WebBrowserInfo> get webBrowserInfo => (super.noSuchMethod(
         Invocation.getter(#webBrowserInfo),
         returnValue:
-            _i12.Future<_i5.WebBrowserInfo>.value(_FakeWebBrowserInfo_3(
+            _i10.Future<_i5.WebBrowserInfo>.value(_FakeWebBrowserInfo_3(
           this,
           Invocation.getter(#webBrowserInfo),
         )),
-      ) as _i12.Future<_i5.WebBrowserInfo>);
+      ) as _i10.Future<_i5.WebBrowserInfo>);
   @override
-  _i12.Future<_i6.MacOsDeviceInfo> get macOsInfo => (super.noSuchMethod(
+  _i10.Future<_i6.MacOsDeviceInfo> get macOsInfo => (super.noSuchMethod(
         Invocation.getter(#macOsInfo),
         returnValue:
-            _i12.Future<_i6.MacOsDeviceInfo>.value(_FakeMacOsDeviceInfo_4(
+            _i10.Future<_i6.MacOsDeviceInfo>.value(_FakeMacOsDeviceInfo_4(
           this,
           Invocation.getter(#macOsInfo),
         )),
-      ) as _i12.Future<_i6.MacOsDeviceInfo>);
+      ) as _i10.Future<_i6.MacOsDeviceInfo>);
   @override
-  _i12.Future<_i7.WindowsDeviceInfo> get windowsInfo => (super.noSuchMethod(
+  _i10.Future<_i7.WindowsDeviceInfo> get windowsInfo => (super.noSuchMethod(
         Invocation.getter(#windowsInfo),
         returnValue:
-            _i12.Future<_i7.WindowsDeviceInfo>.value(_FakeWindowsDeviceInfo_5(
+            _i10.Future<_i7.WindowsDeviceInfo>.value(_FakeWindowsDeviceInfo_5(
           this,
           Invocation.getter(#windowsInfo),
         )),
-      ) as _i12.Future<_i7.WindowsDeviceInfo>);
+      ) as _i10.Future<_i7.WindowsDeviceInfo>);
   @override
-  _i12.Future<_i8.BaseDeviceInfo> get deviceInfo => (super.noSuchMethod(
+  _i10.Future<_i8.BaseDeviceInfo> get deviceInfo => (super.noSuchMethod(
         Invocation.getter(#deviceInfo),
         returnValue:
-            _i12.Future<_i8.BaseDeviceInfo>.value(_FakeBaseDeviceInfo_6(
+            _i10.Future<_i8.BaseDeviceInfo>.value(_FakeBaseDeviceInfo_6(
           this,
           Invocation.getter(#deviceInfo),
         )),
-      ) as _i12.Future<_i8.BaseDeviceInfo>);
+      ) as _i10.Future<_i8.BaseDeviceInfo>);
 }
 
 /// A class which mocks [AndroidDeviceInfo].
@@ -426,141 +373,4 @@ class MockAndroidBuildVersion extends _i1.Mock
         ),
         returnValue: <String, dynamic>{},
       ) as Map<String, dynamic>);
-}
-
-/// A class which mocks [AutoRouter].
-///
-/// See the documentation for Mockito's code generation for more information.
-class MockAutoRouter extends _i1.Mock implements _i13.AutoRouter {
-  MockAutoRouter() {
-    _i1.throwOnMissingStub(this);
-  }
-
-  @override
-  _i13.NavigatorObserversBuilder get navigatorObservers => (super.noSuchMethod(
-        Invocation.getter(#navigatorObservers),
-        returnValue: () => <_i9.NavigatorObserver>[],
-      ) as _i13.NavigatorObserversBuilder);
-  @override
-  bool get inheritNavigatorObservers => (super.noSuchMethod(
-        Invocation.getter(#inheritNavigatorObservers),
-        returnValue: false,
-      ) as bool);
-  @override
-  _i9.State<_i13.AutoRouter> createState() => (super.noSuchMethod(
-        Invocation.method(
-          #createState,
-          [],
-        ),
-        returnValue: _FakeState_9<_i13.AutoRouter>(
-          this,
-          Invocation.method(
-            #createState,
-            [],
-          ),
-        ),
-      ) as _i9.State<_i13.AutoRouter>);
-  @override
-  _i9.StatefulElement createElement() => (super.noSuchMethod(
-        Invocation.method(
-          #createElement,
-          [],
-        ),
-        returnValue: _FakeStatefulElement_10(
-          this,
-          Invocation.method(
-            #createElement,
-            [],
-          ),
-        ),
-      ) as _i9.StatefulElement);
-  @override
-  String toStringShort() => (super.noSuchMethod(
-        Invocation.method(
-          #toStringShort,
-          [],
-        ),
-        returnValue: '',
-      ) as String);
-  @override
-  void debugFillProperties(_i10.DiagnosticPropertiesBuilder? properties) =>
-      super.noSuchMethod(
-        Invocation.method(
-          #debugFillProperties,
-          [properties],
-        ),
-        returnValueForMissingStub: null,
-      );
-  @override
-  String toStringShallow({
-    String? joiner = r', ',
-    _i10.DiagnosticLevel? minLevel = _i10.DiagnosticLevel.debug,
-  }) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #toStringShallow,
-          [],
-          {
-            #joiner: joiner,
-            #minLevel: minLevel,
-          },
-        ),
-        returnValue: '',
-      ) as String);
-  @override
-  String toStringDeep({
-    String? prefixLineOne = r'',
-    String? prefixOtherLines,
-    _i10.DiagnosticLevel? minLevel = _i10.DiagnosticLevel.debug,
-  }) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #toStringDeep,
-          [],
-          {
-            #prefixLineOne: prefixLineOne,
-            #prefixOtherLines: prefixOtherLines,
-            #minLevel: minLevel,
-          },
-        ),
-        returnValue: '',
-      ) as String);
-  @override
-  _i10.DiagnosticsNode toDiagnosticsNode({
-    String? name,
-    _i10.DiagnosticsTreeStyle? style,
-  }) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #toDiagnosticsNode,
-          [],
-          {
-            #name: name,
-            #style: style,
-          },
-        ),
-        returnValue: _FakeDiagnosticsNode_11(
-          this,
-          Invocation.method(
-            #toDiagnosticsNode,
-            [],
-            {
-              #name: name,
-              #style: style,
-            },
-          ),
-        ),
-      ) as _i10.DiagnosticsNode);
-  @override
-  List<_i10.DiagnosticsNode> debugDescribeChildren() => (super.noSuchMethod(
-        Invocation.method(
-          #debugDescribeChildren,
-          [],
-        ),
-        returnValue: <_i10.DiagnosticsNode>[],
-      ) as List<_i10.DiagnosticsNode>);
-  @override
-  String toString(
-          {_i10.DiagnosticLevel? minLevel = _i10.DiagnosticLevel.info}) =>
-      super.toString();
 }
