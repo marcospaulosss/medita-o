@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:auto_route/auto_route.dart';
 import 'package:cinco_minutos_meditacao/modules/common/screens/splash_screen/splash_screen_view.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
@@ -13,8 +12,7 @@ import 'package:mockito/mockito.dart';
 
 import 'splash_screen_view_test.mocks.dart';
 
-@GenerateMocks(
-    [DeviceInfoPlugin, AndroidDeviceInfo, AndroidBuildVersion, AutoRouter])
+@GenerateMocks([DeviceInfoPlugin, AndroidDeviceInfo, AndroidBuildVersion])
 void main() {
   dotenv.testLoad(fileInput: File('.env.dev').readAsStringSync());
 
@@ -23,14 +21,12 @@ void main() {
     late MockDeviceInfoPlugin deviceInfoPlugin;
     late MockAndroidDeviceInfo androidDeviceInfo;
     late MockAndroidBuildVersion androidBuildVersion;
-    late MockAutoRouter autoRouter;
 
     setUp(() {
       splashScreenView = const SplashScreenView();
       deviceInfoPlugin = MockDeviceInfoPlugin();
       androidDeviceInfo = MockAndroidDeviceInfo();
       androidBuildVersion = MockAndroidBuildVersion();
-      autoRouter = MockAutoRouter();
     });
 
     testWidgets("Should show splash screen", (tester) async {
@@ -72,8 +68,7 @@ void main() {
       var state = element.state as SplashScreenViewState;
       state.deviceInfoPlugin = deviceInfoPlugin;
 
-      var result =
-          state.readAndroidBuildData(await deviceInfoPlugin.androidInfo);
+      state.readAndroidBuildData(await deviceInfoPlugin.androidInfo);
       expect(true, true);
     });
   });
