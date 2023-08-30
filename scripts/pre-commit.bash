@@ -21,6 +21,7 @@ fi
 printf "\e[33;1m%s\e[m\n" "Running tests"
 flutter test --coverage
 lcov --remove coverage/lcov.info 'lib/core/*' -o coverage/new_lcov.info
+lcov --remove coverage/new_lcov.info '**/strings/localization/**' -o coverage/new2_lcov.info
 
 if [ $? -ne 0 ]; then
     printf "\e[31;1m%s\e[m\n" "Tests failed, please fix before commiting"
@@ -28,7 +29,7 @@ if [ $? -ne 0 ]; then
     exit 1
 fi
 
-genhtml coverage/new_lcov.info -o coverage/html
+genhtml coverage/new2_lcov.info -o coverage/html
 open coverage/html/index.html
 
 slep 5
