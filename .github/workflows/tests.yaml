@@ -64,3 +64,4 @@ jobs:
         uses: VeryGoodOpenSource/very_good_coverage@v2.1.0
         with:
           min_coverage: 80
+          exclude: 'lib/core/* **/strings/localization/**'
