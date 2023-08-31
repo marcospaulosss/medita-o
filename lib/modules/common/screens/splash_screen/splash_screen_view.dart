@@ -46,6 +46,9 @@ class SplashScreenViewState extends State<SplashScreenView> {
         deviceData = readAndroidBuildData(await deviceInfoPlugin.androidInfo);
         initialization();
       }
+
+      FlutterNativeSplash.remove();
+      if (context.mounted) AutoRouter.of(context).replace(const HomeRoute());
     } on PlatformException {
       return;
     }
@@ -60,15 +63,13 @@ class SplashScreenViewState extends State<SplashScreenView> {
   void initialization() async {
     if (deviceData["version.release"] == null ||
         int.parse(deviceData["version.release"]) < 12) {
-      // ignore: use_build_context_synchronously
-      AutoRouter.of(context).replace(const HomeRoute());
+      if (context.mounted) AutoRouter.of(context).replace(const HomeRoute());
       FlutterNativeSplash.remove();
       return;
     }
 
     FlutterNativeSplash.remove();
     await Future.delayed(const Duration(seconds: 5));
-    // ignore: use_build_context_synchronously
-    AutoRouter.of(context).replace(const HomeRoute());
+    if (context.mounted) AutoRouter.of(context).replace(const HomeRoute());
   }
 }
