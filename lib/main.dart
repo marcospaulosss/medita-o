@@ -1,6 +1,7 @@
 import 'package:cinco_minutos_meditacao/core/di/setup.dart';
 import 'package:cinco_minutos_meditacao/core/firebase/firebase_options.dart';
 import 'package:cinco_minutos_meditacao/core/flavors/flavors.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
@@ -9,14 +10,17 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:intl/intl.dart';
 import 'package:intl/intl_standalone.dart';
 
+late final FirebaseApp app;
+
 Future<void> main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
 
   /// Inicializa o Firebase.
-  await Firebase.initializeApp(
+  app = await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  FirebaseAuth.instanceFor(app: app);
 
   /// Configura o Firebase Crashlytics. apenas em ambiente de produção.
   if (F.isProd) {
