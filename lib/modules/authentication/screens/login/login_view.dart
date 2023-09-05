@@ -23,12 +23,15 @@ class _LoginViewState extends State<LoginView> {
   /// Presenter da tela de login
   Presenter presenter = resolve<LoginPresenter>();
 
+  /// Controlador do estado da tela
   final MultiStateContainerController stateController =
       MultiStateContainerController();
 
   @override
   void initState() {
     stateController.showNormalState();
+
+    presenter.onOpenScreen();
 
     super.initState();
   }
@@ -76,6 +79,7 @@ class _LoginViewState extends State<LoginView> {
     );
   }
 
+  /// Solicita o login utilizando o Google
   void requestLoginGoogle() async {
     stateController.showLoadingState();
     var (userGoogle, error) = await presenter.loginGoogle();
