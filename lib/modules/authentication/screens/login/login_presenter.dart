@@ -8,10 +8,16 @@ class LoginPresenter extends Presenter {
   /// Serviço de autenticação
   final AuthService _authService;
 
+  /// Router
   final AppRouter _router;
 
+  /// Repositório
+  final Repository _repository;
+
   /// - [authService] : Serviço de autenticação
-  LoginPresenter(this._authService, this._router);
+  /// - [router] : Router
+  /// - [repository] : Repositório
+  LoginPresenter(this._authService, this._router, this._repository);
 
   /// Login utilizando o Google
   @override
@@ -19,8 +25,15 @@ class LoginPresenter extends Presenter {
     return await _authService.loginGoogle();
   }
 
+  /// Direciona para a tela de home
   @override
   void goToHome() {
     _router.replace(const HomeRoute());
+  }
+
+  /// Tageamento de evento de analytics pra a tela de login
+  @override
+  void onOpenScreen() {
+    _repository.sendOpenScreenEvent();
   }
 }
