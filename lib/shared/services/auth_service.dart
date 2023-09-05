@@ -1,5 +1,7 @@
+import 'package:cinco_minutos_meditacao/shared/services/log_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthService {
@@ -12,7 +14,7 @@ class AuthService {
 
   bool get isAuthenticated => _authenticated;
 
-  Future<(GoogleSignInAccount?, AuthCredential?, Object?)> loginGoogle() async {
+  Future<(User?, dynamic)> loginGoogle() async {
     try {
       final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
       final GoogleSignInAuthentication googleAuth =
@@ -40,9 +42,12 @@ class AuthService {
 
       _authenticated = true;
 
-      return (googleUser, credential, null);
-    } catch (e) {
-      return (null, null, Future.error(e));
+      return (fireUser, null);
+    } catch (e, s) {
+      FirebaseCrashlytics.instance.log("Erro ao realizar login com o Google");
+      LogService().log("Erro login com o Google", e, s);
+
+      return (null, Future.error(e));
     }
   }
 
