@@ -5,23 +5,23 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:intl/intl.dart' as intl;
 
-import 'common_strings_en.dart';
-import 'common_strings_es.dart';
-import 'common_strings_pt.dart';
+import 'authentication_strings_en.dart';
+import 'authentication_strings_es.dart';
+import 'authentication_strings_pt.dart';
 
-/// Callers can lookup localized strings with an instance of CommonStrings
-/// returned by `CommonStrings.of(context)`.
+/// Callers can lookup localized strings with an instance of AuthenticationStrings
+/// returned by `AuthenticationStrings.of(context)`.
 ///
-/// Applications need to include `CommonStrings.delegate()` in their app's
+/// Applications need to include `AuthenticationStrings.delegate()` in their app's
 /// `localizationDelegates` list, and the locales they support in the app's
 /// `supportedLocales` list. For example:
 ///
 /// ```dart
-/// import 'localization/common_strings.dart';
+/// import 'localization/authentication_strings.dart';
 ///
 /// return MaterialApp(
-///   localizationsDelegates: CommonStrings.localizationsDelegates,
-///   supportedLocales: CommonStrings.supportedLocales,
+///   localizationsDelegates: AuthenticationStrings.localizationsDelegates,
+///   supportedLocales: AuthenticationStrings.supportedLocales,
 ///   home: MyApplicationHome(),
 /// );
 /// ```
@@ -58,18 +58,18 @@ import 'common_strings_pt.dart';
 /// Select and expand the newly-created Localizations item then, for each
 /// locale your application supports, add a new item and select the locale
 /// you wish to add from the pop-up menu in the Value field. This list should
-/// be consistent with the languages listed in the CommonStrings.supportedLocales
+/// be consistent with the languages listed in the AuthenticationStrings.supportedLocales
 /// property.
-abstract class CommonStrings {
-  CommonStrings(String locale) : localeName = intl.Intl.canonicalizedLocale(locale.toString());
+abstract class AuthenticationStrings {
+  AuthenticationStrings(String locale) : localeName = intl.Intl.canonicalizedLocale(locale.toString());
 
   final String localeName;
 
-  static CommonStrings of(BuildContext context) {
-    return Localizations.of<CommonStrings>(context, CommonStrings)!;
+  static AuthenticationStrings of(BuildContext context) {
+    return Localizations.of<AuthenticationStrings>(context, AuthenticationStrings)!;
   }
 
-  static const LocalizationsDelegate<CommonStrings> delegate = _CommonStringsDelegate();
+  static const LocalizationsDelegate<AuthenticationStrings> delegate = _AuthenticationStringsDelegate();
 
   /// A list of this localizations delegate along with the default localizations
   /// delegates.
@@ -95,40 +95,40 @@ abstract class CommonStrings {
     Locale('pt')
   ];
 
-  /// No description provided for @home.
+  /// No description provided for @yourGoogleAccount.
   ///
   /// In pt, this message translates to:
-  /// **'Home'**
-  String get home;
+  /// **'Sua conta Google'**
+  String get yourGoogleAccount;
 }
 
-class _CommonStringsDelegate extends LocalizationsDelegate<CommonStrings> {
-  const _CommonStringsDelegate();
+class _AuthenticationStringsDelegate extends LocalizationsDelegate<AuthenticationStrings> {
+  const _AuthenticationStringsDelegate();
 
   @override
-  Future<CommonStrings> load(Locale locale) {
-    return SynchronousFuture<CommonStrings>(lookupCommonStrings(locale));
+  Future<AuthenticationStrings> load(Locale locale) {
+    return SynchronousFuture<AuthenticationStrings>(lookupAuthenticationStrings(locale));
   }
 
   @override
   bool isSupported(Locale locale) => <String>['en', 'es', 'pt'].contains(locale.languageCode);
 
   @override
-  bool shouldReload(_CommonStringsDelegate old) => false;
+  bool shouldReload(_AuthenticationStringsDelegate old) => false;
 }
 
-CommonStrings lookupCommonStrings(Locale locale) {
+AuthenticationStrings lookupAuthenticationStrings(Locale locale) {
 
 
   // Lookup logic when only language code is specified.
   switch (locale.languageCode) {
-    case 'en': return CommonStringsEn();
-    case 'es': return CommonStringsEs();
-    case 'pt': return CommonStringsPt();
+    case 'en': return AuthenticationStringsEn();
+    case 'es': return AuthenticationStringsEs();
+    case 'pt': return AuthenticationStringsPt();
   }
 
   throw FlutterError(
-    'CommonStrings.delegate failed to load unsupported locale "$locale". This is likely '
+    'AuthenticationStrings.delegate failed to load unsupported locale "$locale". This is likely '
     'an issue with the localizations generation tool. Please file an issue '
     'on GitHub with a reproducible sample app and the gen-l10n configuration '
     'that was used.'
