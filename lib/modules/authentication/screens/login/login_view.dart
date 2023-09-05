@@ -2,6 +2,7 @@ import 'package:auto_route/annotations.dart';
 import 'package:cinco_minutos_meditacao/core/di/helpers.dart';
 import 'package:cinco_minutos_meditacao/modules/authentication/screens/login/login_contracts.dart';
 import 'package:cinco_minutos_meditacao/modules/authentication/screens/login/login_presenter.dart';
+import 'package:cinco_minutos_meditacao/modules/authentication/shared/strings/localization/authentication_strings.dart';
 import 'package:cinco_minutos_meditacao/shared/components/background_default.dart';
 import 'package:cinco_minutos_meditacao/shared/components/icon_label_button.dart';
 import 'package:cinco_minutos_meditacao/shared/helpers/multi_state_container/container.dart';
@@ -24,8 +25,7 @@ class _LoginViewState extends State<LoginView> {
   Presenter presenter = resolve<LoginPresenter>();
 
   /// Controlador do estado da tela
-  final MultiStateContainerController stateController =
-      MultiStateContainerController();
+  final stateController = MultiStateContainerController();
 
   @override
   void initState() {
@@ -47,14 +47,14 @@ class _LoginViewState extends State<LoginView> {
   Widget build(BuildContext context) {
     return MultiStateContainer(
       controller: stateController,
-      normalStateBuilder: (context) => buildScaffold,
+      normalStateBuilder: (context) => buildScaffold(),
       loadingStateBuilder: (context) =>
           const Center(child: Text("Carregando...")),
       errorStateBuilder: (context) => const Center(child: Text("Erro")),
     );
   }
 
-  Scaffold get buildScaffold {
+  Scaffold buildScaffold() {
     return Scaffold(
       body: BackgroundDefault(
         child: IconLabelButton(
@@ -65,9 +65,9 @@ class _LoginViewState extends State<LoginView> {
             'assets/icons/google_logo.svg',
             height: 30,
           ),
-          label: const Text(
-            'Sua conta Google',
-            style: TextStyle(
+          label: Text(
+            AuthenticationStrings.of(context).yourGoogleAccount,
+            style: const TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.w400,
               color: Color(0xff2B448C),
