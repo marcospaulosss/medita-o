@@ -11,16 +11,27 @@ jobs:
       contents: write
       packages: write
 #    runs-on: [marcOS]
-    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ ubuntu-latest]
+        # Due to https://github.com/actions/runner/issues/849, we have to use quotes for '3.0'
+        ruby: [ '2.7']
+      runs-on: ${{ matrix.os }}
 
     steps:
       - name: Efetua checkout da branch
         uses: actions/checkout@v3
 
       - name: Setup Ruby
-        uses: actions/setup-ruby@v1
+        uses: ruby/setup-ruby@v1
         with:
-          ruby-version: 2.7
+          ruby-version: ${{ matrix.ruby }}
+          bundler-cache: true
+
+#        uses: actions/setup-ruby@v1
+#        with:
+#          ruby-version: 2.7
 
       - name: Install SSH key
         uses: shimataro/ssh-key-action@v2
