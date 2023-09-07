@@ -91,6 +91,17 @@ jobs:
           name: apk
           path: build/app/outputs/flutter-apk
 
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '2.7'
+
+      - name: Setup Fastlane
+        run: |
+          cd android
+          bundle install
+          cd ..
+
       - name: Deploy do firebase
         run: |
           ls -la build/app/outputs/flutter-apk
