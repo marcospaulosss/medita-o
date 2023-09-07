@@ -11,7 +11,7 @@ jobs:
       contents: write
       packages: write
 #    runs-on: [marcOS]
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
 
     steps:
       - name: Efetua checkout da branch
@@ -21,6 +21,11 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: '2.7'
+
+#      - name: Setup Ruby TO MACOS
+#        uses: actions/setup-ruby@v1
+#        with:
+#          ruby-version: 2.7
 
       - name: Install SSH key
         uses: shimataro/ssh-key-action@v2
@@ -77,6 +82,9 @@ jobs:
     runs-on: macos-latest
 
     steps:
+      - name: Efetua checkout da branch
+        uses: actions/checkout@v3
+
       - name: Download apk
         uses: actions/download-artifact@v3
         with:
