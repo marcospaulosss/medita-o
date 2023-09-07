@@ -4,7 +4,9 @@ import 'package:cinco_minutos_meditacao/modules/authentication/screens/login/log
 import 'package:cinco_minutos_meditacao/modules/authentication/screens/login/login_presenter.dart';
 import 'package:cinco_minutos_meditacao/modules/authentication/shared/strings/localization/authentication_strings.dart';
 import 'package:cinco_minutos_meditacao/shared/components/background_default.dart';
+import 'package:cinco_minutos_meditacao/shared/components/generic_error_container.dart';
 import 'package:cinco_minutos_meditacao/shared/components/icon_label_button.dart';
+import 'package:cinco_minutos_meditacao/shared/components/loading.dart';
 import 'package:cinco_minutos_meditacao/shared/helpers/multi_state_container/container.dart';
 import 'package:cinco_minutos_meditacao/shared/helpers/multi_state_container/controller.dart';
 import 'package:flutter/material.dart';
@@ -48,9 +50,10 @@ class _LoginViewState extends State<LoginView> {
     return MultiStateContainer(
       controller: stateController,
       normalStateBuilder: (context) => buildScaffold(),
-      loadingStateBuilder: (context) =>
-          const Center(child: Text("Carregando...")),
-      errorStateBuilder: (context) => const Center(child: Text("Erro")),
+      loadingStateBuilder: (context) => const Loading(),
+      errorStateBuilder: (context) => GenericErrorContainer(
+        onRetry: () => requestLoginGoogle,
+      ),
     );
   }
 
@@ -62,7 +65,7 @@ class _LoginViewState extends State<LoginView> {
           width: 350,
           height: 55,
           image: SvgPicture.asset(
-            'assets/icons/google_logo.svg',
+            'assets/images/icons/google_logo.svg',
             height: 30,
           ),
           label: Text(
@@ -85,6 +88,7 @@ class _LoginViewState extends State<LoginView> {
     var (userGoogle, error) = await presenter.loginGoogle();
     if (error != null) {
       stateController.showErrorState();
+      return;
     }
     stateController.showNormalState();
 
