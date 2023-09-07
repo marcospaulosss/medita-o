@@ -99,7 +99,7 @@ jobs:
       contents: write
       packages: write
 #    runs-on: [ marcOS ]
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
 
     steps:
       - name: Efetua checkout da branch
@@ -112,9 +112,9 @@ jobs:
           path: build/ios/ipa
 
       - name: Setup Ruby
-        uses: ruby/setup-ruby@v1
+        uses: actions/setup-ruby@v1
         with:
-          ruby-version: '2.7'
+          ruby-version: 2.7
 
       - name: Setup Fastlane
         run: |
