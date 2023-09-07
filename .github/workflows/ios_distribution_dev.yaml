@@ -99,7 +99,7 @@ jobs:
       contents: write
       packages: write
 #    runs-on: [ marcOS ]
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
 
     steps:
       - name: Download ipa
@@ -140,7 +140,7 @@ jobs:
       contents: write
       packages: write
 #    runs-on: [ marcOS ]
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
 
     steps:
       - name: Download ipa
