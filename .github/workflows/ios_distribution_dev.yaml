@@ -10,7 +10,8 @@ jobs:
       checks: write
       contents: write
       packages: write
-    runs-on: [marcOS]
+#    runs-on: [marcOS]
+    runs-on: macos-latest
 
     steps:
       - name: Efetua checkout da branch
@@ -97,7 +98,8 @@ jobs:
       checks: write
       contents: write
       packages: write
-    runs-on: [ marcOS ]
+#    runs-on: [ marcOS ]
+    runs-on: macos-latest
 
     steps:
       - name: Download ipa
@@ -127,7 +129,8 @@ jobs:
       checks: write
       contents: write
       packages: write
-    runs-on: [ marcOS ]
+#    runs-on: [ marcOS ]
+    runs-on: macos-latest
 
     steps:
       - name: Download ipa
