@@ -19,7 +19,7 @@ jobs:
       contents: write
       packages: write
     steps:
-      - name: Efetua checkout da branch
+      - name: Checkout branch
         uses: actions/checkout@v3
 
       - name: Setup Java
@@ -28,7 +28,7 @@ jobs:
           distribution: 'temurin' # See 'Supported distributions' for available options
           java-version: '17'
 
-      - name: Setup flutter e builda projeto
+      - name: Setup flutter and build project
         uses: subosito/flutter-action@v2
         with:
           flutter-version: '3.10.6'
@@ -48,7 +48,7 @@ jobs:
           lcov --remove coverage/new_lcov.info '**/strings/localization/**' -o coverage/new2_lcov.info
           flutter test --machine > test-results.json
 
-#      - name: Setup flutter e builda projeto LOCALMENTE
+#      - name: Setup flutter and build project LOCAL
 #        run: |
 #          flutter --version
 #          flutter pub get
@@ -68,7 +68,7 @@ jobs:
           reporter: flutter-json
           token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Verifica o coverage
+      - name: Verify coverage
         uses: VeryGoodOpenSource/very_good_coverage@v2.1.0
         with:
           min_coverage: 70
