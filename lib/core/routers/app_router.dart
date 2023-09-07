@@ -10,4 +10,9 @@ class AppRouter extends $AppRouter {
         AutoRoute(page: HomeRoute.page, guards: [AuthGuard()]),
         AutoRoute(page: LoginRoute.page),
       ];
+
+  /// Navega para a tela inicial do app.
+  void goToReplace(PageRouteInfo route) {
+    replace(route);
+  }
 }

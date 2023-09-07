@@ -101,7 +101,7 @@ void main() async {
 
       await tester.pump();
       await tester.tap(find.byType(IconLabelButton));
-      await tester.pumpAndSettle();
+      await tester.pump();
 
       verify(presenter.loginGoogle()).called(1);
       verify(presenter.goToHome()).called(1);
