@@ -5,6 +5,7 @@ import 'package:cinco_minutos_meditacao/modules/authentication/screens/login/log
 import 'package:cinco_minutos_meditacao/modules/authentication/screens/login/login_view.dart';
 import 'package:cinco_minutos_meditacao/modules/authentication/shared/strings/localization/authentication_strings.dart';
 import 'package:cinco_minutos_meditacao/shared/components/icon_label_button.dart';
+import 'package:cinco_minutos_meditacao/shared/strings/localization/shared_strings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -34,6 +35,7 @@ void main() async {
         MaterialApp(
           localizationsDelegates: const [
             AuthenticationStrings.delegate,
+            SharedStrings.delegate,
             GlobalMaterialLocalizations.delegate,
             GlobalWidgetsLocalizations.delegate,
             GlobalCupertinoLocalizations.delegate,
@@ -58,6 +60,7 @@ void main() async {
         MaterialApp(
           localizationsDelegates: const [
             AuthenticationStrings.delegate,
+            SharedStrings.delegate,
             GlobalMaterialLocalizations.delegate,
             GlobalWidgetsLocalizations.delegate,
             GlobalCupertinoLocalizations.delegate,
@@ -82,12 +85,12 @@ void main() async {
       when(presenter.onOpenScreen()).thenAnswer((_) {});
       when(presenter.loginGoogle())
           .thenAnswer((_) async => (null, Exception("error")));
-      when(presenter.goToHome()).thenAnswer((_) {});
 
       await tester.pumpWidget(
         MaterialApp(
           localizationsDelegates: const [
             AuthenticationStrings.delegate,
+            SharedStrings.delegate,
             GlobalMaterialLocalizations.delegate,
             GlobalWidgetsLocalizations.delegate,
             GlobalCupertinoLocalizations.delegate,
@@ -104,7 +107,12 @@ void main() async {
       await tester.pump();
 
       verify(presenter.loginGoogle()).called(1);
-      verify(presenter.goToHome()).called(1);
+      expect(find.text("Tivemos um problema."), findsOneWidget);
+      expect(find.textContaining("tente novamente."), findsOneWidget);
+      expect(find.textContaining("tente novamente."), findsOneWidget);
+      expect(find.byType(GestureDetector), findsOneWidget);
+      expect(find.text("Tentar novamente"), findsOneWidget);
+      expect(find.byType(Icon), findsOneWidget);
     });
   });
 }
