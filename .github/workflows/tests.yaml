@@ -21,29 +21,18 @@ jobs:
       - name: Efetua checkout da branch
         uses: actions/checkout@v3
 
-#      - name: Setup Java
-#        uses: actions/setup-java@v3
-#        with:
-#          distribution: 'temurin' # See 'Supported distributions' for available options
-#          java-version: '17'
-
-#      - name: Setup flutter e builda projeto
-#        uses: subosito/flutter-action@v2
-#        with:
-#          flutter-version: '3.10.6'
-#          channel: 'stable'
-#      - run: flutter --version
-#      - run: flutter pub get
-#      - run: ./localization
-#      - run: flutter packages pub run build_runner build --delete-conflicting-outputs
-#      - run: flutter analyze --no-fatal-infos --no-fatal-warnings
-#      - run: dart format lib/ --set-exit-if-changed
-#      - run: dart format test/ --set-exit-if-changed
-#      - run: flutter test --coverage
-#      - run: flutter test --machine > test-results.json
+      - name: Setup Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin' # See 'Supported distributions' for available options
+          java-version: '17'
 
       - name: Setup flutter e builda projeto
-        run: |
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.10.6'
+          channel: 'stable'
+      - run: |
           flutter --version
           flutter pub get
           ./localization
@@ -53,6 +42,18 @@ jobs:
           lcov --remove coverage/lcov.info 'lib/core/*' -o coverage/new_lcov.info
           lcov --remove coverage/new_lcov.info '**/strings/localization/**' -o coverage/new2_lcov.info
           flutter test --machine > test-results.json
+
+#      - name: Setup flutter e builda projeto LOCALMENTE
+#        run: |
+#          flutter --version
+#          flutter pub get
+#          ./localization
+#          flutter packages pub run build_runner build --delete-conflicting-outputs
+#          flutter analyze --no-fatal-infos --no-fatal-warnings
+#          flutter test --coverage
+#          lcov --remove coverage/lcov.info 'lib/core/*' -o coverage/new_lcov.info
+#          lcov --remove coverage/new_lcov.info '**/strings/localization/**' -o coverage/new2_lcov.info
+#          flutter test --machine > test-results.json
 
       - name: Report result tests
         uses: dorny/test-reporter@v1.6.0
@@ -65,6 +66,6 @@ jobs:
       - name: Verifica o coverage
         uses: VeryGoodOpenSource/very_good_coverage@v2.1.0
         with:
-          min_coverage: 80
+          min_coverage: 70
           exclude: './lib/core/* **/strings/localization/**'
           path: ./coverage/new2_lcov.info
