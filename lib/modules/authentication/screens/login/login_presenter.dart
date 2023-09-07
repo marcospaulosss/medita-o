@@ -28,7 +28,7 @@ class LoginPresenter extends Presenter {
   /// Direciona para a tela de home
   @override
   void goToHome() {
-    _router.replace(const HomeRoute());
+    _router.goToReplace(const HomeRoute());
   }
 
   /// Tageamento de evento de analytics pra a tela de login
