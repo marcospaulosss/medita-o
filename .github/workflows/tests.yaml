@@ -12,7 +12,8 @@ on:
 jobs:
   flutter_test:
     name: Flutter Tests
-    runs-on: [marcOS]
+#    runs-on: [marcOS]
+    runs-on: macos-latest
     permissions:
       checks: write
       contents: write
