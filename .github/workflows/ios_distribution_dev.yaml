@@ -108,6 +108,16 @@ jobs:
           name: ipa
           path: build/ios/ipa
 
+      - name: Setup Ruby
+        uses: actions/setup-ruby@v1
+        with:
+          ruby-version: 2.7
+
+      - name: Setup Fastlane
+        run: |
+          cd ios
+          bundle install
+
       - name: Deploy para testflight
         run: |
           cd ios
@@ -138,6 +148,16 @@ jobs:
         with:
           name: ipa
           path: build/ios/ipa
+
+      - name: Setup Ruby
+        uses: actions/setup-ruby@v1
+        with:
+          ruby-version: 2.7
+
+      - name: Setup Fastlane
+        run: |
+          cd ios
+          bundle install
 
       - name: Deploy do firebase
         run: |
