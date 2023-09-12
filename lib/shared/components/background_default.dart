@@ -28,7 +28,6 @@ class BackgroundDefault extends StatelessWidget {
           end: Alignment.bottomLeft,
         ),
       ),
-      padding: const EdgeInsets.symmetric(horizontal: 40),
       child: child,
     );
   }
