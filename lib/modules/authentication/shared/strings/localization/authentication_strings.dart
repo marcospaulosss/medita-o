@@ -100,6 +100,72 @@ abstract class AuthenticationStrings {
   /// In pt, this message translates to:
   /// **'Sua conta Google'**
   String get yourGoogleAccount;
+
+  /// No description provided for @exampleEmail.
+  ///
+  /// In pt, this message translates to:
+  /// **'exemplo@email.com'**
+  String get exampleEmail;
+
+  /// No description provided for @email.
+  ///
+  /// In pt, this message translates to:
+  /// **'E-mail'**
+  String get email;
+
+  /// No description provided for @obscurePassword.
+  ///
+  /// In pt, this message translates to:
+  /// **'***********'**
+  String get obscurePassword;
+
+  /// No description provided for @password.
+  ///
+  /// In pt, this message translates to:
+  /// **'Senha'**
+  String get password;
+
+  /// No description provided for @rememberPassword.
+  ///
+  /// In pt, this message translates to:
+  /// **'Lembrar senha'**
+  String get rememberPassword;
+
+  /// No description provided for @forgotPassword.
+  ///
+  /// In pt, this message translates to:
+  /// **'Esqueci minha senha'**
+  String get forgotPassword;
+
+  /// No description provided for @signIn.
+  ///
+  /// In pt, this message translates to:
+  /// **'Fazer Login'**
+  String get signIn;
+
+  /// No description provided for @orEnterUsing.
+  ///
+  /// In pt, this message translates to:
+  /// **'  Ou entre usando  '**
+  String get orEnterUsing;
+
+  /// No description provided for @meditateWithoutLogin.
+  ///
+  /// In pt, this message translates to:
+  /// **'Meditar sem Login'**
+  String get meditateWithoutLogin;
+
+  /// No description provided for @createOne.
+  ///
+  /// In pt, this message translates to:
+  /// **'Criar uma '**
+  String get createOne;
+
+  /// No description provided for @account.
+  ///
+  /// In pt, this message translates to:
+  /// **'conta'**
+  String get account;
 }
 
 class _AuthenticationStringsDelegate extends LocalizationsDelegate<AuthenticationStrings> {
