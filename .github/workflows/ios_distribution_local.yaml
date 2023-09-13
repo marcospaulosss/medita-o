@@ -1,0 +1,184 @@
+name: iOS distribution Dev
+
+on:
+  workflow_dispatch:
+  workflow_call:
+
+jobs:
+  build:
+    permissions:
+      checks: write
+      contents: write
+      packages: write
+    runs-on: [marcOS]
+#    runs-on: macos-latest
+
+    steps:
+      - name: Efetua checkout da branch
+        uses: actions/checkout@v3
+
+#      - name: Setup Ruby
+#        uses: actions/setup-ruby@v1
+#        with:
+#          ruby-version: 2.7
+
+      - name: Install SSH key
+        uses: shimataro/ssh-key-action@v2
+        with:
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          name: id_rsa
+          known_hosts: ${{ secrets.SSH_KNOWN_HOSTS }}
+
+      - name: Setup Fastlane
+        run: |
+          cd ios
+          bundle install
+
+#      - name: Download keys match
+#        run: |
+#          cd ios
+#          bundle exec fastlane download_keys
+#        env:
+#          APPLE_ID: ${{ secrets.APPLE_ID }}
+#          FASTLANE_PASSWORD: ${{ secrets.FASTLANE_PASSWORD }}
+#          APP_STORE_CONNECT_APPLE_ID: ${{ secrets.APP_STORE_CONNECT_APPLE_ID }}
+#          FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD: ${{ secrets.FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD }}
+#          MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
+#          MATCH_KEYCHAIN_PASSWORD: ${{ secrets.MATCH_KEYCHAIN_PASSWORD }}
+#          MATCH_GIT_BASIC_AUTHORIZATION: ${{ secrets.MATCH_GIT_BASIC_AUTHORIZATION }}
+
+#      - name: Setup Java
+#        uses: actions/setup-java@v3
+#        with:
+#          distribution: 'temurin' # See 'Supported distributions' for available options
+#          java-version: '17'
+
+#      - name: Setup flutter e builda projeto
+#        uses: subosito/flutter-action@v2
+#        with:
+#          flutter-version: '3.10.6'
+#          channel: 'stable'
+#          token: ${{ secrets.GITHUB_TOKEN }}
+#      - run: |
+#          flutter clean
+#          rm -rf ios/Pods
+#          rm ios/Podfile.lock
+#          flutter pub get
+#          ./localization
+#          flutter packages pub run build_runner build --delete-conflicting-outputs
+#          cd ios
+#          pod deintegrate
+#          pod install
+#          cd ..
+#          flutter build ipa --export-options-plist lib/core/export_plist/Info_dev.plist --flavor dev -t lib/core/flavors/main_dev.dart
+
+      - name: Setup flutter e builda projeto LOCALMENTE
+        run: |
+          flutter clean
+          rm -rf ios/Pods
+          rm ios/Podfile.lock
+          flutter pub get
+          ./localization
+          flutter packages pub run build_runner build --delete-conflicting-outputs
+          cd ios
+          pod deintegrate
+          pod install
+          cd ..
+          flutter build ipa --export-options-plist lib/core/export_plist/Info_dev.plist --flavor dev -t lib/core/flavors/main_dev.dart
+
+      - name: Upload do ipa
+        uses: actions/upload-artifact@v3
+        with:
+          name: ipa
+          path: build/ios/ipa/Dev.ipa
+
+  testflight:
+    needs: build
+    permissions:
+      checks: write
+      contents: write
+      packages: write
+    runs-on: [ marcOS ]
+#    runs-on: macos-latest
+
+    steps:
+      - name: Efetua checkout da branch
+        uses: actions/checkout@v3
+
+      - name: Download ipa
+        uses: actions/download-artifact@v3
+        with:
+          name: ipa
+          path: build/ios/ipa
+
+#      - name: Setup Ruby
+#        uses: actions/setup-ruby@v1
+#        with:
+#          ruby-version: 2.7
+
+      - name: Setup Fastlane
+        run: |
+          cd ios
+          bundle install
+
+      - name: Deploy para testflight
+        run: |
+          cd ios
+          bundle exec fastlane tf
+        env:
+          APPLE_ID: ${{ secrets.APPLE_ID }}
+          FASTLANE_PASSWORD: ${{ secrets.FASTLANE_PASSWORD }}
+          APP_STORE_CONNECT_APPLE_ID: ${{ secrets.APP_STORE_CONNECT_APPLE_ID }}
+          FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD: ${{ secrets.FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD }}
+          MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
+          MATCH_KEYCHAIN_PASSWORD: ${{ secrets.MATCH_KEYCHAIN_PASSWORD }}
+          MATCH_GIT_BASIC_AUTHORIZATION: ${{ secrets.MATCH_GIT_BASIC_AUTHORIZATION }}
+          APP_STORE_ISSUER_ID: ${{ secrets.APP_STORE_ISSUER_ID }}
+          APP_STORE_KEY_ID: ${{ secrets.APP_STORE_KEY_ID }}
+
+  firebase:
+    needs: build
+    permissions:
+      checks: write
+      contents: write
+      packages: write
+    runs-on: [ marcOS ]
+#    runs-on: ubuntu-latest
+
+    steps:
+      - name: Efetua checkout da branch
+        uses: actions/checkout@v3
+
+      - name: Download ipa
+        uses: actions/download-artifact@v3
+        with:
+          name: ipa
+          path: build/ios/ipa
+
+#      - name: Setup Ruby
+#        uses: ruby/setup-ruby@v1
+#        with:
+#          ruby-version: '2.7'
+
+      - name: Setup Fastlane
+        run: |
+          cd ios
+          bundle install
+
+      - name: Deploy do firebase
+        run: |
+          cd ios
+          bundle exec fastlane firebase
+        env:
+          FIREBASE_TESTER_GROUPS: ${{ secrets.FIREBASE_TESTER_GROUPS }}
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+          APPLE_ID: ${{ secrets.APPLE_ID }}
+          APP_STORE_ISSUER_ID: ${{ secrets.APP_STORE_ISSUER_ID }}
+          APP_STORE_KEY_ID: ${{ secrets.APP_STORE_KEY_ID }}
+          APP_STORE_CONNECT_APPLE_ID: ${{ secrets.APP_STORE_CONNECT_APPLE_ID }}
+          FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD: ${{ secrets.FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD }}
+          MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
+          MATCH_KEYCHAIN_PASSWORD: ${{ secrets.MATCH_KEYCHAIN_PASSWORD }}
+          MATCH_GIT_BASIC_AUTHORIZATION: ${{ secrets.MATCH_GIT_BASIC_AUTHORIZATION }}
+          ITMSTRANSPORTER_FORCE_ITMS_PACKAGE_UPLOAD: false
+          FASTLANE_PASSWORD: ${{ secrets.FASTLANE_PASSWORD }}
