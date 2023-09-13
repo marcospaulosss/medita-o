@@ -1,5 +1,9 @@
 ROOT=$PWD
 COMMON_STRINGS_PATH=$ROOT/lib/modules/common/shared/strings
+AUTHENTICATION_STRINGS_PATH=$ROOT/lib/modules/authentication/shared/strings
+SHARED_STRINGS_PATH=$ROOT/lib/shared/strings
 
 cd $COMMON_STRINGS_PATH && flutter gen-l10n > /dev/null
+cd $AUTHENTICATION_STRINGS_PATH && flutter gen-l10n > /dev/null
+cd $SHARED_STRINGS_PATH && flutter gen-l10n > /dev/null
 cd $ROOT
