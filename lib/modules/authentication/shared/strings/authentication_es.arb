@@ -1,3 +1,14 @@
 {
-  "yourGoogleAccount": "Tu cuenta de Google"
+  "yourGoogleAccount": "Su cuenta de Google",
+  "exampleEmail": "ejemplo@correo electrónico.com",
+  "email": "Correo electrónico",
+  "obscurePassword": "***********",
+  "password": "Contraseña",
+  "rememberPassword": "Recordar contraseña",
+  "forgotPassword": "Olvidé mi contraseña",
+  "signIn": "Iniciar sesión",
+  "orEnterUsing": "  O ingresa usando  ",
+  "meditateWithoutLogin": "Medita sin iniciar sesión",
+  "createOne": "Crear uno",
+  "account" : "cuenta"
 }
