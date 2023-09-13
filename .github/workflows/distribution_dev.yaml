@@ -25,7 +25,8 @@ jobs:
       checks: write
       contents: write
       packages: write
-    runs-on: [ marcOS ]
+#    runs-on: [ marcOS ]
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code

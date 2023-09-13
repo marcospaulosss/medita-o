@@ -1,0 +1,7 @@
+arb-dir: .
+template-arb-file: authentication_pt.arb
+output-dir: ./localization
+output-localization-file: authentication_strings.dart
+output-class: AuthenticationStrings
+nullable-getter: false
+synthetic-package: false

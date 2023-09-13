@@ -1,0 +1,5 @@
+{
+  "genericErrorRetry": "Tentar novamente",
+  "genericErrorTitle": "Tivemos um problema.",
+  "genericErrorSubTitle": "Encontramos um problema ao carregar os dados. Por favor, tente novamente."
+}

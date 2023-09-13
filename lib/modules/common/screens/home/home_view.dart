@@ -23,8 +23,6 @@ class _HomeViewState extends State<HomeView> {
   void initState() {
     presenter.onOpenScreen();
 
-    // initialization();
-
     super.initState();
   }
 
