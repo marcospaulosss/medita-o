@@ -73,9 +73,13 @@ void main() async {
       );
 
       await tester.pump();
-      await tester.tap(find.byType(IconLabelButton));
+      await tester.drag(find.byType(ListView), const Offset(0.0, -300));
+      await tester.pump();
+
+      await tester.tap(find.byType(IconLabelButton).at(1));
       await tester.pumpAndSettle();
 
+      verify(presenter.onOpenScreen()).called(1);
       verify(presenter.loginGoogle()).called(1);
       verify(presenter.goToHome()).called(1);
     });
@@ -103,7 +107,10 @@ void main() async {
       );
 
       await tester.pump();
-      await tester.tap(find.byType(IconLabelButton));
+      await tester.drag(find.byType(ListView), const Offset(0.0, -300));
+      await tester.pump();
+
+      await tester.tap(find.byType(IconLabelButton).at(1));
       await tester.pump();
 
       verify(presenter.loginGoogle()).called(1);
@@ -113,6 +120,165 @@ void main() async {
       expect(find.byType(GestureDetector), findsOneWidget);
       expect(find.text("Tentar novamente"), findsOneWidget);
       expect(find.byType(Icon), findsOneWidget);
+
+      await tester.tap(find.byType(GestureDetector));
+    });
+
+    testWidgets("Should verify click button remember password", (tester) async {
+      when(presenter.onOpenScreen()).thenAnswer((_) {});
+
+      await tester.pumpWidget(
+        MaterialApp(
+          localizationsDelegates: const [
+            AuthenticationStrings.delegate,
+            SharedStrings.delegate,
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          supportedLocales: const [
+            Locale('pt', ''),
+          ],
+          home: loginView,
+        ),
+      );
+
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.byIcon(Icons.check));
+      await tester.pumpAndSettle();
+    });
+
+    testWidgets("Should verify click button forget password", (tester) async {
+      when(presenter.onOpenScreen()).thenAnswer((_) {});
+
+      await tester.pumpWidget(
+        MaterialApp(
+          localizationsDelegates: const [
+            AuthenticationStrings.delegate,
+            SharedStrings.delegate,
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          supportedLocales: const [
+            Locale('pt', ''),
+          ],
+          home: loginView,
+        ),
+      );
+
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.byType(InkWell));
+      await tester.pumpAndSettle();
+    });
+
+    testWidgets("Should verify click button sing in", (tester) async {
+      when(presenter.onOpenScreen()).thenAnswer((_) {});
+
+      await tester.pumpWidget(
+        MaterialApp(
+          localizationsDelegates: const [
+            AuthenticationStrings.delegate,
+            SharedStrings.delegate,
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          supportedLocales: const [
+            Locale('pt', ''),
+          ],
+          home: loginView,
+        ),
+      );
+
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.byType(IconLabelButton));
+      await tester.pumpAndSettle();
+    });
+
+    testWidgets("Should verify click button meditate Without Login",
+        (tester) async {
+      when(presenter.onOpenScreen()).thenAnswer((_) {});
+
+      await tester.pumpWidget(
+        MaterialApp(
+          localizationsDelegates: const [
+            AuthenticationStrings.delegate,
+            SharedStrings.delegate,
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          supportedLocales: const [
+            Locale('pt', ''),
+          ],
+          home: loginView,
+        ),
+      );
+
+      await tester.pumpAndSettle();
+      await tester.drag(find.byType(ListView), const Offset(0.0, -300));
+      await tester.pump();
+
+      await tester.tap(find.byType(IconLabelButton).at(2));
+      await tester.pumpAndSettle();
+    });
+
+    testWidgets("Should verify click button meditate create account",
+        (tester) async {
+      when(presenter.onOpenScreen()).thenAnswer((_) {});
+
+      await tester.pumpWidget(
+        MaterialApp(
+          localizationsDelegates: const [
+            AuthenticationStrings.delegate,
+            SharedStrings.delegate,
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          supportedLocales: const [
+            Locale('pt', ''),
+          ],
+          home: loginView,
+        ),
+      );
+
+      await tester.pumpAndSettle();
+      await tester.drag(find.byType(ListView), const Offset(0.0, -300));
+      await tester.pump();
+
+      await tester.tap(find.byType(GestureDetector).at(6));
+      await tester.pumpAndSettle();
+    });
+
+    testWidgets("Should verify click button IconButton to obscure password",
+        (tester) async {
+      when(presenter.onOpenScreen()).thenAnswer((_) {});
+
+      await tester.pumpWidget(
+        MaterialApp(
+          localizationsDelegates: const [
+            AuthenticationStrings.delegate,
+            SharedStrings.delegate,
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          supportedLocales: const [
+            Locale('pt', ''),
+          ],
+          home: loginView,
+        ),
+      );
+
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.byType(IconButton));
+      await tester.pumpAndSettle();
     });
   });
 }

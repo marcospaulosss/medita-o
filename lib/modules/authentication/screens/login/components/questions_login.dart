@@ -57,8 +57,8 @@ class _QuestionsLoginState extends State<QuestionsLogin> {
           ),
         ),
         IconLabelButton(
-          onTap: () {},
-          width: 350,
+          onTap: () => print("Login normal"),
+          width: double.infinity,
           height: 55,
           decoration: BoxDecoration(
             border: Border.all(

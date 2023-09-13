@@ -18,7 +18,7 @@ class LoginButtons extends StatelessWidget {
       children: [
         IconLabelButton(
           onTap: requestLoginGoogle,
-          width: 350,
+          width: double.infinity,
           height: 55,
           image: SvgPicture.asset(
             'assets/images/icons/google_logo.svg',
@@ -32,7 +32,7 @@ class LoginButtons extends StatelessWidget {
         const SizedBox(height: 6.42),
         IconLabelButton(
           onTap: () => print("Meditar sem login"),
-          width: 350,
+          width: double.infinity,
           height: 55,
           decoration: BoxDecoration(
             border: Border.all(
@@ -53,7 +53,7 @@ class LoginButtons extends StatelessWidget {
         ),
         const SizedBox(height: 27),
         GestureDetector(
-          onTap: () {},
+          onTap: () => print("Criar conta"),
           child: RichText(
             text: TextSpan(
               text: AuthenticationStrings.of(context).createOne,
