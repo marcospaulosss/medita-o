@@ -170,7 +170,7 @@ void main() async {
 
       await tester.pumpAndSettle();
 
-      await tester.tap(find.byType(InkWell));
+      await tester.tap(find.byType(InkWell).first);
       await tester.pumpAndSettle();
     });
 
