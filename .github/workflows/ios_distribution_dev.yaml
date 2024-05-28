@@ -56,7 +56,7 @@ jobs:
       - name: Setup flutter e builda projeto
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.10.6'
+          flutter-version: '3.22.1'
           channel: 'stable'
           token: ${{ secrets.GITHUB_TOKEN }}
       - run: |
