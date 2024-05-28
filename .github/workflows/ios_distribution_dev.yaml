@@ -20,7 +20,8 @@ jobs:
       - name: Setup Ruby
         uses: actions/setup-ruby@v1
         with:
-          ruby-version: 2.7
+          ruby-version: '2.7'
+      - run: ruby hello.rb
 
       - name: Install SSH key
         uses: shimataro/ssh-key-action@v2
@@ -114,7 +115,8 @@ jobs:
       - name: Setup Ruby
         uses: actions/setup-ruby@v1
         with:
-          ruby-version: 2.7
+          ruby-version: '2.7'
+      - run: ruby hello.rb
 
       - name: Setup Fastlane
         run: |
@@ -159,6 +161,7 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: '2.7'
+      - run: ruby hello.rb
 
       - name: Setup Fastlane
         run: |
