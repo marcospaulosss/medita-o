@@ -68,6 +68,7 @@ jobs:
           ./localization
           flutter packages pub run build_runner build --delete-conflicting-outputs
           cd ios
+          gem update cocoapods
           pod deintegrate
           pod install
           cd ..
