@@ -6,13 +6,18 @@ class GenericErrorContainer extends StatefulWidget {
   /// O que será executado ao selecionar o botão de retentativa.
   final void Function()? onRetry;
 
+  /// Mensagem de erro.
+  final String? message;
+
   /// Cria o widget que representa o container de erro genérico do app.
   ///
   /// [onRetry] representa o que será executado ao selecionar botão de retentativa.
   ///
   /// Se [onRetry] não for informado, o botão não será exibido.
+  /// Se [message] não for informado, a mensagem padrão será exibida.
   ///
-  const GenericErrorContainer({Key? key, this.onRetry}) : super(key: key);
+  const GenericErrorContainer({Key? key, this.onRetry, this.message})
+      : super(key: key);
 
   @override
   State<GenericErrorContainer> createState() => _GenericErrorContainerState();
@@ -76,10 +81,26 @@ class _GenericErrorContainerState extends State<GenericErrorContainer> {
   SizedBox get buildSubTitle {
     return SizedBox(
       width: 311,
-      child: Text(
-        SharedStrings.of(context).genericErrorSubTitle,
-        textAlign: TextAlign.center,
-        style: buildTextStyleDefault.copyWith(fontWeight: FontWeight.w500),
+      child: Column(
+        children: [
+          Text(
+            SharedStrings.of(context).genericErrorSubTitle,
+            textAlign: TextAlign.center,
+            style: buildTextStyleDefault.copyWith(fontWeight: FontWeight.w500),
+          ),
+          Visibility(
+            visible: widget.message != null,
+            child: const SizedBox(height: 8),
+          ),
+          Text(
+            "( ${widget.message ?? ''} ) ",
+            textAlign: TextAlign.center,
+            style: buildTextStyleDefault.copyWith(
+              fontSize: 14,
+              color: Colors.grey,
+            ),
+          ),
+        ],
       ),
     );
   }

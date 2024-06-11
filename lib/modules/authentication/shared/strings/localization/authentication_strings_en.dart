@@ -8,6 +8,9 @@ class AuthenticationStringsEn extends AuthenticationStrings {
   String get yourGoogleAccount => 'Your Google Account';
 
   @override
+  String get yourFacebookAccount => 'Your Facebook Account';
+
+  @override
   String get exampleEmail => 'example@email.com';
 
   @override

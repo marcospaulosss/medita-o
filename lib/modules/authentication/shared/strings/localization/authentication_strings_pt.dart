@@ -8,6 +8,9 @@ class AuthenticationStringsPt extends AuthenticationStrings {
   String get yourGoogleAccount => 'Sua conta Google';
 
   @override
+  String get yourFacebookAccount => 'Sua conta Facebook';
+
+  @override
   String get exampleEmail => 'exemplo@email.com';
 
   @override
