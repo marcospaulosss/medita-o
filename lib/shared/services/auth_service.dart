@@ -50,7 +50,7 @@ class AuthService {
         case LoginStatus.success:
           // Login bem-sucedido
           final AccessToken accessToken = resultFacebook.accessToken!;
-          print('Access Token: ${accessToken.token}');
+          // print('Access Token: ${accessToken.token}');
           break;
         case LoginStatus.cancelled:
           print('Login cancelado pelo usuário.');
