@@ -4,8 +4,8 @@ part 'authenticate_google_request.g.dart';
 
 @JsonSerializable(createFactory: false)
 class AuthenticateGoogleRequest {
-  @JsonKey(name: 'idToken')
-  final String idToken;
+  @JsonKey(name: 'token')
+  String? idToken;
 
   AuthenticateGoogleRequest({required this.idToken});
 
