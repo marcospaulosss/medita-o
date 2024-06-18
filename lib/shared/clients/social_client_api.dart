@@ -1,5 +1,6 @@
 import 'package:cinco_minutos_meditacao/core/environment/manager.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/models/authenticate_google_request.dart';
+import 'package:cinco_minutos_meditacao/shared/clients/models/authenticate_google_response.dart';
 import 'package:curl_logger_dio_interceptor/curl_logger_dio_interceptor.dart';
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
@@ -22,5 +23,6 @@ abstract class SocialClientApi {
   }
 
   @POST('/auth/google')
-  Future<void> authGoogle(@Body() AuthenticateGoogleRequest token);
+  Future<AuthenticateGoogleResponse> authGoogle(
+      @Body() AuthenticateGoogleRequest token);
 }

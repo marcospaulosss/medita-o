@@ -1,4 +1,6 @@
 import 'package:cinco_minutos_meditacao/shared/helpers/view_binding.dart';
+import 'package:cinco_minutos_meditacao/shared/models/error.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 abstract class LoginViewContract {
   /// Exibe tela de erro generica
@@ -30,5 +32,5 @@ abstract class Repository {
   void sendOpenScreenEvent();
 
   /// Autentica o usuário utilizando o Google
-  Future<void> authenticateUserByGoogle(String idToken);
+  Future<CustomError?> authenticateUserByGoogle(AuthCredential credential);
 }

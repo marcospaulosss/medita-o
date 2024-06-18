@@ -7,11 +7,11 @@ class AppRouter extends $AppRouter {
   @override
   List<AutoRoute> get routes => [
         AutoRoute(page: SplashScreenRoute.page, initial: true),
-        AutoRoute(page: HomeRoute.page, guards: [AuthGuard()]),
         AutoRoute(page: LoginRoute.page),
+        AutoRoute(page: HomeRoute.page, guards: [AuthGuard()]),
       ];
 
-  /// Navega para a tela inicial do app.
+  /// Direciona para a tela selecionada e remove a tela anterior
   void goToReplace(PageRouteInfo route) {
     replace(route);
   }
