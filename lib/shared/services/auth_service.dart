@@ -12,11 +12,7 @@ class AuthService {
   late final FirebaseApp app;
   late final FirebaseAuth _auth = FirebaseAuth.instance;
 
-  bool _authenticated = false;
-
-  bool get isAuthenticated => _authenticated;
-
-  Future<(String?, CustomError?)> loginGoogle() async {
+  Future<(AuthCredential?, CustomError?)> loginGoogle() async {
     try {
       final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
       final GoogleSignInAuthentication googleAuth =
@@ -29,9 +25,8 @@ class AuthService {
       );
 
       // UserCredential result = await _auth.signInWithCredential(credential);
-      _authenticated = true;
 
-      return (googleAuth.idToken, null);
+      return (credential, null);
     } catch (error, stackTrace) {
       var err = CustomError(
         message: error.toString(),
@@ -85,8 +80,6 @@ class AuthService {
       print("firebase metadata: ${fireUser.metadata}");
       print("firebase phone: ${fireUser.phoneNumber}");
       print("firebase id: ${fireUser.uid}");
-
-      _authenticated = true;
     } catch (e, s) {
       FirebaseCrashlytics.instance.log("Erro ao realizar login com o Google");
       LogService().log("Erro login com o Google", e, s);
@@ -97,7 +90,6 @@ class AuthService {
     try {
       await _googleSignIn.signOut();
       await _auth.signOut();
-      _authenticated = false;
     } catch (e) {
       return e;
     }

@@ -5,13 +5,14 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:async' as _i4;
 
-import 'package:auto_route/auto_route.dart' as _i7;
-import 'package:cinco_minutos_meditacao/core/routers/app_router.dart' as _i6;
+import 'package:auto_route/auto_route.dart' as _i8;
+import 'package:cinco_minutos_meditacao/core/routers/app_router.dart' as _i7;
 import 'package:cinco_minutos_meditacao/modules/authentication/screens/login/login_contracts.dart'
-    as _i8;
-import 'package:cinco_minutos_meditacao/shared/models/error.dart' as _i5;
+    as _i9;
+import 'package:cinco_minutos_meditacao/shared/models/error.dart' as _i6;
 import 'package:cinco_minutos_meditacao/shared/services/auth_service.dart'
     as _i3;
+import 'package:firebase_auth/firebase_auth.dart' as _i5;
 import 'package:firebase_core/firebase_core.dart' as _i2;
 import 'package:mockito/mockito.dart' as _i1;
 
@@ -71,14 +72,15 @@ class MockAuthService extends _i1.Mock implements _i3.AuthService {
       ) as bool);
 
   @override
-  _i4.Future<(String?, _i5.CustomError?)> loginGoogle() => (super.noSuchMethod(
+  _i4.Future<(_i5.AuthCredential?, _i6.CustomError?)> loginGoogle() =>
+      (super.noSuchMethod(
         Invocation.method(
           #loginGoogle,
           [],
         ),
-        returnValue:
-            _i4.Future<(String?, _i5.CustomError?)>.value((null, null)),
-      ) as _i4.Future<(String?, _i5.CustomError?)>);
+        returnValue: _i4.Future<(_i5.AuthCredential?, _i6.CustomError?)>.value(
+            (null, null)),
+      ) as _i4.Future<(_i5.AuthCredential?, _i6.CustomError?)>);
 
   @override
   _i4.Future<void> loginFacebook() => (super.noSuchMethod(
@@ -103,19 +105,19 @@ class MockAuthService extends _i1.Mock implements _i3.AuthService {
 /// A class which mocks [AppRouter].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockAppRouter extends _i1.Mock implements _i6.AppRouter {
+class MockAppRouter extends _i1.Mock implements _i7.AppRouter {
   MockAppRouter() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  List<_i7.AutoRoute> get routes => (super.noSuchMethod(
+  List<_i8.AutoRoute> get routes => (super.noSuchMethod(
         Invocation.getter(#routes),
-        returnValue: <_i7.AutoRoute>[],
-      ) as List<_i7.AutoRoute>);
+        returnValue: <_i8.AutoRoute>[],
+      ) as List<_i8.AutoRoute>);
 
   @override
-  void goToReplace(_i7.PageRouteInfo<dynamic>? route) => super.noSuchMethod(
+  void goToReplace(_i8.PageRouteInfo<dynamic>? route) => super.noSuchMethod(
         Invocation.method(
           #goToReplace,
           [route],
@@ -127,7 +129,7 @@ class MockAppRouter extends _i1.Mock implements _i6.AppRouter {
 /// A class which mocks [Repository].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockRepository extends _i1.Mock implements _i8.Repository {
+class MockRepository extends _i1.Mock implements _i9.Repository {
   MockRepository() {
     _i1.throwOnMissingStub(this);
   }
@@ -142,11 +144,11 @@ class MockRepository extends _i1.Mock implements _i8.Repository {
       );
 
   @override
-  _i4.Future<void> authenticateUserByGoogle(String? idToken) =>
+  _i4.Future<void> authenticateUserByGoogle(_i5.AuthCredential? credential) =>
       (super.noSuchMethod(
         Invocation.method(
           #authenticateUserByGoogle,
-          [idToken],
+          [credential],
         ),
         returnValue: _i4.Future<void>.value(),
         returnValueForMissingStub: _i4.Future<void>.value(),
