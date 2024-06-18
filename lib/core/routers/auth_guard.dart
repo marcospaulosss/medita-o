@@ -1,14 +1,15 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:cinco_minutos_meditacao/core/di/helpers.dart';
 import 'package:cinco_minutos_meditacao/core/routers/app_router.gr.dart';
-import 'package:cinco_minutos_meditacao/shared/services/auth_service.dart';
+import 'package:cinco_minutos_meditacao/core/wrappers/secure_storage.dart';
 
 class AuthGuard extends AutoRouteGuard {
-  final AuthService _authService = resolve<AuthService>();
+  final SecureStorage _secureStorage = SecureStorage();
 
   @override
-  void onNavigation(NavigationResolver resolver, StackRouter router) {
-    if (_authService.isAuthenticated) {
+  Future<void> onNavigation(
+      NavigationResolver resolver, StackRouter router) async {
+    var auth = await _secureStorage.isLogged;
+    if (auth) {
       resolver.next(true);
     } else {
       resolver.redirect(const LoginRoute());

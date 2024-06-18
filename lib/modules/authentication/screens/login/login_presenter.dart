@@ -27,11 +27,11 @@ class LoginPresenter extends Presenter {
   @override
   Future<void> loginGoogle() async {
     view!.showLoading();
-    var (idToken, error) = await _authService.loginGoogle();
+    var (credential, error) = await _authService.loginGoogle();
     if (error != null) {
       view?.showError(error.message);
     }
-    if (idToken == null || idToken.isEmpty) {
+    if (credential == null || credential.accessToken!.isEmpty) {
       var message = "Erro ao realizar login com o Google";
       CustomError(
         message: message,
@@ -43,9 +43,12 @@ class LoginPresenter extends Presenter {
       return;
     }
 
-    _repository.authenticateUserByGoogle(idToken);
+    var err = await _repository.authenticateUserByGoogle(credential);
+    if (err != null) {
+      view?.showError(err.message);
+    }
 
-    view!.showNormalState();
+    goToHome();
   }
 
   /// Direciona para a tela de home
