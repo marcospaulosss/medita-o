@@ -1,70 +1,162 @@
-import 'dart:io';
-
 import 'package:cinco_minutos_meditacao/core/routers/app_router.dart';
 import 'package:cinco_minutos_meditacao/modules/authentication/screens/login/login_contracts.dart';
 import 'package:cinco_minutos_meditacao/modules/authentication/screens/login/login_presenter.dart';
+import 'package:cinco_minutos_meditacao/shared/models/error.dart';
 import 'package:cinco_minutos_meditacao/shared/services/auth_service.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
 import 'login_presenter_test.mocks.dart';
 
-class ObjectTeste {
-  const ObjectTeste();
-}
-
-@GenerateMocks([AuthService, AppRouter, Repository])
+@GenerateMocks(
+    [AuthService, CustomError, AppRouter, LoginViewContract, Repository])
 void main() {
-  late MockAuthService authService;
-  late MockAppRouter router;
-  late MockRepository repository;
-  late Presenter presenter;
+  late MockAuthService mockAuthService;
+  late MockCustomError mockCustomError;
+  late MockAppRouter mockAppRouter;
+  late MockLoginViewContract mockView;
+  late MockRepository mockRepository;
+  late LoginPresenter presenter;
 
   setUp(() {
-    authService = MockAuthService();
-    router = MockAppRouter();
-    repository = MockRepository();
-    presenter = LoginPresenter(authService, router, repository);
+    mockAuthService = MockAuthService();
+    mockCustomError = MockCustomError();
+    mockAppRouter = MockAppRouter();
+    mockView = MockLoginViewContract();
+    mockRepository = MockRepository();
+    presenter = LoginPresenter(
+        mockAuthService, mockCustomError, mockAppRouter, mockRepository);
+    presenter.view = mockView;
   });
 
-  group("Presenter", () {
-    test("loginGoogle should return null in object and error", () async {
-      when(authService.loginGoogle()).thenAnswer((_) async => (null, null));
+  group('LoginPresenter', () {
+    test('loginGoogle should show loading and handle error', () async {
+      when(mockAuthService.loginGoogle())
+          .thenAnswer((_) async => (null, mockCustomError));
+      when(mockCustomError.sendErrorToCrashlytics(any, any, any))
+          .thenAnswer((_) async => {});
 
-      var (response, error) = await presenter.loginGoogle();
+      await presenter.loginGoogle();
 
-      verify(authService.loginGoogle());
-      expect(response, null);
-      expect(error, null);
+      verify(mockView.showLoading()).called(1);
+      verify(mockView.showError('Erro ao realizar login com o Google'))
+          .called(1);
+      verifyNever(mockAppRouter.goToReplace(any));
     });
 
-    test("loginGoogle should return User object is null and error = 500",
-        () async {
-      var err = HttpStatus.internalServerError;
-      when(authService.loginGoogle()).thenAnswer((_) async => (null, err));
+    test('loginGoogle should authenticate user and navigate to home', () async {
+      const credential = AuthCredential(
+          accessToken: 'token', providerId: 'id', signInMethod: 'method');
+      when(mockAuthService.loginGoogle())
+          .thenAnswer((_) async => (credential, null));
+      when(mockRepository.authenticateUserByGoogle(credential))
+          .thenAnswer((_) async => null);
 
-      var (response, error) = await presenter.loginGoogle();
+      await presenter.loginGoogle();
 
-      verify(authService.loginGoogle());
-      expect(response, null);
-      expect(error, err);
+      verify(mockView.showLoading()).called(1);
+      verify(mockRepository.authenticateUserByGoogle(credential)).called(1);
+      verify(mockAppRouter.goToReplace(any)).called(1);
     });
 
-    test("goToHome verify redirect go to home", () async {
-      when(router.goToReplace(any)).thenAnswer((_) async => {});
+    test('loginGoogle should handle authentication error', () async {
+      const credential = AuthCredential(
+          accessToken: 'token', providerId: 'id', signInMethod: 'method');
+      when(mockAuthService.loginGoogle())
+          .thenAnswer((_) async => (credential, null));
+      when(mockRepository.authenticateUserByGoogle(credential))
+          .thenAnswer((_) async => mockCustomError);
+      when(mockAppRouter.goToReplace(any)).thenAnswer((_) async => {});
 
+      await presenter.loginGoogle();
+
+      verify(mockView.showLoading()).called(1);
+      verify(mockRepository.authenticateUserByGoogle(credential)).called(1);
+      verify(mockView.showError(
+              'Erro ao authenticar usuário com o Google no servidor'))
+          .called(1);
+
+      verifyNever(mockAppRouter.goToReplace(any));
+    });
+
+    test('loginGoogle should handle null credential', () async {
+      when(mockAuthService.loginGoogle()).thenAnswer((_) async => (null, null));
+      when(mockCustomError.sendErrorToCrashlytics(any, any, any))
+          .thenAnswer((_) async => {});
+
+      await presenter.loginGoogle();
+
+      verify(mockView.showLoading()).called(1);
+      verify(mockCustomError.sendErrorToCrashlytics(
+        "Erro ao realizar login com o Google",
+        ErrorCodes.loginGoogleError,
+        any,
+      )).called(1);
+      verify(mockView.showError("Erro ao realizar login com o Google"))
+          .called(1);
+      verifyNever(mockAppRouter.goToReplace(any));
+    });
+
+    test('loginGoogle should handle null accessToken', () async {
+      const credential = AuthCredential(
+          accessToken: null, providerId: 'id', signInMethod: 'method');
+      when(mockAuthService.loginGoogle())
+          .thenAnswer((_) async => (credential, null));
+      when(mockCustomError.sendErrorToCrashlytics(any, any, any))
+          .thenAnswer((_) async => {});
+
+      await presenter.loginGoogle();
+
+      verify(mockView.showLoading()).called(1);
+      verify(mockCustomError.sendErrorToCrashlytics(
+        "Erro ao realizar login com o Google",
+        ErrorCodes.loginGoogleError,
+        any,
+      )).called(1);
+      verify(mockView.showError("Erro ao realizar login com o Google"))
+          .called(1);
+      verifyNever(mockAppRouter.goToReplace(any));
+    });
+
+    test('loginGoogle should handle empty accessToken', () async {
+      const credential = AuthCredential(
+          accessToken: '', providerId: 'id', signInMethod: 'method');
+      when(mockAuthService.loginGoogle())
+          .thenAnswer((_) async => (credential, null));
+      when(mockCustomError.sendErrorToCrashlytics(any, any, any))
+          .thenAnswer((_) async => {});
+
+      await presenter.loginGoogle();
+
+      verify(mockView.showLoading()).called(1);
+      verify(mockCustomError.sendErrorToCrashlytics(
+        "Erro ao realizar login com o Google",
+        ErrorCodes.loginGoogleError,
+        any,
+      )).called(1);
+      verify(mockView.showError("Erro ao realizar login com o Google"))
+          .called(1);
+      verifyNever(mockAppRouter.goToReplace(any));
+    });
+
+    test('goToHome should navigate to home', () {
       presenter.goToHome();
 
-      verify(router.goToReplace(any));
+      verify(mockAppRouter.goToReplace(any)).called(1);
     });
 
-    test("onOpenScreen validate send tag analitcs", () {
-      when(repository.sendOpenScreenEvent()).thenAnswer((_) async => {});
-
+    test('onOpenScreen should send open screen event', () {
       presenter.onOpenScreen();
 
-      verify(repository.sendOpenScreenEvent());
+      verify(mockRepository.sendOpenScreenEvent()).called(1);
+    });
+
+    test('loginFacebook should call loginFacebook on authService', () async {
+      await presenter.loginFacebook();
+
+      verify(mockAuthService.loginFacebook()).called(1);
     });
   });
 }

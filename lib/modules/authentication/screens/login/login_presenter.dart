@@ -12,6 +12,9 @@ class LoginPresenter extends Presenter {
   /// Serviço de autenticação
   final AuthService _authService;
 
+  /// Erro customizado
+  final CustomError _customError;
+
   /// Router
   final AppRouter _router;
 
@@ -21,7 +24,8 @@ class LoginPresenter extends Presenter {
   /// - [authService] : Serviço de autenticação
   /// - [router] : Router
   /// - [repository] : Repositório
-  LoginPresenter(this._authService, this._router, this._repository);
+  LoginPresenter(
+      this._authService, this._customError, this._router, this._repository);
 
   /// Login utilizando o Google
   @override
@@ -29,15 +33,16 @@ class LoginPresenter extends Presenter {
     view!.showLoading();
     var (credential, error) = await _authService.loginGoogle();
     if (error != null) {
-      view?.showError(error.message);
+      view?.showError("Erro ao realizar login com o Google");
+      return;
     }
-    if (credential == null || credential.accessToken!.isEmpty) {
+    if (credential == null ||
+        credential.accessToken == null ||
+        credential.accessToken!.isEmpty) {
       var message = "Erro ao realizar login com o Google";
-      CustomError(
-        message: message,
-        code: ErrorCodes.loginGoogleError,
-        stackTrace: StackTrace.current,
-      ).sendErrorToCrashlytics();
+      _customError.sendErrorToCrashlytics(
+          message, ErrorCodes.loginGoogleError, StackTrace.current);
+
       view?.showError(message);
 
       return;
@@ -45,7 +50,8 @@ class LoginPresenter extends Presenter {
 
     var err = await _repository.authenticateUserByGoogle(credential);
     if (err != null) {
-      view?.showError(err.message);
+      view?.showError("Erro ao authenticar usuário com o Google no servidor");
+      return;
     }
 
     goToHome();

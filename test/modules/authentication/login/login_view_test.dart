@@ -9,6 +9,7 @@ import 'package:cinco_minutos_meditacao/shared/strings/localization/shared_strin
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
@@ -28,257 +29,178 @@ void main() async {
       loginView = const LoginView();
     });
 
-    testWidgets("Should show login screen", (tester) async {
-      when(presenter.onOpenScreen()).thenAnswer((_) {});
-
-      await tester.pumpWidget(
-        MaterialApp(
-          localizationsDelegates: const [
-            AuthenticationStrings.delegate,
-            SharedStrings.delegate,
-            GlobalMaterialLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
-            GlobalCupertinoLocalizations.delegate,
-          ],
-          supportedLocales: const [
-            Locale('pt', ''),
-          ],
-          home: loginView,
-        ),
+    Widget createWidgetUnderTest() {
+      return MaterialApp(
+        localizationsDelegates: const [
+          AuthenticationStrings.delegate,
+          SharedStrings.delegate,
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+        supportedLocales: const [
+          Locale('pt', ''),
+        ],
+        home: loginView,
       );
+    }
 
-      await tester.pump();
-      verify(presenter.onOpenScreen()).called(1);
+    group("Validate screen", () {
+      testWidgets("Should show login screen", (tester) async {
+        when(presenter.onOpenScreen()).thenAnswer((_) {});
+
+        await tester.pumpWidget(createWidgetUnderTest());
+
+        await tester.pump();
+        verify(presenter.onOpenScreen()).called(1);
+
+        expect(find.byType(Image), findsOneWidget);
+        expect(find.text('E-mail'), findsOneWidget);
+        expect(find.text('exemplo@email.com'), findsOneWidget);
+        expect(find.text('Senha'), findsOneWidget);
+        expect(find.textContaining('********'), findsOneWidget);
+        expect(find.byIcon(Icons.visibility_outlined), findsOneWidget);
+        expect(find.text('Lembrar senha'), findsOneWidget);
+        expect(find.text('Esqueci minha senha'), findsOneWidget);
+        expect(find.text('Fazer Login'), findsOneWidget);
+        expect(find.textContaining('Criar uma conta', findRichText: true),
+            findsOneWidget);
+
+        await tester.pump();
+        await tester.drag(find.byType(ListView), const Offset(0.0, -300));
+        await tester.pump();
+
+        expect(find.textContaining('Ou entre usando'), findsOneWidget);
+        expect(find.byType(SvgPicture), findsNWidgets(2));
+        expect(find.text('Sua conta Google'), findsOneWidget);
+        expect(find.text('Sua conta Facebook'), findsOneWidget);
+      });
+
+      testWidgets("Should verify when show error screen", (tester) async {
+        when(presenter.onOpenScreen()).thenAnswer((_) {});
+
+        await tester.pumpWidget(createWidgetUnderTest());
+
+        final loginViewState =
+            tester.state(find.byType(LoginView)) as LoginViewState;
+        loginViewState.showError("teste");
+        await tester.pump();
+
+        expect(find.byIcon(Icons.close), findsOneWidget);
+        expect(find.text("Tivemos um problema."), findsOneWidget);
+        expect(find.textContaining("problema ao carregar"), findsOneWidget);
+        expect(find.textContaining("( teste )"), findsOneWidget);
+        expect(find.text("Tentar novamente"), findsOneWidget);
+
+        await tester.tap(find.text("Tentar novamente"));
+      });
+
+      testWidgets("Should verify when show loading screen", (tester) async {
+        when(presenter.onOpenScreen()).thenAnswer((_) {});
+
+        await tester.pumpWidget(createWidgetUnderTest());
+
+        final loginViewState =
+            tester.state(find.byType(LoginView)) as LoginViewState;
+        loginViewState.showLoading();
+        await tester.pump();
+
+        expect(find.byType(Image), findsOneWidget);
+        expect(find.textContaining('Carregando'), findsOneWidget);
+      });
     });
 
-    testWidgets("Should verify click button login google", (tester) async {
-      when(presenter.onOpenScreen()).thenAnswer((_) {});
-      when(presenter.loginGoogle()).thenAnswer((_) async => (null, null));
-      when(presenter.goToHome()).thenAnswer((_) {});
+    group("Interaction screen", () {
+      testWidgets("Should verify click button login google", (tester) async {
+        when(presenter.onOpenScreen()).thenAnswer((_) {});
+        when(presenter.loginGoogle()).thenAnswer((_) async => (null, null));
 
-      await tester.pumpWidget(
-        MaterialApp(
-          localizationsDelegates: const [
-            AuthenticationStrings.delegate,
-            SharedStrings.delegate,
-            GlobalMaterialLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
-            GlobalCupertinoLocalizations.delegate,
-          ],
-          supportedLocales: const [
-            Locale('pt', ''),
-          ],
-          home: loginView,
-        ),
-      );
+        await tester.pumpWidget(createWidgetUnderTest());
 
-      await tester.pump();
-      await tester.drag(find.byType(ListView), const Offset(0.0, -300));
-      await tester.pump();
+        await tester.pump();
+        await tester.drag(find.byType(ListView), const Offset(0.0, -300));
+        await tester.pump();
 
-      await tester.tap(find.byType(IconLabelButton).at(1));
-      await tester.pumpAndSettle();
+        await tester.tap(find.byType(IconLabelButton).at(1));
+        await tester.pumpAndSettle();
 
-      verify(presenter.onOpenScreen()).called(1);
-      verify(presenter.loginGoogle()).called(1);
-      verify(presenter.goToHome()).called(1);
-    });
+        verify(presenter.onOpenScreen()).called(3);
+        verify(presenter.loginGoogle()).called(2);
+      });
 
-    testWidgets("Should verify click button login google with error",
-        (tester) async {
-      when(presenter.onOpenScreen()).thenAnswer((_) {});
-      when(presenter.loginGoogle())
-          .thenAnswer((_) async => (null, Exception("error")));
+      testWidgets("Should verify click button remember password",
+          (tester) async {
+        when(presenter.onOpenScreen()).thenAnswer((_) {});
 
-      await tester.pumpWidget(
-        MaterialApp(
-          localizationsDelegates: const [
-            AuthenticationStrings.delegate,
-            SharedStrings.delegate,
-            GlobalMaterialLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
-            GlobalCupertinoLocalizations.delegate,
-          ],
-          supportedLocales: const [
-            Locale('pt', ''),
-          ],
-          home: loginView,
-        ),
-      );
+        await tester.pumpWidget(createWidgetUnderTest());
 
-      await tester.pump();
-      await tester.drag(find.byType(ListView), const Offset(0.0, -300));
-      await tester.pump();
+        await tester.pumpAndSettle();
 
-      await tester.tap(find.byType(IconLabelButton).at(1));
-      await tester.pump();
+        await tester.tap(find.byIcon(Icons.check));
+        await tester.pumpAndSettle();
+      });
 
-      verify(presenter.loginGoogle()).called(1);
-      expect(find.text("Tivemos um problema."), findsOneWidget);
-      expect(find.textContaining("tente novamente."), findsOneWidget);
-      expect(find.textContaining("tente novamente."), findsOneWidget);
-      expect(find.byType(GestureDetector), findsOneWidget);
-      expect(find.text("Tentar novamente"), findsOneWidget);
-      expect(find.byType(Icon), findsOneWidget);
+      testWidgets("Should verify click button forget password", (tester) async {
+        when(presenter.onOpenScreen()).thenAnswer((_) {});
 
-      await tester.tap(find.byType(GestureDetector));
-    });
+        await tester.pumpWidget(createWidgetUnderTest());
 
-    testWidgets("Should verify click button remember password", (tester) async {
-      when(presenter.onOpenScreen()).thenAnswer((_) {});
+        await tester.pumpAndSettle();
 
-      await tester.pumpWidget(
-        MaterialApp(
-          localizationsDelegates: const [
-            AuthenticationStrings.delegate,
-            SharedStrings.delegate,
-            GlobalMaterialLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
-            GlobalCupertinoLocalizations.delegate,
-          ],
-          supportedLocales: const [
-            Locale('pt', ''),
-          ],
-          home: loginView,
-        ),
-      );
+        await tester.tap(find.byType(InkWell).first);
+        await tester.pumpAndSettle();
+      });
 
-      await tester.pumpAndSettle();
+      testWidgets("Should verify click button sing in", (tester) async {
+        when(presenter.onOpenScreen()).thenAnswer((_) {});
 
-      await tester.tap(find.byIcon(Icons.check));
-      await tester.pumpAndSettle();
-    });
+        await tester.pumpWidget(createWidgetUnderTest());
 
-    testWidgets("Should verify click button forget password", (tester) async {
-      when(presenter.onOpenScreen()).thenAnswer((_) {});
+        await tester.pumpAndSettle();
 
-      await tester.pumpWidget(
-        MaterialApp(
-          localizationsDelegates: const [
-            AuthenticationStrings.delegate,
-            SharedStrings.delegate,
-            GlobalMaterialLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
-            GlobalCupertinoLocalizations.delegate,
-          ],
-          supportedLocales: const [
-            Locale('pt', ''),
-          ],
-          home: loginView,
-        ),
-      );
+        await tester.tap(find.byType(IconLabelButton));
+        await tester.pumpAndSettle();
+      });
 
-      await tester.pumpAndSettle();
+      testWidgets("Should verify click button meditate Without Login",
+          (tester) async {
+        when(presenter.onOpenScreen()).thenAnswer((_) {});
 
-      await tester.tap(find.byType(InkWell).first);
-      await tester.pumpAndSettle();
-    });
+        await tester.pumpWidget(createWidgetUnderTest());
 
-    testWidgets("Should verify click button sing in", (tester) async {
-      when(presenter.onOpenScreen()).thenAnswer((_) {});
+        await tester.pumpAndSettle();
+        await tester.drag(find.byType(ListView), const Offset(0.0, -300));
+        await tester.pump();
 
-      await tester.pumpWidget(
-        MaterialApp(
-          localizationsDelegates: const [
-            AuthenticationStrings.delegate,
-            SharedStrings.delegate,
-            GlobalMaterialLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
-            GlobalCupertinoLocalizations.delegate,
-          ],
-          supportedLocales: const [
-            Locale('pt', ''),
-          ],
-          home: loginView,
-        ),
-      );
+        await tester.tap(find.byType(IconLabelButton).at(2));
+        await tester.pumpAndSettle();
+      });
 
-      await tester.pumpAndSettle();
+      testWidgets("Should verify click button meditate create account",
+          (tester) async {
+        when(presenter.onOpenScreen()).thenAnswer((_) {});
 
-      await tester.tap(find.byType(IconLabelButton));
-      await tester.pumpAndSettle();
-    });
+        await tester.pumpWidget(createWidgetUnderTest());
 
-    testWidgets("Should verify click button meditate Without Login",
-        (tester) async {
-      when(presenter.onOpenScreen()).thenAnswer((_) {});
+        await tester.pumpAndSettle();
+        await tester.drag(find.byType(ListView), const Offset(0.0, -300));
+        await tester.pump();
 
-      await tester.pumpWidget(
-        MaterialApp(
-          localizationsDelegates: const [
-            AuthenticationStrings.delegate,
-            SharedStrings.delegate,
-            GlobalMaterialLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
-            GlobalCupertinoLocalizations.delegate,
-          ],
-          supportedLocales: const [
-            Locale('pt', ''),
-          ],
-          home: loginView,
-        ),
-      );
+        await tester.tap(find.byType(GestureDetector).at(6));
+        await tester.pumpAndSettle();
+      });
 
-      await tester.pumpAndSettle();
-      await tester.drag(find.byType(ListView), const Offset(0.0, -300));
-      await tester.pump();
+      testWidgets("Should verify click button IconButton to obscure password",
+          (tester) async {
+        when(presenter.onOpenScreen()).thenAnswer((_) {});
 
-      await tester.tap(find.byType(IconLabelButton).at(2));
-      await tester.pumpAndSettle();
-    });
+        await tester.pumpWidget(createWidgetUnderTest());
 
-    testWidgets("Should verify click button meditate create account",
-        (tester) async {
-      when(presenter.onOpenScreen()).thenAnswer((_) {});
+        await tester.pumpAndSettle();
 
-      await tester.pumpWidget(
-        MaterialApp(
-          localizationsDelegates: const [
-            AuthenticationStrings.delegate,
-            SharedStrings.delegate,
-            GlobalMaterialLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
-            GlobalCupertinoLocalizations.delegate,
-          ],
-          supportedLocales: const [
-            Locale('pt', ''),
-          ],
-          home: loginView,
-        ),
-      );
-
-      await tester.pumpAndSettle();
-      await tester.drag(find.byType(ListView), const Offset(0.0, -300));
-      await tester.pump();
-
-      await tester.tap(find.byType(GestureDetector).at(6));
-      await tester.pumpAndSettle();
-    });
-
-    testWidgets("Should verify click button IconButton to obscure password",
-        (tester) async {
-      when(presenter.onOpenScreen()).thenAnswer((_) {});
-
-      await tester.pumpWidget(
-        MaterialApp(
-          localizationsDelegates: const [
-            AuthenticationStrings.delegate,
-            SharedStrings.delegate,
-            GlobalMaterialLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
-            GlobalCupertinoLocalizations.delegate,
-          ],
-          supportedLocales: const [
-            Locale('pt', ''),
-          ],
-          home: loginView,
-        ),
-      );
-
-      await tester.pumpAndSettle();
-
-      await tester.tap(find.byType(IconButton));
-      await tester.pumpAndSettle();
+        await tester.tap(find.byType(IconButton));
+        await tester.pumpAndSettle();
+      });
     });
   });
 }

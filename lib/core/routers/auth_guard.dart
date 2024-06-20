@@ -8,11 +8,12 @@ class AuthGuard extends AutoRouteGuard {
   @override
   Future<void> onNavigation(
       NavigationResolver resolver, StackRouter router) async {
+    // await _secureStorage.setAllToNull();
     var auth = await _secureStorage.isLogged;
     if (auth) {
       resolver.next(true);
     } else {
-      resolver.redirect(const LoginRoute());
+      resolver.redirect(LoginRoute());
     }
   }
 }
