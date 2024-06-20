@@ -66,21 +66,15 @@ class MockAuthService extends _i1.Mock implements _i3.AuthService {
       );
 
   @override
-  bool get isAuthenticated => (super.noSuchMethod(
-        Invocation.getter(#isAuthenticated),
-        returnValue: false,
-      ) as bool);
-
-  @override
-  _i4.Future<(_i5.AuthCredential?, _i6.CustomError?)> loginGoogle() =>
+  _i4.Future<(_i5.AuthCredential?, Object?)> loginGoogle() =>
       (super.noSuchMethod(
         Invocation.method(
           #loginGoogle,
           [],
         ),
-        returnValue: _i4.Future<(_i5.AuthCredential?, _i6.CustomError?)>.value(
-            (null, null)),
-      ) as _i4.Future<(_i5.AuthCredential?, _i6.CustomError?)>);
+        returnValue:
+            _i4.Future<(_i5.AuthCredential?, Object?)>.value((null, null)),
+      ) as _i4.Future<(_i5.AuthCredential?, Object?)>);
 
   @override
   _i4.Future<void> loginFacebook() => (super.noSuchMethod(
@@ -100,6 +94,42 @@ class MockAuthService extends _i1.Mock implements _i3.AuthService {
         ),
         returnValue: _i4.Future<Object?>.value(),
       ) as _i4.Future<Object?>);
+}
+
+/// A class which mocks [CustomError].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockCustomError extends _i1.Mock implements _i6.CustomError {
+  MockCustomError() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  set message(String? _message) => super.noSuchMethod(
+        Invocation.setter(
+          #message,
+          _message,
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  set code(_i6.ErrorCodes? _code) => super.noSuchMethod(
+        Invocation.setter(
+          #code,
+          _code,
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  set stackTrace(StackTrace? _stackTrace) => super.noSuchMethod(
+        Invocation.setter(
+          #stackTrace,
+          _stackTrace,
+        ),
+        returnValueForMissingStub: null,
+      );
 }
 
 /// A class which mocks [AppRouter].
@@ -126,6 +156,42 @@ class MockAppRouter extends _i1.Mock implements _i7.AppRouter {
       );
 }
 
+/// A class which mocks [LoginViewContract].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockLoginViewContract extends _i1.Mock implements _i9.LoginViewContract {
+  MockLoginViewContract() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  void showError(String? message) => super.noSuchMethod(
+        Invocation.method(
+          #showError,
+          [message],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void showLoading() => super.noSuchMethod(
+        Invocation.method(
+          #showLoading,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void showNormalState() => super.noSuchMethod(
+        Invocation.method(
+          #showNormalState,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
+}
+
 /// A class which mocks [Repository].
 ///
 /// See the documentation for Mockito's code generation for more information.
@@ -144,13 +210,13 @@ class MockRepository extends _i1.Mock implements _i9.Repository {
       );
 
   @override
-  _i4.Future<void> authenticateUserByGoogle(_i5.AuthCredential? credential) =>
+  _i4.Future<Object?> authenticateUserByGoogle(
+          _i5.AuthCredential? credential) =>
       (super.noSuchMethod(
         Invocation.method(
           #authenticateUserByGoogle,
           [credential],
         ),
-        returnValue: _i4.Future<void>.value(),
-        returnValueForMissingStub: _i4.Future<void>.value(),
-      ) as _i4.Future<void>);
+        returnValue: _i4.Future<Object?>.value(),
+      ) as _i4.Future<Object?>);
 }

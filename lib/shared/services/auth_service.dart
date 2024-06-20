@@ -1,4 +1,3 @@
-import 'package:cinco_minutos_meditacao/shared/models/error.dart';
 import 'package:cinco_minutos_meditacao/shared/services/log_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -12,7 +11,7 @@ class AuthService {
   late final FirebaseApp app;
   late final FirebaseAuth _auth = FirebaseAuth.instance;
 
-  Future<(AuthCredential?, CustomError?)> loginGoogle() async {
+  Future<(AuthCredential?, Object?)> loginGoogle() async {
     try {
       final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
       final GoogleSignInAuthentication googleAuth =
@@ -28,13 +27,7 @@ class AuthService {
 
       return (credential, null);
     } catch (error, stackTrace) {
-      var err = CustomError(
-        message: error.toString(),
-        code: ErrorCodes.loginGoogleError,
-        stackTrace: stackTrace,
-      );
-
-      return (null, err);
+      return (null, error);
     }
   }
 

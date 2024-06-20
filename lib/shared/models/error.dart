@@ -7,33 +7,25 @@ enum ErrorCodes {
 
 class CustomError {
   /// Error message
-  final String message;
+  String? message;
 
   /// Error code
-  final ErrorCodes code;
+  ErrorCodes? code;
 
-  /// Stack trace
-  final StackTrace stackTrace;
+  /// Error stack trace
+  StackTrace? stackTrace;
 
   /// Error constructor
-  /// - [message] is the error message
-  /// - [code] is the error code
-  /// - [stackTrace] is the stack trace
-  CustomError(
-      {required this.message, required this.code, required this.stackTrace});
+  CustomError();
 
-  sendErrorToCrashlytics() {
-    FirebaseCrashlytics.instance.log(message);
+  sendErrorToCrashlytics(
+      String? message, ErrorCodes? code, StackTrace? stackTrace) {
+    message = message ?? this.message;
+    code = code ?? this.code;
+    stackTrace = stackTrace ?? this.stackTrace;
+
+    FirebaseCrashlytics.instance.log(message ?? "");
     FirebaseCrashlytics.instance.recordError(message, stackTrace);
-    LogService().log(message, null, stackTrace);
-  }
-
-  /// Error.fromJson factory
-  factory CustomError.fromJson(Map<String, dynamic> json) {
-    return CustomError(
-      message: json['message'],
-      code: json['code'],
-      stackTrace: json['stackTrace'],
-    );
+    LogService().log(message ?? "", null, stackTrace);
   }
 }
