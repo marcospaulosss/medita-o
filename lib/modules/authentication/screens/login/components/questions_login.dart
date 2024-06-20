@@ -77,6 +77,31 @@ class _QuestionsLoginState extends State<QuestionsLogin> {
             ),
           ),
         ),
+        const SizedBox(height: 10),
+        GestureDetector(
+          onTap: () => print("Criar conta"),
+          child: RichText(
+            text: TextSpan(
+              text: AuthenticationStrings.of(context).createOne,
+              style: const TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w400,
+                color: AppColors.frankBlue,
+              ),
+              children: [
+                TextSpan(
+                  text: AuthenticationStrings.of(context).account,
+                  style: const TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w700,
+                    color: AppColors.frankBlue,
+                    decoration: TextDecoration.underline,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
         const SizedBox(height: 57.65),
       ],
     );

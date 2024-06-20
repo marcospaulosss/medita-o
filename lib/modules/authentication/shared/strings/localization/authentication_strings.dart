@@ -101,6 +101,12 @@ abstract class AuthenticationStrings {
   /// **'Sua conta Google'**
   String get yourGoogleAccount;
 
+  /// No description provided for @yourFacebookAccount.
+  ///
+  /// In pt, this message translates to:
+  /// **'Sua conta Facebook'**
+  String get yourFacebookAccount;
+
   /// No description provided for @exampleEmail.
   ///
   /// In pt, this message translates to:

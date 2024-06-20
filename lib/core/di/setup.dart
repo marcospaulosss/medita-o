@@ -1,4 +1,5 @@
 import 'package:cinco_minutos_meditacao/app.dart';
+import 'package:cinco_minutos_meditacao/core/di/client.dart';
 import 'package:cinco_minutos_meditacao/core/di/helpers.dart';
 import 'package:cinco_minutos_meditacao/core/di/singletons.dart' as singletons;
 import 'package:cinco_minutos_meditacao/modules/authentication/di/setup.dart'
@@ -12,6 +13,7 @@ abstract class DI {
   /// Configura a injeção de dependências da aplicação.
   static void setup() {
     singletons.setupInjectors();
+    AuthenticationClientInjector.setup();
     common.setupInjectors();
     authentication.setupInjectors();
   }
