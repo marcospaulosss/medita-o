@@ -7,9 +7,9 @@ import 'package:cinco_minutos_meditacao/modules/authentication/screens/login/log
 import 'package:cinco_minutos_meditacao/shared/clients/models/authenticate_google_request.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/models/authenticate_google_response.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/social_client_api.dart';
-import 'package:cinco_minutos_meditacao/shared/models/error.dart';
 import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 
 class LoginRepository extends Repository {
   /// Gerenciador de analytics
@@ -38,8 +38,7 @@ class LoginRepository extends Repository {
 
   /// Autentica o usuário utilizando o Google
   @override
-  Future<CustomError?> authenticateUserByGoogle(
-      AuthCredential credential) async {
+  Future<Object?> authenticateUserByGoogle(AuthCredential credential) async {
     AuthenticateGoogleRequest request =
         AuthenticateGoogleRequest(idToken: credential.accessToken);
 
@@ -52,29 +51,17 @@ class LoginRepository extends Repository {
 
       return null;
     } on TimeoutException {
-      return CustomError(
-        message: 'Timeout ao tentar autenticar com o Google',
-        code: ErrorCodes.loginGoogleError,
-        stackTrace: StackTrace.current,
-      );
-    } on DioException catch (e, stacktrace) {
+      return FlutterError("Tempo de conexão excedido");
+    } on DioException catch (e) {
       if (e.response != null && e.response!.statusCode == 401) {
         await _secureStorage.setIsLogged(false);
 
         return null;
       }
 
-      return CustomError(
-        message: e.message.toString(),
-        code: ErrorCodes.loginGoogleError,
-        stackTrace: stacktrace,
-      );
-    } catch (e, stacktrace) {
-      return CustomError(
-        message: 'Erro desconhecido ao autenticar com o Google',
-        code: ErrorCodes.loginGoogleError,
-        stackTrace: stacktrace,
-      );
+      return e.error;
+    } catch (e) {
+      return e;
     }
   }
 }

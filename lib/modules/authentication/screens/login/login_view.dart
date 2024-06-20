@@ -21,10 +21,11 @@ class LoginView extends StatefulWidget {
   const LoginView({super.key});
 
   @override
-  State<LoginView> createState() => _LoginViewState();
+  State<LoginView> createState() => LoginViewState();
 }
 
-class _LoginViewState extends State<LoginView> implements LoginViewContract {
+@visibleForTesting
+class LoginViewState extends State<LoginView> implements LoginViewContract {
   /// Presenter da tela de login
   Presenter presenter = resolve<LoginPresenter>();
 
@@ -39,7 +40,7 @@ class _LoginViewState extends State<LoginView> implements LoginViewContract {
     presenter.bindView(this);
     presenter.onOpenScreen();
 
-    stateController.showNormalState();
+    showNormalState();
 
     super.initState();
   }
