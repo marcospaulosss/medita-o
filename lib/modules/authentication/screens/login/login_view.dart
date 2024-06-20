@@ -11,6 +11,7 @@ import 'package:cinco_minutos_meditacao/shared/components/generic_error_containe
 import 'package:cinco_minutos_meditacao/shared/components/loading.dart';
 import 'package:cinco_minutos_meditacao/shared/helpers/multi_state_container/container.dart';
 import 'package:cinco_minutos_meditacao/shared/helpers/multi_state_container/controller.dart';
+import 'package:cinco_minutos_meditacao/shared/helpers/view_binding.dart';
 import 'package:flutter/material.dart';
 
 /// Tela responsável pelo login do usuário
@@ -20,21 +21,26 @@ class LoginView extends StatefulWidget {
   const LoginView({super.key});
 
   @override
-  State<LoginView> createState() => _LoginViewState();
+  State<LoginView> createState() => LoginViewState();
 }
 
-class _LoginViewState extends State<LoginView> {
+@visibleForTesting
+class LoginViewState extends State<LoginView> implements LoginViewContract {
   /// Presenter da tela de login
   Presenter presenter = resolve<LoginPresenter>();
 
   /// Controlador do estado da tela
   final stateController = MultiStateContainerController();
 
+  /// Mensagem de erro
+  late String messageError = "";
+
   @override
   void initState() {
-    stateController.showNormalState();
-
+    presenter.bindView(this);
     presenter.onOpenScreen();
+
+    showNormalState();
 
     super.initState();
   }
@@ -42,6 +48,7 @@ class _LoginViewState extends State<LoginView> {
   @override
   void dispose() {
     stateController.dispose();
+    presenter.unbindView();
 
     super.dispose();
   }
@@ -53,7 +60,8 @@ class _LoginViewState extends State<LoginView> {
       normalStateBuilder: (context) => buildScaffold(),
       loadingStateBuilder: (context) => const Loading(),
       errorStateBuilder: (context) => GenericErrorContainer(
-        onRetry: () => requestLoginGoogle,
+        onRetry: () => requestLoginGoogle(),
+        message: messageError,
       ),
     );
   }
@@ -75,7 +83,10 @@ class _LoginViewState extends State<LoginView> {
                 const FormLogin(),
                 const QuestionsLogin(),
                 const DividerButtons(),
-                LoginButtons(requestLoginGoogle: requestLoginGoogle),
+                LoginButtons(
+                  requestLoginGoogle: requestLoginGoogle,
+                  requestLoginFacebook: requestLoginFacebook,
+                ),
               ],
             ),
           ),
@@ -86,14 +97,28 @@ class _LoginViewState extends State<LoginView> {
 
   /// Solicita o login utilizando o Google
   void requestLoginGoogle() async {
-    stateController.showLoadingState();
-    var (_, error) = await presenter.loginGoogle();
-    if (error != null) {
-      stateController.showErrorState();
-      return;
-    }
-    stateController.showNormalState();
+    await presenter.loginGoogle();
+  }
 
-    presenter.goToHome();
+  /// Solicita o login utilizando o facebook
+  void requestLoginFacebook() async {
+    stateController.showLoadingState();
+    await presenter.loginFacebook();
+  }
+
+  @override
+  void showError(String message) {
+    messageError = message;
+    stateController.showErrorState();
+  }
+
+  @override
+  void showLoading() {
+    stateController.showLoadingState();
+  }
+
+  @override
+  void showNormalState() {
+    stateController.showNormalState();
   }
 }
