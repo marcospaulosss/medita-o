@@ -14,10 +14,12 @@ jobs:
   ios-distribution-dev:
     needs: tests
     uses: polvo-labs/cincominutos-app/.github/workflows/ios_distribution_dev.yaml@main
+    secrets: inherit
 
   android-distribution-dev:
     needs: tests
     uses: polvo-labs/cincominutos-app/.github/workflows/android_distribution_dev.yaml@main
+    secrets: inherit
 
   pre-release:
     needs: [ios-distribution-dev, android-distribution-dev]
