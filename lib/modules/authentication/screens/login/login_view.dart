@@ -3,7 +3,6 @@ import 'package:cinco_minutos_meditacao/core/di/helpers.dart';
 import 'package:cinco_minutos_meditacao/modules/authentication/screens/login/components/divider_buttons.dart';
 import 'package:cinco_minutos_meditacao/modules/authentication/screens/login/components/form_login.dart';
 import 'package:cinco_minutos_meditacao/modules/authentication/screens/login/components/login_buttons.dart';
-import 'package:cinco_minutos_meditacao/modules/authentication/screens/login/components/questions_login.dart';
 import 'package:cinco_minutos_meditacao/modules/authentication/screens/login/login_contracts.dart';
 import 'package:cinco_minutos_meditacao/modules/authentication/screens/login/login_presenter.dart';
 import 'package:cinco_minutos_meditacao/shared/components/background_default.dart';
@@ -34,6 +33,8 @@ class LoginViewState extends State<LoginView> implements LoginViewContract {
 
   /// Mensagem de erro
   late String messageError = "";
+
+  late bool errorEmailInvalid = false;
 
   @override
   void initState() {
@@ -80,8 +81,7 @@ class LoginViewState extends State<LoginView> implements LoginViewContract {
                   height: 241,
                   width: 166,
                 ),
-                const FormLogin(),
-                const QuestionsLogin(),
+                FormLogin(errorEmailInvalid: errorEmailInvalid, onLogin: requestLoginEmailPassword,),
                 const DividerButtons(),
                 LoginButtons(
                   requestLoginGoogle: requestLoginGoogle,
@@ -102,8 +102,12 @@ class LoginViewState extends State<LoginView> implements LoginViewContract {
 
   /// Solicita o login utilizando o facebook
   void requestLoginFacebook() async {
-    stateController.showLoadingState();
     await presenter.loginFacebook();
+  }
+
+  /// Solicita o login padrão
+  void requestLoginEmailPassword(String email, String senha) async {
+    await presenter.loginEmailPassword(email, senha);
   }
 
   @override
@@ -120,5 +124,12 @@ class LoginViewState extends State<LoginView> implements LoginViewContract {
   @override
   void showNormalState() {
     stateController.showNormalState();
+  }
+
+  @override
+  void showErrorEmailInvalid() {
+    setState(() {
+      errorEmailInvalid = true;
+    });
   }
 }
