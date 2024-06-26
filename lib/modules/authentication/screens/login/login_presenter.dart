@@ -1,5 +1,6 @@
 import 'package:cinco_minutos_meditacao/core/routers/app_router.dart';
 import 'package:cinco_minutos_meditacao/core/routers/app_router.gr.dart';
+import 'package:cinco_minutos_meditacao/modules/authentication/models/auth_request.dart';
 import 'package:cinco_minutos_meditacao/modules/authentication/screens/login/login_contracts.dart';
 import 'package:cinco_minutos_meditacao/shared/models/error.dart';
 import 'package:cinco_minutos_meditacao/shared/services/auth_service.dart';
@@ -73,5 +74,25 @@ class LoginPresenter extends Presenter {
   @override
   Future<void> loginFacebook() async {
     _authService.loginFacebook();
+  }
+
+  @override
+  Future<void> loginEmailPassword(String email, String password) {
+    if (!isValidEmail(email)) {
+      view?.showErrorEmailInvalid();
+      return Future.value();
+    }
+
+    AuthRequest authRequest = AuthRequest(email, password);
+    _repository.authenticateUserByEmailPassword(authRequest);
+
+    return Future.value();
+  }
+
+  bool isValidEmail(String email) {
+    final RegExp emailRegex = RegExp(
+      r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$',
+    );
+    return emailRegex.hasMatch(email);
   }
 }

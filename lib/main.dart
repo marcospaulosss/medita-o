@@ -22,8 +22,6 @@ Future<void> main() async {
   );
   FirebaseAuth.instanceFor(app: app);
 
-  /// Configura o Firebase Crashlytics. apenas em ambiente de produção.
-  if (F.isProd) {
     FlutterError.onError = (errorDetails) {
       FirebaseCrashlytics.instance.recordFlutterFatalError(errorDetails);
     };
@@ -31,7 +29,6 @@ Future<void> main() async {
       FirebaseCrashlytics.instance.recordError(error, stack);
       return true;
     };
-  }
 
   // Configura a biblioteca para utilizar o idioma atual do dispositivo.
   Intl.defaultLocale = 'pt_BR';

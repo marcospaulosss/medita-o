@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:cinco_minutos_meditacao/core/analytics/manager.dart';
 import 'package:cinco_minutos_meditacao/core/wrappers/secure_storage.dart';
 import 'package:cinco_minutos_meditacao/modules/authentication/analytics/events.dart';
+import 'package:cinco_minutos_meditacao/modules/authentication/models/auth_request.dart';
 import 'package:cinco_minutos_meditacao/modules/authentication/screens/login/login_contracts.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/models/authenticate_google_request.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/models/authenticate_google_response.dart';
@@ -63,5 +64,11 @@ class LoginRepository extends Repository {
     } catch (e) {
       return e;
     }
+  }
+
+  @override
+  Future<void> authenticateUserByEmailPassword(AuthRequest authRequest) {
+    // TODO: implement authenticateUserByEmailPassword
+    throw UnimplementedError();
   }
 }
