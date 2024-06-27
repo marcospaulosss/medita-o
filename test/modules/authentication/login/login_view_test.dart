@@ -108,6 +108,33 @@ void main() async {
         expect(find.byType(Image), findsOneWidget);
         expect(find.textContaining('Carregando'), findsOneWidget);
       });
+
+      testWidgets('showErrorEmailInvalid should set errorEmailInvalid to true', (tester) async {
+        when(presenter.onOpenScreen()).thenAnswer((_) {});
+
+        await tester.pumpWidget(createWidgetUnderTest());
+
+        final loginViewState =
+        tester.state(find.byType(LoginView)) as LoginViewState;
+        loginViewState.showErrorEmailInvalid();
+
+        expect(loginViewState.errorEmailInvalid, isTrue);
+      });
+
+      testWidgets('showInvalidCredentialsSnackBar should show SnackBar', (tester) async {
+        when(presenter.onOpenScreen()).thenAnswer((_) {});
+
+        await tester.pumpWidget(createWidgetUnderTest());
+
+        final loginViewState =
+        tester.state(find.byType(LoginView)) as LoginViewState;
+        loginViewState.showInvalidCredentialsSnackBar();
+
+        await tester.pumpAndSettle();
+
+        expect(find.byType(SnackBar), findsOneWidget);
+        expect(find.text('Senha ou email inválidos'), findsOneWidget);
+      });
     });
 
     group("Interaction screen", () {
@@ -124,7 +151,7 @@ void main() async {
         await tester.tap(find.byType(IconLabelButton).at(1));
         await tester.pumpAndSettle();
 
-        verify(presenter.onOpenScreen()).called(3);
+        verify(presenter.onOpenScreen()).called(5);
         verify(presenter.loginGoogle()).called(2);
       });
 

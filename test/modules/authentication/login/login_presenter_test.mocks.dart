@@ -201,6 +201,15 @@ class MockLoginViewContract extends _i1.Mock implements _i9.LoginViewContract {
         ),
         returnValueForMissingStub: null,
       );
+
+  @override
+  void showInvalidCredentialsSnackBar() => super.noSuchMethod(
+        Invocation.method(
+          #showInvalidCredentialsSnackBar,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
 }
 
 /// A class which mocks [Repository].
@@ -232,13 +241,13 @@ class MockRepository extends _i1.Mock implements _i9.Repository {
       ) as _i4.Future<Object?>);
 
   @override
-  _i4.Future<Object?> authenticateUserByEmailPassword(
+  _i4.Future<_i6.CustomError?> authenticateUserByEmailPassword(
           _i10.AuthRequest? authRequest) =>
       (super.noSuchMethod(
         Invocation.method(
           #authenticateUserByEmailPassword,
           [authRequest],
         ),
-        returnValue: _i4.Future<Object?>.value(),
-      ) as _i4.Future<Object?>);
+        returnValue: _i4.Future<_i6.CustomError?>.value(),
+      ) as _i4.Future<_i6.CustomError?>);
 }

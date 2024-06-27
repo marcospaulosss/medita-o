@@ -32,6 +32,6 @@ abstract class ClientApi {
   /// - [Auth] : Cliente de autenticação
   /// Solicita a autenticação do usuário utilizando email e senha no servidor
   @POST('/login')
-  Future<AuthenticateGoogleResponse> login(
+  Future<void> login(
       @Body() AuthRequest body);
 }
