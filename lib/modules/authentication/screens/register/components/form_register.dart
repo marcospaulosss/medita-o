@@ -3,44 +3,44 @@ import 'package:cinco_minutos_meditacao/modules/authentication/shared/strings/lo
 import 'package:cinco_minutos_meditacao/shared/Theme/app_colors.dart';
 import 'package:cinco_minutos_meditacao/shared/components/icon_label_button.dart';
 import 'package:cinco_minutos_meditacao/shared/components/icon_text.dart';
-import 'package:cinco_minutos_meditacao/shared/components/link.dart';
 import 'package:cinco_minutos_meditacao/shared/components/text_field_input.dart';
 import 'package:flutter/material.dart';
 
-/// Formulário de login
-class FormLogin extends StatefulWidget {
+class FormRegister extends StatefulWidget {
+
   /// Mensagem de erro de e-mail inválido
   bool errorEmailInvalid = false;
 
-  /// Função que será chamada ao realizar o login
-  final Function onLogin;
-
-  /// Função que será chamada ao realizar o registro
-  final Function onRegister;
-
   /// - [key] : Chave de identificação do widget
   /// - [errorEmailInvalid] : Mensagem de erro de e-mail inválido
-  /// - [onLogin] : Função que será chamada ao realizar o login
-  /// - [onRegister] : Função que será chamada ao realizar o registro
   /// construtor
-  FormLogin({super.key, required this.errorEmailInvalid, required this.onLogin, required this.onRegister,});
+  FormRegister({super.key, required this.errorEmailInvalid,});
 
   @override
-  State<FormLogin> createState() => _FormLoginState();
+  State<FormRegister> createState() => _FormRegisterState();
 }
 
-class _FormLoginState extends State<FormLogin> {
+class _FormRegisterState extends State<FormRegister> {
   /// Chave do formulário
-  final _formKeyLogin = GlobalKey<FormState>();
+  final _formKey = GlobalKey<FormState>();
 
   /// Controlador do campo de texto de e-mail
   final TextEditingController emailController = TextEditingController();
 
+  /// Controlador do campo de texto de nome
+  final TextEditingController nameController = TextEditingController();
+
   /// Controlador do campo de texto de senha
   final TextEditingController passwordController = TextEditingController();
 
+  /// Controlador do campo de texto de repetir senha
+  final TextEditingController repeatPasswordController = TextEditingController();
+
   /// Se a senha está oculta
   bool obscurePasswordText = true;
+
+  /// Se a senha está oculta
+  bool obscureRepeatPasswordText = true;
 
   /// Se o usuário quer lembrar a senha
   bool rememberPassword = true;
@@ -53,7 +53,9 @@ class _FormLoginState extends State<FormLogin> {
   @override
   void dispose() {
     emailController.dispose();
+    nameController.dispose();
     passwordController.dispose();
+    repeatPasswordController.dispose();
 
     super.dispose();
   }
@@ -61,26 +63,40 @@ class _FormLoginState extends State<FormLogin> {
   @override
   Widget build(BuildContext context) {
     return Form(
-      key: _formKeyLogin,
+      key: _formKey,
       child: Padding(
-        padding: const EdgeInsets.only(top: 31, bottom: 18),
+        padding: const EdgeInsets.only(top: 21, bottom: 18),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            TextFieldInput(
+              hintText: AuthenticationStrings.of(context).name,
+              controller: nameController,
+              keyboardType: TextInputType.text,
+              label: AuthenticationStrings.of(context).name,
+              contentPadding: const EdgeInsets.only(left: 10, right: 10),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(12),
+                borderSide: const BorderSide(
+                  color: AppColors.brainstemGrey,
+                  width: 1,
+                ),
+              ),
+              validator: (value) => Validators.required(context, value),
+            ),
+            const SizedBox(height: 9),
             TextFieldInput(
               hintText: AuthenticationStrings.of(context).exampleEmail,
               controller: emailController,
               keyboardType: TextInputType.emailAddress,
               label: AuthenticationStrings.of(context).email,
-              prefixIcon: const Icon(
-                Icons.email_outlined,
-                color: AppColors.brainstemGrey,
-                size: 16,
-              ),
+              contentPadding: const EdgeInsets.only(left: 10, right: 10),
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),
-                borderSide: const BorderSide(
-                  color: AppColors.brainstemGrey,
+                borderSide: BorderSide(
+                  color: (widget.errorEmailInvalid)
+                      ? Colors.red
+                      : AppColors.brainstemGrey,
                   width: 1,
                 ),
               ),
@@ -93,11 +109,7 @@ class _FormLoginState extends State<FormLogin> {
               obscureText: obscurePasswordText,
               keyboardType: TextInputType.none,
               label: AuthenticationStrings.of(context).password,
-              prefixIcon: const Icon(
-                Icons.lock_open_outlined,
-                color: AppColors.brainstemGrey,
-                size: 16,
-              ),
+              contentPadding: const EdgeInsets.only(left: 10, right: 10),
               style: const TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.w400,
@@ -115,6 +127,35 @@ class _FormLoginState extends State<FormLogin> {
                   size: 20,
                 ),
               ),
+              validator: (value) => Validators.required(context, value),
+            ),
+            const SizedBox(height: 9),
+            TextFieldInput(
+              hintText: AuthenticationStrings.of(context).obscurePassword,
+              controller: repeatPasswordController,
+              obscureText: obscureRepeatPasswordText,
+              keyboardType: TextInputType.none,
+              label: AuthenticationStrings.of(context).confirmPassword,
+              contentPadding: const EdgeInsets.only(left: 10, right: 10),
+              style: const TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.w400,
+                color: AppColors.brainstemGrey,
+              ),
+              suffixIcon: IconButton(
+                onPressed: () => setState(() {
+                  obscureRepeatPasswordText = !obscureRepeatPasswordText;
+                }),
+                icon: Icon(
+                  (obscureRepeatPasswordText)
+                      ? Icons.visibility_outlined
+                      : Icons.visibility_off_outlined,
+                  color: AppColors.frankBlue,
+                  size: 20,
+                ),
+              ),
+              validator: (value) =>
+                  Validators.repeatPassword(context, value, passwordController.text),
             ),
             const SizedBox(height: 20),
             buildQuestionsLogin(),
@@ -156,17 +197,13 @@ class _FormLoginState extends State<FormLogin> {
                   ),
                 ),
               ),
-              Link(
-                onTap: () => print("Esqueci minha senha"),
-                text: AuthenticationStrings.of(context).forgotPassword,
-              ),
             ],
           ),
         ),
         IconLabelButton(
           onTap: () {
-            if (_formKeyLogin.currentState!.validate()) {
-              widget.onLogin(emailController.text, passwordController.text);
+            if (_formKey.currentState!.validate()) {
+              print("Cadastrar");
             }
           },
           width: double.infinity,
@@ -180,36 +217,11 @@ class _FormLoginState extends State<FormLogin> {
             color: AppColors.blueMana,
           ),
           label: Text(
-            AuthenticationStrings.of(context).signIn,
+            AuthenticationStrings.of(context).createAccount,
             style: const TextStyle(
               fontSize: 19,
               fontWeight: FontWeight.w700,
               color: AppColors.brilliance2,
-            ),
-          ),
-        ),
-        const SizedBox(height: 10),
-        GestureDetector(
-          onTap: () => widget.onRegister(),
-          child: RichText(
-            text: TextSpan(
-              text: AuthenticationStrings.of(context).createOne,
-              style: const TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w400,
-                color: AppColors.frankBlue,
-              ),
-              children: [
-                TextSpan(
-                  text: AuthenticationStrings.of(context).account,
-                  style: const TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w700,
-                    color: AppColors.frankBlue,
-                    decoration: TextDecoration.underline,
-                  ),
-                ),
-              ],
             ),
           ),
         ),

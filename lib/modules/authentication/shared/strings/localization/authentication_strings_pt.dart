@@ -42,4 +42,22 @@ class AuthenticationStringsPt extends AuthenticationStrings {
 
   @override
   String get account => 'conta';
+
+  @override
+  String get invalidEmail => 'email inválido';
+
+  @override
+  String get name => 'Nome';
+
+  @override
+  String get confirmPassword => 'Confirmar Senha';
+
+  @override
+  String get createAccount => 'Criar Conta';
+
+  @override
+  String get requiredField => 'Campo obrigatório';
+
+  @override
+  String get passwordsDontMatch => 'Senhas não conferem';
 }

@@ -104,4 +104,13 @@ class MockLoginPresenter extends _i1.Mock implements _i2.LoginPresenter {
         ),
         returnValue: false,
       ) as bool);
+
+  @override
+  void goToRegister() => super.noSuchMethod(
+        Invocation.method(
+          #goToRegister,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
 }

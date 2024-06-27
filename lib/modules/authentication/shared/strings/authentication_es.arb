@@ -11,5 +11,12 @@
   "orEnterUsing": "  O ingresa usando  ",
   "meditateWithoutLogin": "Medita sin iniciar sesión",
   "createOne": "Crear uno",
-  "account" : "cuenta"
+  "account" : "cuenta",
+  "invalidEmail": "Correo electrónico no válido",
+  "name": "nombre",
+  "confirmPassword": "Confirmar contraseña",
+  "createAccount": "Crear cuenta",
+  "requiredField": "Campo obligatorio",
+  "invalidEmail": "correo electrónico no válido",
+  "passwordsDontMatch": "Las contraseñas no coinciden"
 }

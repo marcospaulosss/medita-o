@@ -1,10 +1,8 @@
 import 'package:auto_route/annotations.dart';
 import 'package:cinco_minutos_meditacao/core/di/helpers.dart';
-import 'package:cinco_minutos_meditacao/modules/authentication/screens/login/components/divider_buttons.dart';
-import 'package:cinco_minutos_meditacao/modules/authentication/screens/login/components/form_login.dart';
-import 'package:cinco_minutos_meditacao/modules/authentication/screens/login/components/login_buttons.dart';
-import 'package:cinco_minutos_meditacao/modules/authentication/screens/login/login_contracts.dart';
-import 'package:cinco_minutos_meditacao/modules/authentication/screens/login/login_presenter.dart';
+import 'package:cinco_minutos_meditacao/modules/authentication/screens/register/components/form_register.dart';
+import 'package:cinco_minutos_meditacao/modules/authentication/screens/register/register_contracts.dart';
+import 'package:cinco_minutos_meditacao/modules/authentication/screens/register/register_presenter.dart';
 import 'package:cinco_minutos_meditacao/shared/components/background_default.dart';
 import 'package:cinco_minutos_meditacao/shared/components/generic_error_container.dart';
 import 'package:cinco_minutos_meditacao/shared/components/loading.dart';
@@ -13,20 +11,19 @@ import 'package:cinco_minutos_meditacao/shared/helpers/multi_state_container/con
 import 'package:cinco_minutos_meditacao/shared/helpers/view_binding.dart';
 import 'package:flutter/material.dart';
 
-/// Tela responsável pelo login do usuário
-/// utilizando o Google
+/// Tela responsável pelo registro do usuário
 @RoutePage()
-class LoginView extends StatefulWidget {
-  const LoginView({super.key});
+class RegisterView extends StatefulWidget {
+  const RegisterView({super.key});
 
   @override
-  State<LoginView> createState() => LoginViewState();
+  State<RegisterView> createState() => RegisterViewState();
 }
 
 @visibleForTesting
-class LoginViewState extends State<LoginView> implements LoginViewContract {
+class RegisterViewState extends State<RegisterView> implements RegisterViewContract {
   /// Presenter da tela de login
-  Presenter presenter = resolve<LoginPresenter>();
+  Presenter presenter = resolve<RegisterPresenter>();
 
   /// Controlador do estado da tela
   final stateController = MultiStateContainerController();
@@ -34,11 +31,7 @@ class LoginViewState extends State<LoginView> implements LoginViewContract {
   /// Mensagem de erro
   late String messageError = "";
 
-  /// Flag para indicar se o email é inválido
   late bool errorEmailInvalid = false;
-
-  /// Função de retentativa
-  Function retry = () {};
 
   @override
   void initState() {
@@ -65,7 +58,7 @@ class LoginViewState extends State<LoginView> implements LoginViewContract {
       normalStateBuilder: (context) => buildScaffold(),
       loadingStateBuilder: (context) => const Loading(),
       errorStateBuilder: (context) => GenericErrorContainer(
-        onRetry: () => retry(),
+        // onRetry: () => requestLoginGoogle(),
         message: messageError,
       ),
     );
@@ -85,39 +78,13 @@ class LoginViewState extends State<LoginView> implements LoginViewContract {
                   height: 241,
                   width: 166,
                 ),
-                FormLogin(errorEmailInvalid: errorEmailInvalid, onLogin: requestLoginEmailPassword, onRegister: () => goToRegister(),),
-                const DividerButtons(),
-                LoginButtons(
-                  requestLoginGoogle: requestLoginGoogle,
-                  requestLoginFacebook: requestLoginFacebook,
-                ),
+                FormRegister(errorEmailInvalid: errorEmailInvalid),
               ],
             ),
           ),
         ),
       ),
     );
-  }
-
-  void goToRegister() => presenter.goToRegister();
-
-  /// Solicita o login utilizando o Google
-  void requestLoginGoogle() async {
-    await presenter.loginGoogle();
-  }
-
-  /// Solicita o login utilizando o facebook
-  void requestLoginFacebook() async {
-    await presenter.loginFacebook();
-  }
-
-  /// Solicita o login padrão
-  void requestLoginEmailPassword(String email, String senha) async {
-    setState(() {
-      retry = () => requestLoginEmailPassword(email, senha);
-    });
-
-    await presenter.loginEmailPassword(email, senha);
   }
 
   /// Exibe a mensagem de erro
