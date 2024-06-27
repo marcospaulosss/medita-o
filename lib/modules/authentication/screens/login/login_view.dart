@@ -110,22 +110,26 @@ class LoginViewState extends State<LoginView> implements LoginViewContract {
     await presenter.loginEmailPassword(email, senha);
   }
 
+  /// Exibe a mensagem de erro
   @override
   void showError(String message) {
     messageError = message;
     stateController.showErrorState();
   }
 
+  /// Exibe a tela de carregamento
   @override
   void showLoading() {
     stateController.showLoadingState();
   }
 
+  /// Exibe a tela normal
   @override
   void showNormalState() {
     stateController.showNormalState();
   }
 
+  /// Exibe a mensagem de erro de email inválido
   @override
   void showErrorEmailInvalid() {
     setState(() {
@@ -133,6 +137,8 @@ class LoginViewState extends State<LoginView> implements LoginViewContract {
     });
   }
 
+  /// Mostra a snackbar de credenciais inválidas
+  @override
   void showInvalidCredentialsSnackBar() {
     const snackBar = SnackBar(
       content: Text('Senha ou email inválidos'),

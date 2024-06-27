@@ -6,6 +6,7 @@ enum ErrorCodes {
   loginFacebookError,
   loginEmailPasswordError,
   unauthorized,
+  timeoutException,
 }
 
 class CustomError extends Error {

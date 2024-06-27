@@ -1,6 +1,9 @@
+import 'dart:async';
+
 import 'package:cinco_minutos_meditacao/core/routers/app_router.dart';
 import 'package:cinco_minutos_meditacao/modules/authentication/screens/login/login_contracts.dart';
 import 'package:cinco_minutos_meditacao/modules/authentication/screens/login/login_presenter.dart';
+import 'package:cinco_minutos_meditacao/shared/clients/models/auth_request.dart';
 import 'package:cinco_minutos_meditacao/shared/models/error.dart';
 import 'package:cinco_minutos_meditacao/shared/services/auth_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -32,113 +35,154 @@ void main() {
   });
 
   group('LoginPresenter', () {
-    test('loginGoogle should show loading and handle error', () async {
-      when(mockAuthService.loginGoogle())
-          .thenAnswer((_) async => (null, mockCustomError));
-      when(mockCustomError.sendErrorToCrashlytics(any, any, any))
-          .thenAnswer((_) async => {});
+    group('Login google', () {
+      test('loginGoogle should show loading and handle error', () async {
+        when(mockAuthService.loginGoogle())
+            .thenAnswer((_) async => (null, mockCustomError));
+        when(mockCustomError.sendErrorToCrashlytics(any, any, any))
+            .thenAnswer((_) async => {});
 
-      await presenter.loginGoogle();
+        await presenter.loginGoogle();
 
-      verify(mockView.showLoading()).called(1);
-      verify(mockView.showError('Erro ao realizar login com o Google'))
-          .called(1);
-      verifyNever(mockAppRouter.goToReplace(any));
+        verify(mockView.showLoading()).called(1);
+        verify(mockView.showError('Erro ao realizar login com o Google'))
+            .called(1);
+        verifyNever(mockAppRouter.goToReplace(any));
+      });
+
+      test('loginGoogle should authenticate user and navigate to home', () async {
+        const credential = AuthCredential(
+            accessToken: 'token', providerId: 'id', signInMethod: 'method');
+        when(mockAuthService.loginGoogle())
+            .thenAnswer((_) async => (credential, null));
+        when(mockRepository.authenticateUserByGoogle(credential))
+            .thenAnswer((_) async => null);
+
+        await presenter.loginGoogle();
+
+        verify(mockView.showLoading()).called(1);
+        verify(mockRepository.authenticateUserByGoogle(credential)).called(1);
+        verify(mockAppRouter.goToReplace(any)).called(1);
+      });
+
+      test('loginGoogle should handle authentication error', () async {
+        const credential = AuthCredential(
+            accessToken: 'token', providerId: 'id', signInMethod: 'method');
+        when(mockAuthService.loginGoogle())
+            .thenAnswer((_) async => (credential, null));
+        when(mockRepository.authenticateUserByGoogle(credential))
+            .thenAnswer((_) async => mockCustomError);
+        when(mockAppRouter.goToReplace(any)).thenAnswer((_) async => {});
+
+        await presenter.loginGoogle();
+
+        verify(mockView.showLoading()).called(1);
+        verify(mockRepository.authenticateUserByGoogle(credential)).called(1);
+        verify(mockView.showError(
+            'Erro ao authenticar usuário com o Google no servidor'))
+            .called(1);
+
+        verifyNever(mockAppRouter.goToReplace(any));
+      });
+
+      test('loginGoogle should handle null credential', () async {
+        when(mockAuthService.loginGoogle()).thenAnswer((_) async => (null, null));
+        when(mockCustomError.sendErrorToCrashlytics(any, any, any))
+            .thenAnswer((_) async => {});
+
+        await presenter.loginGoogle();
+
+        verify(mockView.showLoading()).called(1);
+        verify(mockCustomError.sendErrorToCrashlytics(
+          "Erro ao realizar login com o Google",
+          ErrorCodes.loginGoogleError,
+          any,
+        )).called(1);
+        verify(mockView.showError("Erro ao realizar login com o Google"))
+            .called(1);
+        verifyNever(mockAppRouter.goToReplace(any));
+      });
+
+      test('loginGoogle should handle null accessToken', () async {
+        const credential = AuthCredential(
+            accessToken: null, providerId: 'id', signInMethod: 'method');
+        when(mockAuthService.loginGoogle())
+            .thenAnswer((_) async => (credential, null));
+        when(mockCustomError.sendErrorToCrashlytics(any, any, any))
+            .thenAnswer((_) async => {});
+
+        await presenter.loginGoogle();
+
+        verify(mockView.showLoading()).called(1);
+        verify(mockCustomError.sendErrorToCrashlytics(
+          "Erro ao realizar login com o Google",
+          ErrorCodes.loginGoogleError,
+          any,
+        )).called(1);
+        verify(mockView.showError("Erro ao realizar login com o Google"))
+            .called(1);
+        verifyNever(mockAppRouter.goToReplace(any));
+      });
+
+      test('loginGoogle should handle empty accessToken', () async {
+        const credential = AuthCredential(
+            accessToken: '', providerId: 'id', signInMethod: 'method');
+        when(mockAuthService.loginGoogle())
+            .thenAnswer((_) async => (credential, null));
+        when(mockCustomError.sendErrorToCrashlytics(any, any, any))
+            .thenAnswer((_) async => {});
+
+        await presenter.loginGoogle();
+
+        verify(mockView.showLoading()).called(1);
+        verify(mockCustomError.sendErrorToCrashlytics(
+          "Erro ao realizar login com o Google",
+          ErrorCodes.loginGoogleError,
+          any,
+        )).called(1);
+        verify(mockView.showError("Erro ao realizar login com o Google"))
+            .called(1);
+        verifyNever(mockAppRouter.goToReplace(any));
+      });
     });
 
-    test('loginGoogle should authenticate user and navigate to home', () async {
-      const credential = AuthCredential(
-          accessToken: 'token', providerId: 'id', signInMethod: 'method');
-      when(mockAuthService.loginGoogle())
-          .thenAnswer((_) async => (credential, null));
-      when(mockRepository.authenticateUserByGoogle(credential))
-          .thenAnswer((_) async => null);
+    group('Login Email Password', () {
+      test('loginEmailPassword should show error when email is invalid', () async {
+        await presenter.loginEmailPassword('invalid_email', 'password');
 
-      await presenter.loginGoogle();
+        verify(mockView.showErrorEmailInvalid()).called(1);
+      });
 
-      verify(mockView.showLoading()).called(1);
-      verify(mockRepository.authenticateUserByGoogle(credential)).called(1);
-      verify(mockAppRouter.goToReplace(any)).called(1);
-    });
+      test('loginEmailPassword should show invalid credentials snackbar when unauthorized', () async {
+        late CustomError customError = CustomError();
+        customError.code = ErrorCodes.unauthorized;
+        when(mockRepository.authenticateUserByEmailPassword(any)).thenAnswer((_) async => customError);
 
-    test('loginGoogle should handle authentication error', () async {
-      const credential = AuthCredential(
-          accessToken: 'token', providerId: 'id', signInMethod: 'method');
-      when(mockAuthService.loginGoogle())
-          .thenAnswer((_) async => (credential, null));
-      when(mockRepository.authenticateUserByGoogle(credential))
-          .thenAnswer((_) async => mockCustomError);
-      when(mockAppRouter.goToReplace(any)).thenAnswer((_) async => {});
+        await presenter.loginEmailPassword('test@test.com', 'password');
 
-      await presenter.loginGoogle();
+        verify(mockView.showInvalidCredentialsSnackBar()).called(1);
+      });
 
-      verify(mockView.showLoading()).called(1);
-      verify(mockRepository.authenticateUserByGoogle(credential)).called(1);
-      verify(mockView.showError(
-              'Erro ao authenticar usuário com o Google no servidor'))
-          .called(1);
+      test('loginEmailPassword should show error when there is an error', () async {
+        late CustomError customError = CustomError();
+        customError.code = ErrorCodes.loginEmailPasswordError;
+        customError.message = 'Error message';
+        when(mockRepository.authenticateUserByEmailPassword(any)).thenAnswer((_) async => customError);
 
-      verifyNever(mockAppRouter.goToReplace(any));
-    });
+        await presenter.loginEmailPassword('test@test.com', 'password');
 
-    test('loginGoogle should handle null credential', () async {
-      when(mockAuthService.loginGoogle()).thenAnswer((_) async => (null, null));
-      when(mockCustomError.sendErrorToCrashlytics(any, any, any))
-          .thenAnswer((_) async => {});
+        verify(mockView.showError('Error message')).called(1);
+      });
 
-      await presenter.loginGoogle();
+      test('loginEmailPassword should not show any error when there is no error', () async {
+        when(mockRepository.authenticateUserByEmailPassword(any)).thenAnswer((_) async => null);
 
-      verify(mockView.showLoading()).called(1);
-      verify(mockCustomError.sendErrorToCrashlytics(
-        "Erro ao realizar login com o Google",
-        ErrorCodes.loginGoogleError,
-        any,
-      )).called(1);
-      verify(mockView.showError("Erro ao realizar login com o Google"))
-          .called(1);
-      verifyNever(mockAppRouter.goToReplace(any));
-    });
+        await presenter.loginEmailPassword('test@test.com', 'password');
 
-    test('loginGoogle should handle null accessToken', () async {
-      const credential = AuthCredential(
-          accessToken: null, providerId: 'id', signInMethod: 'method');
-      when(mockAuthService.loginGoogle())
-          .thenAnswer((_) async => (credential, null));
-      when(mockCustomError.sendErrorToCrashlytics(any, any, any))
-          .thenAnswer((_) async => {});
-
-      await presenter.loginGoogle();
-
-      verify(mockView.showLoading()).called(1);
-      verify(mockCustomError.sendErrorToCrashlytics(
-        "Erro ao realizar login com o Google",
-        ErrorCodes.loginGoogleError,
-        any,
-      )).called(1);
-      verify(mockView.showError("Erro ao realizar login com o Google"))
-          .called(1);
-      verifyNever(mockAppRouter.goToReplace(any));
-    });
-
-    test('loginGoogle should handle empty accessToken', () async {
-      const credential = AuthCredential(
-          accessToken: '', providerId: 'id', signInMethod: 'method');
-      when(mockAuthService.loginGoogle())
-          .thenAnswer((_) async => (credential, null));
-      when(mockCustomError.sendErrorToCrashlytics(any, any, any))
-          .thenAnswer((_) async => {});
-
-      await presenter.loginGoogle();
-
-      verify(mockView.showLoading()).called(1);
-      verify(mockCustomError.sendErrorToCrashlytics(
-        "Erro ao realizar login com o Google",
-        ErrorCodes.loginGoogleError,
-        any,
-      )).called(1);
-      verify(mockView.showError("Erro ao realizar login com o Google"))
-          .called(1);
-      verifyNever(mockAppRouter.goToReplace(any));
+        verifyNever(mockView.showError(any));
+        verifyNever(mockView.showInvalidCredentialsSnackBar());
+        verifyNever(mockView.showErrorEmailInvalid());
+      });
     });
 
     test('goToHome should navigate to home', () {

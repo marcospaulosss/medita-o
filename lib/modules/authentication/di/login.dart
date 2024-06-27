@@ -23,6 +23,7 @@ abstract class LoginInjector {
       () => LoginRepository(
         resolve<AnalyticsManager>(),
         resolve<ClientApi>(),
+        resolve<CustomError>(),
         resolve<SecureStorage>(),
       ),
     );
