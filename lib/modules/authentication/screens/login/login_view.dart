@@ -132,4 +132,15 @@ class LoginViewState extends State<LoginView> implements LoginViewContract {
       errorEmailInvalid = true;
     });
   }
+
+  void showInvalidCredentialsSnackBar() {
+    const snackBar = SnackBar(
+      content: Text('Senha ou email inválidos'),
+      backgroundColor: Colors.red,
+      behavior: SnackBarBehavior.floating,
+      duration: Duration(seconds: 2),
+    );
+
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+  }
 }
