@@ -1,6 +1,6 @@
 import 'package:cinco_minutos_meditacao/core/routers/app_router.dart';
 import 'package:cinco_minutos_meditacao/core/routers/app_router.gr.dart';
-import 'package:cinco_minutos_meditacao/modules/authentication/models/auth_request.dart';
+import 'package:cinco_minutos_meditacao/shared/clients/models/auth_request.dart';
 import 'package:cinco_minutos_meditacao/modules/authentication/screens/login/login_contracts.dart';
 import 'package:cinco_minutos_meditacao/shared/models/error.dart';
 import 'package:cinco_minutos_meditacao/shared/services/auth_service.dart';
@@ -77,14 +77,23 @@ class LoginPresenter extends Presenter {
   }
 
   @override
-  Future<void> loginEmailPassword(String email, String password) {
+  Future<void> loginEmailPassword(String email, String password) async {
     if (!isValidEmail(email)) {
       view?.showErrorEmailInvalid();
       return Future.value();
     }
 
     AuthRequest authRequest = AuthRequest(email, password);
-    _repository.authenticateUserByEmailPassword(authRequest);
+    var error = await _repository.authenticateUserByEmailPassword(authRequest);
+    if (error != null) {
+      if (error.code == ErrorCodes.unauthorized) {
+        view?.showInvalidCredentialsSnackBar();
+        return;
+      }
+
+      view?.showError(error.message!);
+      return;
+    }
 
     return Future.value();
   }

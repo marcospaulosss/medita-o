@@ -9,6 +9,8 @@ import 'package:auto_route/auto_route.dart' as _i8;
 import 'package:cinco_minutos_meditacao/core/routers/app_router.dart' as _i7;
 import 'package:cinco_minutos_meditacao/modules/authentication/screens/login/login_contracts.dart'
     as _i9;
+import 'package:cinco_minutos_meditacao/shared/clients/models/auth_request.dart'
+    as _i10;
 import 'package:cinco_minutos_meditacao/shared/models/error.dart' as _i6;
 import 'package:cinco_minutos_meditacao/shared/services/auth_service.dart'
     as _i3;
@@ -190,6 +192,15 @@ class MockLoginViewContract extends _i1.Mock implements _i9.LoginViewContract {
         ),
         returnValueForMissingStub: null,
       );
+
+  @override
+  void showErrorEmailInvalid() => super.noSuchMethod(
+        Invocation.method(
+          #showErrorEmailInvalid,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
 }
 
 /// A class which mocks [Repository].
@@ -216,6 +227,17 @@ class MockRepository extends _i1.Mock implements _i9.Repository {
         Invocation.method(
           #authenticateUserByGoogle,
           [credential],
+        ),
+        returnValue: _i4.Future<Object?>.value(),
+      ) as _i4.Future<Object?>);
+
+  @override
+  _i4.Future<Object?> authenticateUserByEmailPassword(
+          _i10.AuthRequest? authRequest) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #authenticateUserByEmailPassword,
+          [authRequest],
         ),
         returnValue: _i4.Future<Object?>.value(),
       ) as _i4.Future<Object?>);

@@ -3,9 +3,12 @@ import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 
 enum ErrorCodes {
   loginGoogleError,
+  loginFacebookError,
+  loginEmailPasswordError,
+  unauthorized,
 }
 
-class CustomError {
+class CustomError extends Error {
   /// Error message
   String? message;
 
