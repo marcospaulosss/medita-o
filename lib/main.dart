@@ -22,13 +22,13 @@ Future<void> main() async {
   );
   FirebaseAuth.instanceFor(app: app);
 
-    FlutterError.onError = (errorDetails) {
-      FirebaseCrashlytics.instance.recordFlutterFatalError(errorDetails);
-    };
-    PlatformDispatcher.instance.onError = (error, stack) {
-      FirebaseCrashlytics.instance.recordError(error, stack);
-      return true;
-    };
+  FlutterError.onError = (errorDetails) {
+    FirebaseCrashlytics.instance.recordFlutterFatalError(errorDetails);
+  };
+  PlatformDispatcher.instance.onError = (error, stack) {
+    FirebaseCrashlytics.instance.recordError(error, stack);
+    return true;
+  };
 
   // Configura a biblioteca para utilizar o idioma atual do dispositivo.
   Intl.defaultLocale = 'pt_BR';

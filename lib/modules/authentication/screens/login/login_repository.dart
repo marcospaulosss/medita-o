@@ -3,11 +3,12 @@ import 'dart:async';
 import 'package:cinco_minutos_meditacao/core/analytics/manager.dart';
 import 'package:cinco_minutos_meditacao/core/wrappers/secure_storage.dart';
 import 'package:cinco_minutos_meditacao/modules/authentication/analytics/events.dart';
-import 'package:cinco_minutos_meditacao/modules/authentication/models/auth_request.dart';
+import 'package:cinco_minutos_meditacao/shared/clients/client_api.dart';
+import 'package:cinco_minutos_meditacao/shared/clients/models/auth_request.dart';
 import 'package:cinco_minutos_meditacao/modules/authentication/screens/login/login_contracts.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/models/authenticate_google_request.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/models/authenticate_google_response.dart';
-import 'package:cinco_minutos_meditacao/shared/clients/social_client_api.dart';
+import 'package:cinco_minutos_meditacao/shared/models/error.dart';
 import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
@@ -17,7 +18,7 @@ class LoginRepository extends Repository {
   final AnalyticsManager _analyticsManager;
 
   /// Cliente de autenticação social
-  final SocialClientApi _socialClientApi;
+  final ClientApi _clientApi;
 
   /// Armazenamento seguro
   final SecureStorage _secureStorage;
@@ -27,7 +28,7 @@ class LoginRepository extends Repository {
   /// - [_secureStorage] : Armazenamento seguro
   LoginRepository(
     this._analyticsManager,
-    this._socialClientApi,
+    this._clientApi,
     this._secureStorage,
   );
 
@@ -45,7 +46,7 @@ class LoginRepository extends Repository {
 
     try {
       AuthenticateGoogleResponse response =
-          await _socialClientApi.authGoogle(request);
+          await _clientApi.authGoogle(request);
 
       await _secureStorage.setTokenAPI(response.token!);
       await _secureStorage.setIsLogged(true);
@@ -67,8 +68,31 @@ class LoginRepository extends Repository {
   }
 
   @override
-  Future<void> authenticateUserByEmailPassword(AuthRequest authRequest) {
-    // TODO: implement authenticateUserByEmailPassword
-    throw UnimplementedError();
+  Future<CustomError?> authenticateUserByEmailPassword(AuthRequest authRequest) async {
+    try {
+      await _clientApi.login(authRequest);
+
+      return null;
+    } on TimeoutException {
+      return Future.error(FlutterError("Tempo de conexão excedido"));
+    } on DioException catch (e) {
+      if (e.response != null && e.response!.statusCode == 401) {
+        await _secureStorage.setIsLogged(false);
+
+        var error = CustomError();
+        error.code = ErrorCodes.unauthorized;
+        return error;
+      }
+
+      return CustomError().sendErrorToCrashlytics(
+          "Erro ao realizar login com e-mail e senha",
+          ErrorCodes.loginEmailPasswordError,
+          e.stackTrace);
+    } catch (e) {
+      return CustomError().sendErrorToCrashlytics(
+          "Erro ao realizar login com e-mail e senha",
+          ErrorCodes.loginEmailPasswordError,
+          StackTrace.current);
+    }
   }
 }
