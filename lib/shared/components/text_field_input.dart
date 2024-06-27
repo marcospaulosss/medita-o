@@ -47,6 +47,9 @@ class TextFieldInput extends StatelessWidget {
   /// Estilo do texto
   final TextStyle? style;
 
+  /// Validação do campo de texto
+  final String? Function(String?)? validator;
+
   /// - [key] - Chave de identificação do widget
   /// - [autofocus] - Autofocus do campo de texto
   /// - [border] - Borda do campo de texto
@@ -63,6 +66,7 @@ class TextFieldInput extends StatelessWidget {
   /// - [prefixIcon] - Icone do prefixo do campo de texto
   /// - [suffixIcon] - Icone do suffix do campo de texto
   /// - [style] - Estilo do texto
+  /// - [validator] - Validação do campo de texto
   const TextFieldInput({
     super.key,
     this.autofocus,
@@ -80,6 +84,7 @@ class TextFieldInput extends StatelessWidget {
     this.prefixIcon,
     this.suffixIcon,
     this.style,
+    this.validator,
   });
 
   @override
@@ -112,6 +117,7 @@ class TextFieldInput extends StatelessWidget {
           keyboardType: keyboardType ?? TextInputType.name,
           obscureText: obscureText ?? false,
           style: style ?? buildHintTextStyle.copyWith(color: AppColors.black54),
+          validator: validator,
         ),
       ],
     );

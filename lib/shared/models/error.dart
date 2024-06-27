@@ -22,14 +22,16 @@ class CustomError extends Error {
   /// Error constructor
   CustomError();
 
-  sendErrorToCrashlytics(
+  CustomError sendErrorToCrashlytics(
       String? message, ErrorCodes? code, StackTrace? stackTrace) {
-    message = message ?? this.message;
-    code = code ?? this.code;
-    stackTrace = stackTrace ?? this.stackTrace;
+    this.message = message ?? "";
+    this.code = code;
+    this.stackTrace = stackTrace;
 
     FirebaseCrashlytics.instance.log(message ?? "");
     FirebaseCrashlytics.instance.recordError(message, stackTrace);
     LogService().log(message ?? "", null, stackTrace);
+
+    return this;
   }
 }
