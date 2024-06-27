@@ -84,7 +84,7 @@ class LoginPresenter extends Presenter {
     }
 
     AuthRequest authRequest = AuthRequest(email, password);
-    var error = await _repository.authenticateUserByEmailPassword(authRequest);
+    CustomError? error = await _repository.authenticateUserByEmailPassword(authRequest);
     if (error != null) {
       if (error.code == ErrorCodes.unauthorized) {
         view?.showInvalidCredentialsSnackBar();
@@ -103,5 +103,10 @@ class LoginPresenter extends Presenter {
       r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$',
     );
     return emailRegex.hasMatch(email);
+  }
+
+  @override
+  void goToRegister() {
+    _router.goTo(const RegisterRoute());
   }
 }

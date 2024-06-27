@@ -21,7 +21,7 @@ class LoginRepository extends Repository {
   final ClientApi _clientApi;
 
   /// Erro customizado
-  final CustomError _error;
+  final CustomError error;
 
   /// Armazenamento seguro
   final SecureStorage _secureStorage;
@@ -33,7 +33,7 @@ class LoginRepository extends Repository {
   LoginRepository(
     this._analyticsManager,
     this._clientApi,
-    this._error,
+    this.error,
     this._secureStorage,
   );
 
@@ -79,22 +79,22 @@ class LoginRepository extends Repository {
 
       return null;
     } on TimeoutException {
-      return _error.sendErrorToCrashlytics("Tempo de conexão excedido", ErrorCodes.timeoutException, StackTrace.current);
+      return error.sendErrorToCrashlytics("Tempo de conexão excedido", ErrorCodes.timeoutException, StackTrace.current);
     } on DioException catch (e) {
       if (e.response != null && e.response!.statusCode == 401) {
         await _secureStorage.setIsLogged(false);
 
-        _error.code = ErrorCodes.unauthorized;
-        return _error;
+        error.code = ErrorCodes.unauthorized;
+        return error;
       }
 
-      return _error.sendErrorToCrashlytics(
-          "Erro ao realizar login com e-mail e senha",
+      return error.sendErrorToCrashlytics(
+          "Erro ao realizar login com e-mail e senha - ${e.response?.statusCode}",
           ErrorCodes.loginEmailPasswordError,
           e.stackTrace);
     } catch (e) {
-      return _error.sendErrorToCrashlytics(
-          "Erro ao realizar login com e-mail e senha",
+      return error.sendErrorToCrashlytics(
+          "Erro ao realizar login com e-mail e senha - 500",
           ErrorCodes.loginEmailPasswordError,
           StackTrace.current);
     }

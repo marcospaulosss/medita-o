@@ -42,4 +42,22 @@ class AuthenticationStringsEs extends AuthenticationStrings {
 
   @override
   String get account => 'cuenta';
+
+  @override
+  String get invalidEmail => 'correo electrónico no válido';
+
+  @override
+  String get name => 'nombre';
+
+  @override
+  String get confirmPassword => 'Confirmar contraseña';
+
+  @override
+  String get createAccount => 'Crear cuenta';
+
+  @override
+  String get requiredField => 'Campo obligatorio';
+
+  @override
+  String get passwordsDontMatch => 'Las contraseñas no coinciden';
 }

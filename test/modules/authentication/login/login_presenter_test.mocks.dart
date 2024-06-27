@@ -156,6 +156,15 @@ class MockAppRouter extends _i1.Mock implements _i7.AppRouter {
         ),
         returnValueForMissingStub: null,
       );
+
+  @override
+  void goTo(_i8.PageRouteInfo<dynamic>? route) => super.noSuchMethod(
+        Invocation.method(
+          #goTo,
+          [route],
+        ),
+        returnValueForMissingStub: null,
+      );
 }
 
 /// A class which mocks [LoginViewContract].
