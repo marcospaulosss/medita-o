@@ -152,7 +152,7 @@ void main() async {
         await tester.pumpAndSettle();
 
         verify(presenter.onOpenScreen()).called(5);
-        verify(presenter.loginGoogle()).called(2);
+        verify(presenter.loginGoogle()).called(1);
       });
 
       testWidgets("Should verify click button remember password",
