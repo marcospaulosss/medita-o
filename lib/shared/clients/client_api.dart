@@ -33,7 +33,7 @@ abstract class ClientApi {
   /// - [Auth] : Cliente de autenticação
   /// Solicita a autenticação do usuário utilizando email e senha no servidor
   @POST('/login')
-  Future<void> login(
+  Future<RegisterResponse> login(
       @Body() AuthRequest body);
 
   /// - [Register] : Cliente de criação de conta

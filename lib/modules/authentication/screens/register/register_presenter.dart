@@ -41,6 +41,8 @@ class RegisterPresenter extends Presenter {
   Future<void> register(AuthRequest authRequest) async {
     var error = await _repository.requestRegister(authRequest);
     if (error != null && error.code == ErrorCodes.alreadyRegistered) {
+      view?.showInvalidCredentialsSnackBar(message: error.getErrorMessage);
+
       _router.goToReplace(const LoginRoute());
       return;
     }
@@ -49,5 +51,7 @@ class RegisterPresenter extends Presenter {
       view?.showInvalidCredentialsSnackBar(message: error.message!);
       return;
     }
+
+    goToHome();
   }
 }

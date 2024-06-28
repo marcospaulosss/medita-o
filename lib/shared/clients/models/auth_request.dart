@@ -18,10 +18,16 @@ class AuthRequest {
   @JsonKey(name: 'password')
   String password;
 
+  /// Confirmação de senha
+  @JsonKey(name: 'password_confirmation')
+  String? passwordConfirmation;
+
+  /// - [name] : Nome do usuário
   /// - [email] : Email do usuário
   /// - [password] : Senha do usuário
+  /// - [passwordConfirmation] : Confirmação de senha
   /// constroi um objeto de autenticação
-  AuthRequest({this.name, required this.email, required this.password});
+  AuthRequest({this.name, required this.email, required this.password, this.passwordConfirmation});
 
   factory AuthRequest.fromJson(Map<String, dynamic> json) =>
       _$AuthRequestFromJson(json);

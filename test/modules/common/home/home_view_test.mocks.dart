@@ -3,10 +3,8 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:cinco_minutos_meditacao/modules/common/screens/home/home_contract.dart'
-    as _i2;
 import 'package:cinco_minutos_meditacao/modules/common/screens/home/home_presenter.dart'
-    as _i3;
+    as _i2;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: type=lint
@@ -22,37 +20,27 @@ import 'package:mockito/mockito.dart' as _i1;
 // ignore_for_file: camel_case_types
 // ignore_for_file: subtype_of_sealed_class
 
-class _FakeRepository_0 extends _i1.SmartFake implements _i2.Repository {
-  _FakeRepository_0(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
-}
-
 /// A class which mocks [HomePresenter].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockHomePresenter extends _i1.Mock implements _i3.HomePresenter {
+class MockHomePresenter extends _i1.Mock implements _i2.HomePresenter {
   MockHomePresenter() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i2.Repository get repository => (super.noSuchMethod(
-        Invocation.getter(#repository),
-        returnValue: _FakeRepository_0(
-          this,
-          Invocation.getter(#repository),
-        ),
-      ) as _i2.Repository);
-
-  @override
   void onOpenScreen() => super.noSuchMethod(
         Invocation.method(
           #onOpenScreen,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void logOut() => super.noSuchMethod(
+        Invocation.method(
+          #logOut,
           [],
         ),
         returnValueForMissingStub: null,

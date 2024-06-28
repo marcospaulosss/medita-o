@@ -8,6 +8,7 @@ import 'package:cinco_minutos_meditacao/shared/clients/models/auth_request.dart'
 import 'package:cinco_minutos_meditacao/modules/authentication/screens/login/login_contracts.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/models/authenticate_google_request.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/models/authenticate_google_response.dart';
+import 'package:cinco_minutos_meditacao/shared/clients/models/register_response.dart';
 import 'package:cinco_minutos_meditacao/shared/models/error.dart';
 import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -75,7 +76,10 @@ class LoginRepository extends Repository {
   @override
   Future<CustomError?> authenticateUserByEmailPassword(AuthRequest authRequest) async {
     try {
-      await _clientApi.login(authRequest);
+      RegisterResponse response = await _clientApi.login(authRequest);
+
+      await _secureStorage.setTokenAPI(response.token!);
+      await _secureStorage.setIsLogged(true);
 
       return null;
     } on TimeoutException {
