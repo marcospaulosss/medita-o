@@ -91,7 +91,7 @@ class RegisterViewState extends State<RegisterView> implements RegisterViewContr
   }
 
   onRegister(name, email, password) async {
-    AuthRequest authRequest = AuthRequest(name: name, email: email, password: password);
+    AuthRequest authRequest = AuthRequest(name: name, email: email, password: password, passwordConfirmation: password);
     await presenter.register(authRequest);
   }
 

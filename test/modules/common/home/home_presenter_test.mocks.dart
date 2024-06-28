@@ -3,9 +3,8 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:cinco_minutos_meditacao/core/analytics/manager.dart' as _i2;
 import 'package:cinco_minutos_meditacao/modules/common/screens/home/home_repository.dart'
-    as _i3;
+    as _i2;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: type=lint
@@ -21,38 +20,27 @@ import 'package:mockito/mockito.dart' as _i1;
 // ignore_for_file: camel_case_types
 // ignore_for_file: subtype_of_sealed_class
 
-class _FakeAnalyticsManager_0 extends _i1.SmartFake
-    implements _i2.AnalyticsManager {
-  _FakeAnalyticsManager_0(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
-}
-
 /// A class which mocks [HomeRepository].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockHomeRepository extends _i1.Mock implements _i3.HomeRepository {
+class MockHomeRepository extends _i1.Mock implements _i2.HomeRepository {
   MockHomeRepository() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i2.AnalyticsManager get analytics => (super.noSuchMethod(
-        Invocation.getter(#analytics),
-        returnValue: _FakeAnalyticsManager_0(
-          this,
-          Invocation.getter(#analytics),
-        ),
-      ) as _i2.AnalyticsManager);
-
-  @override
   void sendOpenScreenEvent() => super.noSuchMethod(
         Invocation.method(
           #sendOpenScreenEvent,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void logOut() => super.noSuchMethod(
+        Invocation.method(
+          #logOut,
           [],
         ),
         returnValueForMissingStub: null,

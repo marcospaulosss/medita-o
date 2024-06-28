@@ -49,4 +49,8 @@ class CustomError extends Error {
 
     return this;
   }
+
+  String get getErrorMessage {
+    return message ?? _defaultMessages[code] ?? "Erro desconhecido.";
+  }
 }
