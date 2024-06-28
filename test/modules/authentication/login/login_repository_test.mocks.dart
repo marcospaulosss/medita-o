@@ -112,14 +112,21 @@ class MockClientApi extends _i1.Mock implements _i7.ClientApi {
       ) as _i8.Future<_i2.AuthenticateGoogleResponse>);
 
   @override
-  _i8.Future<void> login(_i10.AuthRequest? body) => (super.noSuchMethod(
+  _i8.Future<_i3.RegisterResponse> login(_i10.AuthRequest? body) =>
+      (super.noSuchMethod(
         Invocation.method(
           #login,
           [body],
         ),
-        returnValue: _i8.Future<void>.value(),
-        returnValueForMissingStub: _i8.Future<void>.value(),
-      ) as _i8.Future<void>);
+        returnValue:
+            _i8.Future<_i3.RegisterResponse>.value(_FakeRegisterResponse_1(
+          this,
+          Invocation.method(
+            #login,
+            [body],
+          ),
+        )),
+      ) as _i8.Future<_i3.RegisterResponse>);
 
   @override
   _i8.Future<_i3.RegisterResponse> register(_i10.AuthRequest? body) =>
@@ -226,6 +233,15 @@ class MockCustomError extends _i1.Mock implements _i4.CustomError {
         ),
         returnValueForMissingStub: null,
       );
+
+  @override
+  String get getErrorMessage => (super.noSuchMethod(
+        Invocation.getter(#getErrorMessage),
+        returnValue: _i12.dummyValue<String>(
+          this,
+          Invocation.getter(#getErrorMessage),
+        ),
+      ) as String);
 
   @override
   _i4.CustomError sendErrorToCrashlytics({

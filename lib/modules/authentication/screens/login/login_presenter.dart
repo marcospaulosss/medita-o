@@ -94,7 +94,7 @@ class LoginPresenter extends Presenter {
       return;
     }
 
-    return Future.value();
+    goToHome();
   }
 
   bool isValidEmail(String email) {
