@@ -3,6 +3,7 @@ import 'package:cinco_minutos_meditacao/core/di/helpers.dart';
 import 'package:cinco_minutos_meditacao/modules/authentication/screens/register/components/form_register.dart';
 import 'package:cinco_minutos_meditacao/modules/authentication/screens/register/register_contracts.dart';
 import 'package:cinco_minutos_meditacao/modules/authentication/screens/register/register_presenter.dart';
+import 'package:cinco_minutos_meditacao/shared/clients/models/auth_request.dart';
 import 'package:cinco_minutos_meditacao/shared/components/background_default.dart';
 import 'package:cinco_minutos_meditacao/shared/components/generic_error_container.dart';
 import 'package:cinco_minutos_meditacao/shared/components/loading.dart';
@@ -78,13 +79,20 @@ class RegisterViewState extends State<RegisterView> implements RegisterViewContr
                   height: 241,
                   width: 166,
                 ),
-                FormRegister(errorEmailInvalid: errorEmailInvalid),
+                FormRegister(
+                  onRegister: onRegister,
+                ),
               ],
             ),
           ),
         ),
       ),
     );
+  }
+
+  onRegister(name, email, password) async {
+    AuthRequest authRequest = AuthRequest(name: name, email: email, password: password);
+    await presenter.register(authRequest);
   }
 
   /// Exibe a mensagem de erro
@@ -116,12 +124,13 @@ class RegisterViewState extends State<RegisterView> implements RegisterViewContr
 
   /// Mostra a snackbar de credenciais inválidas
   @override
-  void showInvalidCredentialsSnackBar() {
-    const snackBar = SnackBar(
-      content: Text('Senha ou email inválidos'),
+  void showInvalidCredentialsSnackBar({String? message}) {
+    String msg = message ?? "Parametros inválidos";
+    var snackBar = SnackBar(
+      content: Text(msg),
       backgroundColor: Colors.red,
       behavior: SnackBarBehavior.floating,
-      duration: Duration(seconds: 2),
+      duration: const Duration(seconds: 3),
     );
 
     ScaffoldMessenger.of(context).showSnackBar(snackBar);

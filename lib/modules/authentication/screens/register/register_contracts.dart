@@ -17,7 +17,7 @@ abstract class RegisterViewContract {
   void showErrorEmailInvalid();
 
   /// Exibe erro de credenciais inválidas
-  void showInvalidCredentialsSnackBar();
+  void showInvalidCredentialsSnackBar({String? message});
 }
 
 abstract class Presenter implements ViewBinding<RegisterViewContract> {
@@ -26,9 +26,15 @@ abstract class Presenter implements ViewBinding<RegisterViewContract> {
 
   /// Direciona para a tela de home
   void goToHome();
+
+  /// Realiza o registro do usuário
+  Future<void> register(AuthRequest authRequest);
 }
 
 abstract class Repository {
   /// Envia o evento de analytics associado ao carregamento de cadastro.
   void sendOpenScreenEvent();
+
+  /// Realiza o registro do usuário
+  Future<CustomError?> requestRegister(AuthRequest authRequest);
 }

@@ -79,7 +79,7 @@ class LoginRepository extends Repository {
 
       return null;
     } on TimeoutException {
-      return error.sendErrorToCrashlytics("Tempo de conexão excedido", ErrorCodes.timeoutException, StackTrace.current);
+      return error.sendErrorToCrashlytics(code: ErrorCodes.timeoutException, stackTrace: StackTrace.current);
     } on DioException catch (e) {
       if (e.response != null && e.response!.statusCode == 401) {
         await _secureStorage.setIsLogged(false);
@@ -89,14 +89,14 @@ class LoginRepository extends Repository {
       }
 
       return error.sendErrorToCrashlytics(
-          "Erro ao realizar login com e-mail e senha - ${e.response?.statusCode}",
-          ErrorCodes.loginEmailPasswordError,
-          e.stackTrace);
+          message: "Erro ao realizar login com e-mail e senha - ${e.response?.statusCode}",
+          code: ErrorCodes.loginEmailPasswordError,
+          stackTrace: e.stackTrace);
     } catch (e) {
       return error.sendErrorToCrashlytics(
-          "Erro ao realizar login com e-mail e senha - 500",
-          ErrorCodes.loginEmailPasswordError,
-          StackTrace.current);
+          message: "Erro ao realizar login com e-mail e senha - 500",
+          code: ErrorCodes.loginEmailPasswordError,
+          stackTrace: StackTrace.current);
     }
   }
 }

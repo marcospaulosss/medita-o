@@ -40,11 +40,10 @@ class LoginPresenter extends Presenter {
     if (credential == null ||
         credential.accessToken == null ||
         credential.accessToken!.isEmpty) {
-      var message = "Erro ao realizar login com o Google";
       _customError.sendErrorToCrashlytics(
-          message, ErrorCodes.loginGoogleError, StackTrace.current);
+          code: ErrorCodes.loginGoogleError, stackTrace: StackTrace.current);
 
-      view?.showError(message);
+      view?.showError(_customError.message!);
 
       return;
     }
@@ -83,7 +82,7 @@ class LoginPresenter extends Presenter {
       return Future.value();
     }
 
-    AuthRequest authRequest = AuthRequest(email, password);
+    AuthRequest authRequest = AuthRequest(email: email, password: password);
     CustomError? error = await _repository.authenticateUserByEmailPassword(authRequest);
     if (error != null) {
       if (error.code == ErrorCodes.unauthorized) {
