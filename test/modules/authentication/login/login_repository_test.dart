@@ -129,7 +129,7 @@ void main() {
 
     group('Authenticate api', () {
       test('authenticateUserByEmailPassword should authenticate user', () async {
-        final authRequest = AuthRequest('test@test.com', 'password');
+        final authRequest = AuthRequest(email: 'test@test.com', password: 'password');
         when(mockSocialClientApi.login(any)).thenAnswer((_) async => {});
 
         final result = await repository.authenticateUserByEmailPassword(authRequest);
@@ -139,19 +139,19 @@ void main() {
       });
 
       test('authenticateUserByEmailPassword should handle TimeoutException', () async {
-        final authRequest = AuthRequest('test@test.com', 'password');
+        final authRequest = AuthRequest(email: 'test@test.com', password: 'password');
         when(mockSocialClientApi.login(any)).thenThrow(TimeoutException('Timeout'));
-        when(mockCustomError.sendErrorToCrashlytics(any, any, any)).thenReturn(mockCustomError);
+        when(mockCustomError.sendErrorToCrashlytics(message: anyNamed("message"), code: anyNamed("code"), stackTrace: anyNamed("stackTrace"))).thenReturn(mockCustomError);
 
         final result = await repository.authenticateUserByEmailPassword(authRequest);
 
         expect(result, isA<CustomError>());
         verify(mockSocialClientApi.login(any)).called(1);
-        verify(mockCustomError.sendErrorToCrashlytics(any, any, any)).called(1);
+        verify(mockCustomError.sendErrorToCrashlytics(message: anyNamed("message"), code: anyNamed("code"), stackTrace: anyNamed("stackTrace"))).called(1);
       });
 
       test('authenticateUserByEmailPassword should handle DioException with 401 status code', () async {
-        final authRequest = AuthRequest('test@test.com', 'password');
+        final authRequest = AuthRequest(email: 'test@test.com', password: 'password');
         final dioError = DioException(
           requestOptions: RequestOptions(path: ''),
           response: Response(statusCode: 401, requestOptions: RequestOptions(path: '')),
@@ -168,13 +168,13 @@ void main() {
       });
 
       test('authenticateUserByEmailPassword should handle DioException with other status code', () async {
-        final authRequest = AuthRequest('test@test.com', 'password');
+        final authRequest = AuthRequest(email: 'test@test.com', password: 'password');
         final dioError = DioException(
           requestOptions: RequestOptions(path: ''),
           response: Response(statusCode: 500, requestOptions: RequestOptions(path: '')),
         );
         when(mockSocialClientApi.login(any)).thenThrow(dioError);
-        when(mockCustomError.sendErrorToCrashlytics(any, any, any)).thenReturn(mockCustomError);
+        when(mockCustomError.sendErrorToCrashlytics(message: anyNamed("message"), code: anyNamed("code"), stackTrace: anyNamed("stackTrace"))).thenReturn(mockCustomError);
         when(mockCustomError.code).thenReturn(ErrorCodes.loginEmailPasswordError);
 
         final result = await repository.authenticateUserByEmailPassword(authRequest);
@@ -185,10 +185,10 @@ void main() {
       });
 
       test('authenticateUserByEmailPassword should handle generic exception', () async {
-        final authRequest = AuthRequest( 'test@test.com',  'password');
+        final authRequest = AuthRequest( email: 'test@test.com',  password: 'password');
         final genericError = Exception('Generic error');
         when(mockSocialClientApi.login(any)).thenThrow(genericError);
-        when(mockCustomError.sendErrorToCrashlytics(any, any, any)).thenReturn(mockCustomError);
+        when(mockCustomError.sendErrorToCrashlytics(message: anyNamed("message"), code: anyNamed("code"), stackTrace: anyNamed("stackTrace"))).thenReturn(mockCustomError);
         when(mockCustomError.code).thenReturn(ErrorCodes.loginEmailPasswordError);
 
         final result = await repository.authenticateUserByEmailPassword(authRequest);

@@ -8,13 +8,13 @@ import 'package:flutter/material.dart';
 
 class FormRegister extends StatefulWidget {
 
-  /// Mensagem de erro de e-mail inválido
-  bool errorEmailInvalid = false;
+  /// Função de registro
+  Function onRegister;
 
   /// - [key] : Chave de identificação do widget
-  /// - [errorEmailInvalid] : Mensagem de erro de e-mail inválido
+  /// - [onRegister] : Mensagem de erro de e-mail inválido
   /// construtor
-  FormRegister({super.key, required this.errorEmailInvalid,});
+  FormRegister({super.key, required this.onRegister});
 
   @override
   State<FormRegister> createState() => _FormRegisterState();
@@ -93,10 +93,8 @@ class _FormRegisterState extends State<FormRegister> {
               contentPadding: const EdgeInsets.only(left: 10, right: 10),
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),
-                borderSide: BorderSide(
-                  color: (widget.errorEmailInvalid)
-                      ? Colors.red
-                      : AppColors.brainstemGrey,
+                borderSide: const BorderSide(
+                  color: AppColors.brainstemGrey,
                   width: 1,
                 ),
               ),
@@ -203,7 +201,11 @@ class _FormRegisterState extends State<FormRegister> {
         IconLabelButton(
           onTap: () {
             if (_formKey.currentState!.validate()) {
-              print("Cadastrar");
+              widget.onRegister(
+                nameController.text,
+                emailController.text,
+                passwordController.text,
+              );
             }
           },
           width: double.infinity,

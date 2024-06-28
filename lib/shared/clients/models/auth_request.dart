@@ -6,6 +6,10 @@ part 'auth_request.g.dart';
 
 @JsonSerializable()
 class AuthRequest {
+  /// Nome do usuário
+  @JsonKey(name: 'name')
+  String? name;
+
   /// Email do usuário
   @JsonKey(name: 'email')
   String email;
@@ -17,7 +21,7 @@ class AuthRequest {
   /// - [email] : Email do usuário
   /// - [password] : Senha do usuário
   /// constroi um objeto de autenticação
-  AuthRequest(this.email, this.password);
+  AuthRequest({this.name, required this.email, required this.password});
 
   factory AuthRequest.fromJson(Map<String, dynamic> json) =>
       _$AuthRequestFromJson(json);

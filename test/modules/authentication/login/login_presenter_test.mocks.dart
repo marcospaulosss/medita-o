@@ -3,7 +3,7 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i4;
+import 'dart:async' as _i5;
 
 import 'package:auto_route/auto_route.dart' as _i8;
 import 'package:cinco_minutos_meditacao/core/routers/app_router.dart' as _i7;
@@ -11,10 +11,10 @@ import 'package:cinco_minutos_meditacao/modules/authentication/screens/login/log
     as _i9;
 import 'package:cinco_minutos_meditacao/shared/clients/models/auth_request.dart'
     as _i10;
-import 'package:cinco_minutos_meditacao/shared/models/error.dart' as _i6;
+import 'package:cinco_minutos_meditacao/shared/models/error.dart' as _i3;
 import 'package:cinco_minutos_meditacao/shared/services/auth_service.dart'
-    as _i3;
-import 'package:firebase_auth/firebase_auth.dart' as _i5;
+    as _i4;
+import 'package:firebase_auth/firebase_auth.dart' as _i6;
 import 'package:firebase_core/firebase_core.dart' as _i2;
 import 'package:mockito/mockito.dart' as _i1;
 
@@ -41,10 +41,20 @@ class _FakeFirebaseApp_0 extends _i1.SmartFake implements _i2.FirebaseApp {
         );
 }
 
+class _FakeCustomError_1 extends _i1.SmartFake implements _i3.CustomError {
+  _FakeCustomError_1(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
 /// A class which mocks [AuthService].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockAuthService extends _i1.Mock implements _i3.AuthService {
+class MockAuthService extends _i1.Mock implements _i4.AuthService {
   MockAuthService() {
     _i1.throwOnMissingStub(this);
   }
@@ -68,40 +78,40 @@ class MockAuthService extends _i1.Mock implements _i3.AuthService {
       );
 
   @override
-  _i4.Future<(_i5.AuthCredential?, Object?)> loginGoogle() =>
+  _i5.Future<(_i6.AuthCredential?, Object?)> loginGoogle() =>
       (super.noSuchMethod(
         Invocation.method(
           #loginGoogle,
           [],
         ),
         returnValue:
-            _i4.Future<(_i5.AuthCredential?, Object?)>.value((null, null)),
-      ) as _i4.Future<(_i5.AuthCredential?, Object?)>);
+            _i5.Future<(_i6.AuthCredential?, Object?)>.value((null, null)),
+      ) as _i5.Future<(_i6.AuthCredential?, Object?)>);
 
   @override
-  _i4.Future<void> loginFacebook() => (super.noSuchMethod(
+  _i5.Future<void> loginFacebook() => (super.noSuchMethod(
         Invocation.method(
           #loginFacebook,
           [],
         ),
-        returnValue: _i4.Future<void>.value(),
-        returnValueForMissingStub: _i4.Future<void>.value(),
-      ) as _i4.Future<void>);
+        returnValue: _i5.Future<void>.value(),
+        returnValueForMissingStub: _i5.Future<void>.value(),
+      ) as _i5.Future<void>);
 
   @override
-  _i4.Future<Object?> logout() => (super.noSuchMethod(
+  _i5.Future<Object?> logout() => (super.noSuchMethod(
         Invocation.method(
           #logout,
           [],
         ),
-        returnValue: _i4.Future<Object?>.value(),
-      ) as _i4.Future<Object?>);
+        returnValue: _i5.Future<Object?>.value(),
+      ) as _i5.Future<Object?>);
 }
 
 /// A class which mocks [CustomError].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockCustomError extends _i1.Mock implements _i6.CustomError {
+class MockCustomError extends _i1.Mock implements _i3.CustomError {
   MockCustomError() {
     _i1.throwOnMissingStub(this);
   }
@@ -116,7 +126,7 @@ class MockCustomError extends _i1.Mock implements _i6.CustomError {
       );
 
   @override
-  set code(_i6.ErrorCodes? _code) => super.noSuchMethod(
+  set code(_i3.ErrorCodes? _code) => super.noSuchMethod(
         Invocation.setter(
           #code,
           _code,
@@ -132,6 +142,36 @@ class MockCustomError extends _i1.Mock implements _i6.CustomError {
         ),
         returnValueForMissingStub: null,
       );
+
+  @override
+  _i3.CustomError sendErrorToCrashlytics({
+    String? message,
+    _i3.ErrorCodes? code,
+    StackTrace? stackTrace,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #sendErrorToCrashlytics,
+          [],
+          {
+            #message: message,
+            #code: code,
+            #stackTrace: stackTrace,
+          },
+        ),
+        returnValue: _FakeCustomError_1(
+          this,
+          Invocation.method(
+            #sendErrorToCrashlytics,
+            [],
+            {
+              #message: message,
+              #code: code,
+              #stackTrace: stackTrace,
+            },
+          ),
+        ),
+      ) as _i3.CustomError);
 }
 
 /// A class which mocks [AppRouter].
@@ -239,24 +279,24 @@ class MockRepository extends _i1.Mock implements _i9.Repository {
       );
 
   @override
-  _i4.Future<Object?> authenticateUserByGoogle(
-          _i5.AuthCredential? credential) =>
+  _i5.Future<Object?> authenticateUserByGoogle(
+          _i6.AuthCredential? credential) =>
       (super.noSuchMethod(
         Invocation.method(
           #authenticateUserByGoogle,
           [credential],
         ),
-        returnValue: _i4.Future<Object?>.value(),
-      ) as _i4.Future<Object?>);
+        returnValue: _i5.Future<Object?>.value(),
+      ) as _i5.Future<Object?>);
 
   @override
-  _i4.Future<_i6.CustomError?> authenticateUserByEmailPassword(
+  _i5.Future<_i3.CustomError?> authenticateUserByEmailPassword(
           _i10.AuthRequest? authRequest) =>
       (super.noSuchMethod(
         Invocation.method(
           #authenticateUserByEmailPassword,
           [authRequest],
         ),
-        returnValue: _i4.Future<_i6.CustomError?>.value(),
-      ) as _i4.Future<_i6.CustomError?>);
+        returnValue: _i5.Future<_i3.CustomError?>.value(),
+      ) as _i5.Future<_i3.CustomError?>);
 }

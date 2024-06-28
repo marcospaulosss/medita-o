@@ -1,6 +1,7 @@
 import 'package:cinco_minutos_meditacao/core/routers/app_router.dart';
 import 'package:cinco_minutos_meditacao/core/routers/app_router.gr.dart';
 import 'package:cinco_minutos_meditacao/modules/authentication/screens/register/register_contracts.dart';
+import 'package:cinco_minutos_meditacao/shared/clients/models/auth_request.dart';
 import 'package:cinco_minutos_meditacao/shared/models/error.dart';
 
 class RegisterPresenter extends Presenter {
@@ -34,5 +35,19 @@ class RegisterPresenter extends Presenter {
   @override
   void onOpenScreen() {
     _repository.sendOpenScreenEvent();
+  }
+
+  @override
+  Future<void> register(AuthRequest authRequest) async {
+    var error = await _repository.requestRegister(authRequest);
+    if (error != null && error.code == ErrorCodes.alreadyRegistered) {
+      _router.goToReplace(const LoginRoute());
+      return;
+    }
+
+    if (error != null && error.code == ErrorCodes.badRequest) {
+      view?.showInvalidCredentialsSnackBar(message: error.message!);
+      return;
+    }
   }
 }
