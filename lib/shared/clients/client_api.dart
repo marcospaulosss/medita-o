@@ -2,6 +2,7 @@ import 'package:cinco_minutos_meditacao/core/environment/manager.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/models/auth_request.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/models/authenticate_google_request.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/models/authenticate_google_response.dart';
+import 'package:cinco_minutos_meditacao/shared/clients/models/register_response.dart';
 import 'package:curl_logger_dio_interceptor/curl_logger_dio_interceptor.dart';
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
@@ -33,5 +34,11 @@ abstract class ClientApi {
   /// Solicita a autenticação do usuário utilizando email e senha no servidor
   @POST('/login')
   Future<void> login(
+      @Body() AuthRequest body);
+
+  /// - [Register] : Cliente de criação de conta
+  /// Solicita a criação de uma conta no servidor
+  @POST('/register')
+  Future<RegisterResponse> register(
       @Body() AuthRequest body);
 }

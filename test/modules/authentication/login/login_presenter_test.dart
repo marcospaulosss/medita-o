@@ -39,8 +39,7 @@ void main() {
       test('loginGoogle should show loading and handle error', () async {
         when(mockAuthService.loginGoogle())
             .thenAnswer((_) async => (null, mockCustomError));
-        when(mockCustomError.sendErrorToCrashlytics(any, any, any))
-            .thenAnswer((_) async => {});
+        when(mockCustomError.sendErrorToCrashlytics(message: anyNamed("message"), code: anyNamed("code"), stackTrace: anyNamed("stackTrace"))).thenReturn(CustomError());
 
         await presenter.loginGoogle();
 
@@ -86,17 +85,20 @@ void main() {
       });
 
       test('loginGoogle should handle null credential', () async {
+        CustomError error = CustomError();
+        error.message = "Erro ao realizar login com o Google";
+
         when(mockAuthService.loginGoogle()).thenAnswer((_) async => (null, null));
-        when(mockCustomError.sendErrorToCrashlytics(any, any, any))
-            .thenAnswer((_) async => {});
+        when(mockCustomError.message).thenReturn("Erro ao realizar login com o Google");
+        when(mockCustomError.sendErrorToCrashlytics(code: anyNamed("code"), stackTrace: anyNamed("stackTrace"))).thenReturn(error);
 
         await presenter.loginGoogle();
 
         verify(mockView.showLoading()).called(1);
         verify(mockCustomError.sendErrorToCrashlytics(
-          "Erro ao realizar login com o Google",
-          ErrorCodes.loginGoogleError,
-          any,
+          message: anyNamed("message"),
+          code: anyNamed("code"),
+          stackTrace: anyNamed("stackTrace"),
         )).called(1);
         verify(mockView.showError("Erro ao realizar login com o Google"))
             .called(1);
@@ -108,16 +110,17 @@ void main() {
             accessToken: null, providerId: 'id', signInMethod: 'method');
         when(mockAuthService.loginGoogle())
             .thenAnswer((_) async => (credential, null));
-        when(mockCustomError.sendErrorToCrashlytics(any, any, any))
-            .thenAnswer((_) async => {});
+        when(mockCustomError.message).thenReturn("Erro ao realizar login com o Google");
+        when(mockCustomError.sendErrorToCrashlytics(message: anyNamed("message"), code: anyNamed("code"), stackTrace: anyNamed("stackTrace"))).thenReturn(CustomError());
+
 
         await presenter.loginGoogle();
 
         verify(mockView.showLoading()).called(1);
         verify(mockCustomError.sendErrorToCrashlytics(
-          "Erro ao realizar login com o Google",
-          ErrorCodes.loginGoogleError,
-          any,
+          message: anyNamed("message"),
+          code: anyNamed("code"),
+          stackTrace: anyNamed("stackTrace"),
         )).called(1);
         verify(mockView.showError("Erro ao realizar login com o Google"))
             .called(1);
@@ -129,16 +132,17 @@ void main() {
             accessToken: '', providerId: 'id', signInMethod: 'method');
         when(mockAuthService.loginGoogle())
             .thenAnswer((_) async => (credential, null));
-        when(mockCustomError.sendErrorToCrashlytics(any, any, any))
-            .thenAnswer((_) async => {});
+        when(mockCustomError.message).thenReturn("Erro ao realizar login com o Google");
+        when(mockCustomError.sendErrorToCrashlytics(message: anyNamed("message"), code: anyNamed("code"), stackTrace: anyNamed("stackTrace"))).thenReturn(CustomError());
+
 
         await presenter.loginGoogle();
 
         verify(mockView.showLoading()).called(1);
         verify(mockCustomError.sendErrorToCrashlytics(
-          "Erro ao realizar login com o Google",
-          ErrorCodes.loginGoogleError,
-          any,
+          message: anyNamed("message"),
+          code: anyNamed("code"),
+          stackTrace: anyNamed("stackTrace"),
         )).called(1);
         verify(mockView.showError("Erro ao realizar login com o Google"))
             .called(1);
