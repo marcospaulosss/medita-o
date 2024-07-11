@@ -28,6 +28,14 @@ class LoginButtons extends StatelessWidget {
           onTap: requestLoginGoogle,
           width: double.infinity,
           height: 55,
+          decoration: BoxDecoration(
+            color: Colors.transparent,
+            borderRadius: BorderRadius.circular(8),
+            border: Border.all(
+              color: AppColors.frankBlue,
+              width: 1,
+            ),
+          ),
           image: SvgPicture.asset(
             'assets/images/icons/google_logo.svg',
             height: 30,
@@ -38,19 +46,19 @@ class LoginButtons extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 6.42),
-        IconLabelButton(
-          onTap: requestLoginFacebook,
-          width: double.infinity,
-          height: 55,
-          image: SvgPicture.asset(
-            'assets/images/icons/facebook_logo.svg',
-            height: 30,
-          ),
-          label: Text(
-            AuthenticationStrings.of(context).yourFacebookAccount,
-            style: buildTextStyleDefault,
-          ),
-        ),
+        // IconLabelButton(
+        //   onTap: requestLoginFacebook,
+        //   width: double.infinity,
+        //   height: 55,
+        //   image: SvgPicture.asset(
+        //     'assets/images/icons/facebook_logo.svg',
+        //     height: 30,
+        //   ),
+        //   label: Text(
+        //     AuthenticationStrings.of(context).yourFacebookAccount,
+        //     style: buildTextStyleDefault,
+        //   ),
+        // ),
       ],
     );
   }

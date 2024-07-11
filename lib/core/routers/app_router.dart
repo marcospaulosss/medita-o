@@ -10,6 +10,7 @@ class AppRouter extends $AppRouter {
         AutoRoute(page: LoginRoute.page),
         AutoRoute(page: RegisterRoute.page),
         AutoRoute(page: HomeRoute.page, guards: [AuthGuard()]),
+        AutoRoute(page: RegisterSuccessRoute.page, guards: [AuthGuard()]),
       ];
 
   /// Direciona para a tela selecionada e remove a tela anterior

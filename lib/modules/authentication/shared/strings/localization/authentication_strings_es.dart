@@ -60,4 +60,19 @@ class AuthenticationStringsEs extends AuthenticationStrings {
 
   @override
   String get passwordsDontMatch => 'Las contraseñas no coinciden';
+
+  @override
+  String get invalidParameters => 'Parâmetros inválidos';
+
+  @override
+  String get accountCreatedSuccessfully => 'Conta criada com Sucesso!';
+
+  @override
+  String get completeYourRegistration => 'Complete seu cadastro';
+
+  @override
+  String get haveAccessContent => ' e tenha acesso a todos os conteúdos.';
+
+  @override
+  String get startMeditating => 'Comece a Meditar';
 }
