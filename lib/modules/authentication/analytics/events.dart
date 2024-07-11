@@ -11,4 +11,9 @@ abstract class AuthenticationEvents {
   static AnalyticsEvent get registerScreenOpened {
     return AnalyticsEvent(name: "abriu_tela_cadastro");
   }
+
+  /// Evento disparado quando a tela de sucesso do cadastro do app é acessada.
+  static AnalyticsEvent get registerSuccessScreenOpened {
+    return AnalyticsEvent(name: "abriu_tela_sucesso_cadastro");
+  }
 }

@@ -8,6 +8,7 @@ import 'package:cinco_minutos_meditacao/modules/authentication/screens/login/log
 import 'package:cinco_minutos_meditacao/shared/components/background_default.dart';
 import 'package:cinco_minutos_meditacao/shared/components/generic_error_container.dart';
 import 'package:cinco_minutos_meditacao/shared/components/loading.dart';
+import 'package:cinco_minutos_meditacao/shared/helpers/app_images.dart';
 import 'package:cinco_minutos_meditacao/shared/helpers/multi_state_container/container.dart';
 import 'package:cinco_minutos_meditacao/shared/helpers/multi_state_container/controller.dart';
 import 'package:cinco_minutos_meditacao/shared/helpers/view_binding.dart';
@@ -81,11 +82,15 @@ class LoginViewState extends State<LoginView> implements LoginViewContract {
             child: ListView(
               children: [
                 Image.asset(
-                  "assets/images/balão-5min 1.png",
+                  AppImages.balloon,
                   height: 241,
                   width: 166,
                 ),
-                FormLogin(errorEmailInvalid: errorEmailInvalid, onLogin: requestLoginEmailPassword, onRegister: () => goToRegister(),),
+                FormLogin(
+                  errorEmailInvalid: errorEmailInvalid,
+                  onLogin: requestLoginEmailPassword,
+                  onRegister: () => goToRegister(),
+                ),
                 const DividerButtons(),
                 LoginButtons(
                   requestLoginGoogle: requestLoginGoogle,

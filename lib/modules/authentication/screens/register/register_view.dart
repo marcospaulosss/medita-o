@@ -3,10 +3,12 @@ import 'package:cinco_minutos_meditacao/core/di/helpers.dart';
 import 'package:cinco_minutos_meditacao/modules/authentication/screens/register/components/form_register.dart';
 import 'package:cinco_minutos_meditacao/modules/authentication/screens/register/register_contracts.dart';
 import 'package:cinco_minutos_meditacao/modules/authentication/screens/register/register_presenter.dart';
+import 'package:cinco_minutos_meditacao/modules/authentication/shared/strings/localization/authentication_strings.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/models/auth_request.dart';
 import 'package:cinco_minutos_meditacao/shared/components/background_default.dart';
 import 'package:cinco_minutos_meditacao/shared/components/generic_error_container.dart';
 import 'package:cinco_minutos_meditacao/shared/components/loading.dart';
+import 'package:cinco_minutos_meditacao/shared/helpers/app_images.dart';
 import 'package:cinco_minutos_meditacao/shared/helpers/multi_state_container/container.dart';
 import 'package:cinco_minutos_meditacao/shared/helpers/multi_state_container/controller.dart';
 import 'package:cinco_minutos_meditacao/shared/helpers/view_binding.dart';
@@ -22,7 +24,8 @@ class RegisterView extends StatefulWidget {
 }
 
 @visibleForTesting
-class RegisterViewState extends State<RegisterView> implements RegisterViewContract {
+class RegisterViewState extends State<RegisterView>
+    implements RegisterViewContract {
   /// Presenter da tela de login
   Presenter presenter = resolve<RegisterPresenter>();
 
@@ -32,7 +35,12 @@ class RegisterViewState extends State<RegisterView> implements RegisterViewContr
   /// Mensagem de erro
   late String messageError = "";
 
+  /// Variável para armazenar o estado de erro de email inválido
   late bool errorEmailInvalid = false;
+
+  /// Variável para armazenar a requisição de autenticação
+  late AuthRequest authRequest =
+      AuthRequest(name: "", email: "", password: "", passwordConfirmation: "");
 
   @override
   void initState() {
@@ -59,7 +67,8 @@ class RegisterViewState extends State<RegisterView> implements RegisterViewContr
       normalStateBuilder: (context) => buildScaffold(),
       loadingStateBuilder: (context) => const Loading(),
       errorStateBuilder: (context) => GenericErrorContainer(
-        // onRetry: () => requestLoginGoogle(),
+        onRetry: () => onRegister(
+            authRequest.name, authRequest.email, authRequest.password),
         message: messageError,
       ),
     );
@@ -75,7 +84,7 @@ class RegisterViewState extends State<RegisterView> implements RegisterViewContr
             child: ListView(
               children: [
                 Image.asset(
-                  "assets/images/balão-5min 1.png",
+                  AppImages.balloon,
                   height: 241,
                   width: 166,
                 ),
@@ -91,7 +100,11 @@ class RegisterViewState extends State<RegisterView> implements RegisterViewContr
   }
 
   onRegister(name, email, password) async {
-    AuthRequest authRequest = AuthRequest(name: name, email: email, password: password, passwordConfirmation: password);
+    authRequest = AuthRequest(
+        name: name,
+        email: email,
+        password: password,
+        passwordConfirmation: password);
     await presenter.register(authRequest);
   }
 
@@ -125,7 +138,7 @@ class RegisterViewState extends State<RegisterView> implements RegisterViewContr
   /// Mostra a snackbar de credenciais inválidas
   @override
   void showInvalidCredentialsSnackBar({String? message}) {
-    String msg = message ?? "Parametros inválidos";
+    String msg = message ?? AuthenticationStrings.of(context).invalidParameters;
     var snackBar = SnackBar(
       content: Text(msg),
       backgroundColor: Colors.red,

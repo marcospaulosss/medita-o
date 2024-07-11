@@ -47,6 +47,8 @@ class RegisterRepository extends Repository {
 
       await _secureStorage.setTokenAPI(response.token!);
       await _secureStorage.setIsLogged(true);
+
+      return null;
     } on TimeoutException {
       return _error.sendErrorToCrashlytics(
           code: ErrorCodes.timeoutException, stackTrace: StackTrace.current);
@@ -61,13 +63,11 @@ class RegisterRepository extends Repository {
           return _error;
         default:
           return _error.sendErrorToCrashlytics(
-              code: ErrorCodes.registerError,
-              stackTrace: StackTrace.current);
+              code: ErrorCodes.registerError, stackTrace: StackTrace.current);
       }
     } catch (e) {
       return _error.sendErrorToCrashlytics(
-          code: ErrorCodes.registerError,
-          stackTrace: StackTrace.current);
+          code: ErrorCodes.registerError, stackTrace: StackTrace.current);
     }
   }
 }

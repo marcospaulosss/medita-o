@@ -21,9 +21,10 @@ class RegisterPresenter extends Presenter {
   /// - [router] : Router
   /// - [repository] : Repositório
   RegisterPresenter(
-      this._customError, this._router,
-      this._repository,
-      );
+    this._customError,
+    this._router,
+    this._repository,
+  );
 
   /// Direciona para a tela de home
   @override
@@ -47,11 +48,12 @@ class RegisterPresenter extends Presenter {
       return;
     }
 
-    if (error != null && error.code == ErrorCodes.badRequest) {
+    if (error != null &&
+        (error.code == ErrorCodes.badRequest || error.code == null)) {
       view?.showInvalidCredentialsSnackBar(message: error.message!);
       return;
     }
 
-    goToHome();
+    _router.goTo(const RegisterSuccessRoute());
   }
 }
