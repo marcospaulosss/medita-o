@@ -3,9 +3,14 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
+import 'dart:async' as _i5;
+
 import 'package:cinco_minutos_meditacao/core/analytics/event.dart' as _i3;
 import 'package:cinco_minutos_meditacao/core/analytics/manager.dart' as _i2;
+import 'package:cinco_minutos_meditacao/core/wrappers/secure_storage.dart'
+    as _i4;
 import 'package:mockito/mockito.dart' as _i1;
+import 'package:mockito/src/dummies.dart' as _i6;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -36,4 +41,57 @@ class MockAnalyticsManager extends _i1.Mock implements _i2.AnalyticsManager {
         ),
         returnValueForMissingStub: null,
       );
+}
+
+/// A class which mocks [SecureStorage].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockSecureStorage extends _i1.Mock implements _i4.SecureStorage {
+  MockSecureStorage() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i5.Future<String> get tokenAPI => (super.noSuchMethod(
+        Invocation.getter(#tokenAPI),
+        returnValue: _i5.Future<String>.value(_i6.dummyValue<String>(
+          this,
+          Invocation.getter(#tokenAPI),
+        )),
+      ) as _i5.Future<String>);
+
+  @override
+  _i5.Future<bool> get isLogged => (super.noSuchMethod(
+        Invocation.getter(#isLogged),
+        returnValue: _i5.Future<bool>.value(false),
+      ) as _i5.Future<bool>);
+
+  @override
+  _i5.Future<dynamic> setAllToNull() => (super.noSuchMethod(
+        Invocation.method(
+          #setAllToNull,
+          [],
+        ),
+        returnValue: _i5.Future<dynamic>.value(),
+      ) as _i5.Future<dynamic>);
+
+  @override
+  _i5.Future<void> setTokenAPI(String? tokenAPI) => (super.noSuchMethod(
+        Invocation.method(
+          #setTokenAPI,
+          [tokenAPI],
+        ),
+        returnValue: _i5.Future<void>.value(),
+        returnValueForMissingStub: _i5.Future<void>.value(),
+      ) as _i5.Future<void>);
+
+  @override
+  _i5.Future<void> setIsLogged(bool? isLogged) => (super.noSuchMethod(
+        Invocation.method(
+          #setIsLogged,
+          [isLogged],
+        ),
+        returnValue: _i5.Future<void>.value(),
+        returnValueForMissingStub: _i5.Future<void>.value(),
+      ) as _i5.Future<void>);
 }

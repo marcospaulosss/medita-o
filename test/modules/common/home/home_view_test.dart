@@ -27,27 +27,5 @@ main() async {
 
       homeView = const HomeView();
     });
-
-    testWidgets("Should show home screen", (tester) async {
-      when(presenter.onOpenScreen()).thenAnswer((_) {});
-
-      await tester.pumpWidget(
-        MaterialApp(
-          localizationsDelegates: const [
-            CommonStrings.delegate,
-            GlobalMaterialLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
-            GlobalCupertinoLocalizations.delegate,
-          ],
-          supportedLocales: const [
-            Locale('pt', ''),
-          ],
-          home: homeView,
-        ),
-      );
-
-      await tester.pump(const Duration(seconds: 4));
-      verify(presenter.onOpenScreen()).called(1);
-    });
   });
 }

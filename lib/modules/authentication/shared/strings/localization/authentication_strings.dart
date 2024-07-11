@@ -208,6 +208,36 @@ abstract class AuthenticationStrings {
   /// In pt, this message translates to:
   /// **'Senhas não conferem'**
   String get passwordsDontMatch;
+
+  /// No description provided for @invalidParameters.
+  ///
+  /// In pt, this message translates to:
+  /// **'Parâmetros inválidos'**
+  String get invalidParameters;
+
+  /// No description provided for @accountCreatedSuccessfully.
+  ///
+  /// In pt, this message translates to:
+  /// **'Conta criada com Sucesso!'**
+  String get accountCreatedSuccessfully;
+
+  /// No description provided for @completeYourRegistration.
+  ///
+  /// In pt, this message translates to:
+  /// **'Complete seu cadastro'**
+  String get completeYourRegistration;
+
+  /// No description provided for @haveAccessContent.
+  ///
+  /// In pt, this message translates to:
+  /// **' e tenha acesso a todos os conteúdos.'**
+  String get haveAccessContent;
+
+  /// No description provided for @startMeditating.
+  ///
+  /// In pt, this message translates to:
+  /// **'Comece a Meditar'**
+  String get startMeditating;
 }
 
 class _AuthenticationStringsDelegate extends LocalizationsDelegate<AuthenticationStrings> {
