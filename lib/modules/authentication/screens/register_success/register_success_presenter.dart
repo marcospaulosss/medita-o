@@ -24,5 +24,7 @@ class RegisterSuccessPresenter extends Presenter {
   }
 
   @override
-  void onOpenScreen() {}
+  void onOpenScreen() {
+    repository.sendOpenScreenEvent();
+  }
 }
