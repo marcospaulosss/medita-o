@@ -42,12 +42,20 @@ class SecureStorage {
     return await Future.wait([
       setTokenAPI(""),
       setIsLogged(false),
+      setUserId(0),
+      setUserName(""),
+      setUserEmail(""),
+      setGoogleId(""),
     ]);
   }
 
   //region - Chaves
   static const _tokenAPI = "token";
   static const _isLogged = "isLogged";
+  static const _userId = "userId";
+  static const _userName = "userName";
+  static const _userEmail = "userEmail";
+  static const _googleId = "googleId";
 
   /// Token de autenticação da api
   Future<String> get tokenAPI async => await read(key: _tokenAPI) ?? "";
@@ -63,5 +71,37 @@ class SecureStorage {
   /// Define se o usuário está logado
   Future<void> setIsLogged(bool isLogged) async {
     await write(key: _isLogged, value: isLogged.toString());
+  }
+
+  /// id do usuário
+  Future<int> get userId async => int.parse(read(key: _userId).toString());
+
+  /// Define o id do usuário
+  Future<void> setUserId(int userId) async {
+    await write(key: _userId, value: userId.toString());
+  }
+
+  /// nome do usuário
+  Future<String> get userName async => await read(key: _userName) ?? "";
+
+  /// Define o nome do usuário
+  Future<void> setUserName(String userName) async {
+    await write(key: _userName, value: userName);
+  }
+
+  /// email do usuário
+  Future<String> get userEmail async => await read(key: _userEmail) ?? "";
+
+  /// Define o email do usuário
+  Future<void> setUserEmail(String userEmail) async {
+    await write(key: _userEmail, value: userEmail);
+  }
+
+  /// id do google
+  Future<String> get googleId async => await read(key: _googleId) ?? "";
+
+  /// Define o id do google
+  Future<void> setGoogleId(String googleId) async {
+    await write(key: _googleId, value: googleId);
   }
 }

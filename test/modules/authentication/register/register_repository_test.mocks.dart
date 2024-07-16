@@ -3,24 +3,26 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i8;
+import 'dart:async' as _i9;
 
-import 'package:cinco_minutos_meditacao/core/analytics/event.dart' as _i6;
-import 'package:cinco_minutos_meditacao/core/analytics/manager.dart' as _i5;
+import 'package:cinco_minutos_meditacao/core/analytics/event.dart' as _i7;
+import 'package:cinco_minutos_meditacao/core/analytics/manager.dart' as _i6;
 import 'package:cinco_minutos_meditacao/core/wrappers/secure_storage.dart'
-    as _i12;
-import 'package:cinco_minutos_meditacao/shared/clients/client_api.dart' as _i7;
-import 'package:cinco_minutos_meditacao/shared/clients/models/auth_request.dart'
+    as _i13;
+import 'package:cinco_minutos_meditacao/shared/clients/client_api.dart' as _i8;
+import 'package:cinco_minutos_meditacao/shared/clients/models/requests/auth_request.dart'
+    as _i11;
+import 'package:cinco_minutos_meditacao/shared/clients/models/requests/authenticate_google_request.dart'
     as _i10;
-import 'package:cinco_minutos_meditacao/shared/clients/models/authenticate_google_request.dart'
-    as _i9;
-import 'package:cinco_minutos_meditacao/shared/clients/models/authenticate_google_response.dart'
+import 'package:cinco_minutos_meditacao/shared/clients/models/responses/authenticate_google_response.dart'
     as _i2;
-import 'package:cinco_minutos_meditacao/shared/clients/models/register_response.dart'
+import 'package:cinco_minutos_meditacao/shared/clients/models/responses/register_response.dart'
     as _i3;
-import 'package:cinco_minutos_meditacao/shared/models/error.dart' as _i4;
+import 'package:cinco_minutos_meditacao/shared/clients/models/responses/user_response.dart'
+    as _i4;
+import 'package:cinco_minutos_meditacao/shared/models/error.dart' as _i5;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:mockito/src/dummies.dart' as _i11;
+import 'package:mockito/src/dummies.dart' as _i12;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -57,8 +59,18 @@ class _FakeRegisterResponse_1 extends _i1.SmartFake
         );
 }
 
-class _FakeCustomError_2 extends _i1.SmartFake implements _i4.CustomError {
-  _FakeCustomError_2(
+class _FakeUserResponse_2 extends _i1.SmartFake implements _i4.UserResponse {
+  _FakeUserResponse_2(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeCustomError_3 extends _i1.SmartFake implements _i5.CustomError {
+  _FakeCustomError_3(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -70,13 +82,13 @@ class _FakeCustomError_2 extends _i1.SmartFake implements _i4.CustomError {
 /// A class which mocks [AnalyticsManager].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockAnalyticsManager extends _i1.Mock implements _i5.AnalyticsManager {
+class MockAnalyticsManager extends _i1.Mock implements _i6.AnalyticsManager {
   MockAnalyticsManager() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  void sendEvent(_i6.AnalyticsEvent? event) => super.noSuchMethod(
+  void sendEvent(_i7.AnalyticsEvent? event) => super.noSuchMethod(
         Invocation.method(
           #sendEvent,
           [event],
@@ -88,20 +100,20 @@ class MockAnalyticsManager extends _i1.Mock implements _i5.AnalyticsManager {
 /// A class which mocks [ClientApi].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockClientApi extends _i1.Mock implements _i7.ClientApi {
+class MockClientApi extends _i1.Mock implements _i8.ClientApi {
   MockClientApi() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i8.Future<_i2.AuthenticateGoogleResponse> authGoogle(
-          _i9.AuthenticateGoogleRequest? token) =>
+  _i9.Future<_i2.AuthenticateGoogleResponse> authGoogle(
+          _i10.AuthenticateGoogleRequest? token) =>
       (super.noSuchMethod(
         Invocation.method(
           #authGoogle,
           [token],
         ),
-        returnValue: _i8.Future<_i2.AuthenticateGoogleResponse>.value(
+        returnValue: _i9.Future<_i2.AuthenticateGoogleResponse>.value(
             _FakeAuthenticateGoogleResponse_0(
           this,
           Invocation.method(
@@ -109,47 +121,62 @@ class MockClientApi extends _i1.Mock implements _i7.ClientApi {
             [token],
           ),
         )),
-      ) as _i8.Future<_i2.AuthenticateGoogleResponse>);
+      ) as _i9.Future<_i2.AuthenticateGoogleResponse>);
 
   @override
-  _i8.Future<_i3.RegisterResponse> login(_i10.AuthRequest? body) =>
+  _i9.Future<_i3.RegisterResponse> login(_i11.AuthRequest? body) =>
       (super.noSuchMethod(
         Invocation.method(
           #login,
           [body],
         ),
         returnValue:
-            _i8.Future<_i3.RegisterResponse>.value(_FakeRegisterResponse_1(
+            _i9.Future<_i3.RegisterResponse>.value(_FakeRegisterResponse_1(
           this,
           Invocation.method(
             #login,
             [body],
           ),
         )),
-      ) as _i8.Future<_i3.RegisterResponse>);
+      ) as _i9.Future<_i3.RegisterResponse>);
 
   @override
-  _i8.Future<_i3.RegisterResponse> register(_i10.AuthRequest? body) =>
+  _i9.Future<_i3.RegisterResponse> register(_i11.AuthRequest? body) =>
       (super.noSuchMethod(
         Invocation.method(
           #register,
           [body],
         ),
         returnValue:
-            _i8.Future<_i3.RegisterResponse>.value(_FakeRegisterResponse_1(
+            _i9.Future<_i3.RegisterResponse>.value(_FakeRegisterResponse_1(
           this,
           Invocation.method(
             #register,
             [body],
           ),
         )),
-      ) as _i8.Future<_i3.RegisterResponse>);
+      ) as _i9.Future<_i3.RegisterResponse>);
+
+  @override
+  _i9.Future<_i4.UserResponse> user() => (super.noSuchMethod(
+        Invocation.method(
+          #user,
+          [],
+        ),
+        returnValue: _i9.Future<_i4.UserResponse>.value(_FakeUserResponse_2(
+          this,
+          Invocation.method(
+            #user,
+            [],
+          ),
+        )),
+      ) as _i9.Future<_i4.UserResponse>);
 }
 
 /// A class which mocks [CustomError].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockCustomError extends _i1.Mock implements _i4.CustomError {
+class MockCustomError extends _i1.Mock implements _i5.CustomError {
   MockCustomError() {
     _i1.throwOnMissingStub(this);
   }
@@ -164,7 +191,7 @@ class MockCustomError extends _i1.Mock implements _i4.CustomError {
       );
 
   @override
-  set code(_i4.ErrorCodes? _code) => super.noSuchMethod(
+  set code(_i5.ErrorCodes? _code) => super.noSuchMethod(
         Invocation.setter(
           #code,
           _code,
@@ -184,16 +211,16 @@ class MockCustomError extends _i1.Mock implements _i4.CustomError {
   @override
   String get getErrorMessage => (super.noSuchMethod(
         Invocation.getter(#getErrorMessage),
-        returnValue: _i11.dummyValue<String>(
+        returnValue: _i12.dummyValue<String>(
           this,
           Invocation.getter(#getErrorMessage),
         ),
       ) as String);
 
   @override
-  _i4.CustomError sendErrorToCrashlytics({
+  _i5.CustomError sendErrorToCrashlytics({
     String? message,
-    _i4.ErrorCodes? code,
+    _i5.ErrorCodes? code,
     StackTrace? stackTrace,
   }) =>
       (super.noSuchMethod(
@@ -206,7 +233,7 @@ class MockCustomError extends _i1.Mock implements _i4.CustomError {
             #stackTrace: stackTrace,
           },
         ),
-        returnValue: _FakeCustomError_2(
+        returnValue: _FakeCustomError_3(
           this,
           Invocation.method(
             #sendErrorToCrashlytics,
@@ -218,58 +245,93 @@ class MockCustomError extends _i1.Mock implements _i4.CustomError {
             },
           ),
         ),
-      ) as _i4.CustomError);
+      ) as _i5.CustomError);
 }
 
 /// A class which mocks [SecureStorage].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockSecureStorage extends _i1.Mock implements _i12.SecureStorage {
+class MockSecureStorage extends _i1.Mock implements _i13.SecureStorage {
   MockSecureStorage() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i8.Future<String> get tokenAPI => (super.noSuchMethod(
+  _i9.Future<String> get tokenAPI => (super.noSuchMethod(
         Invocation.getter(#tokenAPI),
-        returnValue: _i8.Future<String>.value(_i11.dummyValue<String>(
+        returnValue: _i9.Future<String>.value(_i12.dummyValue<String>(
           this,
           Invocation.getter(#tokenAPI),
         )),
-      ) as _i8.Future<String>);
+      ) as _i9.Future<String>);
 
   @override
-  _i8.Future<bool> get isLogged => (super.noSuchMethod(
+  _i9.Future<bool> get isLogged => (super.noSuchMethod(
         Invocation.getter(#isLogged),
-        returnValue: _i8.Future<bool>.value(false),
-      ) as _i8.Future<bool>);
+        returnValue: _i9.Future<bool>.value(false),
+      ) as _i9.Future<bool>);
 
   @override
-  _i8.Future<dynamic> setAllToNull() => (super.noSuchMethod(
+  _i9.Future<int> get userId => (super.noSuchMethod(
+        Invocation.getter(#userId),
+        returnValue: _i9.Future<int>.value(0),
+      ) as _i9.Future<int>);
+
+  @override
+  _i9.Future<String> get userName => (super.noSuchMethod(
+        Invocation.getter(#userName),
+        returnValue: _i9.Future<String>.value(_i12.dummyValue<String>(
+          this,
+          Invocation.getter(#userName),
+        )),
+      ) as _i9.Future<String>);
+
+  @override
+  _i9.Future<dynamic> setAllToNull() => (super.noSuchMethod(
         Invocation.method(
           #setAllToNull,
           [],
         ),
-        returnValue: _i8.Future<dynamic>.value(),
-      ) as _i8.Future<dynamic>);
+        returnValue: _i9.Future<dynamic>.value(),
+      ) as _i9.Future<dynamic>);
 
   @override
-  _i8.Future<void> setTokenAPI(String? tokenAPI) => (super.noSuchMethod(
+  _i9.Future<void> setTokenAPI(String? tokenAPI) => (super.noSuchMethod(
         Invocation.method(
           #setTokenAPI,
           [tokenAPI],
         ),
-        returnValue: _i8.Future<void>.value(),
-        returnValueForMissingStub: _i8.Future<void>.value(),
-      ) as _i8.Future<void>);
+        returnValue: _i9.Future<void>.value(),
+        returnValueForMissingStub: _i9.Future<void>.value(),
+      ) as _i9.Future<void>);
 
   @override
-  _i8.Future<void> setIsLogged(bool? isLogged) => (super.noSuchMethod(
+  _i9.Future<void> setIsLogged(bool? isLogged) => (super.noSuchMethod(
         Invocation.method(
           #setIsLogged,
           [isLogged],
         ),
-        returnValue: _i8.Future<void>.value(),
-        returnValueForMissingStub: _i8.Future<void>.value(),
-      ) as _i8.Future<void>);
+        returnValue: _i9.Future<void>.value(),
+        returnValueForMissingStub: _i9.Future<void>.value(),
+      ) as _i9.Future<void>);
+
+  @override
+  _i9.Future<void> setUserId(int? userId) => (super.noSuchMethod(
+        Invocation.method(
+          #setUserId,
+          [userId],
+        ),
+        returnValue: _i9.Future<void>.value(),
+        returnValueForMissingStub: _i9.Future<void>.value(),
+      ) as _i9.Future<void>);
+
+  @override
+  _i9.Future<void> setUserName(String? userName) => (super.noSuchMethod(
+        Invocation.method(
+          #setUserName,
+          [userName],
+        ),
+        returnValue: _i9.Future<void>.value(),
+        returnValueForMissingStub: _i9.Future<void>.value(),
+      ) as _i9.Future<void>);
 }

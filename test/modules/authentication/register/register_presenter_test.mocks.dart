@@ -9,7 +9,7 @@ import 'package:auto_route/auto_route.dart' as _i6;
 import 'package:cinco_minutos_meditacao/core/routers/app_router.dart' as _i5;
 import 'package:cinco_minutos_meditacao/modules/authentication/screens/register/register_contracts.dart'
     as _i3;
-import 'package:cinco_minutos_meditacao/shared/clients/models/auth_request.dart'
+import 'package:cinco_minutos_meditacao/shared/clients/models/requests/auth_request.dart'
     as _i8;
 import 'package:cinco_minutos_meditacao/shared/models/error.dart' as _i2;
 import 'package:mockito/mockito.dart' as _i1;
