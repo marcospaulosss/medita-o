@@ -4,7 +4,7 @@ import 'package:cinco_minutos_meditacao/modules/authentication/screens/register/
 import 'package:cinco_minutos_meditacao/modules/authentication/screens/register/register_contracts.dart';
 import 'package:cinco_minutos_meditacao/modules/authentication/screens/register/register_presenter.dart';
 import 'package:cinco_minutos_meditacao/modules/authentication/shared/strings/localization/authentication_strings.dart';
-import 'package:cinco_minutos_meditacao/shared/clients/models/auth_request.dart';
+import 'package:cinco_minutos_meditacao/shared/clients/models/requests/auth_request.dart';
 import 'package:cinco_minutos_meditacao/shared/components/background_default.dart';
 import 'package:cinco_minutos_meditacao/shared/components/generic_error_container.dart';
 import 'package:cinco_minutos_meditacao/shared/components/loading.dart';

@@ -3,6 +3,10 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
+import 'dart:async' as _i4;
+
+import 'package:cinco_minutos_meditacao/modules/common/screens/home/home_contract.dart'
+    as _i3;
 import 'package:cinco_minutos_meditacao/modules/common/screens/home/home_presenter.dart'
     as _i2;
 import 'package:mockito/mockito.dart' as _i1;
@@ -29,6 +33,15 @@ class MockHomePresenter extends _i1.Mock implements _i2.HomePresenter {
   }
 
   @override
+  set view(_i3.HomeViewContract? _view) => super.noSuchMethod(
+        Invocation.setter(
+          #view,
+          _view,
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
   void onOpenScreen() => super.noSuchMethod(
         Invocation.method(
           #onOpenScreen,
@@ -45,4 +58,24 @@ class MockHomePresenter extends _i1.Mock implements _i2.HomePresenter {
         ),
         returnValueForMissingStub: null,
       );
+
+  @override
+  _i4.Future<void> initPresenter() => (super.noSuchMethod(
+        Invocation.method(
+          #initPresenter,
+          [],
+        ),
+        returnValue: _i4.Future<void>.value(),
+        returnValueForMissingStub: _i4.Future<void>.value(),
+      ) as _i4.Future<void>);
+
+  @override
+  _i4.Future<void> getMe() => (super.noSuchMethod(
+        Invocation.method(
+          #getMe,
+          [],
+        ),
+        returnValue: _i4.Future<void>.value(),
+        returnValueForMissingStub: _i4.Future<void>.value(),
+      ) as _i4.Future<void>);
 }
