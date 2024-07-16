@@ -1,3 +1,4 @@
+import 'package:cinco_minutos_meditacao/shared/Theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -19,7 +20,7 @@ class IconLabelButton extends StatelessWidget {
   final double height;
 
   /// decoração do botão.
-  final Decoration? decoration;
+  Decoration? decoration;
 
   /// ícone do botão.
   final Icon? icon;
@@ -46,7 +47,7 @@ class IconLabelButton extends StatelessWidget {
   /// - [label] - texto do botão.
   /// - [position] - posição do ícone em relação ao texto.
   /// - [spaceBetween] - espaço entre o ícone e o texto.
-  const IconLabelButton({
+  IconLabelButton({
     super.key,
     required this.onTap,
     required this.width,
@@ -98,10 +99,11 @@ class IconLabelButton extends StatelessWidget {
   BoxDecoration get buildBoxDecoration {
     return BoxDecoration(
       border: Border.all(
-        color: const Color(0xff2B448C),
+        color: AppColors.blueMana,
         width: 1,
       ),
       borderRadius: BorderRadius.circular(12),
+      color: AppColors.blueMana,
     );
   }
 }

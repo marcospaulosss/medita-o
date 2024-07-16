@@ -78,4 +78,39 @@ class MockLoginPresenter extends _i1.Mock implements _i2.LoginPresenter {
         returnValue: _i4.Future<void>.value(),
         returnValueForMissingStub: _i4.Future<void>.value(),
       ) as _i4.Future<void>);
+
+  @override
+  _i4.Future<void> loginEmailPassword(
+    String? email,
+    String? password,
+  ) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #loginEmailPassword,
+          [
+            email,
+            password,
+          ],
+        ),
+        returnValue: _i4.Future<void>.value(),
+        returnValueForMissingStub: _i4.Future<void>.value(),
+      ) as _i4.Future<void>);
+
+  @override
+  bool isValidEmail(String? email) => (super.noSuchMethod(
+        Invocation.method(
+          #isValidEmail,
+          [email],
+        ),
+        returnValue: false,
+      ) as bool);
+
+  @override
+  void goToRegister() => super.noSuchMethod(
+        Invocation.method(
+          #goToRegister,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
 }

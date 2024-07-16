@@ -3,9 +3,16 @@ import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 
 enum ErrorCodes {
   loginGoogleError,
+  loginFacebookError,
+  loginEmailPasswordError,
+  alreadyRegistered,
+  unauthorized,
+  timeoutException,
+  badRequest,
+  registerError,
 }
 
-class CustomError {
+class CustomError extends Error {
   /// Error message
   String? message;
 
@@ -13,19 +20,37 @@ class CustomError {
   ErrorCodes? code;
 
   /// Error stack trace
+  @override
   StackTrace? stackTrace;
 
   /// Error constructor
   CustomError();
 
-  sendErrorToCrashlytics(
-      String? message, ErrorCodes? code, StackTrace? stackTrace) {
-    message = message ?? this.message;
-    code = code ?? this.code;
-    stackTrace = stackTrace ?? this.stackTrace;
+  static final Map<ErrorCodes, String> _defaultMessages = {
+    ErrorCodes.loginGoogleError: "Erro ao fazer login com o Google.",
+    ErrorCodes.loginFacebookError: "Erro ao fazer login com o Facebook.",
+    ErrorCodes.loginEmailPasswordError: "Erro ao fazer login com email e senha.",
+    ErrorCodes.unauthorized: "Usuário não autorizado.",
+    ErrorCodes.timeoutException: "Tempo de resposta excedido.",
+    ErrorCodes.badRequest: "Parametros inválidos.",
+    ErrorCodes.alreadyRegistered: "Usuário já cadastrado.",
+    ErrorCodes.registerError: "Erro ao realizar cadastro.",
+  };
 
-    FirebaseCrashlytics.instance.log(message ?? "");
-    FirebaseCrashlytics.instance.recordError(message, stackTrace);
-    LogService().log(message ?? "", null, stackTrace);
+  CustomError sendErrorToCrashlytics({
+      String? message, ErrorCodes? code, StackTrace? stackTrace}) {
+    this.code = code;
+    this.message = message ?? _defaultMessages[code] ?? "Erro desconhecido.";
+    this.stackTrace = stackTrace;
+
+    FirebaseCrashlytics.instance.log(this.message ?? "");
+    FirebaseCrashlytics.instance.recordError(this.message, stackTrace);
+    LogService().log(this.message ?? "", null, stackTrace);
+
+    return this;
+  }
+
+  String get getErrorMessage {
+    return message ?? _defaultMessages[code] ?? "Erro desconhecido.";
   }
 }

@@ -71,9 +71,8 @@ void main() async {
         await tester.pump();
 
         expect(find.textContaining('Ou entre usando'), findsOneWidget);
-        expect(find.byType(SvgPicture), findsNWidgets(2));
+        expect(find.byType(SvgPicture), findsNWidgets(1));
         expect(find.text('Sua conta Google'), findsOneWidget);
-        expect(find.text('Sua conta Facebook'), findsOneWidget);
       });
 
       testWidgets("Should verify when show error screen", (tester) async {
@@ -108,6 +107,35 @@ void main() async {
         expect(find.byType(Image), findsOneWidget);
         expect(find.textContaining('Carregando'), findsOneWidget);
       });
+
+      testWidgets('showErrorEmailInvalid should set errorEmailInvalid to true',
+          (tester) async {
+        when(presenter.onOpenScreen()).thenAnswer((_) {});
+
+        await tester.pumpWidget(createWidgetUnderTest());
+
+        final loginViewState =
+            tester.state(find.byType(LoginView)) as LoginViewState;
+        loginViewState.showErrorEmailInvalid();
+
+        expect(loginViewState.errorEmailInvalid, isTrue);
+      });
+
+      testWidgets('showInvalidCredentialsSnackBar should show SnackBar',
+          (tester) async {
+        when(presenter.onOpenScreen()).thenAnswer((_) {});
+
+        await tester.pumpWidget(createWidgetUnderTest());
+
+        final loginViewState =
+            tester.state(find.byType(LoginView)) as LoginViewState;
+        loginViewState.showInvalidCredentialsSnackBar();
+
+        await tester.pumpAndSettle();
+
+        expect(find.byType(SnackBar), findsOneWidget);
+        expect(find.text('Senha ou email inválidos'), findsOneWidget);
+      });
     });
 
     group("Interaction screen", () {
@@ -124,8 +152,8 @@ void main() async {
         await tester.tap(find.byType(IconLabelButton).at(1));
         await tester.pumpAndSettle();
 
-        verify(presenter.onOpenScreen()).called(3);
-        verify(presenter.loginGoogle()).called(2);
+        verify(presenter.onOpenScreen()).called(5);
+        verify(presenter.loginGoogle()).called(1);
       });
 
       testWidgets("Should verify click button remember password",
@@ -172,13 +200,14 @@ void main() async {
         await tester.drag(find.byType(ListView), const Offset(0.0, -300));
         await tester.pump();
 
-        await tester.tap(find.byType(IconLabelButton).at(2));
+        await tester.tap(find.byType(IconLabelButton).at(1));
         await tester.pumpAndSettle();
       });
 
       testWidgets("Should verify click button meditate create account",
           (tester) async {
         when(presenter.onOpenScreen()).thenAnswer((_) {});
+        when(presenter.goToRegister()).thenAnswer((_) {});
 
         await tester.pumpWidget(createWidgetUnderTest());
 
@@ -186,8 +215,12 @@ void main() async {
         await tester.drag(find.byType(ListView), const Offset(0.0, -300));
         await tester.pump();
 
-        await tester.tap(find.byType(GestureDetector).at(6));
+        expect(find.textContaining("Criar uma conta", findRichText: true),
+            findsOneWidget);
+        await tester
+            .tap(find.textContaining("Criar uma conta", findRichText: true));
         await tester.pumpAndSettle();
+        verify(presenter.goToRegister()).called(1);
       });
 
       testWidgets("Should verify click button IconButton to obscure password",
@@ -200,6 +233,64 @@ void main() async {
 
         await tester.tap(find.byType(IconButton));
         await tester.pumpAndSettle();
+      });
+
+      testWidgets("Should show error when click in login first",
+          (tester) async {
+        when(presenter.onOpenScreen()).thenAnswer((_) {});
+
+        await tester.pumpWidget(createWidgetUnderTest());
+
+        await tester.pumpAndSettle();
+
+        await tester.tap(find.textContaining("Fazer Login"));
+        await tester.pumpAndSettle();
+
+        expect(find.textContaining("Campo obrigatório"), findsOneWidget);
+      });
+
+      testWidgets("Should show error when click in login and email is empty",
+          (tester) async {
+        when(presenter.onOpenScreen()).thenAnswer((_) {});
+
+        await tester.pumpWidget(createWidgetUnderTest());
+        await tester.pumpAndSettle();
+
+        await tester.enterText(find.byType(TextField).first, "");
+
+        await tester.tap(find.textContaining("Fazer Login"));
+        await tester.pumpAndSettle();
+
+        expect(find.textContaining("Campo obrigatório"), findsOneWidget);
+      });
+
+      testWidgets("Should show error when click in login and email is invalid",
+          (tester) async {
+        when(presenter.onOpenScreen()).thenAnswer((_) {});
+
+        await tester.pumpWidget(createWidgetUnderTest());
+        await tester.pumpAndSettle();
+
+        await tester.enterText(find.byType(TextField).first, "teste");
+
+        await tester.tap(find.textContaining("Fazer Login"));
+        await tester.pumpAndSettle();
+
+        expect(find.textContaining("email inválido"), findsOneWidget);
+      });
+
+      testWidgets("Should show error when click in login and password is empty",
+          (tester) async {
+        when(presenter.onOpenScreen()).thenAnswer((_) {});
+
+        await tester.pumpWidget(createWidgetUnderTest());
+        await tester.pumpAndSettle();
+
+        await tester.enterText(
+            find.byType(TextField).first, "marcos.santos@teste.com");
+
+        await tester.tap(find.textContaining("Fazer Login"));
+        await tester.pump();
       });
     });
   });
