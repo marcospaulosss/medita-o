@@ -3,10 +3,13 @@ import 'dart:async';
 import 'package:cinco_minutos_meditacao/core/analytics/manager.dart';
 import 'package:cinco_minutos_meditacao/core/wrappers/secure_storage.dart';
 import 'package:cinco_minutos_meditacao/modules/authentication/analytics/events.dart';
+import 'package:cinco_minutos_meditacao/shared/clients/client_api.dart';
+import 'package:cinco_minutos_meditacao/shared/clients/models/auth_request.dart';
 import 'package:cinco_minutos_meditacao/modules/authentication/screens/login/login_contracts.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/models/authenticate_google_request.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/models/authenticate_google_response.dart';
-import 'package:cinco_minutos_meditacao/shared/clients/social_client_api.dart';
+import 'package:cinco_minutos_meditacao/shared/clients/models/register_response.dart';
+import 'package:cinco_minutos_meditacao/shared/models/error.dart';
 import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
@@ -16,17 +19,22 @@ class LoginRepository extends Repository {
   final AnalyticsManager _analyticsManager;
 
   /// Cliente de autenticação social
-  final SocialClientApi _socialClientApi;
+  final ClientApi _clientApi;
+
+  /// Erro customizado
+  final CustomError error;
 
   /// Armazenamento seguro
   final SecureStorage _secureStorage;
 
   /// - [_analyticsManager] : Gerenciador de analytics
   /// - [_socialClientApi] : Cliente de autenticação social
+  /// - [_error] : Erro customizado
   /// - [_secureStorage] : Armazenamento seguro
   LoginRepository(
     this._analyticsManager,
-    this._socialClientApi,
+    this._clientApi,
+    this.error,
     this._secureStorage,
   );
 
@@ -44,7 +52,7 @@ class LoginRepository extends Repository {
 
     try {
       AuthenticateGoogleResponse response =
-          await _socialClientApi.authGoogle(request);
+          await _clientApi.authGoogle(request);
 
       await _secureStorage.setTokenAPI(response.token!);
       await _secureStorage.setIsLogged(true);
@@ -62,6 +70,37 @@ class LoginRepository extends Repository {
       return e.error;
     } catch (e) {
       return e;
+    }
+  }
+
+  @override
+  Future<CustomError?> authenticateUserByEmailPassword(AuthRequest authRequest) async {
+    try {
+      RegisterResponse response = await _clientApi.login(authRequest);
+
+      await _secureStorage.setTokenAPI(response.token!);
+      await _secureStorage.setIsLogged(true);
+
+      return null;
+    } on TimeoutException {
+      return error.sendErrorToCrashlytics(code: ErrorCodes.timeoutException, stackTrace: StackTrace.current);
+    } on DioException catch (e) {
+      if (e.response != null && e.response!.statusCode == 401) {
+        await _secureStorage.setIsLogged(false);
+
+        error.code = ErrorCodes.unauthorized;
+        return error;
+      }
+
+      return error.sendErrorToCrashlytics(
+          message: "Erro ao realizar login com e-mail e senha - ${e.response?.statusCode}",
+          code: ErrorCodes.loginEmailPasswordError,
+          stackTrace: e.stackTrace);
+    } catch (e) {
+      return error.sendErrorToCrashlytics(
+          message: "Erro ao realizar login com e-mail e senha - 500",
+          code: ErrorCodes.loginEmailPasswordError,
+          stackTrace: StackTrace.current);
     }
   }
 }

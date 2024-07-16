@@ -1,4 +1,6 @@
+import 'package:cinco_minutos_meditacao/shared/clients/models/auth_request.dart';
 import 'package:cinco_minutos_meditacao/shared/helpers/view_binding.dart';
+import 'package:cinco_minutos_meditacao/shared/models/error.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 abstract class LoginViewContract {
@@ -10,6 +12,12 @@ abstract class LoginViewContract {
 
   /// Exibe tela normal
   void showNormalState();
+
+  /// Exibe erro de e-mail inválido
+  void showErrorEmailInvalid();
+
+  /// Exibe erro de credenciais inválidas
+  void showInvalidCredentialsSnackBar();
 }
 
 abstract class Presenter implements ViewBinding<LoginViewContract> {
@@ -22,8 +30,14 @@ abstract class Presenter implements ViewBinding<LoginViewContract> {
   /// Login utilizando o Facebook
   Future<void> loginFacebook();
 
+  /// Login utilizando e-mail e senha
+  Future<void> loginEmailPassword(String email, String password);
+
   /// Direciona para a tela de home
   void goToHome();
+
+  /// Direciona para a tela de registro
+  void goToRegister();
 }
 
 abstract class Repository {
@@ -32,4 +46,7 @@ abstract class Repository {
 
   /// Autentica o usuário utilizando o Google
   Future<Object?> authenticateUserByGoogle(AuthCredential credential);
+
+  /// Autentica o usuário utilizando e-mail e senha
+  Future<CustomError?> authenticateUserByEmailPassword(AuthRequest authRequest);
 }

@@ -23,6 +23,10 @@ class _HomeViewState extends State<HomeView> {
   void initState() {
     presenter.onOpenScreen();
 
+    Future.delayed(const Duration(seconds: 10), () {
+      presenter.logOut();
+    });
+
     super.initState();
   }
 

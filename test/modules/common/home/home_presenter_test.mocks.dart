@@ -3,9 +3,16 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:cinco_minutos_meditacao/core/analytics/manager.dart' as _i2;
+import 'dart:async' as _i4;
+
+import 'package:auto_route/auto_route.dart' as _i8;
+import 'package:cinco_minutos_meditacao/core/routers/app_router.dart' as _i7;
 import 'package:cinco_minutos_meditacao/modules/common/screens/home/home_repository.dart'
+    as _i6;
+import 'package:cinco_minutos_meditacao/shared/services/auth_service.dart'
     as _i3;
+import 'package:firebase_auth/firebase_auth.dart' as _i5;
+import 'package:firebase_core/firebase_core.dart' as _i2;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: type=lint
@@ -21,9 +28,8 @@ import 'package:mockito/mockito.dart' as _i1;
 // ignore_for_file: camel_case_types
 // ignore_for_file: subtype_of_sealed_class
 
-class _FakeAnalyticsManager_0 extends _i1.SmartFake
-    implements _i2.AnalyticsManager {
-  _FakeAnalyticsManager_0(
+class _FakeFirebaseApp_0 extends _i1.SmartFake implements _i2.FirebaseApp {
+  _FakeFirebaseApp_0(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -32,28 +38,118 @@ class _FakeAnalyticsManager_0 extends _i1.SmartFake
         );
 }
 
-/// A class which mocks [HomeRepository].
+/// A class which mocks [AuthService].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockHomeRepository extends _i1.Mock implements _i3.HomeRepository {
-  MockHomeRepository() {
+class MockAuthService extends _i1.Mock implements _i3.AuthService {
+  MockAuthService() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i2.AnalyticsManager get analytics => (super.noSuchMethod(
-        Invocation.getter(#analytics),
-        returnValue: _FakeAnalyticsManager_0(
+  _i2.FirebaseApp get app => (super.noSuchMethod(
+        Invocation.getter(#app),
+        returnValue: _FakeFirebaseApp_0(
           this,
-          Invocation.getter(#analytics),
+          Invocation.getter(#app),
         ),
-      ) as _i2.AnalyticsManager);
+      ) as _i2.FirebaseApp);
+
+  @override
+  set app(_i2.FirebaseApp? _app) => super.noSuchMethod(
+        Invocation.setter(
+          #app,
+          _app,
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  _i4.Future<(_i5.AuthCredential?, Object?)> loginGoogle() =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #loginGoogle,
+          [],
+        ),
+        returnValue:
+            _i4.Future<(_i5.AuthCredential?, Object?)>.value((null, null)),
+      ) as _i4.Future<(_i5.AuthCredential?, Object?)>);
+
+  @override
+  _i4.Future<void> loginFacebook() => (super.noSuchMethod(
+        Invocation.method(
+          #loginFacebook,
+          [],
+        ),
+        returnValue: _i4.Future<void>.value(),
+        returnValueForMissingStub: _i4.Future<void>.value(),
+      ) as _i4.Future<void>);
+
+  @override
+  _i4.Future<Object?> logout() => (super.noSuchMethod(
+        Invocation.method(
+          #logout,
+          [],
+        ),
+        returnValue: _i4.Future<Object?>.value(),
+      ) as _i4.Future<Object?>);
+}
+
+/// A class which mocks [HomeRepository].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockHomeRepository extends _i1.Mock implements _i6.HomeRepository {
+  MockHomeRepository() {
+    _i1.throwOnMissingStub(this);
+  }
 
   @override
   void sendOpenScreenEvent() => super.noSuchMethod(
         Invocation.method(
           #sendOpenScreenEvent,
           [],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void logOut() => super.noSuchMethod(
+        Invocation.method(
+          #logOut,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
+}
+
+/// A class which mocks [AppRouter].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockAppRouter extends _i1.Mock implements _i7.AppRouter {
+  MockAppRouter() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  List<_i8.AutoRoute> get routes => (super.noSuchMethod(
+        Invocation.getter(#routes),
+        returnValue: <_i8.AutoRoute>[],
+      ) as List<_i8.AutoRoute>);
+
+  @override
+  void goToReplace(_i8.PageRouteInfo<dynamic>? route) => super.noSuchMethod(
+        Invocation.method(
+          #goToReplace,
+          [route],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void goTo(_i8.PageRouteInfo<dynamic>? route) => super.noSuchMethod(
+        Invocation.method(
+          #goTo,
+          [route],
         ),
         returnValueForMissingStub: null,
       );
