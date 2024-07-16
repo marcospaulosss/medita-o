@@ -8,11 +8,18 @@ class AppRouter extends $AppRouter {
   List<AutoRoute> get routes => [
         AutoRoute(page: SplashScreenRoute.page, initial: true),
         AutoRoute(page: LoginRoute.page),
+        AutoRoute(page: RegisterRoute.page),
         AutoRoute(page: HomeRoute.page, guards: [AuthGuard()]),
+        AutoRoute(page: RegisterSuccessRoute.page, guards: [AuthGuard()]),
       ];
 
   /// Direciona para a tela selecionada e remove a tela anterior
   void goToReplace(PageRouteInfo route) {
     replace(route);
+  }
+
+  /// Direciona para a tela selecionada
+  void goTo(PageRouteInfo route) {
+    push(route);
   }
 }

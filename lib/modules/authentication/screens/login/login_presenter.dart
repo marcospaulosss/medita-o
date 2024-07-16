@@ -1,5 +1,6 @@
 import 'package:cinco_minutos_meditacao/core/routers/app_router.dart';
 import 'package:cinco_minutos_meditacao/core/routers/app_router.gr.dart';
+import 'package:cinco_minutos_meditacao/shared/clients/models/auth_request.dart';
 import 'package:cinco_minutos_meditacao/modules/authentication/screens/login/login_contracts.dart';
 import 'package:cinco_minutos_meditacao/shared/models/error.dart';
 import 'package:cinco_minutos_meditacao/shared/services/auth_service.dart';
@@ -39,11 +40,10 @@ class LoginPresenter extends Presenter {
     if (credential == null ||
         credential.accessToken == null ||
         credential.accessToken!.isEmpty) {
-      var message = "Erro ao realizar login com o Google";
       _customError.sendErrorToCrashlytics(
-          message, ErrorCodes.loginGoogleError, StackTrace.current);
+          code: ErrorCodes.loginGoogleError, stackTrace: StackTrace.current);
 
-      view?.showError(message);
+      view?.showError(_customError.message!);
 
       return;
     }
@@ -73,5 +73,39 @@ class LoginPresenter extends Presenter {
   @override
   Future<void> loginFacebook() async {
     _authService.loginFacebook();
+  }
+
+  @override
+  Future<void> loginEmailPassword(String email, String password) async {
+    if (!isValidEmail(email)) {
+      view?.showErrorEmailInvalid();
+      return Future.value();
+    }
+
+    AuthRequest authRequest = AuthRequest(email: email, password: password);
+    CustomError? error = await _repository.authenticateUserByEmailPassword(authRequest);
+    if (error != null) {
+      if (error.code == ErrorCodes.unauthorized) {
+        view?.showInvalidCredentialsSnackBar();
+        return;
+      }
+
+      view?.showError(error.message!);
+      return;
+    }
+
+    goToHome();
+  }
+
+  bool isValidEmail(String email) {
+    final RegExp emailRegex = RegExp(
+      r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$',
+    );
+    return emailRegex.hasMatch(email);
+  }
+
+  @override
+  void goToRegister() {
+    _router.goTo(const RegisterRoute());
   }
 }

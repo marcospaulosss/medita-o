@@ -1,3 +1,4 @@
+import 'package:cinco_minutos_meditacao/shared/models/error.dart';
 import 'package:cinco_minutos_meditacao/shared/services/log_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -27,7 +28,9 @@ class AuthService {
 
       return (credential, null);
     } catch (error, stackTrace) {
-      return (null, error);
+      var err = CustomError().sendErrorToCrashlytics(
+          code: ErrorCodes.loginGoogleError, stackTrace: stackTrace);
+      return (null, err);
     }
   }
 
