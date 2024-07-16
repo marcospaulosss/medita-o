@@ -1,7 +1,7 @@
 import 'package:cinco_minutos_meditacao/core/routers/app_router.dart';
 import 'package:cinco_minutos_meditacao/core/routers/app_router.gr.dart';
-import 'package:cinco_minutos_meditacao/shared/clients/models/auth_request.dart';
 import 'package:cinco_minutos_meditacao/modules/authentication/screens/login/login_contracts.dart';
+import 'package:cinco_minutos_meditacao/shared/clients/models/requests/auth_request.dart';
 import 'package:cinco_minutos_meditacao/shared/models/error.dart';
 import 'package:cinco_minutos_meditacao/shared/services/auth_service.dart';
 
@@ -83,7 +83,8 @@ class LoginPresenter extends Presenter {
     }
 
     AuthRequest authRequest = AuthRequest(email: email, password: password);
-    CustomError? error = await _repository.authenticateUserByEmailPassword(authRequest);
+    CustomError? error =
+        await _repository.authenticateUserByEmailPassword(authRequest);
     if (error != null) {
       if (error.code == ErrorCodes.unauthorized) {
         view?.showInvalidCredentialsSnackBar();

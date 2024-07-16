@@ -5,8 +5,8 @@ import 'package:cinco_minutos_meditacao/core/wrappers/secure_storage.dart';
 import 'package:cinco_minutos_meditacao/modules/authentication/analytics/events.dart';
 import 'package:cinco_minutos_meditacao/modules/authentication/screens/register/register_contracts.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/client_api.dart';
-import 'package:cinco_minutos_meditacao/shared/clients/models/auth_request.dart';
-import 'package:cinco_minutos_meditacao/shared/clients/models/register_response.dart';
+import 'package:cinco_minutos_meditacao/shared/clients/models/requests/auth_request.dart';
+import 'package:cinco_minutos_meditacao/shared/clients/models/responses/register_response.dart';
 import 'package:cinco_minutos_meditacao/shared/models/error.dart';
 import 'package:dio/dio.dart';
 

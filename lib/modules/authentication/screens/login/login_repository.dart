@@ -3,12 +3,12 @@ import 'dart:async';
 import 'package:cinco_minutos_meditacao/core/analytics/manager.dart';
 import 'package:cinco_minutos_meditacao/core/wrappers/secure_storage.dart';
 import 'package:cinco_minutos_meditacao/modules/authentication/analytics/events.dart';
-import 'package:cinco_minutos_meditacao/shared/clients/client_api.dart';
-import 'package:cinco_minutos_meditacao/shared/clients/models/auth_request.dart';
 import 'package:cinco_minutos_meditacao/modules/authentication/screens/login/login_contracts.dart';
-import 'package:cinco_minutos_meditacao/shared/clients/models/authenticate_google_request.dart';
-import 'package:cinco_minutos_meditacao/shared/clients/models/authenticate_google_response.dart';
-import 'package:cinco_minutos_meditacao/shared/clients/models/register_response.dart';
+import 'package:cinco_minutos_meditacao/shared/clients/client_api.dart';
+import 'package:cinco_minutos_meditacao/shared/clients/models/requests/auth_request.dart';
+import 'package:cinco_minutos_meditacao/shared/clients/models/requests/authenticate_google_request.dart';
+import 'package:cinco_minutos_meditacao/shared/clients/models/responses/authenticate_google_response.dart';
+import 'package:cinco_minutos_meditacao/shared/clients/models/responses/register_response.dart';
 import 'package:cinco_minutos_meditacao/shared/models/error.dart';
 import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -74,7 +74,8 @@ class LoginRepository extends Repository {
   }
 
   @override
-  Future<CustomError?> authenticateUserByEmailPassword(AuthRequest authRequest) async {
+  Future<CustomError?> authenticateUserByEmailPassword(
+      AuthRequest authRequest) async {
     try {
       RegisterResponse response = await _clientApi.login(authRequest);
 
@@ -83,7 +84,8 @@ class LoginRepository extends Repository {
 
       return null;
     } on TimeoutException {
-      return error.sendErrorToCrashlytics(code: ErrorCodes.timeoutException, stackTrace: StackTrace.current);
+      return error.sendErrorToCrashlytics(
+          code: ErrorCodes.timeoutException, stackTrace: StackTrace.current);
     } on DioException catch (e) {
       if (e.response != null && e.response!.statusCode == 401) {
         await _secureStorage.setIsLogged(false);
@@ -93,7 +95,8 @@ class LoginRepository extends Repository {
       }
 
       return error.sendErrorToCrashlytics(
-          message: "Erro ao realizar login com e-mail e senha - ${e.response?.statusCode}",
+          message:
+              "Erro ao realizar login com e-mail e senha - ${e.response?.statusCode}",
           code: ErrorCodes.loginEmailPasswordError,
           stackTrace: e.stackTrace);
     } catch (e) {

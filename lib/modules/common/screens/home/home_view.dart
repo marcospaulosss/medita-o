@@ -1,9 +1,13 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:cinco_minutos_meditacao/core/di/helpers.dart';
-import 'package:cinco_minutos_meditacao/core/flavors/flavors.dart';
 import 'package:cinco_minutos_meditacao/modules/common/screens/home/home_contract.dart';
 import 'package:cinco_minutos_meditacao/modules/common/screens/home/home_presenter.dart';
 import 'package:cinco_minutos_meditacao/modules/common/shared/strings/localization/common_strings.dart';
+import 'package:cinco_minutos_meditacao/shared/clients/models/responses/user_response.dart';
+import 'package:cinco_minutos_meditacao/shared/components/generic_error_container.dart';
+import 'package:cinco_minutos_meditacao/shared/components/loading.dart';
+import 'package:cinco_minutos_meditacao/shared/helpers/multi_state_container/export.dart';
+import 'package:cinco_minutos_meditacao/shared/helpers/view_binding.dart';
 import 'package:flutter/material.dart';
 
 @RoutePage()
@@ -16,39 +20,64 @@ class HomeView extends StatefulWidget {
   State<HomeView> createState() => _HomeViewState();
 }
 
-class _HomeViewState extends State<HomeView> {
+class _HomeViewState extends State<HomeView> implements HomeViewContract {
   Presenter presenter = resolve<HomePresenter>();
+
+  /// Controlador do estado da tela
+  final stateController = MultiStateContainerController();
+
+  /// Mensagem de erro
+  late String messageError = "";
 
   @override
   void initState() {
-    presenter.onOpenScreen();
+    stateController.showErrorState();
 
-    Future.delayed(const Duration(seconds: 10), () {
-      presenter.logOut();
-    });
+    presenter.bindView(this);
+    presenter.initPresenter();
 
     super.initState();
   }
 
+  void dispose() {
+    presenter.unbindView();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
+    return MultiStateContainer(
+      controller: stateController,
+      normalStateBuilder: (context) => buildScaffold(context),
+      loadingStateBuilder: (context) => const Loading(),
+      errorStateBuilder: (context) => GenericErrorContainer(
+        message: messageError,
+      ),
+    );
+  }
+
+  Scaffold buildScaffold(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(CommonStrings.of(context).home),
       ),
-      body: Container(
-        alignment: Alignment.center,
-        child: Column(
-          children: [
-            const Text("Home View"),
-            Text(F.title),
-            const SizedBox(height: 20),
-            Text(F.name),
-            const SizedBox(height: 20),
-            Text(F.description),
-          ],
-        ),
-      ),
+      body: SingleChildScrollView(),
     );
+  }
+
+  @override
+  void showLoading() {
+    stateController.showLoadingState();
+  }
+
+  @override
+  void showNormalState(UserResponse? user) {
+    stateController.showNormalState();
+  }
+
+  @override
+  void showError(String message) {
+    messageError = message;
+    stateController.showErrorState();
   }
 }

@@ -4,13 +4,18 @@ import 'package:cinco_minutos_meditacao/core/routers/app_router.dart';
 import 'package:cinco_minutos_meditacao/core/wrappers/secure_storage.dart';
 import 'package:cinco_minutos_meditacao/modules/common/screens/home/home_presenter.dart';
 import 'package:cinco_minutos_meditacao/modules/common/screens/home/home_repository.dart';
+import 'package:cinco_minutos_meditacao/shared/clients/client_api.dart';
+import 'package:cinco_minutos_meditacao/shared/models/error.dart';
 import 'package:cinco_minutos_meditacao/shared/services/auth_service.dart';
 
 abstract class HomeInjector {
   static void setup() {
-    registerFactory<HomePresenter>(
-        () => HomePresenter(resolve<AuthService>(),resolve<HomeRepository>(), resolve<AppRouter>()));
-    registerFactory<HomeRepository>(
-        () => HomeRepository(resolve<AnalyticsManager>(), resolve<SecureStorage>()));
+    registerFactory<HomePresenter>(() => HomePresenter(resolve<AuthService>(),
+        resolve<HomeRepository>(), resolve<AppRouter>()));
+    registerFactory<HomeRepository>(() => HomeRepository(
+        resolve<AnalyticsManager>(),
+        resolve<ClientApi>(),
+        resolve<CustomError>(),
+        resolve<SecureStorage>()));
   }
 }
