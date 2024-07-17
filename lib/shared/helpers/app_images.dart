@@ -1,7 +1,6 @@
-
-
 /// Classe que contém as cores do aplicativo.
 abstract class AppImages {
   /// blue variations
   static const balloon = "assets/images/balão-5min 1.png";
+  static const line = "assets/images/icons/Linha 5.svg";
 }

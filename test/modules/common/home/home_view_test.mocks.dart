@@ -9,6 +9,8 @@ import 'package:cinco_minutos_meditacao/modules/common/screens/home/home_contrac
     as _i3;
 import 'package:cinco_minutos_meditacao/modules/common/screens/home/home_presenter.dart'
     as _i2;
+import 'package:cinco_minutos_meditacao/shared/clients/models/responses/user_response.dart'
+    as _i5;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: type=lint
@@ -42,6 +44,21 @@ class MockHomePresenter extends _i1.Mock implements _i2.HomePresenter {
       );
 
   @override
+  bool get error => (super.noSuchMethod(
+        Invocation.getter(#error),
+        returnValue: false,
+      ) as bool);
+
+  @override
+  set error(bool? _error) => super.noSuchMethod(
+        Invocation.setter(
+          #error,
+          _error,
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
   void onOpenScreen() => super.noSuchMethod(
         Invocation.method(
           #onOpenScreen,
@@ -70,12 +87,11 @@ class MockHomePresenter extends _i1.Mock implements _i2.HomePresenter {
       ) as _i4.Future<void>);
 
   @override
-  _i4.Future<void> getMe() => (super.noSuchMethod(
+  _i4.Future<_i5.UserResponse?> getMe() => (super.noSuchMethod(
         Invocation.method(
           #getMe,
           [],
         ),
-        returnValue: _i4.Future<void>.value(),
-        returnValueForMissingStub: _i4.Future<void>.value(),
-      ) as _i4.Future<void>);
+        returnValue: _i4.Future<_i5.UserResponse?>.value(),
+      ) as _i4.Future<_i5.UserResponse?>);
 }
