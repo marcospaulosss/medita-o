@@ -1,6 +1,6 @@
 import 'package:cinco_minutos_meditacao/modules/common/shared/strings/localization/common_strings.dart';
 import 'package:cinco_minutos_meditacao/shared/Theme/app_colors.dart';
-import 'package:cinco_minutos_meditacao/shared/helpers/app_images.dart';
+import 'package:cinco_minutos_meditacao/shared/Theme/app_images.dart';
 import 'package:flutter/material.dart';
 
 class AppHeader extends StatelessWidget {

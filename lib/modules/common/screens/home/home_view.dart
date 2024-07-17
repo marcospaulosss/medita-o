@@ -5,6 +5,8 @@ import 'package:cinco_minutos_meditacao/modules/common/screens/home/home_present
 import 'package:cinco_minutos_meditacao/modules/common/shared/components/app_header.dart';
 import 'package:cinco_minutos_meditacao/modules/common/shared/components/meditate.dart';
 import 'package:cinco_minutos_meditacao/modules/common/shared/strings/localization/common_strings.dart';
+import 'package:cinco_minutos_meditacao/shared/Theme/app_colors.dart';
+import 'package:cinco_minutos_meditacao/shared/Theme/app_images.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/user_response.dart';
 import 'package:cinco_minutos_meditacao/shared/components/app_background.dart';
 import 'package:cinco_minutos_meditacao/shared/components/generic_error_container.dart';
@@ -12,6 +14,7 @@ import 'package:cinco_minutos_meditacao/shared/components/loading.dart';
 import 'package:cinco_minutos_meditacao/shared/helpers/multi_state_container/export.dart';
 import 'package:cinco_minutos_meditacao/shared/helpers/view_binding.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 @RoutePage()
 class HomeView extends StatefulWidget {
@@ -73,51 +76,160 @@ class _HomeViewState extends State<HomeView> implements HomeViewContract {
     );
   }
 
+  /// Corpo da tela
   Padding buildBody(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(top: 61, left: 40, right: 40, bottom: 33),
       child: Column(
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Meditate(
-                title: CommonStrings.of(context).meditate5Minutes,
-              ),
-              const SizedBox(width: 14),
-              Meditate(
-                title: CommonStrings.of(context).learnMethod,
-              ),
-            ],
-          ),
-          const SizedBox(height: 14),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Meditate(
-                title: CommonStrings.of(context).guidedMeditate,
-              ),
-              const SizedBox(width: 14),
-              Meditate(
-                title: CommonStrings.of(context).meditateTime,
-              ),
-            ],
-          ),
+          buildMeditate(context),
+          const SizedBox(height: 33),
+          Image.asset(AppImages.banner),
+          const SizedBox(height: 40),
+          buildMeditometer(),
         ],
       ),
     );
   }
 
+  /// Constrói o meditômetro
+  Column buildMeditometer() {
+    return Column(
+      children: [
+        const Text(
+          "Meditômetro",
+          style: TextStyle(
+            fontSize: 30,
+            fontWeight: FontWeight.w400,
+            color: AppColors.steelWoolColor,
+          ),
+        ),
+        Container(
+          height: 17,
+          width: 125,
+          alignment: Alignment.center,
+          decoration: BoxDecoration(
+            color: AppColors.blueMana,
+            borderRadius: BorderRadius.circular(27),
+          ),
+          child: const Text(
+            "EM TEMPO REAL",
+            style: TextStyle(
+              fontSize: 13,
+              fontWeight: FontWeight.w400,
+              color: AppColors.white,
+            ),
+          ),
+        ),
+        const Text(
+          "24.126.970",
+          style: TextStyle(
+            fontSize: 58,
+            fontWeight: FontWeight.w900,
+            color: AppColors.frankBlue,
+          ),
+        ),
+        RichText(
+          text: const TextSpan(
+            children: [
+              TextSpan(
+                text: "milhões ",
+                style: TextStyle(
+                  fontSize: 11,
+                  fontWeight: FontWeight.w700,
+                  color: AppColors.frankBlue,
+                ),
+              ),
+              TextSpan(
+                text: "de Minutos meditados no mundo",
+                style: TextStyle(
+                  fontSize: 11,
+                  fontWeight: FontWeight.w400,
+                  color: AppColors.frankBlue,
+                ),
+              ),
+            ],
+          ),
+        ),
+        const SizedBox(height: 28),
+        Stack(
+          alignment: Alignment.center,
+          children: [
+            Container(
+              height: 67,
+              width: 288,
+              color: AppColors.vividCerulean,
+            ),
+            SvgPicture.asset(
+              "assets/images/Layer 1.svg",
+              height: 144,
+              width: 248,
+            ),
+            const Positioned(
+              left: 12,
+              top: 65,
+              child: Text(
+                "PAÍSES \nALCANÇADOS",
+                style: TextStyle(
+                  fontSize: 11,
+                  fontWeight: FontWeight.w400,
+                  color: AppColors.white,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+
+  /// Constrói a seção de meditação
+  Column buildMeditate(BuildContext context) {
+    return Column(
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Meditate(
+              title: CommonStrings.of(context).meditate5Minutes,
+            ),
+            const SizedBox(width: 14),
+            Meditate(
+              title: CommonStrings.of(context).learnMethod,
+            ),
+          ],
+        ),
+        const SizedBox(height: 14),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Meditate(
+              title: CommonStrings.of(context).guidedMeditate,
+            ),
+            const SizedBox(width: 14),
+            Meditate(
+              title: CommonStrings.of(context).meditateTime,
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+
+  /// -[Funcionalidades do contrato]-
+  /// Mostra o estado de carregamento
   @override
   void showLoading() {
     stateController.showLoadingState();
   }
 
+  /// Mostra o estado normal
   @override
   void showNormalState(UserResponse? user) {
     stateController.showNormalState();
   }
 
+  /// Mostra o estado de erro
   @override
   void showError(String message) {
     messageError = message;
