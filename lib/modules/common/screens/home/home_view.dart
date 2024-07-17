@@ -79,11 +79,12 @@ class _HomeViewState extends State<HomeView> implements HomeViewContract {
       child: Column(
         children: [
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Meditate(
                 title: CommonStrings.of(context).meditate5Minutes,
               ),
+              const SizedBox(width: 14),
               Meditate(
                 title: CommonStrings.of(context).learnMethod,
               ),
@@ -91,11 +92,12 @@ class _HomeViewState extends State<HomeView> implements HomeViewContract {
           ),
           const SizedBox(height: 14),
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Meditate(
                 title: CommonStrings.of(context).guidedMeditate,
               ),
+              const SizedBox(width: 14),
               Meditate(
                 title: CommonStrings.of(context).meditateTime,
               ),
