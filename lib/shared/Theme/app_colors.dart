@@ -7,6 +7,9 @@ abstract class AppColors {
   static const frankBlue = Color(0xff2B448C);
   static const blueMana = Color(0xff70C2F6);
   static const germanderSpeedwell = Color(0xff0090C7);
+  static const babyBlue = Color(0xff5BCFF1);
+  static const blueNCS = Color(0xff008ec6);
+  static const azureishWhite = Color(0xffddebf1);
 
   /// gray variations
   static const brainstemGrey = Color(0xffB6B6B6);
