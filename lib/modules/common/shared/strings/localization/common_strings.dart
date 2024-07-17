@@ -95,11 +95,47 @@ abstract class CommonStrings {
     Locale('pt')
   ];
 
-  /// No description provided for @home.
+  /// No description provided for @hello.
   ///
   /// In pt, this message translates to:
-  /// **'Home'**
-  String get home;
+  /// **'Olá'**
+  String get hello;
+
+  /// No description provided for @homeHeaderDescription1.
+  ///
+  /// In pt, this message translates to:
+  /// **'Some seu tempo pela paz mundial agora mesmo!'**
+  String get homeHeaderDescription1;
+
+  /// No description provided for @meditate5Minutes.
+  ///
+  /// In pt, this message translates to:
+  /// **'Medite 5 \nMinutos'**
+  String get meditate5Minutes;
+
+  /// No description provided for @fiveMinutes.
+  ///
+  /// In pt, this message translates to:
+  /// **'5 min'**
+  String get fiveMinutes;
+
+  /// No description provided for @learnMethod.
+  ///
+  /// In pt, this message translates to:
+  /// **'Aprenda o \nmétodo'**
+  String get learnMethod;
+
+  /// No description provided for @guidedMeditate.
+  ///
+  /// In pt, this message translates to:
+  /// **'Meditação \nguiada'**
+  String get guidedMeditate;
+
+  /// No description provided for @meditateTime.
+  ///
+  /// In pt, this message translates to:
+  /// **'Medite no \nseu tempo'**
+  String get meditateTime;
 }
 
 class _CommonStringsDelegate extends LocalizationsDelegate<CommonStrings> {

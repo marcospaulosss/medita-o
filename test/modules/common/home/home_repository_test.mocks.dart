@@ -82,6 +82,24 @@ class MockSecureStorage extends _i1.Mock implements _i4.SecureStorage {
       ) as _i5.Future<String>);
 
   @override
+  _i5.Future<String> get userEmail => (super.noSuchMethod(
+        Invocation.getter(#userEmail),
+        returnValue: _i5.Future<String>.value(_i6.dummyValue<String>(
+          this,
+          Invocation.getter(#userEmail),
+        )),
+      ) as _i5.Future<String>);
+
+  @override
+  _i5.Future<String> get googleId => (super.noSuchMethod(
+        Invocation.getter(#googleId),
+        returnValue: _i5.Future<String>.value(_i6.dummyValue<String>(
+          this,
+          Invocation.getter(#googleId),
+        )),
+      ) as _i5.Future<String>);
+
+  @override
   _i5.Future<dynamic> setAllToNull() => (super.noSuchMethod(
         Invocation.method(
           #setAllToNull,
@@ -125,6 +143,26 @@ class MockSecureStorage extends _i1.Mock implements _i4.SecureStorage {
         Invocation.method(
           #setUserName,
           [userName],
+        ),
+        returnValue: _i5.Future<void>.value(),
+        returnValueForMissingStub: _i5.Future<void>.value(),
+      ) as _i5.Future<void>);
+
+  @override
+  _i5.Future<void> setUserEmail(String? userEmail) => (super.noSuchMethod(
+        Invocation.method(
+          #setUserEmail,
+          [userEmail],
+        ),
+        returnValue: _i5.Future<void>.value(),
+        returnValueForMissingStub: _i5.Future<void>.value(),
+      ) as _i5.Future<void>);
+
+  @override
+  _i5.Future<void> setGoogleId(String? googleId) => (super.noSuchMethod(
+        Invocation.method(
+          #setGoogleId,
+          [googleId],
         ),
         returnValue: _i5.Future<void>.value(),
         returnValueForMissingStub: _i5.Future<void>.value(),
