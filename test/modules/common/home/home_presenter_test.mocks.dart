@@ -5,11 +5,13 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:async' as _i4;
 
-import 'package:auto_route/auto_route.dart' as _i9;
-import 'package:cinco_minutos_meditacao/core/routers/app_router.dart' as _i8;
+import 'package:auto_route/auto_route.dart' as _i10;
+import 'package:cinco_minutos_meditacao/core/routers/app_router.dart' as _i9;
 import 'package:cinco_minutos_meditacao/modules/common/screens/home/home_repository.dart'
     as _i6;
-import 'package:cinco_minutos_meditacao/shared/models/error.dart' as _i7;
+import 'package:cinco_minutos_meditacao/shared/clients/models/responses/user_response.dart'
+    as _i7;
+import 'package:cinco_minutos_meditacao/shared/models/error.dart' as _i8;
 import 'package:cinco_minutos_meditacao/shared/services/auth_service.dart'
     as _i3;
 import 'package:firebase_auth/firebase_auth.dart' as _i5;
@@ -123,31 +125,33 @@ class MockHomeRepository extends _i1.Mock implements _i6.HomeRepository {
       );
 
   @override
-  _i4.Future<_i7.CustomError?> requestMe() => (super.noSuchMethod(
+  _i4.Future<(_i7.UserResponse?, _i8.CustomError?)> requestUser() =>
+      (super.noSuchMethod(
         Invocation.method(
-          #requestMe,
+          #requestUser,
           [],
         ),
-        returnValue: _i4.Future<_i7.CustomError?>.value(),
-      ) as _i4.Future<_i7.CustomError?>);
+        returnValue: _i4.Future<(_i7.UserResponse?, _i8.CustomError?)>.value(
+            (null, null)),
+      ) as _i4.Future<(_i7.UserResponse?, _i8.CustomError?)>);
 }
 
 /// A class which mocks [AppRouter].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockAppRouter extends _i1.Mock implements _i8.AppRouter {
+class MockAppRouter extends _i1.Mock implements _i9.AppRouter {
   MockAppRouter() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  List<_i9.AutoRoute> get routes => (super.noSuchMethod(
+  List<_i10.AutoRoute> get routes => (super.noSuchMethod(
         Invocation.getter(#routes),
-        returnValue: <_i9.AutoRoute>[],
-      ) as List<_i9.AutoRoute>);
+        returnValue: <_i10.AutoRoute>[],
+      ) as List<_i10.AutoRoute>);
 
   @override
-  void goToReplace(_i9.PageRouteInfo<dynamic>? route) => super.noSuchMethod(
+  void goToReplace(_i10.PageRouteInfo<dynamic>? route) => super.noSuchMethod(
         Invocation.method(
           #goToReplace,
           [route],
@@ -156,7 +160,7 @@ class MockAppRouter extends _i1.Mock implements _i8.AppRouter {
       );
 
   @override
-  void goTo(_i9.PageRouteInfo<dynamic>? route) => super.noSuchMethod(
+  void goTo(_i10.PageRouteInfo<dynamic>? route) => super.noSuchMethod(
         Invocation.method(
           #goTo,
           [route],
