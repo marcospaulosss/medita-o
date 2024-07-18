@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/user_response.dart';
 import 'package:cinco_minutos_meditacao/shared/helpers/view_binding.dart';
 import 'package:cinco_minutos_meditacao/shared/models/error.dart';
@@ -22,6 +24,9 @@ abstract class Presenter implements ViewBinding<HomeViewContract> {
 
   /// efetua o logout do usuário
   void logOut();
+
+  /// Atualiza a imagem de perfil do usuário
+  Future<void> updateImageProfile();
 }
 
 abstract class Repository {
@@ -33,4 +38,6 @@ abstract class Repository {
 
   /// Busca informações do usuário
   Future<(UserResponse?, CustomError?)> requestUser();
+
+  Future<void> uploadImageProfile(File file);
 }

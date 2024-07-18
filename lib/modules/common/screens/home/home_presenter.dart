@@ -64,4 +64,15 @@ class HomePresenter implements Presenter {
 
     return user;
   }
+
+  @override
+  Future<void> updateImageProfile() async {
+    _router.goTo(const CameraRoute(), onClose: (result) {
+      if (result == null) {
+        return;
+      }
+
+      _repository.uploadImageProfile(result);
+    });
+  }
 }

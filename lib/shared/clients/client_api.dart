@@ -48,4 +48,8 @@ abstract class ClientApi {
   /// Obtem informações do usuário logado
   @GET('/user')
   Future<UserResponse> user();
+
+  @POST('/user/update-photo')
+  @MultiPart()
+  Future<dynamic> uploadPhoto(@Part() Map<String, dynamic> body);
 }

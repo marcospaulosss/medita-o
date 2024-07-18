@@ -171,6 +171,16 @@ class MockClientApi extends _i1.Mock implements _i8.ClientApi {
           ),
         )),
       ) as _i9.Future<_i4.UserResponse>);
+
+  @override
+  _i9.Future<dynamic> uploadPhoto(Map<String, dynamic>? body) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #uploadPhoto,
+          [body],
+        ),
+        returnValue: _i9.Future<dynamic>.value(),
+      ) as _i9.Future<dynamic>);
 }
 
 /// A class which mocks [SecureStorage].

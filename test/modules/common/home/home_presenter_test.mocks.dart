@@ -4,9 +4,10 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:async' as _i4;
+import 'dart:io' as _i9;
 
-import 'package:auto_route/auto_route.dart' as _i10;
-import 'package:cinco_minutos_meditacao/core/routers/app_router.dart' as _i9;
+import 'package:auto_route/auto_route.dart' as _i11;
+import 'package:cinco_minutos_meditacao/core/routers/app_router.dart' as _i10;
 import 'package:cinco_minutos_meditacao/modules/common/screens/home/home_repository.dart'
     as _i6;
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/user_response.dart'
@@ -134,24 +135,34 @@ class MockHomeRepository extends _i1.Mock implements _i6.HomeRepository {
         returnValue: _i4.Future<(_i7.UserResponse?, _i8.CustomError?)>.value(
             (null, null)),
       ) as _i4.Future<(_i7.UserResponse?, _i8.CustomError?)>);
+
+  @override
+  _i4.Future<void> uploadImageProfile(_i9.File? file) => (super.noSuchMethod(
+        Invocation.method(
+          #uploadImageProfile,
+          [file],
+        ),
+        returnValue: _i4.Future<void>.value(),
+        returnValueForMissingStub: _i4.Future<void>.value(),
+      ) as _i4.Future<void>);
 }
 
 /// A class which mocks [AppRouter].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockAppRouter extends _i1.Mock implements _i9.AppRouter {
+class MockAppRouter extends _i1.Mock implements _i10.AppRouter {
   MockAppRouter() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  List<_i10.AutoRoute> get routes => (super.noSuchMethod(
+  List<_i11.AutoRoute> get routes => (super.noSuchMethod(
         Invocation.getter(#routes),
-        returnValue: <_i10.AutoRoute>[],
-      ) as List<_i10.AutoRoute>);
+        returnValue: <_i11.AutoRoute>[],
+      ) as List<_i11.AutoRoute>);
 
   @override
-  void goToReplace(_i10.PageRouteInfo<dynamic>? route) => super.noSuchMethod(
+  void goToReplace(_i11.PageRouteInfo<dynamic>? route) => super.noSuchMethod(
         Invocation.method(
           #goToReplace,
           [route],
@@ -160,10 +171,15 @@ class MockAppRouter extends _i1.Mock implements _i9.AppRouter {
       );
 
   @override
-  void goTo(_i10.PageRouteInfo<dynamic>? route) => super.noSuchMethod(
+  void goTo(
+    _i11.PageRouteInfo<dynamic>? route, {
+    _i10.OnCloseRoute? onClose,
+  }) =>
+      super.noSuchMethod(
         Invocation.method(
           #goTo,
           [route],
+          {#onClose: onClose},
         ),
         returnValueForMissingStub: null,
       );
