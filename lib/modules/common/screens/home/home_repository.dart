@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:cinco_minutos_meditacao/core/analytics/manager.dart';
 import 'package:cinco_minutos_meditacao/core/wrappers/secure_storage.dart';
@@ -74,6 +75,41 @@ class HomeRepository implements Repository {
         _error.sendErrorToCrashlytics(
             code: ErrorCodes.getMeError, stackTrace: StackTrace.current)
       );
+    }
+  }
+
+  @override
+  Future<void> uploadImageProfile(File file) async {
+    try {
+      Map<String, dynamic> map = {
+        'photo': file.readAsBytesSync(),
+      };
+      var response = await _clientApi.uploadPhoto(map);
+
+      return null;
+    } on TimeoutException {
+      print("TimeoutException");
+      // return (
+      // null,
+      // _error.sendErrorToCrashlytics(
+      //     code: ErrorCodes.timeoutException, stackTrace: StackTrace.current)
+      // );
+    } on DioException catch (e) {
+      print(e);
+      // return (
+      // null,
+      // _error.sendErrorToCrashlytics(
+      //   code: ErrorCodes.getMeError,
+      //   stackTrace: StackTrace.current,
+      // )
+      // );
+    } catch (e) {
+      print(e);
+      // return (
+      // null,
+      // _error.sendErrorToCrashlytics(
+      //     code: ErrorCodes.getMeError, stackTrace: StackTrace.current)
+      // );
     }
   }
 }

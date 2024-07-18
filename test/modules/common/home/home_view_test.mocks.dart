@@ -94,4 +94,14 @@ class MockHomePresenter extends _i1.Mock implements _i2.HomePresenter {
         ),
         returnValue: _i4.Future<_i5.UserResponse?>.value(),
       ) as _i4.Future<_i5.UserResponse?>);
+
+  @override
+  _i4.Future<void> updateImageProfile() => (super.noSuchMethod(
+        Invocation.method(
+          #updateImageProfile,
+          [],
+        ),
+        returnValue: _i4.Future<void>.value(),
+        returnValueForMissingStub: _i4.Future<void>.value(),
+      ) as _i4.Future<void>);
 }

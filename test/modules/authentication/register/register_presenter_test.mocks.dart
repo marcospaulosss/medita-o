@@ -193,10 +193,15 @@ class MockAppRouter extends _i1.Mock implements _i5.AppRouter {
       );
 
   @override
-  void goTo(_i6.PageRouteInfo<dynamic>? route) => super.noSuchMethod(
+  void goTo(
+    _i6.PageRouteInfo<dynamic>? route, {
+    _i5.OnCloseRoute? onClose,
+  }) =>
+      super.noSuchMethod(
         Invocation.method(
           #goTo,
           [route],
+          {#onClose: onClose},
         ),
         returnValueForMissingStub: null,
       );

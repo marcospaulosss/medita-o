@@ -35,6 +35,9 @@ class _HomeViewState extends State<HomeView> implements HomeViewContract {
   /// Mensagem de erro
   late String messageError = "";
 
+  /// Usuário
+  late UserResponse user;
+
   @override
   void initState() {
     stateController.showErrorState();
@@ -47,6 +50,7 @@ class _HomeViewState extends State<HomeView> implements HomeViewContract {
 
   void dispose() {
     presenter.unbindView();
+
     super.dispose();
   }
 
@@ -67,8 +71,10 @@ class _HomeViewState extends State<HomeView> implements HomeViewContract {
       child: Column(
         children: [
           AppHeader(
-            nameUser: "Gabriela",
+            nameUser: user.name.split(" ").first,
             description1: CommonStrings.of(context).homeHeaderDescription1,
+            photo: user.profilePhotoPath,
+            updateImage: () => presenter.updateImageProfile(),
           ),
           buildBody(context),
         ],
@@ -216,7 +222,6 @@ class _HomeViewState extends State<HomeView> implements HomeViewContract {
     );
   }
 
-  /// -[Funcionalidades do contrato]-
   /// Mostra o estado de carregamento
   @override
   void showLoading() {
@@ -226,6 +231,9 @@ class _HomeViewState extends State<HomeView> implements HomeViewContract {
   /// Mostra o estado normal
   @override
   void showNormalState(UserResponse? user) {
+    setState(() {
+      this.user = user!;
+    });
     stateController.showNormalState();
   }
 
