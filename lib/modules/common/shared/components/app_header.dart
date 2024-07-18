@@ -12,15 +12,25 @@ class AppHeader extends StatelessWidget {
   final String description2;
   final String description3;
 
+  /// foto do usuário
+  String? photo;
+
+  /// função para atualizar a imagem
+  final Function updateImage;
+
   /// - [nameUser] Nome do usuário
   /// - [description] frase de descrição
+  /// - [photo] foto do usuário
+  /// - [updateImage] função para atualizar a imagem
   /// construtor
-  const AppHeader({
+  AppHeader({
     super.key,
     this.nameUser = "",
     this.description1 = "",
     this.description2 = "",
     this.description3 = "",
+    this.photo,
+    required this.updateImage,
   });
 
   @override
@@ -73,17 +83,25 @@ class AppHeader extends StatelessWidget {
     return Positioned(
       top: 20,
       left: 30,
-      child: Container(
-        width: 78,
-        height: 78,
-        decoration: BoxDecoration(
-          color: AppColors.white,
-          borderRadius: BorderRadius.circular(50),
-        ),
-        child: const Icon(
-          Icons.add,
-          color: AppColors.blueNCS,
-          size: 30,
+      child: GestureDetector(
+        onTap: () => updateImage(),
+        child: Container(
+          width: 78,
+          height: 78,
+          decoration: BoxDecoration(
+            color: AppColors.white,
+            borderRadius: BorderRadius.circular(50),
+          ),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(50),
+            child: (photo != null)
+                ? Image.network(photo!, fit: BoxFit.cover)
+                : const Icon(
+                    Icons.add,
+                    color: AppColors.blueNCS,
+                    size: 30,
+                  ),
+          ),
         ),
       ),
     );
