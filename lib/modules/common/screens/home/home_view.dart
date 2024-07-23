@@ -40,14 +40,13 @@ class _HomeViewState extends State<HomeView> implements HomeViewContract {
 
   @override
   void initState() {
-    stateController.showErrorState();
-
     presenter.bindView(this);
     presenter.initPresenter();
 
     super.initState();
   }
 
+  @override
   void dispose() {
     presenter.unbindView();
 
@@ -62,6 +61,7 @@ class _HomeViewState extends State<HomeView> implements HomeViewContract {
       loadingStateBuilder: (context) => const Loading(),
       errorStateBuilder: (context) => GenericErrorContainer(
         message: messageError,
+        onRetry: () => presenter.initPresenter(),
       ),
     );
   }
@@ -102,12 +102,13 @@ class _HomeViewState extends State<HomeView> implements HomeViewContract {
   Column buildMeditometer() {
     return Column(
       children: [
-        const Text(
-          "Meditômetro",
-          style: TextStyle(
-            fontSize: 30,
+        Text(
+          CommonStrings.of(context).meditometer,
+          style: const TextStyle(
+            fontSize: 64,
             fontWeight: FontWeight.w400,
             color: AppColors.steelWoolColor,
+            fontFamily: "Blanch",
           ),
         ),
         Container(
@@ -118,9 +119,9 @@ class _HomeViewState extends State<HomeView> implements HomeViewContract {
             color: AppColors.blueMana,
             borderRadius: BorderRadius.circular(27),
           ),
-          child: const Text(
-            "EM TEMPO REAL",
-            style: TextStyle(
+          child: Text(
+            CommonStrings.of(context).realTime,
+            style: const TextStyle(
               fontSize: 13,
               fontWeight: FontWeight.w400,
               color: AppColors.white,
@@ -136,9 +137,9 @@ class _HomeViewState extends State<HomeView> implements HomeViewContract {
           ),
         ),
         RichText(
-          text: const TextSpan(
+          text: TextSpan(
             children: [
-              TextSpan(
+              const TextSpan(
                 text: "milhões ",
                 style: TextStyle(
                   fontSize: 11,
@@ -147,8 +148,8 @@ class _HomeViewState extends State<HomeView> implements HomeViewContract {
                 ),
               ),
               TextSpan(
-                text: "de Minutos meditados no mundo",
-                style: TextStyle(
+                text: CommonStrings.of(context).minutesMeditatedWorld,
+                style: const TextStyle(
                   fontSize: 11,
                   fontWeight: FontWeight.w400,
                   color: AppColors.frankBlue,
@@ -167,19 +168,21 @@ class _HomeViewState extends State<HomeView> implements HomeViewContract {
               color: AppColors.vividCerulean,
             ),
             SvgPicture.asset(
-              "assets/images/Layer 1.svg",
+              AppImages.countries,
               height: 144,
               width: 248,
             ),
-            const Positioned(
+            Positioned(
               left: 12,
-              top: 65,
+              top: 53,
+              width: 60,
               child: Text(
-                "PAÍSES \nALCANÇADOS",
-                style: TextStyle(
-                  fontSize: 11,
+                CommonStrings.of(context).countriesReached,
+                style: const TextStyle(
+                  fontSize: 17,
                   fontWeight: FontWeight.w400,
                   color: AppColors.white,
+                  fontFamily: "Blanch",
                 ),
               ),
             ),
@@ -199,7 +202,7 @@ class _HomeViewState extends State<HomeView> implements HomeViewContract {
             Meditate(
               title: CommonStrings.of(context).meditate5Minutes,
             ),
-            const SizedBox(width: 14),
+            const SizedBox(width: 10),
             Meditate(
               title: CommonStrings.of(context).learnMethod,
             ),
@@ -212,7 +215,7 @@ class _HomeViewState extends State<HomeView> implements HomeViewContract {
             Meditate(
               title: CommonStrings.of(context).guidedMeditate,
             ),
-            const SizedBox(width: 14),
+            const SizedBox(width: 10),
             Meditate(
               title: CommonStrings.of(context).meditateTime,
             ),

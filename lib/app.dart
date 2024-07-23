@@ -81,7 +81,7 @@ class _AppState extends State<App> {
           TargetPlatform.iOS: FadeUpwardsPageTransitionsBuilder(),
           TargetPlatform.android: FadeUpwardsPageTransitionsBuilder(),
         }),
-        fontFamily: 'Apertura',
+        fontFamily: 'Heebo',
       ),
       routerConfig: _appRouter.config(
         navigatorObservers: () => [

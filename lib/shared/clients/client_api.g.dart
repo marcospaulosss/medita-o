@@ -131,11 +131,18 @@ class _ClientApi implements ClientApi {
   }
 
   @override
-  Future<dynamic> uploadPhoto(Map<String, dynamic> body) async {
+  Future<dynamic> uploadPhoto(File photo) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final _data = FormData.fromMap(body);
+    final _data = FormData();
+    _data.files.add(MapEntry(
+      'photo',
+      MultipartFile.fromFileSync(
+        photo.path,
+        filename: photo.path.split(Platform.pathSeparator).last,
+      ),
+    ));
     final _result = await _dio.fetch(_setStreamType<dynamic>(Options(
       method: 'POST',
       headers: _headers,
@@ -144,7 +151,7 @@ class _ClientApi implements ClientApi {
     )
         .compose(
           _dio.options,
-          '/user/update-photo',
+          '/user/photo',
           queryParameters: queryParameters,
           data: _data,
         )

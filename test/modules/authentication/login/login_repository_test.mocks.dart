@@ -4,11 +4,12 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:async' as _i9;
+import 'dart:io' as _i12;
 
 import 'package:cinco_minutos_meditacao/core/analytics/event.dart' as _i7;
 import 'package:cinco_minutos_meditacao/core/analytics/manager.dart' as _i6;
 import 'package:cinco_minutos_meditacao/core/wrappers/secure_storage.dart'
-    as _i12;
+    as _i13;
 import 'package:cinco_minutos_meditacao/shared/clients/client_api.dart' as _i8;
 import 'package:cinco_minutos_meditacao/shared/clients/models/requests/auth_request.dart'
     as _i11;
@@ -22,7 +23,7 @@ import 'package:cinco_minutos_meditacao/shared/clients/models/responses/user_res
     as _i4;
 import 'package:cinco_minutos_meditacao/shared/models/error.dart' as _i5;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:mockito/src/dummies.dart' as _i13;
+import 'package:mockito/src/dummies.dart' as _i14;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -173,11 +174,10 @@ class MockClientApi extends _i1.Mock implements _i8.ClientApi {
       ) as _i9.Future<_i4.UserResponse>);
 
   @override
-  _i9.Future<dynamic> uploadPhoto(Map<String, dynamic>? body) =>
-      (super.noSuchMethod(
+  _i9.Future<dynamic> uploadPhoto(_i12.File? photo) => (super.noSuchMethod(
         Invocation.method(
           #uploadPhoto,
-          [body],
+          [photo],
         ),
         returnValue: _i9.Future<dynamic>.value(),
       ) as _i9.Future<dynamic>);
@@ -186,7 +186,7 @@ class MockClientApi extends _i1.Mock implements _i8.ClientApi {
 /// A class which mocks [SecureStorage].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockSecureStorage extends _i1.Mock implements _i12.SecureStorage {
+class MockSecureStorage extends _i1.Mock implements _i13.SecureStorage {
   MockSecureStorage() {
     _i1.throwOnMissingStub(this);
   }
@@ -194,7 +194,7 @@ class MockSecureStorage extends _i1.Mock implements _i12.SecureStorage {
   @override
   _i9.Future<String> get tokenAPI => (super.noSuchMethod(
         Invocation.getter(#tokenAPI),
-        returnValue: _i9.Future<String>.value(_i13.dummyValue<String>(
+        returnValue: _i9.Future<String>.value(_i14.dummyValue<String>(
           this,
           Invocation.getter(#tokenAPI),
         )),
@@ -215,7 +215,7 @@ class MockSecureStorage extends _i1.Mock implements _i12.SecureStorage {
   @override
   _i9.Future<String> get userName => (super.noSuchMethod(
         Invocation.getter(#userName),
-        returnValue: _i9.Future<String>.value(_i13.dummyValue<String>(
+        returnValue: _i9.Future<String>.value(_i14.dummyValue<String>(
           this,
           Invocation.getter(#userName),
         )),
@@ -224,7 +224,7 @@ class MockSecureStorage extends _i1.Mock implements _i12.SecureStorage {
   @override
   _i9.Future<String> get userEmail => (super.noSuchMethod(
         Invocation.getter(#userEmail),
-        returnValue: _i9.Future<String>.value(_i13.dummyValue<String>(
+        returnValue: _i9.Future<String>.value(_i14.dummyValue<String>(
           this,
           Invocation.getter(#userEmail),
         )),
@@ -233,7 +233,7 @@ class MockSecureStorage extends _i1.Mock implements _i12.SecureStorage {
   @override
   _i9.Future<String> get googleId => (super.noSuchMethod(
         Invocation.getter(#googleId),
-        returnValue: _i9.Future<String>.value(_i13.dummyValue<String>(
+        returnValue: _i9.Future<String>.value(_i14.dummyValue<String>(
           this,
           Invocation.getter(#googleId),
         )),
@@ -347,7 +347,7 @@ class MockCustomError extends _i1.Mock implements _i5.CustomError {
   @override
   String get getErrorMessage => (super.noSuchMethod(
         Invocation.getter(#getErrorMessage),
-        returnValue: _i13.dummyValue<String>(
+        returnValue: _i14.dummyValue<String>(
           this,
           Invocation.getter(#getErrorMessage),
         ),
