@@ -24,4 +24,16 @@ class CommonStringsPt extends CommonStrings {
 
   @override
   String get meditateTime => 'Medite no \nseu tempo';
+
+  @override
+  String get meditometer => 'Meditômetro';
+
+  @override
+  String get realTime => 'EM TEMPO REAL';
+
+  @override
+  String get minutesMeditatedWorld => 'de Minutos meditados no mundo';
+
+  @override
+  String get countriesReached => 'PAÍSES ALCANÇADOS';
 }

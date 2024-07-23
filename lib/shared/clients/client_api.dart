@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:cinco_minutos_meditacao/core/environment/manager.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/interceptor.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/models/requests/auth_request.dart';
@@ -49,7 +51,7 @@ abstract class ClientApi {
   @GET('/user')
   Future<UserResponse> user();
 
-  @POST('/user/update-photo')
+  @POST('/user/photo')
   @MultiPart()
-  Future<dynamic> uploadPhoto(@Part() Map<String, dynamic> body);
+  Future<dynamic> uploadPhoto(@Part(name: "photo") File photo);
 }

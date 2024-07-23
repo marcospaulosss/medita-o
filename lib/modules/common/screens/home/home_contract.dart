@@ -39,5 +39,6 @@ abstract class Repository {
   /// Busca informações do usuário
   Future<(UserResponse?, CustomError?)> requestUser();
 
-  Future<void> uploadImageProfile(File file);
+  /// Atualiza a imagem de perfil do usuário
+  Future<CustomError?> uploadImageProfile(File file);
 }

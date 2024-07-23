@@ -78,38 +78,24 @@ class HomeRepository implements Repository {
     }
   }
 
+  /// Atualiza a imagem de perfil do usuário
   @override
-  Future<void> uploadImageProfile(File file) async {
+  Future<CustomError?> uploadImageProfile(File file) async {
     try {
-      Map<String, dynamic> map = {
-        'photo': file.readAsBytesSync(),
-      };
-      var response = await _clientApi.uploadPhoto(map);
+      await _clientApi.uploadPhoto(file);
 
       return null;
     } on TimeoutException {
-      print("TimeoutException");
-      // return (
-      // null,
-      // _error.sendErrorToCrashlytics(
-      //     code: ErrorCodes.timeoutException, stackTrace: StackTrace.current)
-      // );
+      return _error.sendErrorToCrashlytics(
+          code: ErrorCodes.timeoutException, stackTrace: StackTrace.current);
     } on DioException catch (e) {
-      print(e);
-      // return (
-      // null,
-      // _error.sendErrorToCrashlytics(
-      //   code: ErrorCodes.getMeError,
-      //   stackTrace: StackTrace.current,
-      // )
-      // );
+      return _error.sendErrorToCrashlytics(
+        code: ErrorCodes.getMeError,
+        stackTrace: StackTrace.current,
+      );
     } catch (e) {
-      print(e);
-      // return (
-      // null,
-      // _error.sendErrorToCrashlytics(
-      //     code: ErrorCodes.getMeError, stackTrace: StackTrace.current)
-      // );
+      return _error.sendErrorToCrashlytics(
+          code: ErrorCodes.getMeError, stackTrace: StackTrace.current);
     }
   }
 }

@@ -24,4 +24,16 @@ class CommonStringsEs extends CommonStrings {
 
   @override
   String get meditateTime => 'Medita en\ntu tiempo';
+
+  @override
+  String get meditometer => 'meditómetro';
+
+  @override
+  String get realTime => 'EN TIEMPO REAL';
+
+  @override
+  String get minutesMeditatedWorld => 'de MinutosMeditatedWorld';
+
+  @override
+  String get countriesReached => 'PAÍSES ALCANZADOS';
 }

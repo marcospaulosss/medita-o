@@ -136,6 +136,30 @@ abstract class CommonStrings {
   /// In pt, this message translates to:
   /// **'Medite no \nseu tempo'**
   String get meditateTime;
+
+  /// No description provided for @meditometer.
+  ///
+  /// In pt, this message translates to:
+  /// **'Meditômetro'**
+  String get meditometer;
+
+  /// No description provided for @realTime.
+  ///
+  /// In pt, this message translates to:
+  /// **'EM TEMPO REAL'**
+  String get realTime;
+
+  /// No description provided for @minutesMeditatedWorld.
+  ///
+  /// In pt, this message translates to:
+  /// **'de Minutos meditados no mundo'**
+  String get minutesMeditatedWorld;
+
+  /// No description provided for @countriesReached.
+  ///
+  /// In pt, this message translates to:
+  /// **'PAÍSES ALCANÇADOS'**
+  String get countriesReached;
 }
 
 class _CommonStringsDelegate extends LocalizationsDelegate<CommonStrings> {

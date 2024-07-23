@@ -5,5 +5,9 @@
   "fiveMinutes": "5 min",
   "learnMethod": "Aprenda o \nmétodo",
   "guidedMeditate": "Meditação \nguiada",
-  "meditateTime": "Medite no \nseu tempo"
+  "meditateTime": "Medite no \nseu tempo",
+  "meditometer": "Meditômetro",
+  "realTime": "EM TEMPO REAL",
+  "minutesMeditatedWorld": "de Minutos meditados no mundo",
+  "countriesReached": "PAÍSES ALCANÇADOS"
 }
