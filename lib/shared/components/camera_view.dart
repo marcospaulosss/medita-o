@@ -66,7 +66,7 @@ class _CameraViewState extends State<CameraView> {
                       Navigator.of(context).pop();
                     },
                     child: Container(
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                         color: Colors.white,
                         shape: BoxShape.circle,
                       ),
@@ -97,7 +97,7 @@ class _CameraViewState extends State<CameraView> {
                       FloatingActionButton(
                         heroTag: 'library',
                         onPressed: _pickImageFromGallery,
-                        child: Icon(Icons.photo_library),
+                        child: const Icon(Icons.photo_library),
                       ),
                     ],
                   ),
@@ -147,6 +147,8 @@ class _CameraViewState extends State<CameraView> {
     setState(() {
       if (pickedFile != null) {
         _image = File(pickedFile.path);
+
+        Navigator.of(context).pop(_image);
       }
     });
   }

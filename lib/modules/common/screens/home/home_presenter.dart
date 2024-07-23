@@ -2,6 +2,7 @@ import 'package:cinco_minutos_meditacao/core/routers/app_router.dart';
 import 'package:cinco_minutos_meditacao/core/routers/app_router.gr.dart';
 import 'package:cinco_minutos_meditacao/modules/common/screens/home/home_contract.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/user_response.dart';
+import 'package:cinco_minutos_meditacao/shared/models/error.dart';
 import 'package:cinco_minutos_meditacao/shared/services/auth_service.dart';
 
 class HomePresenter implements Presenter {
@@ -65,14 +66,22 @@ class HomePresenter implements Presenter {
     return user;
   }
 
+  /// Atualiza a imagem de perfil do usuário
   @override
   Future<void> updateImageProfile() async {
-    _router.goTo(const CameraRoute(), onClose: (result) {
+    _router.goTo(const CameraRoute(), onClose: (result) async {
       if (result == null) {
         return;
       }
 
-      _repository.uploadImageProfile(result);
+      CustomError? err = await _repository.uploadImageProfile(result);
+      if (err != null) {
+        view!.showError(err.getErrorMessage);
+        return;
+      }
+
+      UserResponse? user = await getMe();
+      view!.showNormalState(user);
     });
   }
 }

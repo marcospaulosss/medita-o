@@ -24,4 +24,16 @@ class CommonStringsEn extends CommonStrings {
 
   @override
   String get meditateTime => 'Meditate in\nyour time';
+
+  @override
+  String get meditometer => 'Meditometer';
+
+  @override
+  String get realTime => 'IN REAL TIME';
+
+  @override
+  String get minutesMeditatedWorld => 'from MinutesMeditatedWorld';
+
+  @override
+  String get countriesReached => 'COUNTRIES REACHED';
 }
