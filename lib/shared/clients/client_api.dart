@@ -5,6 +5,7 @@ import 'package:cinco_minutos_meditacao/shared/clients/interceptor.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/models/requests/auth_request.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/models/requests/authenticate_google_request.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/authenticate_google_response.dart';
+import 'package:cinco_minutos_meditacao/shared/clients/models/responses/meditations_response.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/register_response.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/user_response.dart';
 import 'package:curl_logger_dio_interceptor/curl_logger_dio_interceptor.dart';
@@ -54,4 +55,9 @@ abstract class ClientApi {
   @POST('/user/photo')
   @MultiPart()
   Future<dynamic> uploadPhoto(@Part(name: "photo") File photo);
+
+  /// - [ Meditations ] : Cliente de meditações
+  /// Obtem as meditações disponíveis
+  @GET('/meditations')
+  Future<MeditationsResponse> meditations();
 }

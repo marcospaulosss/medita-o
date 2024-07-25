@@ -11,6 +11,7 @@ enum ErrorCodes {
   badRequest,
   registerError,
   getMeError,
+  getMeditionsError,
 }
 
 class CustomError extends Error {
@@ -38,6 +39,7 @@ class CustomError extends Error {
     ErrorCodes.alreadyRegistered: "Usuário já cadastrado.",
     ErrorCodes.registerError: "Erro ao realizar cadastro.",
     ErrorCodes.getMeError: "Erro ao obter informações do usuário.",
+    ErrorCodes.getMeditionsError: "Erro ao obter meditações.",
   };
 
   CustomError sendErrorToCrashlytics(

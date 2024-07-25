@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:cinco_minutos_meditacao/modules/common/screens/home/home_model.dart';
+import 'package:cinco_minutos_meditacao/shared/clients/models/responses/meditations_response.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/user_response.dart';
 import 'package:cinco_minutos_meditacao/shared/helpers/view_binding.dart';
 import 'package:cinco_minutos_meditacao/shared/models/error.dart';
@@ -9,7 +11,7 @@ abstract class HomeViewContract {
   void showLoading();
 
   /// Mostra a tela normal
-  void showNormalState(UserResponse? user);
+  void showNormalState(HomeModel model);
 
   /// Mostra a tela de erro
   void showError(String message);
@@ -41,4 +43,7 @@ abstract class Repository {
 
   /// Atualiza a imagem de perfil do usuário
   Future<CustomError?> uploadImageProfile(File file);
+
+  /// Busca a quantidade de meditações realizadas no mundo
+  Future<(MeditationsResponse?, CustomError?)> requestMeditations();
 }

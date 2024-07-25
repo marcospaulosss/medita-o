@@ -1,6 +1,8 @@
 import 'package:cinco_minutos_meditacao/core/routers/app_router.dart';
 import 'package:cinco_minutos_meditacao/core/routers/app_router.gr.dart';
 import 'package:cinco_minutos_meditacao/modules/common/screens/home/home_contract.dart';
+import 'package:cinco_minutos_meditacao/modules/common/screens/home/home_model.dart';
+import 'package:cinco_minutos_meditacao/shared/clients/models/responses/meditations_response.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/user_response.dart';
 import 'package:cinco_minutos_meditacao/shared/models/error.dart';
 import 'package:cinco_minutos_meditacao/shared/services/auth_service.dart';
@@ -28,6 +30,8 @@ class HomePresenter implements Presenter {
   /// variável de controle de erro
   bool error = false;
 
+  HomeModel homeModel = HomeModel();
+
   /// evento disparado ao abrir a tela
   @override
   void onOpenScreen() {
@@ -49,9 +53,11 @@ class HomePresenter implements Presenter {
 
     view!.showLoading();
     UserResponse? user = await getMe();
-
-    if (!error) {
-      view!.showNormalState(user);
+    MeditationsResponse? meditations = await getMeditions();
+    if (user != null && meditations != null) {
+      homeModel.userResponse = user;
+      homeModel.meditationsResponse = meditations;
+      view!.showNormalState(homeModel);
     }
   }
 
@@ -81,7 +87,18 @@ class HomePresenter implements Presenter {
       }
 
       UserResponse? user = await getMe();
-      view!.showNormalState(user);
+      homeModel.userResponse = user;
+      view!.showNormalState(homeModel);
     });
+  }
+
+  Future<MeditationsResponse?> getMeditions() async {
+    var (meditations, error) = await _repository.requestMeditations();
+    if (error != null) {
+      view!.showError(error.getErrorMessage);
+      return null;
+    }
+
+    return meditations;
   }
 }

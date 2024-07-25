@@ -6,6 +6,7 @@ import 'package:cinco_minutos_meditacao/core/wrappers/secure_storage.dart';
 import 'package:cinco_minutos_meditacao/modules/common/analytics/events.dart';
 import 'package:cinco_minutos_meditacao/modules/common/screens/home/home_contract.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/client_api.dart';
+import 'package:cinco_minutos_meditacao/shared/clients/models/responses/meditations_response.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/user_response.dart';
 import 'package:cinco_minutos_meditacao/shared/models/error.dart';
 import 'package:dio/dio.dart';
@@ -96,6 +97,35 @@ class HomeRepository implements Repository {
     } catch (e) {
       return _error.sendErrorToCrashlytics(
           code: ErrorCodes.getMeError, stackTrace: StackTrace.current);
+    }
+  }
+
+  @override
+  Future<(MeditationsResponse?, CustomError?)> requestMeditations() async {
+    try {
+      MeditationsResponse response = await _clientApi.meditations();
+
+      return (response, null);
+    } on TimeoutException {
+      return (
+        null,
+        _error.sendErrorToCrashlytics(
+            code: ErrorCodes.timeoutException, stackTrace: StackTrace.current)
+      );
+    } on DioException catch (e) {
+      return (
+        null,
+        _error.sendErrorToCrashlytics(
+          code: ErrorCodes.getMeditionsError,
+          stackTrace: StackTrace.current,
+        )
+      );
+    } catch (e) {
+      return (
+        null,
+        _error.sendErrorToCrashlytics(
+            code: ErrorCodes.getMeError, stackTrace: StackTrace.current)
+      );
     }
   }
 }
