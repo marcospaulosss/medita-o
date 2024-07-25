@@ -1,13 +1,13 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:cinco_minutos_meditacao/core/di/helpers.dart';
 import 'package:cinco_minutos_meditacao/modules/common/screens/home/home_contract.dart';
+import 'package:cinco_minutos_meditacao/modules/common/screens/home/home_model.dart';
 import 'package:cinco_minutos_meditacao/modules/common/screens/home/home_presenter.dart';
 import 'package:cinco_minutos_meditacao/modules/common/shared/components/app_header.dart';
 import 'package:cinco_minutos_meditacao/modules/common/shared/components/meditate.dart';
 import 'package:cinco_minutos_meditacao/modules/common/shared/strings/localization/common_strings.dart';
 import 'package:cinco_minutos_meditacao/shared/Theme/app_colors.dart';
 import 'package:cinco_minutos_meditacao/shared/Theme/app_images.dart';
-import 'package:cinco_minutos_meditacao/shared/clients/models/responses/user_response.dart';
 import 'package:cinco_minutos_meditacao/shared/components/app_background.dart';
 import 'package:cinco_minutos_meditacao/shared/components/generic_error_container.dart';
 import 'package:cinco_minutos_meditacao/shared/components/loading.dart';
@@ -36,10 +36,12 @@ class _HomeViewState extends State<HomeView> implements HomeViewContract {
   late String messageError = "";
 
   /// Usuário
-  late UserResponse user;
+  late HomeModel model = HomeModel();
 
   @override
   void initState() {
+    stateController.showLoadingState();
+
     presenter.bindView(this);
     presenter.initPresenter();
 
@@ -71,9 +73,9 @@ class _HomeViewState extends State<HomeView> implements HomeViewContract {
       child: Column(
         children: [
           AppHeader(
-            nameUser: user.name.split(" ").first,
+            nameUser: model.userResponse!.name.split(" ").first,
             description1: CommonStrings.of(context).homeHeaderDescription1,
-            photo: user.profilePhotoPath,
+            photo: model.userResponse!.profilePhotoPath,
             updateImage: () => presenter.updateImageProfile(),
           ),
           buildBody(context),
@@ -128,9 +130,9 @@ class _HomeViewState extends State<HomeView> implements HomeViewContract {
             ),
           ),
         ),
-        const Text(
-          "24.126.970",
-          style: TextStyle(
+        Text(
+          model.meditationsResponse!.totalMinutes.toString(),
+          style: const TextStyle(
             fontSize: 58,
             fontWeight: FontWeight.w900,
             color: AppColors.frankBlue,
@@ -233,9 +235,9 @@ class _HomeViewState extends State<HomeView> implements HomeViewContract {
 
   /// Mostra o estado normal
   @override
-  void showNormalState(UserResponse? user) {
+  void showNormalState(HomeModel modelResponse) {
     setState(() {
-      this.user = user!;
+      model = modelResponse;
     });
     stateController.showNormalState();
   }
