@@ -137,10 +137,20 @@ class MockHomeRepository extends _i1.Mock implements _i6.HomeRepository {
       ) as _i4.Future<(_i7.UserResponse?, _i8.CustomError?)>);
 
   @override
-  _i4.Future<void> uploadImageProfile(_i9.File? file) => (super.noSuchMethod(
+  _i4.Future<_i8.CustomError?> uploadImageProfile(_i9.File? file) =>
+      (super.noSuchMethod(
         Invocation.method(
           #uploadImageProfile,
           [file],
+        ),
+        returnValue: _i4.Future<_i8.CustomError?>.value(),
+      ) as _i4.Future<_i8.CustomError?>);
+
+  @override
+  _i4.Future<void> requestMeditations() => (super.noSuchMethod(
+        Invocation.method(
+          #requestMeditations,
+          [],
         ),
         returnValue: _i4.Future<void>.value(),
         returnValueForMissingStub: _i4.Future<void>.value(),
