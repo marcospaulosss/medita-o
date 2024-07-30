@@ -23,10 +23,11 @@ class HomeView extends StatefulWidget {
   });
 
   @override
-  State<HomeView> createState() => _HomeViewState();
+  State<HomeView> createState() => HomeViewState();
 }
 
-class _HomeViewState extends State<HomeView> implements HomeViewContract {
+@visibleForTesting
+class HomeViewState extends State<HomeView> implements HomeViewContract {
   Presenter presenter = resolve<HomePresenter>();
 
   /// Controlador do estado da tela
@@ -40,8 +41,6 @@ class _HomeViewState extends State<HomeView> implements HomeViewContract {
 
   @override
   void initState() {
-    stateController.showLoadingState();
-
     presenter.bindView(this);
     presenter.initPresenter();
 

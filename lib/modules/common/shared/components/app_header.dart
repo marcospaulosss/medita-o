@@ -94,7 +94,7 @@ class AppHeader extends StatelessWidget {
           ),
           child: ClipRRect(
             borderRadius: BorderRadius.circular(50),
-            child: (photo != null)
+            child: (photo != null && photo!.isNotEmpty)
                 ? Image.network(photo!, fit: BoxFit.cover)
                 : const Icon(
                     Icons.add,

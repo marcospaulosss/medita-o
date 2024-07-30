@@ -3,14 +3,18 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i4;
+import 'dart:async' as _i5;
 
 import 'package:cinco_minutos_meditacao/modules/common/screens/home/home_contract.dart'
-    as _i3;
-import 'package:cinco_minutos_meditacao/modules/common/screens/home/home_presenter.dart'
+    as _i4;
+import 'package:cinco_minutos_meditacao/modules/common/screens/home/home_model.dart'
     as _i2;
+import 'package:cinco_minutos_meditacao/modules/common/screens/home/home_presenter.dart'
+    as _i3;
+import 'package:cinco_minutos_meditacao/shared/clients/models/responses/meditations_response.dart'
+    as _i7;
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/user_response.dart'
-    as _i5;
+    as _i6;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: type=lint
@@ -26,16 +30,26 @@ import 'package:mockito/mockito.dart' as _i1;
 // ignore_for_file: camel_case_types
 // ignore_for_file: subtype_of_sealed_class
 
+class _FakeHomeModel_0 extends _i1.SmartFake implements _i2.HomeModel {
+  _FakeHomeModel_0(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
 /// A class which mocks [HomePresenter].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockHomePresenter extends _i1.Mock implements _i2.HomePresenter {
+class MockHomePresenter extends _i1.Mock implements _i3.HomePresenter {
   MockHomePresenter() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  set view(_i3.HomeViewContract? _view) => super.noSuchMethod(
+  set view(_i4.HomeViewContract? _view) => super.noSuchMethod(
         Invocation.setter(
           #view,
           _view,
@@ -59,6 +73,24 @@ class MockHomePresenter extends _i1.Mock implements _i2.HomePresenter {
       );
 
   @override
+  _i2.HomeModel get homeModel => (super.noSuchMethod(
+        Invocation.getter(#homeModel),
+        returnValue: _FakeHomeModel_0(
+          this,
+          Invocation.getter(#homeModel),
+        ),
+      ) as _i2.HomeModel);
+
+  @override
+  set homeModel(_i2.HomeModel? _homeModel) => super.noSuchMethod(
+        Invocation.setter(
+          #homeModel,
+          _homeModel,
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
   void onOpenScreen() => super.noSuchMethod(
         Invocation.method(
           #onOpenScreen,
@@ -77,41 +109,40 @@ class MockHomePresenter extends _i1.Mock implements _i2.HomePresenter {
       );
 
   @override
-  _i4.Future<void> initPresenter() => (super.noSuchMethod(
+  _i5.Future<void> initPresenter() => (super.noSuchMethod(
         Invocation.method(
           #initPresenter,
           [],
         ),
-        returnValue: _i4.Future<void>.value(),
-        returnValueForMissingStub: _i4.Future<void>.value(),
-      ) as _i4.Future<void>);
+        returnValue: _i5.Future<void>.value(),
+        returnValueForMissingStub: _i5.Future<void>.value(),
+      ) as _i5.Future<void>);
 
   @override
-  _i4.Future<_i5.UserResponse?> getMe() => (super.noSuchMethod(
+  _i5.Future<_i6.UserResponse?> getMe() => (super.noSuchMethod(
         Invocation.method(
           #getMe,
           [],
         ),
-        returnValue: _i4.Future<_i5.UserResponse?>.value(),
-      ) as _i4.Future<_i5.UserResponse?>);
+        returnValue: _i5.Future<_i6.UserResponse?>.value(),
+      ) as _i5.Future<_i6.UserResponse?>);
 
   @override
-  _i4.Future<void> updateImageProfile() => (super.noSuchMethod(
+  _i5.Future<void> updateImageProfile() => (super.noSuchMethod(
         Invocation.method(
           #updateImageProfile,
           [],
         ),
-        returnValue: _i4.Future<void>.value(),
-        returnValueForMissingStub: _i4.Future<void>.value(),
-      ) as _i4.Future<void>);
+        returnValue: _i5.Future<void>.value(),
+        returnValueForMissingStub: _i5.Future<void>.value(),
+      ) as _i5.Future<void>);
 
   @override
-  _i4.Future<void> getMeditions() => (super.noSuchMethod(
+  _i5.Future<_i7.MeditationsResponse?> getMeditions() => (super.noSuchMethod(
         Invocation.method(
           #getMeditions,
           [],
         ),
-        returnValue: _i4.Future<void>.value(),
-        returnValueForMissingStub: _i4.Future<void>.value(),
-      ) as _i4.Future<void>);
+        returnValue: _i5.Future<_i7.MeditationsResponse?>.value(),
+      ) as _i5.Future<_i7.MeditationsResponse?>);
 }
