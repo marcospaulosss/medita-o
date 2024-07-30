@@ -124,7 +124,7 @@ class HomeRepository implements Repository {
       return (
         null,
         _error.sendErrorToCrashlytics(
-            code: ErrorCodes.getMeError, stackTrace: StackTrace.current)
+            code: ErrorCodes.getMeditionsError, stackTrace: StackTrace.current)
       );
     }
   }
