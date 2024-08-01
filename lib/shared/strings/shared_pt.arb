@@ -1,5 +1,10 @@
 {
   "genericErrorRetry": "Tentar novamente",
   "genericErrorTitle": "Tivemos um problema.",
-  "genericErrorSubTitle": "Encontramos um problema ao carregar os dados. Por favor, tente novamente."
+  "genericErrorSubTitle": "Encontramos um problema ao carregar os dados. Por favor, tente novamente.",
+  "meditometer": "Meditômetro",
+  "realTime": "EM TEMPO REAL",
+  "millions": "milhões ",
+  "minutesMeditatedWorld": "de Minutos meditados no mundo",
+  "countriesReached": "PAÍSES ALCANÇADOS"
 }

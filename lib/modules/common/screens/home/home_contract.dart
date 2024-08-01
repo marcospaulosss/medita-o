@@ -29,6 +29,9 @@ abstract class Presenter implements ViewBinding<HomeViewContract> {
 
   /// Atualiza a imagem de perfil do usuário
   Future<void> updateImageProfile();
+
+  /// Direciona para a tela de informações e metodos de meditação
+  void goToMeditateInfo(HomeModel model);
 }
 
 abstract class Repository {

@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:cinco_minutos_meditacao/core/routers/app_router.gr.dart';
 import 'package:cinco_minutos_meditacao/shared/Theme/app_colors.dart';
+import 'package:cinco_minutos_meditacao/shared/helpers/bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';
 
 class BottomNavBar extends StatefulWidget {
@@ -34,7 +35,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
           navigatorItem(
             "assets/images/icons/Balão.png",
             "Meditar",
-            _shouldShowIdentify(),
+            shouldShowIdentify(widget.routeName),
             const HomeRoute(),
           ),
         ],
@@ -72,13 +73,5 @@ class _BottomNavBarState extends State<BottomNavBar> {
         ],
       ),
     );
-  }
-
-  bool _shouldShowIdentify() {
-    // Defina aqui as rotas que devem exibir o bottomNavigationBar
-    const routesWithBottomNavigationBar = [
-      HomeRoute.name,
-    ];
-    return routesWithBottomNavigationBar.contains(widget.routeName);
   }
 }

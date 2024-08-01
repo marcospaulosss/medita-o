@@ -1,9 +1,10 @@
 import 'package:cinco_minutos_meditacao/core/di/helpers.dart';
 import 'package:cinco_minutos_meditacao/core/routers/app_router.dart';
-import 'package:cinco_minutos_meditacao/core/routers/app_router.gr.dart';
 import 'package:cinco_minutos_meditacao/modules/authentication/shared/strings/localization/authentication_strings.dart';
 import 'package:cinco_minutos_meditacao/modules/common/shared/strings/localization/common_strings.dart';
+import 'package:cinco_minutos_meditacao/modules/meditate/shared/strings/localization/meditate_strings.dart';
 import 'package:cinco_minutos_meditacao/shared/components/bottom_nav_bar.dart';
+import 'package:cinco_minutos_meditacao/shared/helpers/bottom_navigation_bar.dart';
 import 'package:cinco_minutos_meditacao/shared/helpers/custom_navigator_observer.dart';
 import 'package:cinco_minutos_meditacao/shared/strings/localization/shared_strings.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
@@ -46,17 +47,9 @@ class _AppState extends State<App> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       setState(() {
         this.routeName = routeName;
-        _showBottomNavigationBar = _shouldShowBottomNavigationBar(routeName);
+        _showBottomNavigationBar = shouldShowBottomNavigationBar(routeName);
       });
     });
-  }
-
-  bool _shouldShowBottomNavigationBar(String routeName) {
-    // Defina aqui as rotas que devem exibir o bottomNavigationBar
-    const routesWithBottomNavigationBar = [
-      HomeRoute.name,
-    ];
-    return routesWithBottomNavigationBar.contains(routeName);
   }
 
   @override
@@ -96,6 +89,7 @@ class _AppState extends State<App> {
         CommonStrings.delegate,
         AuthenticationStrings.delegate,
         SharedStrings.delegate,
+        MeditateStrings.delegate,
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,

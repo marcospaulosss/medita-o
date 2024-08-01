@@ -60,4 +60,8 @@ abstract class ClientApi {
   /// Obtem as meditações disponíveis
   @GET('/meditations')
   Future<MeditationsResponse> meditations();
+
+  /// Obtem as meditações realizadas pelo usuário
+  @GET('/meditations/{user_id}')
+  Future<MeditationsResponse> meditationsByUser(@Path('user_id') String userId);
 }
