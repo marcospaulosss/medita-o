@@ -145,4 +145,13 @@ class MockHomePresenter extends _i1.Mock implements _i3.HomePresenter {
         ),
         returnValue: _i5.Future<_i7.MeditationsResponse?>.value(),
       ) as _i5.Future<_i7.MeditationsResponse?>);
+
+  @override
+  void goToMeditateInfo(_i2.HomeModel? model) => super.noSuchMethod(
+        Invocation.method(
+          #goToMeditateInfo,
+          [model],
+        ),
+        returnValueForMissingStub: null,
+      );
 }
