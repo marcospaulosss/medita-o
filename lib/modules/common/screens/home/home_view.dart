@@ -3,16 +3,17 @@ import 'package:cinco_minutos_meditacao/core/di/helpers.dart';
 import 'package:cinco_minutos_meditacao/modules/common/screens/home/home_contract.dart';
 import 'package:cinco_minutos_meditacao/modules/common/screens/home/home_model.dart';
 import 'package:cinco_minutos_meditacao/modules/common/screens/home/home_presenter.dart';
-import 'package:cinco_minutos_meditacao/modules/common/shared/components/app_header.dart';
 import 'package:cinco_minutos_meditacao/modules/common/shared/components/meditate.dart';
 import 'package:cinco_minutos_meditacao/modules/common/shared/strings/localization/common_strings.dart';
 import 'package:cinco_minutos_meditacao/shared/Theme/app_colors.dart';
 import 'package:cinco_minutos_meditacao/shared/Theme/app_images.dart';
 import 'package:cinco_minutos_meditacao/shared/components/app_background.dart';
+import 'package:cinco_minutos_meditacao/shared/components/app_header.dart';
 import 'package:cinco_minutos_meditacao/shared/components/generic_error_container.dart';
 import 'package:cinco_minutos_meditacao/shared/components/loading.dart';
 import 'package:cinco_minutos_meditacao/shared/helpers/multi_state_container/export.dart';
 import 'package:cinco_minutos_meditacao/shared/helpers/view_binding.dart';
+import 'package:cinco_minutos_meditacao/shared/strings/localization/shared_strings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -104,7 +105,7 @@ class HomeViewState extends State<HomeView> implements HomeViewContract {
     return Column(
       children: [
         Text(
-          CommonStrings.of(context).meditometer,
+          SharedStrings.of(context).meditometer,
           style: const TextStyle(
             fontSize: 64,
             fontWeight: FontWeight.w400,
@@ -121,7 +122,7 @@ class HomeViewState extends State<HomeView> implements HomeViewContract {
             borderRadius: BorderRadius.circular(27),
           ),
           child: Text(
-            CommonStrings.of(context).realTime,
+            SharedStrings.of(context).realTime,
             style: const TextStyle(
               fontSize: 13,
               fontWeight: FontWeight.w400,
@@ -140,16 +141,16 @@ class HomeViewState extends State<HomeView> implements HomeViewContract {
         RichText(
           text: TextSpan(
             children: [
-              const TextSpan(
-                text: "milhões ",
-                style: TextStyle(
+              TextSpan(
+                text: SharedStrings.of(context).millions,
+                style: const TextStyle(
                   fontSize: 11,
                   fontWeight: FontWeight.w700,
                   color: AppColors.frankBlue,
                 ),
               ),
               TextSpan(
-                text: CommonStrings.of(context).minutesMeditatedWorld,
+                text: SharedStrings.of(context).minutesMeditatedWorld,
                 style: const TextStyle(
                   fontSize: 11,
                   fontWeight: FontWeight.w400,
@@ -178,7 +179,7 @@ class HomeViewState extends State<HomeView> implements HomeViewContract {
               top: 53,
               width: 60,
               child: Text(
-                CommonStrings.of(context).countriesReached,
+                SharedStrings.of(context).countriesReached,
                 style: const TextStyle(
                   fontSize: 17,
                   fontWeight: FontWeight.w400,
@@ -202,10 +203,12 @@ class HomeViewState extends State<HomeView> implements HomeViewContract {
           children: [
             Meditate(
               title: CommonStrings.of(context).meditate5Minutes,
+              onTap: () {},
             ),
             const SizedBox(width: 10),
             Meditate(
               title: CommonStrings.of(context).learnMethod,
+              onTap: () => presenter.goToMeditateInfo(model),
             ),
           ],
         ),
@@ -215,10 +218,12 @@ class HomeViewState extends State<HomeView> implements HomeViewContract {
           children: [
             Meditate(
               title: CommonStrings.of(context).guidedMeditate,
+              onTap: () {},
             ),
             const SizedBox(width: 10),
             Meditate(
               title: CommonStrings.of(context).meditateTime,
+              onTap: () {},
             ),
           ],
         ),

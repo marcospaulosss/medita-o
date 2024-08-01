@@ -17,6 +17,7 @@ abstract class AppColors {
   static const steelWoolColor = Color(0xff777777);
   static const dimGray = Color(0xff626262);
   static const philippineGray = Color(0xff929292);
+  static const grayOnix = Color(0xff383838);
 
   /// black variations
   static const black54 = Colors.black54;
@@ -25,6 +26,7 @@ abstract class AppColors {
   static const brilliance = Color(0xfffcfcfc);
   static const brilliance2 = Color(0xffFDFDFD);
   static const white = Color(0xffffffff);
+  static const antiFlashWhite = Color(0xffF3F3F3);
 
   /// yellow variations
   static const yellow = Color(0xffFECC00);

@@ -2,6 +2,7 @@ import 'package:cinco_minutos_meditacao/core/routers/app_router.dart';
 import 'package:cinco_minutos_meditacao/core/routers/app_router.gr.dart';
 import 'package:cinco_minutos_meditacao/modules/common/screens/home/home_contract.dart';
 import 'package:cinco_minutos_meditacao/modules/common/screens/home/home_model.dart';
+import 'package:cinco_minutos_meditacao/modules/meditate/screens/meditate_info/meditate_info_model.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/meditations_response.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/user_response.dart';
 import 'package:cinco_minutos_meditacao/shared/models/error.dart';
@@ -100,5 +101,15 @@ class HomePresenter implements Presenter {
     }
 
     return meditations;
+  }
+
+  @override
+  void goToMeditateInfo(HomeModel model) {
+    _router.goTo(MeditateInfoRoute(
+      model: MeditateInfoModel(
+        userResponse: model.userResponse,
+        meditationsResponse: model.meditationsResponse,
+      ),
+    ));
   }
 }
