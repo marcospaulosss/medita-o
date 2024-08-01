@@ -210,6 +210,23 @@ class MockClientApi extends _i1.Mock implements _i9.ClientApi {
           ),
         )),
       ) as _i10.Future<_i5.MeditationsResponse>);
+
+  @override
+  _i10.Future<_i5.MeditationsResponse> meditationsByUser(String? userId) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #meditationsByUser,
+          [userId],
+        ),
+        returnValue: _i10.Future<_i5.MeditationsResponse>.value(
+            _FakeMeditationsResponse_3(
+          this,
+          Invocation.method(
+            #meditationsByUser,
+            [userId],
+          ),
+        )),
+      ) as _i10.Future<_i5.MeditationsResponse>);
 }
 
 /// A class which mocks [CustomError].
@@ -311,10 +328,13 @@ class MockSecureStorage extends _i1.Mock implements _i15.SecureStorage {
       ) as _i10.Future<bool>);
 
   @override
-  _i10.Future<int> get userId => (super.noSuchMethod(
+  _i10.Future<String> get userId => (super.noSuchMethod(
         Invocation.getter(#userId),
-        returnValue: _i10.Future<int>.value(0),
-      ) as _i10.Future<int>);
+        returnValue: _i10.Future<String>.value(_i14.dummyValue<String>(
+          this,
+          Invocation.getter(#userId),
+        )),
+      ) as _i10.Future<String>);
 
   @override
   _i10.Future<String> get userName => (super.noSuchMethod(
@@ -373,7 +393,7 @@ class MockSecureStorage extends _i1.Mock implements _i15.SecureStorage {
       ) as _i10.Future<void>);
 
   @override
-  _i10.Future<void> setUserId(int? userId) => (super.noSuchMethod(
+  _i10.Future<void> setUserId(String? userId) => (super.noSuchMethod(
         Invocation.method(
           #setUserId,
           [userId],
