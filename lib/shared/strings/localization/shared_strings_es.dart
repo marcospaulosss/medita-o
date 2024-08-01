@@ -12,4 +12,19 @@ class SharedStringsEs extends SharedStrings {
 
   @override
   String get genericErrorSubTitle => 'Encontramos um problema ao carregar os dados. Por favor, tente novamente.';
+
+  @override
+  String get meditometer => 'Meditômetro';
+
+  @override
+  String get realTime => 'EM TEMPO REAL';
+
+  @override
+  String get millions => 'milhões ';
+
+  @override
+  String get minutesMeditatedWorld => 'de Minutos meditados no mundo';
+
+  @override
+  String get countriesReached => 'PAÍSES ALCANÇADOS';
 }

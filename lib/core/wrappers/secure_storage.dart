@@ -42,7 +42,7 @@ class SecureStorage {
     return await Future.wait([
       setTokenAPI(""),
       setIsLogged(false),
-      setUserId(0),
+      setUserId("0"),
       setUserName(""),
       setUserEmail(""),
       setGoogleId(""),
@@ -74,11 +74,11 @@ class SecureStorage {
   }
 
   /// id do usuário
-  Future<int> get userId async => int.parse(read(key: _userId).toString());
+  Future<String> get userId async => await read(key: _userId) ?? "";
 
   /// Define o id do usuário
-  Future<void> setUserId(int userId) async {
-    await write(key: _userId, value: userId.toString());
+  Future<void> setUserId(String userId) async {
+    await write(key: _userId, value: userId);
   }
 
   /// nome do usuário

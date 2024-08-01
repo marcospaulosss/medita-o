@@ -50,7 +50,7 @@ class HomeRepository implements Repository {
     try {
       UserResponse response = await _clientApi.user();
 
-      await _secureStorage.setUserId(response.id);
+      await _secureStorage.setUserId(response.id.toString());
       await _secureStorage.setUserName(response.name);
       await _secureStorage.setUserEmail(response.email);
       await _secureStorage.setGoogleId(response.googleId);
