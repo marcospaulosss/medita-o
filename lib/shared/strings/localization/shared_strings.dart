@@ -142,6 +142,12 @@ abstract class SharedStrings {
   /// In pt, this message translates to:
   /// **'PAÍSES ALCANÇADOS'**
   String get countriesReached;
+
+  /// No description provided for @hello.
+  ///
+  /// In pt, this message translates to:
+  /// **'Olá'**
+  String get hello;
 }
 
 class _SharedStringsDelegate extends LocalizationsDelegate<SharedStrings> {

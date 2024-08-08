@@ -95,12 +95,6 @@ abstract class CommonStrings {
     Locale('pt')
   ];
 
-  /// No description provided for @hello.
-  ///
-  /// In pt, this message translates to:
-  /// **'Olá'**
-  String get hello;
-
   /// No description provided for @homeHeaderDescription1.
   ///
   /// In pt, this message translates to:
