@@ -1,11 +1,7 @@
 import 'package:cinco_minutos_meditacao/core/routers/app_router.dart';
 import 'package:cinco_minutos_meditacao/core/routers/app_router.gr.dart';
-import 'package:cinco_minutos_meditacao/modules/authentication/screens/register/register_contracts.dart';
-import 'package:cinco_minutos_meditacao/modules/authentication/screens/register/register_presenter.dart';
 import 'package:cinco_minutos_meditacao/modules/authentication/screens/register_success/register_success_presenter.dart';
 import 'package:cinco_minutos_meditacao/modules/authentication/screens/register_success/register_success_repository.dart';
-import 'package:cinco_minutos_meditacao/shared/clients/models/auth_request.dart';
-import 'package:cinco_minutos_meditacao/shared/models/error.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';

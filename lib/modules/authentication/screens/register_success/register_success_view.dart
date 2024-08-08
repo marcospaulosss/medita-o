@@ -5,9 +5,9 @@ import 'package:cinco_minutos_meditacao/modules/authentication/screens/register_
 import 'package:cinco_minutos_meditacao/modules/authentication/screens/register_success/register_success_presenter.dart';
 import 'package:cinco_minutos_meditacao/modules/authentication/shared/strings/localization/authentication_strings.dart';
 import 'package:cinco_minutos_meditacao/shared/Theme/app_colors.dart';
+import 'package:cinco_minutos_meditacao/shared/Theme/app_images.dart';
 import 'package:cinco_minutos_meditacao/shared/components/background_default.dart';
 import 'package:cinco_minutos_meditacao/shared/components/icon_label_button.dart';
-import 'package:cinco_minutos_meditacao/shared/helpers/app_images.dart';
 import 'package:flutter/material.dart';
 
 /// Tela responsável pelo registro do usuário

@@ -3,8 +3,18 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:cinco_minutos_meditacao/modules/common/screens/home/home_presenter.dart'
+import 'dart:async' as _i5;
+
+import 'package:cinco_minutos_meditacao/modules/common/screens/home/home_contract.dart'
+    as _i4;
+import 'package:cinco_minutos_meditacao/modules/common/screens/home/home_model.dart'
     as _i2;
+import 'package:cinco_minutos_meditacao/modules/common/screens/home/home_presenter.dart'
+    as _i3;
+import 'package:cinco_minutos_meditacao/shared/clients/models/responses/meditations_response.dart'
+    as _i7;
+import 'package:cinco_minutos_meditacao/shared/clients/models/responses/user_response.dart'
+    as _i6;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: type=lint
@@ -20,13 +30,65 @@ import 'package:mockito/mockito.dart' as _i1;
 // ignore_for_file: camel_case_types
 // ignore_for_file: subtype_of_sealed_class
 
+class _FakeHomeModel_0 extends _i1.SmartFake implements _i2.HomeModel {
+  _FakeHomeModel_0(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
 /// A class which mocks [HomePresenter].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockHomePresenter extends _i1.Mock implements _i2.HomePresenter {
+class MockHomePresenter extends _i1.Mock implements _i3.HomePresenter {
   MockHomePresenter() {
     _i1.throwOnMissingStub(this);
   }
+
+  @override
+  set view(_i4.HomeViewContract? _view) => super.noSuchMethod(
+        Invocation.setter(
+          #view,
+          _view,
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  bool get error => (super.noSuchMethod(
+        Invocation.getter(#error),
+        returnValue: false,
+      ) as bool);
+
+  @override
+  set error(bool? _error) => super.noSuchMethod(
+        Invocation.setter(
+          #error,
+          _error,
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  _i2.HomeModel get homeModel => (super.noSuchMethod(
+        Invocation.getter(#homeModel),
+        returnValue: _FakeHomeModel_0(
+          this,
+          Invocation.getter(#homeModel),
+        ),
+      ) as _i2.HomeModel);
+
+  @override
+  set homeModel(_i2.HomeModel? _homeModel) => super.noSuchMethod(
+        Invocation.setter(
+          #homeModel,
+          _homeModel,
+        ),
+        returnValueForMissingStub: null,
+      );
 
   @override
   void onOpenScreen() => super.noSuchMethod(
@@ -42,6 +104,53 @@ class MockHomePresenter extends _i1.Mock implements _i2.HomePresenter {
         Invocation.method(
           #logOut,
           [],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  _i5.Future<void> initPresenter() => (super.noSuchMethod(
+        Invocation.method(
+          #initPresenter,
+          [],
+        ),
+        returnValue: _i5.Future<void>.value(),
+        returnValueForMissingStub: _i5.Future<void>.value(),
+      ) as _i5.Future<void>);
+
+  @override
+  _i5.Future<_i6.UserResponse?> getMe() => (super.noSuchMethod(
+        Invocation.method(
+          #getMe,
+          [],
+        ),
+        returnValue: _i5.Future<_i6.UserResponse?>.value(),
+      ) as _i5.Future<_i6.UserResponse?>);
+
+  @override
+  _i5.Future<void> updateImageProfile() => (super.noSuchMethod(
+        Invocation.method(
+          #updateImageProfile,
+          [],
+        ),
+        returnValue: _i5.Future<void>.value(),
+        returnValueForMissingStub: _i5.Future<void>.value(),
+      ) as _i5.Future<void>);
+
+  @override
+  _i5.Future<_i7.MeditationsResponse?> getMeditions() => (super.noSuchMethod(
+        Invocation.method(
+          #getMeditions,
+          [],
+        ),
+        returnValue: _i5.Future<_i7.MeditationsResponse?>.value(),
+      ) as _i5.Future<_i7.MeditationsResponse?>);
+
+  @override
+  void goToMeditateInfo(_i2.HomeModel? model) => super.noSuchMethod(
+        Invocation.method(
+          #goToMeditateInfo,
+          [model],
         ),
         returnValueForMissingStub: null,
       );
