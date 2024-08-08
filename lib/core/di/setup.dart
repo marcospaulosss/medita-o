@@ -4,6 +4,8 @@ import 'package:cinco_minutos_meditacao/core/di/singletons.dart' as singletons;
 import 'package:cinco_minutos_meditacao/modules/authentication/di/setup.dart'
     as authentication;
 import 'package:cinco_minutos_meditacao/modules/common/di/setup.dart' as common;
+import 'package:cinco_minutos_meditacao/modules/meditate/di/setup.dart'
+    as meditate;
 
 abstract class DI {
   /// Resolve e retorna a instância do app.
@@ -14,5 +16,6 @@ abstract class DI {
     singletons.setupInjectors();
     common.setupInjectors();
     authentication.setupInjectors();
+    meditate.setupInjectors();
   }
 }

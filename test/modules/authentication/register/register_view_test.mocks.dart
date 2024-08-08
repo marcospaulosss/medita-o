@@ -9,7 +9,7 @@ import 'package:cinco_minutos_meditacao/modules/authentication/screens/register/
     as _i3;
 import 'package:cinco_minutos_meditacao/modules/authentication/screens/register/register_presenter.dart'
     as _i2;
-import 'package:cinco_minutos_meditacao/shared/clients/models/auth_request.dart'
+import 'package:cinco_minutos_meditacao/shared/clients/models/requests/auth_request.dart'
     as _i5;
 import 'package:mockito/mockito.dart' as _i1;
 

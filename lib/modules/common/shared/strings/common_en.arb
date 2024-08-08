@@ -1,3 +1,13 @@
 {
-  "home": "Home"
+  "hello": "Hello",
+  "homeHeaderDescription1": "Spend your time for world peace right now!",
+  "meditate5Minutes": "Meditate 5 \nMinutes",
+  "fiveMinutes": "5 min",
+  "learnMethod": "Learn \nmethod",
+  "guidedMeditate": "Guided \nMeditation",
+  "meditateTime": "Meditate in\nyour time",
+  "meditometer": "Meditometer",
+  "realTime": "IN REAL TIME",
+  "minutesMeditatedWorld": "from MinutesMeditatedWorld",
+  "countriesReached": "COUNTRIES REACHED"
 }

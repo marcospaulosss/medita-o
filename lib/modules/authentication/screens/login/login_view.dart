@@ -5,10 +5,10 @@ import 'package:cinco_minutos_meditacao/modules/authentication/screens/login/com
 import 'package:cinco_minutos_meditacao/modules/authentication/screens/login/components/login_buttons.dart';
 import 'package:cinco_minutos_meditacao/modules/authentication/screens/login/login_contracts.dart';
 import 'package:cinco_minutos_meditacao/modules/authentication/screens/login/login_presenter.dart';
+import 'package:cinco_minutos_meditacao/shared/Theme/app_images.dart';
 import 'package:cinco_minutos_meditacao/shared/components/background_default.dart';
 import 'package:cinco_minutos_meditacao/shared/components/generic_error_container.dart';
 import 'package:cinco_minutos_meditacao/shared/components/loading.dart';
-import 'package:cinco_minutos_meditacao/shared/helpers/app_images.dart';
 import 'package:cinco_minutos_meditacao/shared/helpers/multi_state_container/container.dart';
 import 'package:cinco_minutos_meditacao/shared/helpers/multi_state_container/controller.dart';
 import 'package:cinco_minutos_meditacao/shared/helpers/view_binding.dart';

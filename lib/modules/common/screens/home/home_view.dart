@@ -1,9 +1,18 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:cinco_minutos_meditacao/core/di/helpers.dart';
-import 'package:cinco_minutos_meditacao/core/flavors/flavors.dart';
 import 'package:cinco_minutos_meditacao/modules/common/screens/home/home_contract.dart';
+import 'package:cinco_minutos_meditacao/modules/common/screens/home/home_model.dart';
 import 'package:cinco_minutos_meditacao/modules/common/screens/home/home_presenter.dart';
+import 'package:cinco_minutos_meditacao/modules/common/shared/components/meditate.dart';
 import 'package:cinco_minutos_meditacao/modules/common/shared/strings/localization/common_strings.dart';
+import 'package:cinco_minutos_meditacao/shared/Theme/app_images.dart';
+import 'package:cinco_minutos_meditacao/shared/components/Meditometer.dart';
+import 'package:cinco_minutos_meditacao/shared/components/app_background.dart';
+import 'package:cinco_minutos_meditacao/shared/components/app_header.dart';
+import 'package:cinco_minutos_meditacao/shared/components/generic_error_container.dart';
+import 'package:cinco_minutos_meditacao/shared/components/loading.dart';
+import 'package:cinco_minutos_meditacao/shared/helpers/multi_state_container/export.dart';
+import 'package:cinco_minutos_meditacao/shared/helpers/view_binding.dart';
 import 'package:flutter/material.dart';
 
 @RoutePage()
@@ -13,42 +22,138 @@ class HomeView extends StatefulWidget {
   });
 
   @override
-  State<HomeView> createState() => _HomeViewState();
+  State<HomeView> createState() => HomeViewState();
 }
 
-class _HomeViewState extends State<HomeView> {
+@visibleForTesting
+class HomeViewState extends State<HomeView> implements HomeViewContract {
   Presenter presenter = resolve<HomePresenter>();
+
+  /// Controlador do estado da tela
+  final stateController = MultiStateContainerController();
+
+  /// Mensagem de erro
+  late String messageError = "";
+
+  /// Usuário
+  late HomeModel model = HomeModel();
 
   @override
   void initState() {
-    presenter.onOpenScreen();
-
-    Future.delayed(const Duration(seconds: 10), () {
-      presenter.logOut();
-    });
+    presenter.bindView(this);
+    presenter.initPresenter();
 
     super.initState();
   }
 
   @override
+  void dispose() {
+    presenter.unbindView();
+
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(CommonStrings.of(context).home),
-      ),
-      body: Container(
-        alignment: Alignment.center,
-        child: Column(
-          children: [
-            const Text("Home View"),
-            Text(F.title),
-            const SizedBox(height: 20),
-            Text(F.name),
-            const SizedBox(height: 20),
-            Text(F.description),
-          ],
-        ),
+    return MultiStateContainer(
+      controller: stateController,
+      normalStateBuilder: (context) => buildScaffold(context),
+      loadingStateBuilder: (context) => const Loading(),
+      errorStateBuilder: (context) => GenericErrorContainer(
+        message: messageError,
+        onRetry: () => presenter.initPresenter(),
       ),
     );
+  }
+
+  Widget buildScaffold(BuildContext context) {
+    return AppBackground(
+      child: Column(
+        children: [
+          AppHeader(
+            nameUser: model.userResponse!.name.split(" ").first,
+            description1: CommonStrings.of(context).homeHeaderDescription1,
+            photo: model.userResponse!.profilePhotoPath,
+            updateImage: () => presenter.updateImageProfile(),
+          ),
+          buildBody(context),
+        ],
+      ),
+    );
+  }
+
+  /// Corpo da tela
+  Padding buildBody(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(top: 61, left: 40, right: 40, bottom: 33),
+      child: Column(
+        children: [
+          buildMeditate(context),
+          const SizedBox(height: 33),
+          Image.asset(AppImages.banner),
+          const SizedBox(height: 40),
+          Meditometer(meditationsResponse: model.meditationsResponse),
+        ],
+      ),
+    );
+  }
+
+  /// Constrói a seção de meditação
+  Column buildMeditate(BuildContext context) {
+    return Column(
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Meditate(
+              title: CommonStrings.of(context).meditate5Minutes,
+              onTap: () {},
+            ),
+            const SizedBox(width: 10),
+            Meditate(
+              title: CommonStrings.of(context).learnMethod,
+              onTap: () => presenter.goToMeditateInfo(model),
+            ),
+          ],
+        ),
+        const SizedBox(height: 14),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Meditate(
+              title: CommonStrings.of(context).guidedMeditate,
+              onTap: () {},
+            ),
+            const SizedBox(width: 10),
+            Meditate(
+              title: CommonStrings.of(context).meditateTime,
+              onTap: () {},
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+
+  /// Mostra o estado de carregamento
+  @override
+  void showLoading() {
+    stateController.showLoadingState();
+  }
+
+  /// Mostra o estado normal
+  @override
+  void showNormalState(HomeModel modelResponse) {
+    setState(() {
+      model = modelResponse;
+    });
+    stateController.showNormalState();
+  }
+
+  /// Mostra o estado de erro
+  @override
+  void showError(String message) {
+    messageError = message;
+    stateController.showErrorState();
   }
 }
