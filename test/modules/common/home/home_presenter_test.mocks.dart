@@ -4,11 +4,21 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:async' as _i4;
+import 'dart:io' as _i9;
 
-import 'package:auto_route/auto_route.dart' as _i8;
-import 'package:cinco_minutos_meditacao/core/routers/app_router.dart' as _i7;
+import 'package:auto_route/auto_route.dart' as _i12;
+import 'package:cinco_minutos_meditacao/core/routers/app_router.dart' as _i11;
+import 'package:cinco_minutos_meditacao/modules/common/screens/home/home_contract.dart'
+    as _i13;
+import 'package:cinco_minutos_meditacao/modules/common/screens/home/home_model.dart'
+    as _i14;
 import 'package:cinco_minutos_meditacao/modules/common/screens/home/home_repository.dart'
     as _i6;
+import 'package:cinco_minutos_meditacao/shared/clients/models/responses/meditations_response.dart'
+    as _i10;
+import 'package:cinco_minutos_meditacao/shared/clients/models/responses/user_response.dart'
+    as _i7;
+import 'package:cinco_minutos_meditacao/shared/models/error.dart' as _i8;
 import 'package:cinco_minutos_meditacao/shared/services/auth_service.dart'
     as _i3;
 import 'package:firebase_auth/firebase_auth.dart' as _i5;
@@ -120,24 +130,57 @@ class MockHomeRepository extends _i1.Mock implements _i6.HomeRepository {
         ),
         returnValueForMissingStub: null,
       );
+
+  @override
+  _i4.Future<(_i7.UserResponse?, _i8.CustomError?)> requestUser() =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #requestUser,
+          [],
+        ),
+        returnValue: _i4.Future<(_i7.UserResponse?, _i8.CustomError?)>.value(
+            (null, null)),
+      ) as _i4.Future<(_i7.UserResponse?, _i8.CustomError?)>);
+
+  @override
+  _i4.Future<_i8.CustomError?> uploadImageProfile(_i9.File? file) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #uploadImageProfile,
+          [file],
+        ),
+        returnValue: _i4.Future<_i8.CustomError?>.value(),
+      ) as _i4.Future<_i8.CustomError?>);
+
+  @override
+  _i4.Future<(_i10.MeditationsResponse?, _i8.CustomError?)>
+      requestMeditations() => (super.noSuchMethod(
+            Invocation.method(
+              #requestMeditations,
+              [],
+            ),
+            returnValue:
+                _i4.Future<(_i10.MeditationsResponse?, _i8.CustomError?)>.value(
+                    (null, null)),
+          ) as _i4.Future<(_i10.MeditationsResponse?, _i8.CustomError?)>);
 }
 
 /// A class which mocks [AppRouter].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockAppRouter extends _i1.Mock implements _i7.AppRouter {
+class MockAppRouter extends _i1.Mock implements _i11.AppRouter {
   MockAppRouter() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  List<_i8.AutoRoute> get routes => (super.noSuchMethod(
+  List<_i12.AutoRoute> get routes => (super.noSuchMethod(
         Invocation.getter(#routes),
-        returnValue: <_i8.AutoRoute>[],
-      ) as List<_i8.AutoRoute>);
+        returnValue: <_i12.AutoRoute>[],
+      ) as List<_i12.AutoRoute>);
 
   @override
-  void goToReplace(_i8.PageRouteInfo<dynamic>? route) => super.noSuchMethod(
+  void goToReplace(_i12.PageRouteInfo<dynamic>? route) => super.noSuchMethod(
         Invocation.method(
           #goToReplace,
           [route],
@@ -146,10 +189,51 @@ class MockAppRouter extends _i1.Mock implements _i7.AppRouter {
       );
 
   @override
-  void goTo(_i8.PageRouteInfo<dynamic>? route) => super.noSuchMethod(
+  void goTo(
+    _i12.PageRouteInfo<dynamic>? route, {
+    _i11.OnCloseRoute? onClose,
+  }) =>
+      super.noSuchMethod(
         Invocation.method(
           #goTo,
           [route],
+          {#onClose: onClose},
+        ),
+        returnValueForMissingStub: null,
+      );
+}
+
+/// A class which mocks [HomeViewContract].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockHomeViewContract extends _i1.Mock implements _i13.HomeViewContract {
+  MockHomeViewContract() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  void showLoading() => super.noSuchMethod(
+        Invocation.method(
+          #showLoading,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void showNormalState(_i14.HomeModel? model) => super.noSuchMethod(
+        Invocation.method(
+          #showNormalState,
+          [model],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void showError(String? message) => super.noSuchMethod(
+        Invocation.method(
+          #showError,
+          [message],
         ),
         returnValueForMissingStub: null,
       );

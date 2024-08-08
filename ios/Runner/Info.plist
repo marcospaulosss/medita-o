@@ -35,6 +35,16 @@
 		</array>
 		<key>CFBundleVersion</key>
 		<string>1</string>
+		<key>LSApplicationQueriesSchemes</key>
+        <array>
+            <string>http</string>
+            <string>https</string>
+        </array>
+        <key>NSAppTransportSecurity</key>
+        <dict>
+            <key>NSAllowsArbitraryLoads</key>
+            <true/>
+        </dict>
 		<key>ITSAppUsesNonExemptEncryption</key>
 		<false/>
 		<key>LSRequiresIPhoneOS</key>
@@ -62,5 +72,10 @@
 		<false/>
 		<key>UIStatusBarHidden</key>
 		<false/>
+
+        <key>NSCameraUsageDescription</key>
+        <string>We need access to the camera to take photos.</string>
+        <key>NSPhotoLibraryUsageDescription</key>
+        <string>We need access to the photo library to select photos.</string>
 	</dict>
 </plist>

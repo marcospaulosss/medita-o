@@ -1,0 +1,7 @@
+arb-dir: .
+template-arb-file: meditate_pt.arb
+output-dir: ./localization
+output-localization-file: meditate_strings.dart
+output-class: MeditateStrings
+nullable-getter: false
+synthetic-package: false

@@ -1,4 +1,4 @@
-import 'package:cinco_minutos_meditacao/shared/clients/models/auth_request.dart';
+import 'package:cinco_minutos_meditacao/shared/clients/models/requests/auth_request.dart';
 import 'package:cinco_minutos_meditacao/shared/helpers/view_binding.dart';
 import 'package:cinco_minutos_meditacao/shared/models/error.dart';
 import 'package:firebase_auth/firebase_auth.dart';

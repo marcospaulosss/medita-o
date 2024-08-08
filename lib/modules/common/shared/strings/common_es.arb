@@ -1,3 +1,13 @@
 {
-  "home": "Home"
+  "hello": "Hola",
+  "homeHeaderDescription1": "¡Dedica tu tiempo a la paz mundial ahora mismo!",
+  "meditate5Minutes": "Medita 5 \nMinutos",
+  "fiveMinutes": "5 min",
+  "learnMethod": "Aprender \nmétodo",
+  "guidedMeditate": "\nMeditación guiada",
+  "meditateTime": "Medita en\ntu tiempo",
+  "meditometer": "meditómetro",
+  "realTime": "EN TIEMPO REAL",
+  "minutesMeditatedWorld": "de MinutosMeditatedWorld",
+  "countriesReached": "PAÍSES ALCANZADOS"
 }

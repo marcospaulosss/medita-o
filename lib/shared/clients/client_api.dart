@@ -1,8 +1,13 @@
+import 'dart:io';
+
 import 'package:cinco_minutos_meditacao/core/environment/manager.dart';
-import 'package:cinco_minutos_meditacao/shared/clients/models/auth_request.dart';
-import 'package:cinco_minutos_meditacao/shared/clients/models/authenticate_google_request.dart';
-import 'package:cinco_minutos_meditacao/shared/clients/models/authenticate_google_response.dart';
-import 'package:cinco_minutos_meditacao/shared/clients/models/register_response.dart';
+import 'package:cinco_minutos_meditacao/shared/clients/interceptor.dart';
+import 'package:cinco_minutos_meditacao/shared/clients/models/requests/auth_request.dart';
+import 'package:cinco_minutos_meditacao/shared/clients/models/requests/authenticate_google_request.dart';
+import 'package:cinco_minutos_meditacao/shared/clients/models/responses/authenticate_google_response.dart';
+import 'package:cinco_minutos_meditacao/shared/clients/models/responses/meditations_response.dart';
+import 'package:cinco_minutos_meditacao/shared/clients/models/responses/register_response.dart';
+import 'package:cinco_minutos_meditacao/shared/clients/models/responses/user_response.dart';
 import 'package:curl_logger_dio_interceptor/curl_logger_dio_interceptor.dart';
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
@@ -11,12 +16,14 @@ part 'client_api.g.dart';
 
 @RestApi()
 abstract class ClientApi {
-  factory ClientApi(EnvironmentManager environmentManager) {
+  factory ClientApi(
+      EnvironmentManager environmentManager, TokenInterceptor interceptor) {
     var dio = Dio(BaseOptions(
       connectTimeout: const Duration(seconds: 30),
       receiveTimeout: const Duration(seconds: 30),
     ));
     dio.interceptors.add(CurlLoggerDioInterceptor(printOnSuccess: true));
+    dio.interceptors.add(interceptor);
 
     return _ClientApi(
       dio,
@@ -33,12 +40,28 @@ abstract class ClientApi {
   /// - [Auth] : Cliente de autenticação
   /// Solicita a autenticação do usuário utilizando email e senha no servidor
   @POST('/login')
-  Future<RegisterResponse> login(
-      @Body() AuthRequest body);
+  Future<RegisterResponse> login(@Body() AuthRequest body);
 
   /// - [Register] : Cliente de criação de conta
   /// Solicita a criação de uma conta no servidor
   @POST('/register')
-  Future<RegisterResponse> register(
-      @Body() AuthRequest body);
+  Future<RegisterResponse> register(@Body() AuthRequest body);
+
+  /// - [User] : Obtem informações do usuário
+  /// Obtem informações do usuário logado
+  @GET('/user')
+  Future<UserResponse> user();
+
+  @POST('/user/photo')
+  @MultiPart()
+  Future<dynamic> uploadPhoto(@Part(name: "photo") File photo);
+
+  /// - [ Meditations ] : Cliente de meditações
+  /// Obtem as meditações disponíveis
+  @GET('/meditations')
+  Future<MeditationsResponse> meditations();
+
+  /// Obtem as meditações realizadas pelo usuário
+  @GET('/meditations/{user_id}')
+  Future<MeditationsResponse> meditationsByUser(@Path('user_id') String userId);
 }
