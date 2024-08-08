@@ -11,10 +11,6 @@ class MeditateInfoPresenter implements Presenter {
   @override
   MeditateInfoViewContract? view;
 
-  //
-  // /// Serviço de autenticação
-  // final AuthService _authService;
-
   /// Repositório
   final Repository _repository;
 
@@ -45,6 +41,7 @@ class MeditateInfoPresenter implements Presenter {
 
     meditateInfoModel = model;
     meditateInfoModel.meditationsByUserResponse = await getMeditionsByUser();
+    if (meditateInfoModel.meditationsByUserResponse == null) return;
 
     view!.showNormalState(model: meditateInfoModel);
   }
@@ -76,21 +73,11 @@ class MeditateInfoPresenter implements Presenter {
 
   Future<MeditationsResponse?> getMeditionsByUser() async {
     var (meditations, error) = await _repository.requestMeditationsByUser();
-    if (error != null) {
-      view!.showError(error.getErrorMessage);
+    if (error != null || meditations == null) {
+      view!.showError(error?.getErrorMessage ?? 'null safe');
       return null;
     }
 
     return meditations;
-  }
-
-  @override
-  void goToMeditateInfo(HomeModel model) {
-    // TODO: implement goToMeditateInfo
-  }
-
-  @override
-  void logOut() {
-    // TODO: implement logOut
   }
 }

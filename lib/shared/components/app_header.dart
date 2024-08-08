@@ -1,6 +1,6 @@
-import 'package:cinco_minutos_meditacao/modules/common/shared/strings/localization/common_strings.dart';
 import 'package:cinco_minutos_meditacao/shared/Theme/app_colors.dart';
 import 'package:cinco_minutos_meditacao/shared/Theme/app_images.dart';
+import 'package:cinco_minutos_meditacao/shared/strings/localization/shared_strings.dart';
 import 'package:flutter/material.dart';
 
 class AppHeader extends StatelessWidget {
@@ -47,7 +47,7 @@ class AppHeader extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(left: 78.0, top: 30),
                 child: Text(
-                  "${CommonStrings.of(context).hello}, $nameUser!",
+                  "${SharedStrings.of(context).hello}, $nameUser!",
                   style: const TextStyle(
                     fontSize: 23,
                     color: AppColors.white,

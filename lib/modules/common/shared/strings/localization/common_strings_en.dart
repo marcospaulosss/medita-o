@@ -5,9 +5,6 @@ class CommonStringsEn extends CommonStrings {
   CommonStringsEn([String locale = 'en']) : super(locale);
 
   @override
-  String get hello => 'Hello';
-
-  @override
   String get homeHeaderDescription1 => 'Spend your time for world peace right now!';
 
   @override

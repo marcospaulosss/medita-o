@@ -5,9 +5,6 @@ class CommonStringsEs extends CommonStrings {
   CommonStringsEs([String locale = 'es']) : super(locale);
 
   @override
-  String get hello => 'Hola';
-
-  @override
   String get homeHeaderDescription1 => '¡Dedica tu tiempo a la paz mundial ahora mismo!';
 
   @override

@@ -5,9 +5,6 @@ class CommonStringsPt extends CommonStrings {
   CommonStringsPt([String locale = 'pt']) : super(locale);
 
   @override
-  String get hello => 'Olá';
-
-  @override
   String get homeHeaderDescription1 => 'Some seu tempo pela paz mundial agora mesmo!';
 
   @override

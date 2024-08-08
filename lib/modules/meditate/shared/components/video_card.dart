@@ -51,8 +51,11 @@ class _VideoCardState extends State<VideoCard> {
       padding: const EdgeInsets.symmetric(horizontal: 25),
       child: Column(
         children: [
-          buildButtons(),
-          buildPlay(),
+          // buildButtons(),
+          Padding(
+            padding: const EdgeInsets.only(top: 20),
+            child: buildPlay(),
+          ),
         ],
       ),
     );

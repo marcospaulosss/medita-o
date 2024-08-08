@@ -27,4 +27,7 @@ class SharedStringsPt extends SharedStrings {
 
   @override
   String get countriesReached => 'PAÍSES ALCANÇADOS';
+
+  @override
+  String get hello => 'Olá';
 }
