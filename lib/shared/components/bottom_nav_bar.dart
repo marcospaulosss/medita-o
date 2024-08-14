@@ -26,7 +26,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
           topLeft: Radius.circular(22),
           topRight: Radius.circular(22),
         ),
-        color: Colors.white,
+        color: AppColors.white,
       ),
       padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 26),
       child: Row(

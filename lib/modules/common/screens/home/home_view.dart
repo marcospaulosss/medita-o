@@ -107,7 +107,7 @@ class HomeViewState extends State<HomeView> implements HomeViewContract {
           children: [
             Meditate(
               title: CommonStrings.of(context).meditate5Minutes,
-              onTap: () {},
+              onTap: () => presenter.goToFiveMinutes(),
             ),
             const SizedBox(width: 10),
             Meditate(

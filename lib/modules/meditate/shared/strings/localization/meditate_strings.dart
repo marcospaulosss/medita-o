@@ -172,6 +172,30 @@ abstract class MeditateStrings {
   /// In pt, this message translates to:
   /// **'Aprenda a meditar'**
   String get learnMeditate;
+
+  /// No description provided for @tapStartMeditation.
+  ///
+  /// In pt, this message translates to:
+  /// **'Clique no botão para começar'**
+  String get tapStartMeditation;
+
+  /// No description provided for @learnMethod.
+  ///
+  /// In pt, this message translates to:
+  /// **'Aprenda o método        '**
+  String get learnMethod;
+
+  /// No description provided for @remindMeditate.
+  ///
+  /// In pt, this message translates to:
+  /// **'Lembre-me me meditar'**
+  String get remindMeditate;
+
+  /// No description provided for @fiveMinutesTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'5 minutos'**
+  String get fiveMinutesTitle;
 }
 
 class _MeditateStringsDelegate extends LocalizationsDelegate<MeditateStrings> {

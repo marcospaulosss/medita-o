@@ -3,6 +3,7 @@ import 'package:cinco_minutos_meditacao/core/routers/app_router.dart';
 import 'package:cinco_minutos_meditacao/modules/authentication/shared/strings/localization/authentication_strings.dart';
 import 'package:cinco_minutos_meditacao/modules/common/shared/strings/localization/common_strings.dart';
 import 'package:cinco_minutos_meditacao/modules/meditate/shared/strings/localization/meditate_strings.dart';
+import 'package:cinco_minutos_meditacao/shared/Theme/app_colors.dart';
 import 'package:cinco_minutos_meditacao/shared/components/bottom_nav_bar.dart';
 import 'package:cinco_minutos_meditacao/shared/helpers/bottom_navigation_bar.dart';
 import 'package:cinco_minutos_meditacao/shared/helpers/custom_navigator_observer.dart';
@@ -60,6 +61,7 @@ class _AppState extends State<App> {
           data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
           child: Scaffold(
             body: child!,
+            backgroundColor: AppColors.azureishWhite,
             bottomNavigationBar: _showBottomNavigationBar
                 ? BottomNavBar(
                     routeName: routeName,
