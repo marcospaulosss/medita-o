@@ -42,4 +42,16 @@ class MeditateStringsPt extends MeditateStrings {
 
   @override
   String get learnMeditate => 'Aprenda a meditar';
+
+  @override
+  String get tapStartMeditation => 'Clique no botão para começar';
+
+  @override
+  String get learnMethod => 'Aprenda o método        ';
+
+  @override
+  String get remindMeditate => 'Lembre-me me meditar';
+
+  @override
+  String get fiveMinutesTitle => '5 minutos';
 }
