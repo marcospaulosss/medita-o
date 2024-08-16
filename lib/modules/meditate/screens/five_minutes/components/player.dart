@@ -1,9 +1,9 @@
 import 'dart:async';
 
-import 'package:audioplayers/audioplayers.dart';
 import 'package:cinco_minutos_meditacao/modules/meditate/screens/five_minutes/components/progressPainter.dart';
 import 'package:cinco_minutos_meditacao/shared/Theme/app_colors.dart';
 import 'package:flutter/material.dart';
+import 'package:just_audio/just_audio.dart';
 
 class Player extends StatefulWidget {
   final AudioPlayer player;
@@ -20,58 +20,45 @@ class Player extends StatefulWidget {
 }
 
 class _PlayerState extends State<Player> {
-  PlayerState? _playerState;
+  AudioPlayer get _player => widget.player;
   Duration? _duration;
   Duration? _position;
 
-  StreamSubscription? _durationSubscription;
-  StreamSubscription? _positionSubscription;
-  StreamSubscription? _playerCompleteSubscription;
-  StreamSubscription? _playerStateChangeSubscription;
-
-  bool get _isPlaying => _playerState == PlayerState.playing;
-
-  bool get _isPaused => _playerState == PlayerState.paused;
-
-  String get _durationText => _duration?.toString().split('.').first ?? '';
-
-  String get _positionText => _position?.toString().split('.').first ?? '';
-
-  AudioPlayer get player => widget.player;
+  bool get _isPlaying => _player.playing;
 
   @override
   void initState() {
     super.initState();
-    // Use initial values from player
-    _playerState = player.state;
-    player.getDuration().then(
-          (value) => setState(() {
-            _duration = value;
-          }),
-        );
-    player.getCurrentPosition().then(
-          (value) => setState(() {
-            _position = value;
-          }),
-        );
-    _initStreams();
+
+    _initPlayer();
   }
 
-  @override
-  void setState(VoidCallback fn) {
-    // Subscriptions only can be closed asynchronously,
-    // therefore events can occur after widget has been disposed.
-    if (mounted) {
-      super.setState(fn);
-    }
+  Future<void> _initPlayer() async {
+    _player.durationStream.listen((duration) {
+      setState(() {
+        _duration = duration;
+      });
+    });
+
+    _player.positionStream.listen((position) {
+      setState(() {
+        _position = position;
+      });
+    });
+
+    _player.playerStateStream.listen((state) {
+      if (state.processingState == ProcessingState.completed) {
+        setState(() {
+          _position = Duration.zero;
+          _player.stop();
+        });
+      }
+    });
   }
 
   @override
   void dispose() {
-    _durationSubscription?.cancel();
-    _positionSubscription?.cancel();
-    _playerCompleteSubscription?.cancel();
-    _playerStateChangeSubscription?.cancel();
+    _player.dispose();
     super.dispose();
   }
 
@@ -156,45 +143,11 @@ class _PlayerState extends State<Player> {
     );
   }
 
-  void _initStreams() {
-    _durationSubscription = player.onDurationChanged.listen((duration) {
-      setState(() => _duration = duration);
-    });
-
-    _positionSubscription = player.onPositionChanged.listen(
-      (p) => setState(() => _position = p),
-    );
-
-    _playerCompleteSubscription = player.onPlayerComplete.listen((event) {
-      setState(() {
-        _playerState = PlayerState.stopped;
-        _position = Duration.zero;
-      });
-    });
-
-    _playerStateChangeSubscription =
-        player.onPlayerStateChanged.listen((state) {
-      setState(() {
-        _playerState = state;
-      });
-    });
-  }
-
   Future<void> _play() async {
-    await player.resume();
-    setState(() => _playerState = PlayerState.playing);
+    await _player.play();
   }
 
   Future<void> _pause() async {
-    await player.pause();
-    setState(() => _playerState = PlayerState.paused);
-  }
-
-  Future<void> _stop() async {
-    await player.stop();
-    setState(() {
-      _playerState = PlayerState.stopped;
-      _position = Duration.zero;
-    });
+    await _player.pause();
   }
 }

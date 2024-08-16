@@ -6,4 +6,9 @@ abstract class MeditateEvents {
   static AnalyticsEvent get informationMethodScreenOpened {
     return AnalyticsEvent(name: "abriu_tela_informacoes_metodo");
   }
+
+  /// Evento disparado quando a tela da medite 5 minutos.
+  static AnalyticsEvent get meditateFiveMinutesScreenOpened {
+    return AnalyticsEvent(name: "abriu_tela_medite_5_minutos");
+  }
 }
