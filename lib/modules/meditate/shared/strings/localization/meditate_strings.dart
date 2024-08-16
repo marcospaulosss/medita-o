@@ -188,7 +188,7 @@ abstract class MeditateStrings {
   /// No description provided for @remindMeditate.
   ///
   /// In pt, this message translates to:
-  /// **'Lembre-me me meditar'**
+  /// **'Lembre-me de meditar'**
   String get remindMeditate;
 
   /// No description provided for @fiveMinutesTitle.

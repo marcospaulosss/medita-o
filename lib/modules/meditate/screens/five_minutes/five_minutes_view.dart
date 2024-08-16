@@ -1,14 +1,18 @@
-import 'package:audioplayers/audioplayers.dart';
 import 'package:auto_route/auto_route.dart';
+import 'package:cinco_minutos_meditacao/core/di/helpers.dart';
 import 'package:cinco_minutos_meditacao/modules/meditate/screens/five_minutes/components/meditation_method.dart';
 import 'package:cinco_minutos_meditacao/modules/meditate/screens/five_minutes/components/player.dart';
+import 'package:cinco_minutos_meditacao/modules/meditate/screens/five_minutes/five_minutes_contract.dart';
+import 'package:cinco_minutos_meditacao/modules/meditate/screens/five_minutes/five_minutes_presenter.dart';
 import 'package:cinco_minutos_meditacao/modules/meditate/shared/strings/localization/meditate_strings.dart';
 import 'package:cinco_minutos_meditacao/shared/Theme/app_tracks.dart';
 import 'package:cinco_minutos_meditacao/shared/components/app_background.dart';
 import 'package:cinco_minutos_meditacao/shared/components/generic_error_container.dart';
 import 'package:cinco_minutos_meditacao/shared/components/loading.dart';
 import 'package:cinco_minutos_meditacao/shared/helpers/multi_state_container/export.dart';
+import 'package:cinco_minutos_meditacao/shared/helpers/view_binding.dart';
 import 'package:flutter/material.dart';
+import 'package:just_audio/just_audio.dart';
 
 @RoutePage()
 class FiveMinutesView extends StatefulWidget {
@@ -22,10 +26,10 @@ class FiveMinutesView extends StatefulWidget {
 }
 
 @visibleForTesting
-class FiveMinutesViewState extends State<FiveMinutesView> {
-  // implements MeditateInfoViewContract {
+class FiveMinutesViewState extends State<FiveMinutesView>
+    implements FiveMinutesViewContract {
   /// Presenter
-  // Presenter presenter = resolve<MeditateInfoPresenter>();
+  Presenter presenter = resolve<FiveMinutesPresenter>();
 
   /// Controlador do estado da tela
   final stateController = MultiStateContainerController();
@@ -33,24 +37,20 @@ class FiveMinutesViewState extends State<FiveMinutesView> {
   /// Mensagem de erro
   late String messageError = "";
 
-  late AudioPlayer player = AudioPlayer();
+  late AudioPlayer player;
 
   @override
   void initState() {
     stateController.showNormalState();
-    // presenter.bindView(this);
-    // presenter.initPresenter(widget.model);
+
+    presenter.bindView(this);
+    presenter.onOpenScreen();
 
     // Create the audio player.
     player = AudioPlayer();
 
-    // Set the release mode to keep the source after playback has completed.
-    player.setReleaseMode(ReleaseMode.stop);
-
-    // Start the player as soon as the app is displayed.
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      await player.setSource(AppTracks.trackFive);
-      await player.stop();
+      await player.setAudioSource(AudioSource.asset(AppTracks.trackFive));
     });
 
     super.initState();
@@ -58,7 +58,8 @@ class FiveMinutesViewState extends State<FiveMinutesView> {
 
   @override
   void dispose() {
-    // presenter.unbindView();
+    presenter.unbindView();
+
     player.dispose();
     super.dispose();
   }
@@ -71,7 +72,7 @@ class FiveMinutesViewState extends State<FiveMinutesView> {
       loadingStateBuilder: (context) => const Loading(),
       errorStateBuilder: (context) => GenericErrorContainer(
         message: messageError,
-        // onRetry: () => presenter.initPresenter(widget.model),
+        onRetry: () => initState(),
       ),
     );
   }

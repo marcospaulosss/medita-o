@@ -50,7 +50,7 @@ class MeditateStringsEn extends MeditateStrings {
   String get learnMethod => 'Aprenda o método        ';
 
   @override
-  String get remindMeditate => 'Lembre-me me meditar';
+  String get remindMeditate => 'Lembre-me de meditar';
 
   @override
   String get fiveMinutesTitle => '5 minutos';
