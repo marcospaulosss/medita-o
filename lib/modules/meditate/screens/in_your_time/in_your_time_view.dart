@@ -1,7 +1,4 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:cinco_minutos_meditacao/core/di/helpers.dart';
-import 'package:cinco_minutos_meditacao/modules/meditate/screens/five_minutes/five_minutes_contract.dart';
-import 'package:cinco_minutos_meditacao/modules/meditate/screens/five_minutes/five_minutes_presenter.dart';
 import 'package:cinco_minutos_meditacao/modules/meditate/shared/components/meditation_method.dart';
 import 'package:cinco_minutos_meditacao/modules/meditate/shared/components/player.dart';
 import 'package:cinco_minutos_meditacao/modules/meditate/shared/strings/localization/meditate_strings.dart';
@@ -10,26 +7,25 @@ import 'package:cinco_minutos_meditacao/shared/components/app_background.dart';
 import 'package:cinco_minutos_meditacao/shared/components/generic_error_container.dart';
 import 'package:cinco_minutos_meditacao/shared/components/loading.dart';
 import 'package:cinco_minutos_meditacao/shared/helpers/multi_state_container/export.dart';
-import 'package:cinco_minutos_meditacao/shared/helpers/view_binding.dart';
 import 'package:flutter/material.dart';
 import 'package:just_audio/just_audio.dart';
 
 @RoutePage()
-class FiveMinutesView extends StatefulWidget {
+class InYourTimeView extends StatefulWidget {
   /// Construtor
-  const FiveMinutesView({
+  const InYourTimeView({
     super.key,
   });
 
   @override
-  State<FiveMinutesView> createState() => FiveMinutesViewState();
+  State<InYourTimeView> createState() => InYourTimeViewState();
 }
 
 @visibleForTesting
-class FiveMinutesViewState extends State<FiveMinutesView>
-    implements FiveMinutesViewContract {
+class InYourTimeViewState extends State<InYourTimeView> {
+  // implements FiveMinutesViewContract {
   /// Presenter
-  Presenter presenter = resolve<FiveMinutesPresenter>();
+  // Presenter presenter = resolve<FiveMinutesPresenter>();
 
   /// Controlador do estado da tela
   final stateController = MultiStateContainerController();
@@ -43,14 +39,14 @@ class FiveMinutesViewState extends State<FiveMinutesView>
   void initState() {
     stateController.showNormalState();
 
-    presenter.bindView(this);
-    presenter.onOpenScreen();
+    // presenter.bindView(this);
+    // presenter.onOpenScreen();
 
     // Create the audio player.
     player = AudioPlayer();
 
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      await player.setAudioSource(AudioSource.asset(AppTracks.trackFive));
+      await getTrack(5);
     });
 
     super.initState();
@@ -58,7 +54,7 @@ class FiveMinutesViewState extends State<FiveMinutesView>
 
   @override
   void dispose() {
-    presenter.unbindView();
+    // presenter.unbindView();
 
     player.dispose();
     super.dispose();
@@ -107,22 +103,56 @@ class FiveMinutesViewState extends State<FiveMinutesView>
           const SizedBox(height: 26),
           MeditationMethod(
             iconButton1: MeditationMethodButtonCustom(
-              onTap: () {},
+              onTap: (minutes) => getTrack(minutes),
               icon: Icons.play_circle_outline,
               label: MeditateStrings.of(context).learnMethod,
+              type: MeditationMethodButtonType.combo,
             ),
             iconButton2: MeditationMethodButtonCustom(
               onTap: () {},
               icon: Icons.access_time,
               label: MeditateStrings.of(context).remindMeditate,
-              type: MeditationMethodButtonType.white,
+              type: MeditationMethodButtonType.blue,
             ),
-            spaceTop: 38,
-            title: MeditateStrings.of(context).fiveMinutesTitle,
+            spaceTop: 8,
+            title: MeditateStrings.of(context).inYourTime,
           ),
         ],
       ),
     );
+  }
+
+  /// Carrega a trilha
+  Future<void> getTrack(int minutes) async {
+    String track;
+    switch (minutes) {
+      case 5:
+        track = AppTracks.trackFive;
+        break;
+      case 10:
+        track = AppTracks.trackTen;
+        break;
+      case 15:
+        track = AppTracks.trackFifteen;
+        break;
+      case 20:
+        track = AppTracks.trackTwenty;
+        break;
+      case 25:
+        track = AppTracks.trackTwentyFive;
+        break;
+      case 30:
+        track = AppTracks.trackThirty;
+        break;
+      default:
+        track = AppTracks.trackFive;
+    }
+
+    await player.setAudioSource(AudioSource.asset(
+      track,
+    ));
+
+    setState(() {});
   }
 
   /// Mostra o estado de carregamento

@@ -6,6 +6,7 @@ bool shouldShowBottomNavigationBar(String routeName) {
     HomeRoute.name,
     MeditateInfoRoute.name,
     FiveMinutesRoute.name,
+    InYourTimeRoute.name,
   ];
   return routesWithBottomNavigationBar.contains(routeName);
 }
@@ -16,6 +17,7 @@ bool shouldShowIdentify(String routeName) {
     HomeRoute.name,
     MeditateInfoRoute.name,
     FiveMinutesRoute.name,
+    InYourTimeRoute.name,
   ];
   return routesWithBottomNavigationBar.contains(routeName);
 }
