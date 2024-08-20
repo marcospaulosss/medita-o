@@ -121,4 +121,10 @@ class HomePresenter implements Presenter {
   void goToFiveMinutes() {
     _router.goTo(const FiveMinutesRoute());
   }
+
+  /// Vai para a tela do In Your Time
+  @override
+  void goToInYourTime() {
+    _router.goTo(const InYourTimeRoute());
+  }
 }

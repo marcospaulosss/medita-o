@@ -1,8 +1,8 @@
 import 'dart:io';
 
-import 'package:cinco_minutos_meditacao/modules/meditate/screens/five_minutes/components/player.dart';
 import 'package:cinco_minutos_meditacao/modules/meditate/screens/five_minutes/five_minutes_presenter.dart';
 import 'package:cinco_minutos_meditacao/modules/meditate/screens/five_minutes/five_minutes_view.dart';
+import 'package:cinco_minutos_meditacao/modules/meditate/shared/components/player.dart';
 import 'package:cinco_minutos_meditacao/modules/meditate/shared/strings/localization/meditate_strings.dart';
 import 'package:cinco_minutos_meditacao/shared/components/app_background.dart';
 import 'package:cinco_minutos_meditacao/shared/strings/localization/shared_strings.dart';

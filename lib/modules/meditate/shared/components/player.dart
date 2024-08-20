@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:cinco_minutos_meditacao/modules/meditate/screens/five_minutes/components/progressPainter.dart';
+import 'package:cinco_minutos_meditacao/modules/meditate/shared/components/progressPainter.dart';
 import 'package:cinco_minutos_meditacao/shared/Theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:just_audio/just_audio.dart';
@@ -85,7 +85,7 @@ class _PlayerState extends State<Player> {
                 shape: BoxShape.circle,
                 border: Border.all(
                   color: AppColors.freshAir,
-                  width: 2.0, // Ajuste a largura da borda conforme necessário
+                  width: 2.0,
                 ),
               ),
               child: GestureDetector(

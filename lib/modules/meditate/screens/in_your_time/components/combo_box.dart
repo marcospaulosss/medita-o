@@ -1,3 +1,4 @@
+import 'package:cinco_minutos_meditacao/modules/meditate/shared/strings/localization/meditate_strings.dart';
 import 'package:cinco_minutos_meditacao/shared/Theme/app_colors.dart';
 import 'package:flutter/material.dart';
 
@@ -53,7 +54,7 @@ class _ComboBoxState extends State<ComboBox> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
-            '$_currentValue minutos',
+            '$_currentValue ${MeditateStrings.of(context).minutes}',
             style: const TextStyle(
               fontSize: 16.0,
               color: AppColors.germanderSpeedwell,
