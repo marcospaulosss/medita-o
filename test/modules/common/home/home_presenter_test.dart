@@ -3,8 +3,10 @@ import 'dart:io';
 import 'package:cinco_minutos_meditacao/core/routers/app_router.dart';
 import 'package:cinco_minutos_meditacao/core/routers/app_router.gr.dart';
 import 'package:cinco_minutos_meditacao/modules/common/screens/home/home_contract.dart';
+import 'package:cinco_minutos_meditacao/modules/common/screens/home/home_model.dart';
 import 'package:cinco_minutos_meditacao/modules/common/screens/home/home_presenter.dart';
 import 'package:cinco_minutos_meditacao/modules/common/screens/home/home_repository.dart';
+import 'package:cinco_minutos_meditacao/modules/meditate/screens/meditate_info/meditate_info_model.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/meditations_response.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/user_response.dart';
 import 'package:cinco_minutos_meditacao/shared/models/error.dart';
@@ -201,6 +203,91 @@ void main() {
       verifyNever(homeRepository.uploadImageProfile(any));
       verifyNever(mockView.showError(any));
       verifyNever(mockView.showNormalState(any));
+    });
+
+    test(
+        'goToMeditateInfo should navigate to MeditateInfoRoute with correct model',
+        () {
+      final homeModel = HomeModel(
+        userResponse: UserResponse(
+          1,
+          "name",
+          "email",
+          "avatar",
+          "token",
+          "phone",
+          "document",
+          "password",
+          "createdAt",
+        ),
+        meditationsResponse: MeditationsResponse(1, 30),
+      );
+
+      presenter.goToMeditateInfo(homeModel);
+
+      verify(appRouter.goTo(MeditateInfoRoute(
+        model: MeditateInfoModel(
+          userResponse: homeModel.userResponse,
+          meditationsResponse: homeModel.meditationsResponse,
+        ),
+      ))).called(1);
+    });
+
+    test('goToMeditateInfo should handle null userResponse gracefully', () {
+      final homeModel = HomeModel(
+        userResponse: null,
+        meditationsResponse: MeditationsResponse(1, 30),
+      );
+
+      presenter.goToMeditateInfo(homeModel);
+
+      verify(appRouter.goTo(MeditateInfoRoute(
+        model: MeditateInfoModel(
+          userResponse: homeModel.userResponse,
+          meditationsResponse: homeModel.meditationsResponse,
+        ),
+      ))).called(1);
+    });
+
+    test('goToMeditateInfo should handle null meditationsResponse gracefully',
+        () {
+      final homeModel = HomeModel(
+        userResponse: UserResponse(
+          1,
+          "name",
+          "email",
+          "avatar",
+          "token",
+          "phone",
+          "document",
+          "password",
+          "createdAt",
+        ),
+        meditationsResponse: null,
+      );
+
+      presenter.goToMeditateInfo(homeModel);
+
+      verify(appRouter.goTo(MeditateInfoRoute(
+        model: MeditateInfoModel(
+          userResponse: homeModel.userResponse,
+          meditationsResponse: homeModel.meditationsResponse,
+        ),
+      ))).called(1);
+    });
+
+    test('goToFiveMinutes should navigate to FiveMinutesRoute', () {
+      presenter.goToFiveMinutes();
+
+      verify(appRouter.goTo(const FiveMinutesRoute())).called(1);
+    });
+
+    test('goToFiveMinutes should not navigate if router is null', () {
+      when(appRouter.goTo(any)).thenReturn(null);
+
+      presenter.goToFiveMinutes();
+
+      verify(appRouter.goTo(any));
     });
   });
 }
