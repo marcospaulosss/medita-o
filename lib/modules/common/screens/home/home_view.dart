@@ -128,8 +128,9 @@ class HomeViewState extends State<HomeView> implements HomeViewContract {
             ),
             const SizedBox(width: 10),
             Meditate(
+              key: const Key("meditateInYourTime"),
               title: CommonStrings.of(context).meditateTime,
-              onTap: () {},
+              onTap: () => presenter.goToInYourTime(),
             ),
           ],
         ),
