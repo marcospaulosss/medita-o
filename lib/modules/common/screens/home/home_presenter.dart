@@ -31,6 +31,7 @@ class HomePresenter implements Presenter {
   /// variável de controle de erro
   bool error = false;
 
+  /// Modelo da tela
   HomeModel homeModel = HomeModel();
 
   /// evento disparado ao abrir a tela
@@ -93,6 +94,7 @@ class HomePresenter implements Presenter {
     });
   }
 
+  /// Busca as meditações
   Future<MeditationsResponse?> getMeditions() async {
     var (meditations, error) = await _repository.requestMeditations();
     if (error != null) {
@@ -103,6 +105,7 @@ class HomePresenter implements Presenter {
     return meditations;
   }
 
+  /// Vai para a tela de informações de meditação
   @override
   void goToMeditateInfo(HomeModel model) {
     _router.goTo(MeditateInfoRoute(
@@ -111,5 +114,11 @@ class HomePresenter implements Presenter {
         meditationsResponse: model.meditationsResponse,
       ),
     ));
+  }
+
+  /// Vai para a tela de meditação de 5 minutos
+  @override
+  void goToFiveMinutes() {
+    _router.goTo(const FiveMinutesRoute());
   }
 }

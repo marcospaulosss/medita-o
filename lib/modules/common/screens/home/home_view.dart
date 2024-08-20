@@ -106,11 +106,13 @@ class HomeViewState extends State<HomeView> implements HomeViewContract {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             Meditate(
+              key: const Key("meditate5Minutes"),
               title: CommonStrings.of(context).meditate5Minutes,
-              onTap: () {},
+              onTap: () => presenter.goToFiveMinutes(),
             ),
             const SizedBox(width: 10),
             Meditate(
+              key: const Key("learnMethod"),
               title: CommonStrings.of(context).learnMethod,
               onTap: () => presenter.goToMeditateInfo(model),
             ),

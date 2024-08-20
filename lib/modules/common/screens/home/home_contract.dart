@@ -32,6 +32,9 @@ abstract class Presenter implements ViewBinding<HomeViewContract> {
 
   /// Direciona para a tela de informações e metodos de meditação
   void goToMeditateInfo(HomeModel model);
+
+  /// Direciona para a tela de meditação de 5 minutos
+  void goToFiveMinutes();
 }
 
 abstract class Repository {
