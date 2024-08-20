@@ -156,6 +156,76 @@ main() async {
 
         verify(presenter.updateImageProfile()).called(1);
       });
+
+      testWidgets("Should validate o click in card meditate 5 minutes",
+          (tester) async {
+        when(presenter.initPresenter()).thenAnswer((_) {
+          return Future.value();
+        });
+        when(presenter.goToFiveMinutes()).thenAnswer((_) {});
+        await tester.pumpWidget(createWidgetUnderTest());
+
+        await tester.pump();
+        verify(presenter.initPresenter()).called(1);
+
+        final homeViewState =
+            tester.state(find.byType(HomeView)) as HomeViewState;
+        homeViewState.showNormalState(HomeModel(
+          userResponse: UserResponse(
+            1,
+            "Marcos",
+            "marcos@gmail.com",
+            "",
+            "1",
+            "1",
+            "",
+            DateTime.now().toString(),
+            DateTime.now().toString(),
+          ),
+          meditationsResponse: MeditationsResponse(2, 123123),
+        ));
+        await tester.pumpAndSettle();
+
+        await tester.tap(find.byKey(const Key("meditate5Minutes")));
+        await tester.pumpAndSettle();
+
+        verify(presenter.goToFiveMinutes()).called(1);
+      });
+
+      testWidgets("Should validate o click in card learn method",
+          (tester) async {
+        when(presenter.initPresenter()).thenAnswer((_) {
+          return Future.value();
+        });
+        when(presenter.goToMeditateInfo(any)).thenAnswer((_) {});
+        await tester.pumpWidget(createWidgetUnderTest());
+
+        await tester.pump();
+        verify(presenter.initPresenter()).called(1);
+
+        final homeViewState =
+            tester.state(find.byType(HomeView)) as HomeViewState;
+        homeViewState.showNormalState(HomeModel(
+          userResponse: UserResponse(
+            1,
+            "Marcos",
+            "marcos@gmail.com",
+            "",
+            "1",
+            "1",
+            "",
+            DateTime.now().toString(),
+            DateTime.now().toString(),
+          ),
+          meditationsResponse: MeditationsResponse(2, 123123),
+        ));
+        await tester.pumpAndSettle();
+
+        await tester.tap(find.byKey(const Key("learnMethod")));
+        await tester.pumpAndSettle();
+
+        verify(presenter.goToMeditateInfo(any)).called(1);
+      });
     });
 
     group("Simuilation HomeViewState", () {
