@@ -11,5 +11,9 @@
   "methodDescriptionPhrase6": "respirações profundas.",
   "threeBreaths": "3 ",
   "fiveMinutes": "5 ",
-  "learnMeditate": "Aprenda a meditar"
+  "learnMeditate": "Aprenda a meditar",
+  "tapStartMeditation": "Clique no botão para começar",
+  "learnMethod": "Aprenda o método        ",
+  "remindMeditate": "Lembre-me de meditar",
+  "fiveMinutesTitle": "5 minutos"
 }
