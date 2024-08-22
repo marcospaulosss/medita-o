@@ -10,19 +10,11 @@ jobs:
       checks: write
       contents: write
       packages: write
-    runs-on: [marcOS]
+    runs-on: [ marcOS ]
 
     steps:
       - name: Efetua checkout da branch
         uses: actions/checkout@v3
-
-      - name: Install SSH key
-        uses: shimataro/ssh-key-action@v2
-        with:
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          name: id_rsa
-          known_hosts: ${{ secrets.SSH_KNOWN_HOSTS }}
-          if_key_exists: ignore
 
       - name: Setup Fastlane
         run: |
@@ -36,36 +28,6 @@ jobs:
           ./localization
           flutter packages pub run build_runner build --delete-conflicting-outputs
           flutter build apk --debug --flavor dev -t lib/core/flavors/main_dev.dart
-
-      - name: Upload do apk
-        uses: actions/upload-artifact@v3
-        with:
-          name: apk
-          path: build/app/outputs/flutter-apk/app-dev-debug.apk
-
-  firebase:
-    needs: build
-    permissions:
-      checks: write
-      contents: write
-      packages: write
-    runs-on: [ marcOS ]
-
-    steps:
-      - name: Efetua checkout da branch
-        uses: actions/checkout@v3
-
-      - name: Download apk
-        uses: actions/download-artifact@v3
-        with:
-          name: apk
-          path: build/app/outputs/flutter-apk
-
-      - name: Setup Fastlane
-        run: |
-          cd android
-          bundle install
-          cd ..
 
       - name: Deploy do firebase
         run: |

@@ -10,7 +10,7 @@ jobs:
       checks: write
       contents: write
       packages: write
-#    runs-on: [marcOS]
+    #    runs-on: [marcOS]
     runs-on: macos-latest
 
     steps:
@@ -22,10 +22,10 @@ jobs:
         with:
           ruby-version: '2.7'
 
-#      - name: Setup Ruby TO MACOS
-#        uses: actions/setup-ruby@v1
-#        with:
-#          ruby-version: 2.7
+      #      - name: Setup Ruby TO MACOS
+      #        uses: actions/setup-ruby@v1
+      #        with:
+      #          ruby-version: 2.7
 
       - name: Install SSH key
         uses: shimataro/ssh-key-action@v2
@@ -58,50 +58,6 @@ jobs:
           flutter packages pub run build_runner build --delete-conflicting-outputs
           flutter build apk --debug --flavor dev -t lib/core/flavors/main_dev.dart 
 
-#      - name: Setup flutter e builda projeto LOCALMENTE
-#        run: |
-#          flutter clean
-#          flutter pub get
-#          ./localization
-#          flutter packages pub run build_runner build --delete-conflicting-outputs
-#          flutter build apk --debug --flavor dev -t lib/core/flavors/main_dev.dart
-
-      - name: Upload do apk
-        uses: actions/upload-artifact@v3
-        with:
-          name: apk
-          path: build/app/outputs/flutter-apk/app-dev-debug.apk
-
-  firebase:
-    needs: build
-    permissions:
-      checks: write
-      contents: write
-      packages: write
-#    runs-on: [ marcOS ]
-    runs-on: macos-latest
-
-    steps:
-      - name: Efetua checkout da branch
-        uses: actions/checkout@v3
-
-      - name: Download apk
-        uses: actions/download-artifact@v3
-        with:
-          name: apk
-          path: build/app/outputs/flutter-apk
-
-      - name: Setup Ruby
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: '2.7'
-
-      - name: Setup Fastlane
-        run: |
-          cd android
-          bundle install
-          cd ..
-
       - name: Deploy do firebase
         run: |
           ls -la build/app/outputs/flutter-apk
@@ -110,3 +66,70 @@ jobs:
         env:
           FIREBASE_TESTER_GROUPS: ${{ secrets.FIREBASE_TESTER_GROUPS }}
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+
+      #      - name: Setup flutter e builda projeto LOCALMENTE
+      #        run: |
+      #          flutter clean
+      #          flutter pub get
+      #          ./localization
+      #          flutter packages pub run build_runner build --delete-conflicting-outputs
+      #          flutter build apk --debug --flavor dev -t lib/core/flavors/main_dev.dart
+
+#      - name: Upload do apk
+#        uses: actions/upload-artifact@v3
+#        with:
+#          name: apk
+#          path: build/app/outputs/flutter-apk/app-dev-debug.apk
+#          retention-days: 7
+
+#  firebase:
+#    needs: build
+#    permissions:
+#      checks: write
+#      contents: write
+#      packages: write
+#    #    runs-on: [ marcOS ]
+#    runs-on: macos-latest
+#
+#    steps:
+#      - name: Efetua checkout da branch
+#        uses: actions/checkout@v3
+#
+#      - name: Download apk
+#        uses: actions/download-artifact@v3
+#        with:
+#          name: apk
+#          path: build/app/outputs/flutter-apk
+#
+#      - name: Setup Ruby
+#        uses: ruby/setup-ruby@v1
+#        with:
+#          ruby-version: '2.7'
+#
+#      - name: Setup Fastlane
+#        run: |
+#          cd android
+#          bundle install
+#          cd ..
+#
+#      - name: Deploy do firebase
+#        run: |
+#          ls -la build/app/outputs/flutter-apk
+#          cd android
+#          bundle exec fastlane firebase
+#        env:
+#          FIREBASE_TESTER_GROUPS: ${{ secrets.FIREBASE_TESTER_GROUPS }}
+#          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+#
+#      - name: Delete Old Artifacts
+#        env:
+#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#        run: |
+#          DAYS_TO_KEEP=7
+#          for artifact_id in $(curl -s -H "Authorization: token $GITHUB_TOKEN" \
+#            "https://api.github.com/repos/${{ github.repository }}/actions/artifacts" \
+#            | jq -r ".artifacts[] | select(.created_at < \"$(date -d \"-$DAYS_TO_KEEP days\" --utc +%Y-%m-%dT%H:%M:%SZ)\") | .id"); do
+#              echo "Deleting artifact $artifact_id"
+#              curl -s -X DELETE -H "Authorization: token $GITHUB_TOKEN" \
+#                "https://api.github.com/repos/${{ github.repository }}/actions/artifacts/$artifact_id"
+#          done
