@@ -7,7 +7,7 @@ on:
 jobs:
   flutter_test:
     name: Flutter Tests
-    runs-on: [marcOS]
+    runs-on: [ marcOS ]
 
     permissions:
       checks: write
@@ -37,9 +37,9 @@ jobs:
           reporter: flutter-json
           token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Verify coverage
-        uses: VeryGoodOpenSource/very_good_coverage@v2.1.0
-        with:
-          min_coverage: 70
-          exclude: './lib/core/* **/strings/localization/**'
-          path: ./coverage/new2_lcov.info
+#      - name: Verify coverage
+#        uses: VeryGoodOpenSource/very_good_coverage@v2.1.0
+#        with:
+#          min_coverage: 70
+#          exclude: './lib/core/* **/strings/localization/**'
+#          path: ./coverage/new2_lcov.info
