@@ -10,7 +10,7 @@ jobs:
       checks: write
       contents: write
       packages: write
-#    runs-on: [marcOS]
+    #    runs-on: [marcOS]
     runs-on: macos-latest
 
     steps:
@@ -74,25 +74,26 @@ jobs:
           cd ..
           flutter build ipa --export-options-plist lib/core/export_plist/Info_dev.plist --flavor dev -t lib/core/flavors/main_dev.dart
 
-#      - name: Setup flutter e builda projeto LOCALMENTE
-#        run: |
-#          flutter clean
-#          rm -rf ios/Pods
-#          rm ios/Podfile.lock
-#          flutter pub get
-#          ./localization
-#          flutter packages pub run build_runner build --delete-conflicting-outputs
-#          cd ios
-#          pod deintegrate
-#          pod install
-#          cd ..
-#          flutter build ipa --export-options-plist lib/core/export_plist/Info_dev.plist --flavor dev -t lib/core/flavors/main_dev.dart
+      #      - name: Setup flutter e builda projeto LOCALMENTE
+      #        run: |
+      #          flutter clean
+      #          rm -rf ios/Pods
+      #          rm ios/Podfile.lock
+      #          flutter pub get
+      #          ./localization
+      #          flutter packages pub run build_runner build --delete-conflicting-outputs
+      #          cd ios
+      #          pod deintegrate
+      #          pod install
+      #          cd ..
+      #          flutter build ipa --export-options-plist lib/core/export_plist/Info_dev.plist --flavor dev -t lib/core/flavors/main_dev.dart
 
       - name: Upload do ipa
         uses: actions/upload-artifact@v3
         with:
           name: ipa
           path: build/ios/ipa/Dev.ipa
+          retention-days: 7
 
   testflight:
     needs: build
@@ -100,7 +101,7 @@ jobs:
       checks: write
       contents: write
       packages: write
-#    runs-on: [ marcOS ]
+    #    runs-on: [ marcOS ]
     runs-on: macos-latest
 
     steps:
@@ -145,7 +146,7 @@ jobs:
       checks: write
       contents: write
       packages: write
-#    runs-on: [ marcOS ]
+    #    runs-on: [ marcOS ]
     runs-on: ubuntu-latest
 
     steps:
@@ -186,3 +187,16 @@ jobs:
           MATCH_GIT_BASIC_AUTHORIZATION: ${{ secrets.MATCH_GIT_BASIC_AUTHORIZATION }}
           ITMSTRANSPORTER_FORCE_ITMS_PACKAGE_UPLOAD: false
           FASTLANE_PASSWORD: ${{ secrets.FASTLANE_PASSWORD }}
+
+      - name: Delete Old Artifacts
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          DAYS_TO_KEEP=7
+          for artifact_id in $(curl -s -H "Authorization: token $GITHUB_TOKEN" \
+            "https://api.github.com/repos/${{ github.repository }}/actions/artifacts" \
+            | jq -r ".artifacts[] | select(.created_at < \"$(date -d \"-$DAYS_TO_KEEP days\" --utc +%Y-%m-%dT%H:%M:%SZ)\") | .id"); do
+              echo "Deleting artifact $artifact_id"
+              curl -s -X DELETE -H "Authorization: token $GITHUB_TOKEN" \
+                "https://api.github.com/repos/${{ github.repository }}/actions/artifacts/$artifact_id"
+          done
