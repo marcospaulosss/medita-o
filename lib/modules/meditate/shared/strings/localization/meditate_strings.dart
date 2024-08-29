@@ -196,6 +196,12 @@ abstract class MeditateStrings {
   /// In pt, this message translates to:
   /// **'5 minutos'**
   String get fiveMinutesTitle;
+
+  /// No description provided for @inYourTime.
+  ///
+  /// In pt, this message translates to:
+  /// **'No seu tempo'**
+  String get inYourTime;
 }
 
 class _MeditateStringsDelegate extends LocalizationsDelegate<MeditateStrings> {
