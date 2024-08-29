@@ -1,8 +1,8 @@
 import 'dart:io';
 
-import 'package:cinco_minutos_meditacao/modules/meditate/screens/five_minutes/components/player.dart';
 import 'package:cinco_minutos_meditacao/modules/meditate/screens/five_minutes/five_minutes_presenter.dart';
 import 'package:cinco_minutos_meditacao/modules/meditate/screens/five_minutes/five_minutes_view.dart';
+import 'package:cinco_minutos_meditacao/modules/meditate/shared/components/player.dart';
 import 'package:cinco_minutos_meditacao/modules/meditate/shared/strings/localization/meditate_strings.dart';
 import 'package:cinco_minutos_meditacao/shared/components/app_background.dart';
 import 'package:cinco_minutos_meditacao/shared/strings/localization/shared_strings.dart';
@@ -79,6 +79,64 @@ void main() {
         expect(player, findsOneWidget);
 
         await tester.tap(find.byIcon(Icons.play_arrow));
+        await tester.pumpAndSettle();
+      });
+    });
+
+    group("Simulation FiveMinutesViewState", () {
+      testWidgets("Should verify when show error screen", (tester) async {
+        when(presenter.onOpenScreen()).thenAnswer((_) {});
+
+        await tester.pumpWidget(createWidgetUnderTest());
+
+        final fiveMinutesViewState =
+            tester.state(find.byType(FiveMinutesView)) as FiveMinutesViewState;
+        fiveMinutesViewState.showError("teste");
+        await tester.pump();
+
+        expect(find.byIcon(Icons.close), findsOneWidget);
+        expect(find.text("Tivemos um problema."), findsOneWidget);
+        expect(find.textContaining("problema ao carregar"), findsOneWidget);
+        expect(find.textContaining("( teste )"), findsOneWidget);
+        expect(find.text("Tentar novamente"), findsOneWidget);
+
+        await tester.tap(find.text("Tentar novamente"));
+      });
+
+      testWidgets("Should verify when show loading screen", (tester) async {
+        when(presenter.onOpenScreen()).thenAnswer((_) {});
+
+        await tester.pumpWidget(createWidgetUnderTest());
+
+        final fiveMinutesViewState =
+            tester.state(find.byType(FiveMinutesView)) as FiveMinutesViewState;
+        fiveMinutesViewState.showLoading();
+        await tester.pump();
+
+        expect(find.byType(Image), findsOneWidget);
+        expect(find.textContaining('Carregando'), findsOneWidget);
+      });
+
+      testWidgets("Should verify when show normal screen", (tester) async {
+        when(presenter.onOpenScreen()).thenAnswer((_) {});
+
+        await tester.pumpWidget(createWidgetUnderTest());
+
+        final fiveMinutesViewState =
+            tester.state(find.byType(FiveMinutesView)) as FiveMinutesViewState;
+        fiveMinutesViewState.showNormalState();
+        await tester.pumpAndSettle();
+      });
+
+      testWidgets("Should verify when show normal screen with parameter",
+          (tester) async {
+        when(presenter.onOpenScreen()).thenAnswer((_) {});
+
+        await tester.pumpWidget(createWidgetUnderTest());
+
+        final fiveMinutesViewState =
+            tester.state(find.byType(FiveMinutesView)) as FiveMinutesViewState;
+        fiveMinutesViewState.showNormalState();
         await tester.pumpAndSettle();
       });
     });
