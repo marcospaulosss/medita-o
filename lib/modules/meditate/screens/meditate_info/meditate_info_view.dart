@@ -18,14 +18,9 @@ import 'meditate_info_contract.dart';
 
 @RoutePage()
 class MeditateInfoView extends StatefulWidget {
-  /// Parâmetros da tela
-  MeditateInfoModel model;
-
-  /// - [model] : Modelo da tela
   /// Construtor
-  MeditateInfoView({
+  const MeditateInfoView({
     super.key,
-    required this.model,
   });
 
   @override
@@ -44,10 +39,13 @@ class MeditateInfoViewState extends State<MeditateInfoView>
   /// Mensagem de erro
   late String messageError = "";
 
+  /// Modelo
+  MeditateInfoModel? _meditateInfoModel;
+
   @override
   void initState() {
     presenter.bindView(this);
-    presenter.initPresenter(widget.model);
+    presenter.initPresenter();
 
     super.initState();
   }
@@ -67,7 +65,7 @@ class MeditateInfoViewState extends State<MeditateInfoView>
       loadingStateBuilder: (context) => const Loading(),
       errorStateBuilder: (context) => GenericErrorContainer(
         message: messageError,
-        onRetry: () => presenter.initPresenter(widget.model),
+        onRetry: () => presenter.initPresenter(),
       ),
     );
   }
@@ -78,12 +76,13 @@ class MeditateInfoViewState extends State<MeditateInfoView>
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           AppHeader(
-            nameUser: widget.model.userResponse?.name.split(" ").first ?? "",
+            nameUser:
+                _meditateInfoModel!.userResponse?.name.split(" ").first ?? "",
             description1: MeditateStrings.of(context).alreadyAdded,
             description2:
-                "${widget.model.meditationsByUserResponse?.totalMinutes ?? 0} ${MeditateStrings.of(context).minutes} ",
+                "${_meditateInfoModel!.meditationsByUserResponse?.totalMinutes ?? 0} ${MeditateStrings.of(context).minutes} ",
             description3: MeditateStrings.of(context).worldPeace,
-            photo: widget.model.userResponse?.profilePhotoPath,
+            photo: _meditateInfoModel!.userResponse?.profilePhotoPath,
             updateImage: () => presenter.updateImageProfile(),
           ),
           buildBody(context),
@@ -116,7 +115,7 @@ class MeditateInfoViewState extends State<MeditateInfoView>
           const SizedBox(height: 30),
           Center(
             child: Meditometer(
-              meditationsResponse: widget.model.meditationsResponse,
+              meditationsResponse: _meditateInfoModel!.meditationsResponse,
             ),
           ),
         ],
@@ -135,7 +134,7 @@ class MeditateInfoViewState extends State<MeditateInfoView>
   void showNormalState({MeditateInfoModel? model}) {
     if (model != null) {
       setState(() {
-        widget.model = model;
+        _meditateInfoModel = model;
       });
     }
 

@@ -14,6 +14,9 @@ abstract class FiveMinutesViewContract {
 abstract class Presenter implements ViewBinding<FiveMinutesViewContract> {
   /// evento disparado ao abrir a tela
   void onOpenScreen();
+
+  /// Direciona para a tela de informações de como meditar
+  void goToMeditateInfo();
 }
 
 abstract class Repository {

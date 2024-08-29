@@ -364,6 +364,15 @@ class MockSecureStorage extends _i1.Mock implements _i15.SecureStorage {
       ) as _i10.Future<String>);
 
   @override
+  _i10.Future<String> get profilePhoto => (super.noSuchMethod(
+        Invocation.getter(#profilePhoto),
+        returnValue: _i10.Future<String>.value(_i14.dummyValue<String>(
+          this,
+          Invocation.getter(#profilePhoto),
+        )),
+      ) as _i10.Future<String>);
+
+  @override
   _i10.Future<dynamic> setAllToNull() => (super.noSuchMethod(
         Invocation.method(
           #setAllToNull,
@@ -427,6 +436,17 @@ class MockSecureStorage extends _i1.Mock implements _i15.SecureStorage {
         Invocation.method(
           #setGoogleId,
           [googleId],
+        ),
+        returnValue: _i10.Future<void>.value(),
+        returnValueForMissingStub: _i10.Future<void>.value(),
+      ) as _i10.Future<void>);
+
+  @override
+  _i10.Future<void> setProfilePhoto(String? profilePhoto) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #setProfilePhoto,
+          [profilePhoto],
         ),
         returnValue: _i10.Future<void>.value(),
         returnValueForMissingStub: _i10.Future<void>.value(),
