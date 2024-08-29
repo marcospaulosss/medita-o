@@ -1,6 +1,6 @@
 import 'package:cinco_minutos_meditacao/shared/helpers/view_binding.dart';
 
-abstract class FiveMinutesViewContract {
+abstract class InYourTimeContract {
   /// Mostra a tela de carregamento
   void showLoading();
 
@@ -11,7 +11,7 @@ abstract class FiveMinutesViewContract {
   void showError(String message);
 }
 
-abstract class Presenter implements ViewBinding<FiveMinutesViewContract> {
+abstract class Presenter implements ViewBinding<InYourTimeContract> {
   /// evento disparado ao abrir a tela
   void onOpenScreen();
 }

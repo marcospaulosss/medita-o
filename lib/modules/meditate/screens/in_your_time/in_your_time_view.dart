@@ -1,4 +1,7 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:cinco_minutos_meditacao/core/di/helpers.dart';
+import 'package:cinco_minutos_meditacao/modules/meditate/screens/in_your_time/in_your_time_contract.dart';
+import 'package:cinco_minutos_meditacao/modules/meditate/screens/in_your_time/in_your_time_presenter.dart';
 import 'package:cinco_minutos_meditacao/modules/meditate/shared/components/meditation_method.dart';
 import 'package:cinco_minutos_meditacao/modules/meditate/shared/components/player.dart';
 import 'package:cinco_minutos_meditacao/modules/meditate/shared/strings/localization/meditate_strings.dart';
@@ -7,6 +10,7 @@ import 'package:cinco_minutos_meditacao/shared/components/app_background.dart';
 import 'package:cinco_minutos_meditacao/shared/components/generic_error_container.dart';
 import 'package:cinco_minutos_meditacao/shared/components/loading.dart';
 import 'package:cinco_minutos_meditacao/shared/helpers/multi_state_container/export.dart';
+import 'package:cinco_minutos_meditacao/shared/helpers/view_binding.dart';
 import 'package:flutter/material.dart';
 import 'package:just_audio/just_audio.dart';
 
@@ -22,10 +26,10 @@ class InYourTimeView extends StatefulWidget {
 }
 
 @visibleForTesting
-class InYourTimeViewState extends State<InYourTimeView> {
-  // implements FiveMinutesViewContract {
+class InYourTimeViewState extends State<InYourTimeView>
+    implements InYourTimeContract {
   /// Presenter
-  // Presenter presenter = resolve<FiveMinutesPresenter>();
+  Presenter presenter = resolve<InYourTimePresenter>();
 
   /// Controlador do estado da tela
   final stateController = MultiStateContainerController();
@@ -39,8 +43,8 @@ class InYourTimeViewState extends State<InYourTimeView> {
   void initState() {
     stateController.showNormalState();
 
-    // presenter.bindView(this);
-    // presenter.onOpenScreen();
+    presenter.bindView(this);
+    presenter.onOpenScreen();
 
     // Create the audio player.
     player = AudioPlayer();
@@ -54,7 +58,7 @@ class InYourTimeViewState extends State<InYourTimeView> {
 
   @override
   void dispose() {
-    // presenter.unbindView();
+    presenter.unbindView();
 
     player.dispose();
     super.dispose();
@@ -68,7 +72,7 @@ class InYourTimeViewState extends State<InYourTimeView> {
       loadingStateBuilder: (context) => const Loading(),
       errorStateBuilder: (context) => GenericErrorContainer(
         message: messageError,
-        onRetry: () => initState(),
+        onRetry: () {},
       ),
     );
   }

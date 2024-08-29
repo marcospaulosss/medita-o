@@ -82,5 +82,63 @@ void main() {
         await tester.pumpAndSettle();
       });
     });
+
+    group("Simulation FiveMinutesViewState", () {
+      testWidgets("Should verify when show error screen", (tester) async {
+        when(presenter.onOpenScreen()).thenAnswer((_) {});
+
+        await tester.pumpWidget(createWidgetUnderTest());
+
+        final fiveMinutesViewState =
+            tester.state(find.byType(FiveMinutesView)) as FiveMinutesViewState;
+        fiveMinutesViewState.showError("teste");
+        await tester.pump();
+
+        expect(find.byIcon(Icons.close), findsOneWidget);
+        expect(find.text("Tivemos um problema."), findsOneWidget);
+        expect(find.textContaining("problema ao carregar"), findsOneWidget);
+        expect(find.textContaining("( teste )"), findsOneWidget);
+        expect(find.text("Tentar novamente"), findsOneWidget);
+
+        await tester.tap(find.text("Tentar novamente"));
+      });
+
+      testWidgets("Should verify when show loading screen", (tester) async {
+        when(presenter.onOpenScreen()).thenAnswer((_) {});
+
+        await tester.pumpWidget(createWidgetUnderTest());
+
+        final fiveMinutesViewState =
+            tester.state(find.byType(FiveMinutesView)) as FiveMinutesViewState;
+        fiveMinutesViewState.showLoading();
+        await tester.pump();
+
+        expect(find.byType(Image), findsOneWidget);
+        expect(find.textContaining('Carregando'), findsOneWidget);
+      });
+
+      testWidgets("Should verify when show normal screen", (tester) async {
+        when(presenter.onOpenScreen()).thenAnswer((_) {});
+
+        await tester.pumpWidget(createWidgetUnderTest());
+
+        final fiveMinutesViewState =
+            tester.state(find.byType(FiveMinutesView)) as FiveMinutesViewState;
+        fiveMinutesViewState.showNormalState();
+        await tester.pumpAndSettle();
+      });
+
+      testWidgets("Should verify when show normal screen with parameter",
+          (tester) async {
+        when(presenter.onOpenScreen()).thenAnswer((_) {});
+
+        await tester.pumpWidget(createWidgetUnderTest());
+
+        final fiveMinutesViewState =
+            tester.state(find.byType(FiveMinutesView)) as FiveMinutesViewState;
+        fiveMinutesViewState.showNormalState();
+        await tester.pumpAndSettle();
+      });
+    });
   });
 }
