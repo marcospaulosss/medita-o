@@ -7,16 +7,16 @@ jobs:
   tests:
     uses: polvo-labs/cincominutos-app/.github/workflows/tests_local.yaml@main
 
-  ios-distribution-dev:
+  ios_distribution_local:
     needs: tests
     uses: polvo-labs/cincominutos-app/.github/workflows/ios_distribution_local.yaml@main
 
-  android-distribution-dev:
+  android_distribution_local:
     needs: tests
     uses: polvo-labs/cincominutos-app/.github/workflows/android_distribution_local.yaml@main
 
   pre-release:
-    needs: [ios-distribution-dev, android-distribution-dev]
+    needs: [ ios_distribution_local, android_distribution_local ]
     permissions:
       checks: write
       contents: write
