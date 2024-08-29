@@ -72,7 +72,7 @@ class FiveMinutesViewState extends State<FiveMinutesView>
       loadingStateBuilder: (context) => const Loading(),
       errorStateBuilder: (context) => GenericErrorContainer(
         message: messageError,
-        onRetry: () => initState(),
+        onRetry: () {},
       ),
     );
   }

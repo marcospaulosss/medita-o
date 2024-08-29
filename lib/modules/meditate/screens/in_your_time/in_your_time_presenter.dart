@@ -1,10 +1,10 @@
 import 'package:cinco_minutos_meditacao/core/routers/app_router.dart';
-import 'package:cinco_minutos_meditacao/modules/meditate/screens/five_minutes/five_minutes_contract.dart';
+import 'package:cinco_minutos_meditacao/modules/meditate/screens/in_your_time/in_your_time_contract.dart';
 
-class FiveMinutesPresenter implements Presenter {
+class InYourTimePresenter implements Presenter {
   /// View
   @override
-  FiveMinutesViewContract? view;
+  InYourTimeContract? view;
 
   /// Repositório
   final Repository _repository;
@@ -15,7 +15,7 @@ class FiveMinutesPresenter implements Presenter {
   /// - [repository] : Repositório
   /// - [router] : Router
   /// construtor
-  FiveMinutesPresenter(this._repository, this._router);
+  InYourTimePresenter(this._repository, this._router);
 
   /// evento disparado ao abrir a tela
   @override

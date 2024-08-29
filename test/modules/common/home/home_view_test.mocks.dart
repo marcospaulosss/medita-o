@@ -163,4 +163,13 @@ class MockHomePresenter extends _i1.Mock implements _i3.HomePresenter {
         ),
         returnValueForMissingStub: null,
       );
+
+  @override
+  void goToInYourTime() => super.noSuchMethod(
+        Invocation.method(
+          #goToInYourTime,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
 }
