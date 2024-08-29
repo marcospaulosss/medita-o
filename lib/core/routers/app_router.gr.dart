@@ -23,13 +23,10 @@ import 'package:cinco_minutos_meditacao/modules/meditate/screens/five_minutes/fi
     as _i2;
 import 'package:cinco_minutos_meditacao/modules/meditate/screens/in_your_time/in_your_time_view.dart'
     as _i4;
-import 'package:cinco_minutos_meditacao/modules/meditate/screens/meditate_info/meditate_info_model.dart'
-    as _i12;
 import 'package:cinco_minutos_meditacao/modules/meditate/screens/meditate_info/meditate_info_view.dart'
     as _i6;
 import 'package:cinco_minutos_meditacao/shared/components/camera_view.dart'
     as _i1;
-import 'package:flutter/material.dart' as _i11;
 
 abstract class $AppRouter extends _i10.RootStackRouter {
   $AppRouter({super.navigatorKey});
@@ -67,13 +64,9 @@ abstract class $AppRouter extends _i10.RootStackRouter {
       );
     },
     MeditateInfoRoute.name: (routeData) {
-      final args = routeData.argsAs<MeditateInfoRouteArgs>();
       return _i10.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: _i6.MeditateInfoView(
-          key: args.key,
-          model: args.model,
-        ),
+        child: const _i6.MeditateInfoView(),
       );
     },
     RegisterSuccessRoute.name: (routeData) {
@@ -169,40 +162,16 @@ class LoginRoute extends _i10.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i6.MeditateInfoView]
-class MeditateInfoRoute extends _i10.PageRouteInfo<MeditateInfoRouteArgs> {
-  MeditateInfoRoute({
-    _i11.Key? key,
-    required _i12.MeditateInfoModel model,
-    List<_i10.PageRouteInfo>? children,
-  }) : super(
+class MeditateInfoRoute extends _i10.PageRouteInfo<void> {
+  const MeditateInfoRoute({List<_i10.PageRouteInfo>? children})
+      : super(
           MeditateInfoRoute.name,
-          args: MeditateInfoRouteArgs(
-            key: key,
-            model: model,
-          ),
           initialChildren: children,
         );
 
   static const String name = 'MeditateInfoRoute';
 
-  static const _i10.PageInfo<MeditateInfoRouteArgs> page =
-      _i10.PageInfo<MeditateInfoRouteArgs>(name);
-}
-
-class MeditateInfoRouteArgs {
-  const MeditateInfoRouteArgs({
-    this.key,
-    required this.model,
-  });
-
-  final _i11.Key? key;
-
-  final _i12.MeditateInfoModel model;
-
-  @override
-  String toString() {
-    return 'MeditateInfoRouteArgs{key: $key, model: $model}';
-  }
+  static const _i10.PageInfo<void> page = _i10.PageInfo<void>(name);
 }
 
 /// generated route for

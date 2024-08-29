@@ -48,4 +48,13 @@ class MockFiveMinutesPresenter extends _i1.Mock
         ),
         returnValueForMissingStub: null,
       );
+
+  @override
+  void goToMeditateInfo() => super.noSuchMethod(
+        Invocation.method(
+          #goToMeditateInfo,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
 }

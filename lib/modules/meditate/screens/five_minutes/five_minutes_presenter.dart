@@ -22,4 +22,24 @@ class FiveMinutesPresenter implements Presenter {
   void onOpenScreen() {
     _repository.sendOpenScreenEvent();
   }
+
+  @override
+  void goToMeditateInfo() {
+    // _router.goTo(MeditateInfoRoute(
+    //   model: MeditateInfoModel(
+    //     userResponse: UserResponse(
+    //       id,
+    //       name,
+    //       email,
+    //       emailVerifiedAt,
+    //       googleId,
+    //       facebookId,
+    //       profilePhotoPath,
+    //       createdAt,
+    //       updatedAt,
+    //     ),
+    //     meditationsResponse: model.meditationsResponse,
+    //   ),
+    // ));
+  }
 }
