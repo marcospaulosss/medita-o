@@ -46,6 +46,7 @@ class SecureStorage {
       setUserName(""),
       setUserEmail(""),
       setGoogleId(""),
+      setProfilePhoto(""),
     ]);
   }
 
@@ -56,6 +57,7 @@ class SecureStorage {
   static const _userName = "userName";
   static const _userEmail = "userEmail";
   static const _googleId = "googleId";
+  static const _profilePhoto = "profilePhoto";
 
   /// Token de autenticação da api
   Future<String> get tokenAPI async => await read(key: _tokenAPI) ?? "";
@@ -103,5 +105,13 @@ class SecureStorage {
   /// Define o id do google
   Future<void> setGoogleId(String googleId) async {
     await write(key: _googleId, value: googleId);
+  }
+
+  /// url da foto de perfil
+  Future<String> get profilePhoto async => await read(key: _profilePhoto) ?? "";
+
+  /// Define o id do google
+  Future<void> setProfilePhoto(String profilePhoto) async {
+    await write(key: _profilePhoto, value: profilePhoto);
   }
 }

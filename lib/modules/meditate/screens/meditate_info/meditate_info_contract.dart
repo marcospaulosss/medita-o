@@ -19,7 +19,7 @@ abstract class MeditateInfoViewContract {
 
 abstract class Presenter implements ViewBinding<MeditateInfoViewContract> {
   /// Inicializa o presenter
-  void initPresenter(MeditateInfoModel model);
+  void initPresenter();
 
   /// evento disparado ao abrir a tela
   void onOpenScreen();
@@ -40,4 +40,7 @@ abstract class Repository {
 
   /// Busca a quantidade de meditações realizadas no mundo
   Future<(MeditationsResponse?, CustomError?)> requestMeditationsByUser();
+
+  /// Busca a quantidade de meditações realizadas no mundo
+  Future<(MeditationsResponse?, CustomError?)> requestMeditations();
 }
