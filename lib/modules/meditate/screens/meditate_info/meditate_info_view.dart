@@ -109,7 +109,7 @@ class MeditateInfoViewState extends State<MeditateInfoView>
           ),
           const SizedBox(height: 13),
           VideoCard(
-            'https://www.youtube.com/watch?v=s6871xx3LBk&list=PL8WJsGLLbHNuT9ZN3z7kaxfT5OmgeZifh&index=6',
+            'https://youtu.be/O66_PkUEkOM',
             title: MeditateStrings.of(context).learnMeditate,
           ),
           const SizedBox(height: 30),

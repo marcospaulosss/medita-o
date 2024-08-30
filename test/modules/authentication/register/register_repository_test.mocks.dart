@@ -9,12 +9,14 @@ import 'dart:io' as _i13;
 import 'package:cinco_minutos_meditacao/core/analytics/event.dart' as _i8;
 import 'package:cinco_minutos_meditacao/core/analytics/manager.dart' as _i7;
 import 'package:cinco_minutos_meditacao/core/wrappers/secure_storage.dart'
-    as _i15;
+    as _i16;
 import 'package:cinco_minutos_meditacao/shared/clients/client_api.dart' as _i9;
 import 'package:cinco_minutos_meditacao/shared/clients/models/requests/auth_request.dart'
     as _i12;
 import 'package:cinco_minutos_meditacao/shared/clients/models/requests/authenticate_google_request.dart'
     as _i11;
+import 'package:cinco_minutos_meditacao/shared/clients/models/requests/create_new_meditations_request.dart'
+    as _i14;
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/authenticate_google_response.dart'
     as _i2;
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/meditations_response.dart'
@@ -25,7 +27,7 @@ import 'package:cinco_minutos_meditacao/shared/clients/models/responses/user_res
     as _i4;
 import 'package:cinco_minutos_meditacao/shared/models/error.dart' as _i6;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:mockito/src/dummies.dart' as _i14;
+import 'package:mockito/src/dummies.dart' as _i15;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -227,6 +229,18 @@ class MockClientApi extends _i1.Mock implements _i9.ClientApi {
           ),
         )),
       ) as _i10.Future<_i5.MeditationsResponse>);
+
+  @override
+  _i10.Future<void> createNewMeditation(
+          _i14.CreateNewMeditationsRequest? body) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #createNewMeditation,
+          [body],
+        ),
+        returnValue: _i10.Future<void>.value(),
+        returnValueForMissingStub: _i10.Future<void>.value(),
+      ) as _i10.Future<void>);
 }
 
 /// A class which mocks [CustomError].
@@ -267,7 +281,7 @@ class MockCustomError extends _i1.Mock implements _i6.CustomError {
   @override
   String get getErrorMessage => (super.noSuchMethod(
         Invocation.getter(#getErrorMessage),
-        returnValue: _i14.dummyValue<String>(
+        returnValue: _i15.dummyValue<String>(
           this,
           Invocation.getter(#getErrorMessage),
         ),
@@ -307,7 +321,7 @@ class MockCustomError extends _i1.Mock implements _i6.CustomError {
 /// A class which mocks [SecureStorage].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockSecureStorage extends _i1.Mock implements _i15.SecureStorage {
+class MockSecureStorage extends _i1.Mock implements _i16.SecureStorage {
   MockSecureStorage() {
     _i1.throwOnMissingStub(this);
   }
@@ -315,7 +329,7 @@ class MockSecureStorage extends _i1.Mock implements _i15.SecureStorage {
   @override
   _i10.Future<String> get tokenAPI => (super.noSuchMethod(
         Invocation.getter(#tokenAPI),
-        returnValue: _i10.Future<String>.value(_i14.dummyValue<String>(
+        returnValue: _i10.Future<String>.value(_i15.dummyValue<String>(
           this,
           Invocation.getter(#tokenAPI),
         )),
@@ -330,7 +344,7 @@ class MockSecureStorage extends _i1.Mock implements _i15.SecureStorage {
   @override
   _i10.Future<String> get userId => (super.noSuchMethod(
         Invocation.getter(#userId),
-        returnValue: _i10.Future<String>.value(_i14.dummyValue<String>(
+        returnValue: _i10.Future<String>.value(_i15.dummyValue<String>(
           this,
           Invocation.getter(#userId),
         )),
@@ -339,7 +353,7 @@ class MockSecureStorage extends _i1.Mock implements _i15.SecureStorage {
   @override
   _i10.Future<String> get userName => (super.noSuchMethod(
         Invocation.getter(#userName),
-        returnValue: _i10.Future<String>.value(_i14.dummyValue<String>(
+        returnValue: _i10.Future<String>.value(_i15.dummyValue<String>(
           this,
           Invocation.getter(#userName),
         )),
@@ -348,7 +362,7 @@ class MockSecureStorage extends _i1.Mock implements _i15.SecureStorage {
   @override
   _i10.Future<String> get userEmail => (super.noSuchMethod(
         Invocation.getter(#userEmail),
-        returnValue: _i10.Future<String>.value(_i14.dummyValue<String>(
+        returnValue: _i10.Future<String>.value(_i15.dummyValue<String>(
           this,
           Invocation.getter(#userEmail),
         )),
@@ -357,7 +371,7 @@ class MockSecureStorage extends _i1.Mock implements _i15.SecureStorage {
   @override
   _i10.Future<String> get googleId => (super.noSuchMethod(
         Invocation.getter(#googleId),
-        returnValue: _i10.Future<String>.value(_i14.dummyValue<String>(
+        returnValue: _i10.Future<String>.value(_i15.dummyValue<String>(
           this,
           Invocation.getter(#googleId),
         )),
@@ -366,7 +380,7 @@ class MockSecureStorage extends _i1.Mock implements _i15.SecureStorage {
   @override
   _i10.Future<String> get profilePhoto => (super.noSuchMethod(
         Invocation.getter(#profilePhoto),
-        returnValue: _i10.Future<String>.value(_i14.dummyValue<String>(
+        returnValue: _i10.Future<String>.value(_i15.dummyValue<String>(
           this,
           Invocation.getter(#profilePhoto),
         )),

@@ -24,8 +24,16 @@ class FiveMinutesPresenter implements Presenter {
     _repository.sendOpenScreenEvent();
   }
 
+  /// Direciona para a tela de informações de como meditar
   @override
   void goToMeditateInfo() {
     _router.goTo(const MeditateInfoRoute());
+  }
+
+  /// Submete a meditação concluída
+  @override
+  Future<void> submitMeditateCompleted(int time) async {
+    await _repository.requestRegisterMeditateCompleted(time);
+    view?.meditationCompleted();
   }
 }
