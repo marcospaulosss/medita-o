@@ -1,4 +1,5 @@
 import 'package:cinco_minutos_meditacao/core/routers/app_router.dart';
+import 'package:cinco_minutos_meditacao/core/routers/app_router.gr.dart';
 import 'package:cinco_minutos_meditacao/modules/meditate/screens/five_minutes/five_minutes_contract.dart';
 
 class FiveMinutesPresenter implements Presenter {
@@ -25,21 +26,6 @@ class FiveMinutesPresenter implements Presenter {
 
   @override
   void goToMeditateInfo() {
-    // _router.goTo(MeditateInfoRoute(
-    //   model: MeditateInfoModel(
-    //     userResponse: UserResponse(
-    //       id,
-    //       name,
-    //       email,
-    //       emailVerifiedAt,
-    //       googleId,
-    //       facebookId,
-    //       profilePhotoPath,
-    //       createdAt,
-    //       updatedAt,
-    //     ),
-    //     meditationsResponse: model.meditationsResponse,
-    //   ),
-    // ));
+    _router.goTo(const MeditateInfoRoute());
   }
 }
