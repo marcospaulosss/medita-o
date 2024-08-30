@@ -37,7 +37,11 @@ class FiveMinutesViewState extends State<FiveMinutesView>
   /// Mensagem de erro
   late String messageError = "";
 
+  /// Player de áudio
   late AudioPlayer player;
+
+  /// Se a reprodução foi concluída
+  bool hasCompleted = false;
 
   @override
   void initState() {
@@ -96,13 +100,7 @@ class FiveMinutesViewState extends State<FiveMinutesView>
         children: [
           Player(
             player: player,
-            onStop: () async {
-              print("funcionando");
-              if (player.processingState == ProcessingState.idle) {
-                // Recarregar o áudio se o player estiver ocioso
-                await player.setAudioSource(AudioSource.asset(AppTracks.trackFive));
-              }
-            },
+            onStop: submitMeditateComplete,
           ),
           const SizedBox(height: 20),
           Text(
@@ -134,6 +132,19 @@ class FiveMinutesViewState extends State<FiveMinutesView>
     );
   }
 
+  /// Submete a meditação como concluída
+  submitMeditateComplete() async {
+    if (player.processingState == ProcessingState.idle) {
+      // Recarregar o áudio se o player estiver ocioso
+      await player.setAudioSource(AudioSource.asset(AppTracks.trackFive));
+    }
+
+    if (!hasCompleted) {
+      presenter.submitMeditateCompleted(5);
+      hasCompleted = true;
+    }
+  }
+
   /// Mostra o estado de carregamento
   @override
   void showLoading() {
@@ -151,5 +162,10 @@ class FiveMinutesViewState extends State<FiveMinutesView>
   void showError(String message) {
     messageError = message;
     stateController.showErrorState();
+  }
+
+  @override
+  void meditationCompleted() {
+    hasCompleted = false;
   }
 }

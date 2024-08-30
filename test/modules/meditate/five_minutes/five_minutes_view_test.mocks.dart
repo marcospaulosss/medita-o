@@ -3,6 +3,8 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
+import 'dart:async' as _i4;
+
 import 'package:cinco_minutos_meditacao/modules/meditate/screens/five_minutes/five_minutes_contract.dart'
     as _i3;
 import 'package:cinco_minutos_meditacao/modules/meditate/screens/five_minutes/five_minutes_presenter.dart'
@@ -57,4 +59,14 @@ class MockFiveMinutesPresenter extends _i1.Mock
         ),
         returnValueForMissingStub: null,
       );
+
+  @override
+  _i4.Future<void> submitMeditateCompleted(int? time) => (super.noSuchMethod(
+        Invocation.method(
+          #submitMeditateCompleted,
+          [time],
+        ),
+        returnValue: _i4.Future<void>.value(),
+        returnValueForMissingStub: _i4.Future<void>.value(),
+      ) as _i4.Future<void>);
 }

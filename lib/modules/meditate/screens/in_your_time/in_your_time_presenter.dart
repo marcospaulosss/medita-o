@@ -22,4 +22,10 @@ class InYourTimePresenter implements Presenter {
   void onOpenScreen() {
     _repository.sendOpenScreenEvent();
   }
+
+  @override
+  Future<void> submitMeditateCompleted(int time) async {
+    await _repository.requestRegisterMeditateCompleted(time);
+    view?.meditationCompleted();
+  }
 }

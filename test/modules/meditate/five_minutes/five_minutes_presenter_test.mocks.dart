@@ -3,10 +3,13 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:auto_route/auto_route.dart' as _i4;
-import 'package:cinco_minutos_meditacao/core/routers/app_router.dart' as _i3;
+import 'dart:async' as _i4;
+
+import 'package:auto_route/auto_route.dart' as _i6;
+import 'package:cinco_minutos_meditacao/core/routers/app_router.dart' as _i5;
 import 'package:cinco_minutos_meditacao/modules/meditate/screens/five_minutes/five_minutes_repository.dart'
-    as _i2;
+    as _i3;
+import 'package:cinco_minutos_meditacao/shared/models/error.dart' as _i2;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: type=lint
@@ -22,14 +25,33 @@ import 'package:mockito/mockito.dart' as _i1;
 // ignore_for_file: camel_case_types
 // ignore_for_file: subtype_of_sealed_class
 
+class _FakeCustomError_0 extends _i1.SmartFake implements _i2.CustomError {
+  _FakeCustomError_0(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
 /// A class which mocks [FiveMinutesRepository].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockFiveMinutesRepository extends _i1.Mock
-    implements _i2.FiveMinutesRepository {
+    implements _i3.FiveMinutesRepository {
   MockFiveMinutesRepository() {
     _i1.throwOnMissingStub(this);
   }
+
+  @override
+  _i2.CustomError get error => (super.noSuchMethod(
+        Invocation.getter(#error),
+        returnValue: _FakeCustomError_0(
+          this,
+          Invocation.getter(#error),
+        ),
+      ) as _i2.CustomError);
 
   @override
   void sendOpenScreenEvent() => super.noSuchMethod(
@@ -39,24 +61,35 @@ class MockFiveMinutesRepository extends _i1.Mock
         ),
         returnValueForMissingStub: null,
       );
+
+  @override
+  _i4.Future<void> requestRegisterMeditateCompleted(int? time) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #requestRegisterMeditateCompleted,
+          [time],
+        ),
+        returnValue: _i4.Future<void>.value(),
+        returnValueForMissingStub: _i4.Future<void>.value(),
+      ) as _i4.Future<void>);
 }
 
 /// A class which mocks [AppRouter].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockAppRouter extends _i1.Mock implements _i3.AppRouter {
+class MockAppRouter extends _i1.Mock implements _i5.AppRouter {
   MockAppRouter() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  List<_i4.AutoRoute> get routes => (super.noSuchMethod(
+  List<_i6.AutoRoute> get routes => (super.noSuchMethod(
         Invocation.getter(#routes),
-        returnValue: <_i4.AutoRoute>[],
-      ) as List<_i4.AutoRoute>);
+        returnValue: <_i6.AutoRoute>[],
+      ) as List<_i6.AutoRoute>);
 
   @override
-  void goToReplace(_i4.PageRouteInfo<dynamic>? route) => super.noSuchMethod(
+  void goToReplace(_i6.PageRouteInfo<dynamic>? route) => super.noSuchMethod(
         Invocation.method(
           #goToReplace,
           [route],
@@ -66,8 +99,8 @@ class MockAppRouter extends _i1.Mock implements _i3.AppRouter {
 
   @override
   void goTo(
-    _i4.PageRouteInfo<dynamic>? route, {
-    _i3.OnCloseRoute? onClose,
+    _i6.PageRouteInfo<dynamic>? route, {
+    _i5.OnCloseRoute? onClose,
   }) =>
       super.noSuchMethod(
         Invocation.method(
