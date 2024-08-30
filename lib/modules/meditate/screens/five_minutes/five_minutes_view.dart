@@ -94,7 +94,16 @@ class FiveMinutesViewState extends State<FiveMinutesView>
       padding: const EdgeInsets.only(top: 113, left: 40, right: 40, bottom: 33),
       child: Column(
         children: [
-          Player(player: player),
+          Player(
+            player: player,
+            onStop: () async {
+              print("funcionando");
+              if (player.processingState == ProcessingState.idle) {
+                // Recarregar o áudio se o player estiver ocioso
+                await player.setAudioSource(AudioSource.asset(AppTracks.trackFive));
+              }
+            },
+          ),
           const SizedBox(height: 20),
           Text(
             MeditateStrings.of(context).tapStartMeditation,
@@ -107,7 +116,7 @@ class FiveMinutesViewState extends State<FiveMinutesView>
           const SizedBox(height: 26),
           MeditationMethod(
             iconButton1: MeditationMethodButtonCustom(
-              onTap: () {},
+              onTap: () => presenter.goToMeditateInfo(),
               icon: Icons.play_circle_outline,
               label: MeditateStrings.of(context).learnMethod,
             ),
