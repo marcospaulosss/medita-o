@@ -7,7 +7,6 @@ import 'package:cinco_minutos_meditacao/shared/components/text_field_input.dart'
 import 'package:flutter/material.dart';
 
 class FormRegister extends StatefulWidget {
-
   /// Função de registro
   Function onRegister;
 
@@ -34,7 +33,8 @@ class _FormRegisterState extends State<FormRegister> {
   final TextEditingController passwordController = TextEditingController();
 
   /// Controlador do campo de texto de repetir senha
-  final TextEditingController repeatPasswordController = TextEditingController();
+  final TextEditingController repeatPasswordController =
+      TextEditingController();
 
   /// Se a senha está oculta
   bool obscurePasswordText = true;
@@ -105,7 +105,7 @@ class _FormRegisterState extends State<FormRegister> {
               hintText: AuthenticationStrings.of(context).obscurePassword,
               controller: passwordController,
               obscureText: obscurePasswordText,
-              keyboardType: TextInputType.none,
+              keyboardType: TextInputType.text,
               label: AuthenticationStrings.of(context).password,
               contentPadding: const EdgeInsets.only(left: 10, right: 10),
               style: const TextStyle(
@@ -132,7 +132,7 @@ class _FormRegisterState extends State<FormRegister> {
               hintText: AuthenticationStrings.of(context).obscurePassword,
               controller: repeatPasswordController,
               obscureText: obscureRepeatPasswordText,
-              keyboardType: TextInputType.none,
+              keyboardType: TextInputType.text,
               label: AuthenticationStrings.of(context).confirmPassword,
               contentPadding: const EdgeInsets.only(left: 10, right: 10),
               style: const TextStyle(
@@ -152,8 +152,8 @@ class _FormRegisterState extends State<FormRegister> {
                   size: 20,
                 ),
               ),
-              validator: (value) =>
-                  Validators.repeatPassword(context, value, passwordController.text),
+              validator: (value) => Validators.repeatPassword(
+                  context, value, passwordController.text),
             ),
             const SizedBox(height: 20),
             buildQuestionsLogin(),

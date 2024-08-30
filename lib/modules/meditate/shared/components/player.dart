@@ -6,10 +6,18 @@ import 'package:flutter/material.dart';
 import 'package:just_audio/just_audio.dart';
 
 class Player extends StatefulWidget {
+  /// Player de áudio
   final AudioPlayer player;
 
+  /// Função de parar
+  final Function onStop;
+
+  /// - [player] Player de áudio
+  /// - [onStop] Função de parar
+  /// Construtor
   const Player({
     required this.player,
+    required this.onStop,
     super.key,
   });
 
@@ -48,12 +56,17 @@ class _PlayerState extends State<Player> {
 
     _player.playerStateStream.listen((state) {
       if (state.processingState == ProcessingState.completed) {
-        setState(() {
-          _position = Duration.zero;
-          _player.stop();
-        });
+        _onAudioComplete();
       }
     });
+  }
+
+  Future<void> _onAudioComplete() async {
+    setState(() {
+      _position = Duration.zero;
+    });
+    await _player.stop();
+    widget.onStop();
   }
 
   @override
