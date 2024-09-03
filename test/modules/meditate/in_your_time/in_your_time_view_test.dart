@@ -221,6 +221,33 @@ void main() {
         inYourTimeViewState.showNormalState();
         await tester.pumpAndSettle();
       });
+
+      testWidgets(
+          "Should verify when submitMeditateComplete screen with parameter",
+          (tester) async {
+        when(presenter.onOpenScreen()).thenAnswer((_) {});
+
+        await tester.pumpWidget(createWidgetUnderTest());
+
+        final inYourTimeViewState =
+            tester.state(find.byType(InYourTimeView)) as InYourTimeViewState;
+        inYourTimeViewState.submitMeditateComplete();
+        await tester.pumpAndSettle();
+      });
+
+      testWidgets(
+          "Should verify when submitMeditateComplete and hasCompleted is false screen with parameter",
+          (tester) async {
+        when(presenter.onOpenScreen()).thenAnswer((_) {});
+
+        await tester.pumpWidget(createWidgetUnderTest());
+
+        final inYourTimeViewState =
+            tester.state(find.byType(InYourTimeView)) as InYourTimeViewState;
+        inYourTimeViewState.meditationCompleted();
+        inYourTimeViewState.submitMeditateComplete();
+        await tester.pumpAndSettle();
+      });
     });
   });
 }
