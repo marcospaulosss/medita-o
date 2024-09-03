@@ -6,7 +6,6 @@ import 'package:cinco_minutos_meditacao/modules/common/screens/home/home_contrac
 import 'package:cinco_minutos_meditacao/modules/common/screens/home/home_model.dart';
 import 'package:cinco_minutos_meditacao/modules/common/screens/home/home_presenter.dart';
 import 'package:cinco_minutos_meditacao/modules/common/screens/home/home_repository.dart';
-import 'package:cinco_minutos_meditacao/modules/meditate/screens/meditate_info/meditate_info_model.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/meditations_response.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/user_response.dart';
 import 'package:cinco_minutos_meditacao/shared/models/error.dart';
@@ -225,12 +224,7 @@ void main() {
 
       presenter.goToMeditateInfo(homeModel);
 
-      verify(appRouter.goTo(MeditateInfoRoute(
-        model: MeditateInfoModel(
-          userResponse: homeModel.userResponse,
-          meditationsResponse: homeModel.meditationsResponse,
-        ),
-      ))).called(1);
+      verify(appRouter.goTo(const MeditateInfoRoute())).called(1);
     });
 
     test('goToMeditateInfo should handle null userResponse gracefully', () {
@@ -241,12 +235,7 @@ void main() {
 
       presenter.goToMeditateInfo(homeModel);
 
-      verify(appRouter.goTo(MeditateInfoRoute(
-        model: MeditateInfoModel(
-          userResponse: homeModel.userResponse,
-          meditationsResponse: homeModel.meditationsResponse,
-        ),
-      ))).called(1);
+      verify(appRouter.goTo(const MeditateInfoRoute())).called(1);
     });
 
     test('goToMeditateInfo should handle null meditationsResponse gracefully',
@@ -268,12 +257,7 @@ void main() {
 
       presenter.goToMeditateInfo(homeModel);
 
-      verify(appRouter.goTo(MeditateInfoRoute(
-        model: MeditateInfoModel(
-          userResponse: homeModel.userResponse,
-          meditationsResponse: homeModel.meditationsResponse,
-        ),
-      ))).called(1);
+      verify(appRouter.goTo(const MeditateInfoRoute())).called(1);
     });
 
     test('goToFiveMinutes should navigate to FiveMinutesRoute', () {
