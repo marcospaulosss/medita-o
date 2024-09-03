@@ -7,6 +7,8 @@ import 'dart:async' as _i4;
 
 import 'package:auto_route/auto_route.dart' as _i6;
 import 'package:cinco_minutos_meditacao/core/routers/app_router.dart' as _i5;
+import 'package:cinco_minutos_meditacao/modules/meditate/screens/in_your_time/in_your_time_contract.dart'
+    as _i7;
 import 'package:cinco_minutos_meditacao/modules/meditate/screens/in_your_time/in_your_time_repository.dart'
     as _i3;
 import 'package:cinco_minutos_meditacao/shared/models/error.dart' as _i2;
@@ -107,6 +109,52 @@ class MockAppRouter extends _i1.Mock implements _i5.AppRouter {
           #goTo,
           [route],
           {#onClose: onClose},
+        ),
+        returnValueForMissingStub: null,
+      );
+}
+
+/// A class which mocks [InYourTimeContract].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockInYourTimeContract extends _i1.Mock
+    implements _i7.InYourTimeContract {
+  MockInYourTimeContract() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  void showLoading() => super.noSuchMethod(
+        Invocation.method(
+          #showLoading,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void showNormalState() => super.noSuchMethod(
+        Invocation.method(
+          #showNormalState,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void showError(String? message) => super.noSuchMethod(
+        Invocation.method(
+          #showError,
+          [message],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void meditationCompleted() => super.noSuchMethod(
+        Invocation.method(
+          #meditationCompleted,
+          [],
         ),
         returnValueForMissingStub: null,
       );

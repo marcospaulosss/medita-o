@@ -140,10 +140,6 @@ class InYourTimeViewState extends State<InYourTimeView>
   Future<void> getTrack(int minutes) async {
     String track;
     switch (minutes) {
-      case 5:
-        track = AppTracks.trackFive;
-        time = 5;
-        break;
       case 10:
         track = AppTracks.trackTen;
         time = 10;
