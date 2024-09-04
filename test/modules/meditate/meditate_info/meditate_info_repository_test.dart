@@ -279,5 +279,81 @@ void main() {
       verify(secureStorage.userId).called(1);
       verify(clientApi.meditationsByUser('1')).called(1);
     });
+
+    test(
+        'requestMeditations should return MeditationsResponse and null error when successful',
+        () async {
+      // arrange
+      final meditationsResponse = MeditationsResponse(1, 30);
+      when(clientApi.meditations())
+          .thenAnswer((_) async => meditationsResponse);
+
+      // act
+      final result = await repository.requestMeditations();
+
+      // assert
+      expect(result, (meditationsResponse, null));
+
+      verify(clientApi.meditations()).called(1);
+    });
+
+    test(
+        'requestMeditations should return null and CustomError when DioException is thrown',
+        () async {
+      // arrange
+      when(clientApi.meditations()).thenThrow(DioException(
+          response: Response(requestOptions: RequestOptions(path: 'path')),
+          requestOptions: RequestOptions(path: 'path')));
+      when(error.sendErrorToCrashlytics(
+        code: ErrorCodes.getMeditionsError,
+        stackTrace: anyNamed('stackTrace'),
+      )).thenReturn(error);
+
+      // act
+      final result = await repository.requestMeditations();
+
+      // assert
+      expect(result, (null, error));
+
+      verify(clientApi.meditations()).called(1);
+    });
+
+    test(
+        'requestMeditations should return null and CustomError when TimeoutException is thrown',
+        () async {
+      // arrange
+      when(clientApi.meditations()).thenThrow(TimeoutException('timeout'));
+      when(error.sendErrorToCrashlytics(
+        code: ErrorCodes.timeoutException,
+        stackTrace: anyNamed('stackTrace'),
+      )).thenReturn(error);
+
+      // act
+      final result = await repository.requestMeditations();
+
+      // assert
+      expect(result, (null, error));
+
+      verify(clientApi.meditations()).called(1);
+    });
+
+    test(
+        'requestMeditations should return null and CustomError when generic is thrown',
+        () async {
+      // arrange
+      when(clientApi.meditations()).thenThrow(Exception('generic'));
+      when(error.sendErrorToCrashlytics(
+        code: ErrorCodes.getMeditionsError,
+        stackTrace: anyNamed('stackTrace'),
+      )).thenReturn(error);
+
+      // act
+      final result = await repository.requestMeditations();
+
+      // assert
+      expect(result, (null, error));
+
+      verify(clientApi.meditations()).called(1);
+    });
   });
 }

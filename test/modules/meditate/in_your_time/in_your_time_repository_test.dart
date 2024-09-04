@@ -1,21 +1,33 @@
+import 'dart:async';
+
 import 'package:cinco_minutos_meditacao/core/analytics/manager.dart';
-import 'package:cinco_minutos_meditacao/modules/meditate/screens/five_minutes/five_minutes_repository.dart';
+import 'package:cinco_minutos_meditacao/core/wrappers/secure_storage.dart';
 import 'package:cinco_minutos_meditacao/modules/meditate/screens/in_your_time/in_your_time_repository.dart';
+import 'package:cinco_minutos_meditacao/shared/clients/client_api.dart';
+import 'package:cinco_minutos_meditacao/shared/models/error.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
 import 'in_your_time_repository_test.mocks.dart';
 
-@GenerateMocks([AnalyticsManager])
+@GenerateMocks([AnalyticsManager, ClientApi, CustomError, SecureStorage])
 void main() {
   group('InYourTimeRepository', () {
     late InYourTimeRepository repository;
     late MockAnalyticsManager analytics;
+    late MockClientApi clientApi;
+    late MockCustomError error;
+    late MockSecureStorage secureStorage;
 
     setUp(() {
       analytics = MockAnalyticsManager();
-      repository = InYourTimeRepository(analytics);
+      clientApi = MockClientApi();
+      error = MockCustomError();
+      secureStorage = MockSecureStorage();
+      repository =
+          InYourTimeRepository(analytics, clientApi, error, secureStorage);
     });
 
     test('should send open screen event', () {
@@ -24,6 +36,66 @@ void main() {
       repository.sendOpenScreenEvent();
 
       verify(analytics.sendEvent(any)).called(1);
+    });
+
+    test('should request register meditate completed', () async {
+      when(secureStorage.userId).thenAnswer((_) async => '1');
+      when(clientApi.createNewMeditation(any)).thenAnswer((_) async {});
+
+      await repository.requestRegisterMeditateCompleted(5);
+
+      verify(secureStorage.userId).called(1);
+      verify(clientApi.createNewMeditation(any)).called(1);
+    });
+
+    test('should request register meditate completed with timeout exception',
+        () async {
+      when(secureStorage.userId).thenAnswer((_) async => '1');
+      when(clientApi.createNewMeditation(any))
+          .thenThrow(TimeoutException('timeout'));
+      when(error.sendErrorToCrashlytics(
+        code: ErrorCodes.timeoutException,
+        stackTrace: anyNamed('stackTrace'),
+      )).thenReturn(error);
+
+      await repository.requestRegisterMeditateCompleted(5);
+
+      verify(secureStorage.userId).called(1);
+      verify(clientApi.createNewMeditation(any)).called(1);
+      expect(error, isA<CustomError>());
+    });
+
+    test('should request register meditate completed with dio exception',
+        () async {
+      when(secureStorage.userId).thenAnswer((_) async => '1');
+      when(clientApi.createNewMeditation(any))
+          .thenThrow(DioError(requestOptions: RequestOptions(path: '')));
+      when(error.sendErrorToCrashlytics(
+        code: ErrorCodes.createNewMeditationError,
+        stackTrace: anyNamed('stackTrace'),
+      )).thenReturn(error);
+
+      await repository.requestRegisterMeditateCompleted(5);
+
+      verify(secureStorage.userId).called(1);
+      verify(clientApi.createNewMeditation(any)).called(1);
+      expect(error, isA<CustomError>());
+    });
+
+    test('should request register meditate completed with generic exception',
+        () async {
+      when(secureStorage.userId).thenAnswer((_) async => '1');
+      when(clientApi.createNewMeditation(any)).thenThrow(Exception());
+      when(error.sendErrorToCrashlytics(
+        code: ErrorCodes.createNewMeditationError,
+        stackTrace: anyNamed('stackTrace'),
+      )).thenReturn(error);
+
+      await repository.requestRegisterMeditateCompleted(5);
+
+      verify(secureStorage.userId).called(1);
+      verify(clientApi.createNewMeditation(any)).called(1);
+      expect(error, isA<CustomError>());
     });
   });
 }

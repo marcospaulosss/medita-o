@@ -23,7 +23,12 @@ class FormLogin extends StatefulWidget {
   /// - [onLogin] : Função que será chamada ao realizar o login
   /// - [onRegister] : Função que será chamada ao realizar o registro
   /// construtor
-  FormLogin({super.key, required this.errorEmailInvalid, required this.onLogin, required this.onRegister,});
+  FormLogin({
+    super.key,
+    required this.errorEmailInvalid,
+    required this.onLogin,
+    required this.onRegister,
+  });
 
   @override
   State<FormLogin> createState() => _FormLoginState();
@@ -91,7 +96,7 @@ class _FormLoginState extends State<FormLogin> {
               hintText: AuthenticationStrings.of(context).obscurePassword,
               controller: passwordController,
               obscureText: obscurePasswordText,
-              keyboardType: TextInputType.none,
+              keyboardType: TextInputType.text,
               label: AuthenticationStrings.of(context).password,
               prefixIcon: const Icon(
                 Icons.lock_open_outlined,

@@ -122,6 +122,18 @@ class MockMeditateInfoRepository extends _i1.Mock
                 _i5.Future<(_i9.MeditationsResponse?, _i7.CustomError?)>.value(
                     (null, null)),
           ) as _i5.Future<(_i9.MeditationsResponse?, _i7.CustomError?)>);
+
+  @override
+  _i5.Future<(_i9.MeditationsResponse?, _i7.CustomError?)>
+      requestMeditations() => (super.noSuchMethod(
+            Invocation.method(
+              #requestMeditations,
+              [],
+            ),
+            returnValue:
+                _i5.Future<(_i9.MeditationsResponse?, _i7.CustomError?)>.value(
+                    (null, null)),
+          ) as _i5.Future<(_i9.MeditationsResponse?, _i7.CustomError?)>);
 }
 
 /// A class which mocks [AppRouter].

@@ -30,7 +30,7 @@ main() {
     late MeditateInfoView view;
 
     setUp(() {
-      view = MeditateInfoView(model: MeditateInfoModel());
+      view = const MeditateInfoView();
     });
 
     Widget createWidgetUnderTest() {
@@ -53,16 +53,16 @@ main() {
       testWidgets('Should show meditate info screen', (tester) async {
         await tester.pumpWidget(createWidgetUnderTest());
 
-        when(presenter.initPresenter(any)).thenAnswer((_) {
+        when(presenter.initPresenter()).thenAnswer((_) {
           return Future.value();
         });
 
         await tester.pump();
-        verify(presenter.initPresenter(any)).called(1);
+        verify(presenter.initPresenter()).called(1);
 
         final meditateInfoViewState = tester
             .state(find.byType(MeditateInfoView)) as MeditateInfoViewState;
-        meditateInfoViewState.showNormalState();
+        meditateInfoViewState.showNormalState(model: MeditateInfoModel());
         await tester.pumpAndSettle();
 
         expect(find.byType(MeditateInfoView), findsOneWidget);
@@ -77,7 +77,7 @@ main() {
 
     group("Validate Actions", () {
       testWidgets("Should verify function of upload image", (tester) async {
-        when(presenter.initPresenter(any)).thenAnswer((_) {
+        when(presenter.initPresenter()).thenAnswer((_) {
           return Future.value();
         });
         when(presenter.updateImageProfile()).thenAnswer((_) {
@@ -86,11 +86,11 @@ main() {
         await tester.pumpWidget(createWidgetUnderTest());
 
         await tester.pump();
-        verify(presenter.initPresenter(any)).called(1);
+        verify(presenter.initPresenter()).called(1);
 
         final meditateInfoViewState = tester
             .state(find.byType(MeditateInfoView)) as MeditateInfoViewState;
-        meditateInfoViewState.showNormalState();
+        meditateInfoViewState.showNormalState(model: MeditateInfoModel());
         await tester.pumpAndSettle();
 
         await tester.tap(find.byIcon(Icons.add));
@@ -101,7 +101,7 @@ main() {
 
       testWidgets("Should verify function of view video youtube",
           (tester) async {
-        when(presenter.initPresenter(any)).thenAnswer((_) {
+        when(presenter.initPresenter()).thenAnswer((_) {
           return Future.value();
         });
         when(presenter.updateImageProfile()).thenAnswer((_) {
@@ -110,11 +110,11 @@ main() {
         await tester.pumpWidget(createWidgetUnderTest());
 
         await tester.pump();
-        verify(presenter.initPresenter(any)).called(1);
+        verify(presenter.initPresenter()).called(1);
 
         final meditateInfoViewState = tester
             .state(find.byType(MeditateInfoView)) as MeditateInfoViewState;
-        meditateInfoViewState.showNormalState();
+        meditateInfoViewState.showNormalState(model: MeditateInfoModel());
         await tester.pumpAndSettle();
 
         await tester.tap(find.byIcon(Icons.play_arrow));
@@ -163,7 +163,7 @@ main() {
 
         final meditateInfoViewState = tester
             .state(find.byType(MeditateInfoView)) as MeditateInfoViewState;
-        meditateInfoViewState.showNormalState();
+        meditateInfoViewState.showNormalState(model: MeditateInfoModel());
         await tester.pumpAndSettle();
       });
 

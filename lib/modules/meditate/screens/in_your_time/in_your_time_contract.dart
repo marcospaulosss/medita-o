@@ -9,14 +9,23 @@ abstract class InYourTimeContract {
 
   /// Mostra a tela de erro
   void showError(String message);
+
+  /// Altera o estado de encerramento da meditação
+  void meditationCompleted();
 }
 
 abstract class Presenter implements ViewBinding<InYourTimeContract> {
   /// evento disparado ao abrir a tela
   void onOpenScreen();
+
+  /// Submete a meditação concluída
+  void submitMeditateCompleted(int time);
 }
 
 abstract class Repository {
   /// Envia evento de abertura de tela
   void sendOpenScreenEvent();
+
+  /// Efetua o registro da meditação concluída
+  Future<void> requestRegisterMeditateCompleted(int time);
 }
