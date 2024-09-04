@@ -37,7 +37,14 @@ class InYourTimeViewState extends State<InYourTimeView>
   /// Mensagem de erro
   late String messageError = "";
 
+  /// Player de áudio
   late AudioPlayer player;
+
+  /// Se a reprodução foi concluída
+  bool hasCompleted = false;
+
+  /// Tempo da meditação
+  int time = 5;
 
   @override
   void initState() {
@@ -50,7 +57,7 @@ class InYourTimeViewState extends State<InYourTimeView>
     player = AudioPlayer();
 
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      await getTrack(5);
+      await getTrack(time);
     });
 
     super.initState();
@@ -94,7 +101,10 @@ class InYourTimeViewState extends State<InYourTimeView>
       padding: const EdgeInsets.only(top: 113, left: 40, right: 40, bottom: 33),
       child: Column(
         children: [
-          Player(player: player),
+          Player(
+            player: player,
+            onStop: submitMeditateComplete,
+          ),
           const SizedBox(height: 20),
           Text(
             MeditateStrings.of(context).tapStartMeditation,
@@ -130,26 +140,29 @@ class InYourTimeViewState extends State<InYourTimeView>
   Future<void> getTrack(int minutes) async {
     String track;
     switch (minutes) {
-      case 5:
-        track = AppTracks.trackFive;
-        break;
       case 10:
         track = AppTracks.trackTen;
+        time = 10;
         break;
       case 15:
         track = AppTracks.trackFifteen;
+        time = 15;
         break;
       case 20:
         track = AppTracks.trackTwenty;
+        time = 20;
         break;
       case 25:
         track = AppTracks.trackTwentyFive;
+        time = 25;
         break;
       case 30:
         track = AppTracks.trackThirty;
+        time = 30;
         break;
       default:
         track = AppTracks.trackFive;
+        time = 5;
     }
 
     await player.setAudioSource(AudioSource.asset(
@@ -157,6 +170,19 @@ class InYourTimeViewState extends State<InYourTimeView>
     ));
 
     setState(() {});
+  }
+
+  /// Submete a meditação como concluída
+  submitMeditateComplete() async {
+    if (player.processingState == ProcessingState.idle) {
+      // Recarregar o áudio se o player estiver ocioso
+      await player.setAudioSource(AudioSource.asset(AppTracks.trackFive));
+    }
+
+    if (!hasCompleted) {
+      presenter.submitMeditateCompleted(time);
+      hasCompleted = true;
+    }
   }
 
   /// Mostra o estado de carregamento
@@ -176,5 +202,10 @@ class InYourTimeViewState extends State<InYourTimeView>
   void showError(String message) {
     messageError = message;
     stateController.showErrorState();
+  }
+
+  @override
+  void meditationCompleted() {
+    hasCompleted = false;
   }
 }

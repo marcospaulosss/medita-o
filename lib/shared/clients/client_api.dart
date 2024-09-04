@@ -4,6 +4,7 @@ import 'package:cinco_minutos_meditacao/core/environment/manager.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/interceptor.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/models/requests/auth_request.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/models/requests/authenticate_google_request.dart';
+import 'package:cinco_minutos_meditacao/shared/clients/models/requests/create_new_meditations_request.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/authenticate_google_response.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/meditations_response.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/register_response.dart';
@@ -52,6 +53,7 @@ abstract class ClientApi {
   @GET('/user')
   Future<UserResponse> user();
 
+  /// solicita a atualização da foto do usuário
   @POST('/user/photo')
   @MultiPart()
   Future<dynamic> uploadPhoto(@Part(name: "photo") File photo);
@@ -64,4 +66,8 @@ abstract class ClientApi {
   /// Obtem as meditações realizadas pelo usuário
   @GET('/meditations/{user_id}')
   Future<MeditationsResponse> meditationsByUser(@Path('user_id') String userId);
+
+  /// solicita a criação de uma nova meditação
+  @POST('/meditations')
+  Future<void> createNewMeditation(@Body() CreateNewMeditationsRequest body);
 }

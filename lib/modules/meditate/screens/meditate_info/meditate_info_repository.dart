@@ -126,4 +126,34 @@ class MeditateInfoRepository implements Repository {
       );
     }
   }
+
+  /// Busca a quantidade de meditações realizadas no mundo
+  @override
+  Future<(MeditationsResponse?, CustomError?)> requestMeditations() async {
+    try {
+      MeditationsResponse response = await _clientApi.meditations();
+
+      return (response, null);
+    } on TimeoutException {
+      return (
+        null,
+        _error.sendErrorToCrashlytics(
+            code: ErrorCodes.timeoutException, stackTrace: StackTrace.current)
+      );
+    } on DioException catch (e) {
+      return (
+        null,
+        _error.sendErrorToCrashlytics(
+          code: ErrorCodes.getMeditionsError,
+          stackTrace: StackTrace.current,
+        )
+      );
+    } catch (e) {
+      return (
+        null,
+        _error.sendErrorToCrashlytics(
+            code: ErrorCodes.getMeditionsError, stackTrace: StackTrace.current)
+      );
+    }
+  }
 }

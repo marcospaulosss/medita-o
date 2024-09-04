@@ -42,7 +42,10 @@ void main() {
         final model = MeditateInfoModel();
         when(repository.requestMeditationsByUser())
             .thenAnswer((_) async => (null, null));
-        await presenter.initPresenter(model);
+        when(repository.requestUser()).thenAnswer((_) async => (null, null));
+        when(repository.requestMeditations())
+            .thenAnswer((_) async => (null, null));
+        await presenter.initPresenter();
         verify(view.showError('null safe')).called(1);
       });
 
@@ -52,7 +55,11 @@ void main() {
         final model = MeditateInfoModel();
         when(repository.requestMeditationsByUser())
             .thenAnswer((_) async => (null, CustomError()));
-        await presenter.initPresenter(model);
+        when(repository.requestUser()).thenAnswer((_) async => (null, null));
+        when(repository.requestMeditations())
+            .thenAnswer((_) async => (null, null));
+
+        await presenter.initPresenter();
         verify(view.showError('Erro desconhecido.')).called(1);
       });
 
@@ -62,7 +69,11 @@ void main() {
         final model = MeditateInfoModel();
         when(repository.requestMeditationsByUser())
             .thenAnswer((_) async => (MeditationsResponse(1, 10), null));
-        await presenter.initPresenter(model);
+        when(repository.requestUser()).thenAnswer((_) async => (null, null));
+        when(repository.requestMeditations())
+            .thenAnswer((_) async => (null, null));
+
+        await presenter.initPresenter();
         verify(view.showNormalState(model: anyNamed('model'))).called(1);
       });
     });
@@ -153,6 +164,33 @@ void main() {
       verifyNever(repository.requestUser());
       verifyNever(view.showError(any));
       verifyNever(view.showNormalState(model: anyNamed('model')));
+    });
+
+    test(
+        'should call requestUser when initPresenter is called with return error',
+        () async {
+      final model = MeditateInfoModel();
+      when(repository.requestUser())
+          .thenAnswer((_) async => (null, CustomError()));
+      when(repository.requestMeditations())
+          .thenAnswer((_) async => (null, null));
+      when(repository.requestMeditationsByUser())
+          .thenAnswer((_) async => (null, null));
+      await presenter.initPresenter();
+      verify(view.showError('Erro desconhecido.')).called(1);
+    });
+
+    test(
+        'should call requestMeditations when initPresenter is called with return error',
+        () async {
+      final model = MeditateInfoModel();
+      when(repository.requestUser()).thenAnswer((_) async => (null, null));
+      when(repository.requestMeditations())
+          .thenAnswer((_) async => (null, CustomError()));
+      when(repository.requestMeditationsByUser())
+          .thenAnswer((_) async => (null, null));
+      await presenter.initPresenter();
+      verify(view.showError('Erro desconhecido.')).called(1);
     });
   });
 }

@@ -101,11 +101,10 @@ class MockMeditateInfoPresenter extends _i1.Mock
       );
 
   @override
-  _i5.Future<void> initPresenter(_i2.MeditateInfoModel? model) =>
-      (super.noSuchMethod(
+  _i5.Future<void> initPresenter() => (super.noSuchMethod(
         Invocation.method(
           #initPresenter,
-          [model],
+          [],
         ),
         returnValue: _i5.Future<void>.value(),
         returnValueForMissingStub: _i5.Future<void>.value(),
