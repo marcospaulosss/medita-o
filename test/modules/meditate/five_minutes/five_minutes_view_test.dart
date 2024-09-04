@@ -139,6 +139,33 @@ void main() {
         fiveMinutesViewState.showNormalState();
         await tester.pumpAndSettle();
       });
+
+      testWidgets("Should verify when submit meditate completed",
+          (tester) async {
+        when(presenter.onOpenScreen()).thenAnswer((_) {});
+
+        await tester.pumpWidget(createWidgetUnderTest());
+
+        final fiveMinutesViewState =
+            tester.state(find.byType(FiveMinutesView)) as FiveMinutesViewState;
+        fiveMinutesViewState.hasCompleted = true;
+        fiveMinutesViewState.submitMeditateComplete();
+        await tester.pumpAndSettle();
+      });
+
+      testWidgets(
+          "Should verify when submit meditate completed and hasComplete is false",
+          (tester) async {
+        when(presenter.onOpenScreen()).thenAnswer((_) {});
+
+        await tester.pumpWidget(createWidgetUnderTest());
+
+        final fiveMinutesViewState =
+            tester.state(find.byType(FiveMinutesView)) as FiveMinutesViewState;
+        fiveMinutesViewState.meditationCompleted();
+        fiveMinutesViewState.submitMeditateComplete();
+        await tester.pumpAndSettle();
+      });
     });
   });
 }

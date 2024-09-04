@@ -1,6 +1,5 @@
 import 'package:cinco_minutos_meditacao/core/routers/app_router.dart';
 import 'package:cinco_minutos_meditacao/core/routers/app_router.gr.dart';
-import 'package:cinco_minutos_meditacao/modules/common/screens/home/home_model.dart';
 import 'package:cinco_minutos_meditacao/modules/meditate/screens/meditate_info/meditate_info_contract.dart';
 import 'package:cinco_minutos_meditacao/modules/meditate/screens/meditate_info/meditate_info_model.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/meditations_response.dart';
@@ -36,10 +35,23 @@ class MeditateInfoPresenter implements Presenter {
 
   /// Inicializa o presenter
   @override
-  Future<void> initPresenter(MeditateInfoModel model) async {
+  Future<void> initPresenter() async {
     onOpenScreen();
 
-    meditateInfoModel = model;
+    var (userResponse, err) = await _repository.requestUser();
+    if (err != null) {
+      view!.showError(err.getErrorMessage);
+      return;
+    }
+    meditateInfoModel.userResponse = userResponse;
+
+    var (meditations, error) = await _repository.requestMeditations();
+    if (error != null) {
+      view!.showError(error.getErrorMessage);
+      return;
+    }
+    meditateInfoModel.meditationsResponse = meditations;
+
     meditateInfoModel.meditationsByUserResponse = await getMeditionsByUser();
     if (meditateInfoModel.meditationsByUserResponse == null) return;
 

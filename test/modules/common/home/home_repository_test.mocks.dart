@@ -15,6 +15,8 @@ import 'package:cinco_minutos_meditacao/shared/clients/models/requests/auth_requ
     as _i14;
 import 'package:cinco_minutos_meditacao/shared/clients/models/requests/authenticate_google_request.dart'
     as _i13;
+import 'package:cinco_minutos_meditacao/shared/clients/models/requests/create_new_meditations_request.dart'
+    as _i16;
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/authenticate_google_response.dart'
     as _i2;
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/meditations_response.dart'
@@ -171,6 +173,15 @@ class MockSecureStorage extends _i1.Mock implements _i9.SecureStorage {
       ) as _i10.Future<String>);
 
   @override
+  _i10.Future<String> get profilePhoto => (super.noSuchMethod(
+        Invocation.getter(#profilePhoto),
+        returnValue: _i10.Future<String>.value(_i11.dummyValue<String>(
+          this,
+          Invocation.getter(#profilePhoto),
+        )),
+      ) as _i10.Future<String>);
+
+  @override
   _i10.Future<dynamic> setAllToNull() => (super.noSuchMethod(
         Invocation.method(
           #setAllToNull,
@@ -234,6 +245,17 @@ class MockSecureStorage extends _i1.Mock implements _i9.SecureStorage {
         Invocation.method(
           #setGoogleId,
           [googleId],
+        ),
+        returnValue: _i10.Future<void>.value(),
+        returnValueForMissingStub: _i10.Future<void>.value(),
+      ) as _i10.Future<void>);
+
+  @override
+  _i10.Future<void> setProfilePhoto(String? profilePhoto) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #setProfilePhoto,
+          [profilePhoto],
         ),
         returnValue: _i10.Future<void>.value(),
         returnValueForMissingStub: _i10.Future<void>.value(),
@@ -356,6 +378,18 @@ class MockClientApi extends _i1.Mock implements _i12.ClientApi {
           ),
         )),
       ) as _i10.Future<_i5.MeditationsResponse>);
+
+  @override
+  _i10.Future<void> createNewMeditation(
+          _i16.CreateNewMeditationsRequest? body) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #createNewMeditation,
+          [body],
+        ),
+        returnValue: _i10.Future<void>.value(),
+        returnValueForMissingStub: _i10.Future<void>.value(),
+      ) as _i10.Future<void>);
 }
 
 /// A class which mocks [CustomError].
