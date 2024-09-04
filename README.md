@@ -151,3 +151,17 @@ cd ..
 cd actions-runner
 ./run.sh
 ```
+
+# Roda os testes do projeto
+
+```shell
+flutter pub get
+./localization
+flutter packages pub run build_runner build --delete-conflicting-outputs
+flutter analyze --no-fatal-infos --no-fatal-warnings
+flutter test --coverage
+lcov --remove coverage/lcov.info 'lib/core/*' -o coverage/new_lcov.info
+lcov --remove coverage/new_lcov.info '**/strings/localization/**' -o coverage/new2_lcov.info
+genhtml -o coverage_report coverage/new2_lcov.info
+open coverage_report/index.html
+```
