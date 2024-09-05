@@ -39,13 +39,29 @@ Submit a new Beta Build to Crashlytics Beta
 
 Deploy a new version to the Google Play
 
-### android upload_android_dev_app
+### android internal_test
 
 ```sh
-[bundle exec] fastlane android upload_android_dev_app
+[bundle exec] fastlane android internal_test
+```
+
+Deploy a new version to the Google Play Internal Test
+
+### android firebase
+
+```sh
+[bundle exec] fastlane android firebase
 ```
 
 Upload dev app to Firebase App Distribution
+
+### android firebase_prod
+
+```sh
+[bundle exec] fastlane android firebase_prod
+```
+
+Upload prod app to Firebase App Distribution
 
 ----
 
