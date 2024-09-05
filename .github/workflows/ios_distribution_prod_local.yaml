@@ -1,0 +1,69 @@
+name: iOS distribution LOCAL
+
+on:
+  workflow_dispatch:
+  workflow_call:
+
+jobs:
+  build:
+    permissions:
+      checks: write
+      contents: write
+      packages: write
+    runs-on: [ marcOS ]
+
+    steps:
+      - name: Efetua checkout da branch
+        uses: actions/checkout@v3
+
+      - name: Setup Fastlane
+        run: |
+          cd ios
+          bundle install
+
+      - name: Setup flutter e builda projeto LOCALMENTE
+        run: |
+          flutter clean
+          rm -rf ios/Pods
+          rm ios/Podfile.lock
+          flutter pub get
+          ./localization
+          flutter packages pub run build_runner build --delete-conflicting-outputs
+          cd ios
+          pod deintegrate
+          pod install
+          cd ..
+          flutter build ipa --export-options-plist lib/core/export_plist/Info_dev.plist --flavor dev -t lib/core/flavors/main_dev.dart
+
+      - name: Deploy para testflight
+        run: |
+          cd ios
+          bundle exec fastlane tf
+        env:
+          APPLE_ID: ${{ secrets.APPLE_ID }}
+          FASTLANE_PASSWORD: ${{ secrets.FASTLANE_PASSWORD }}
+          APP_STORE_CONNECT_APPLE_ID: ${{ secrets.APP_STORE_CONNECT_APPLE_ID }}
+          FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD: ${{ secrets.FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD }}
+          MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
+          MATCH_KEYCHAIN_PASSWORD: ${{ secrets.MATCH_KEYCHAIN_PASSWORD }}
+          MATCH_GIT_BASIC_AUTHORIZATION: ${{ secrets.MATCH_GIT_BASIC_AUTHORIZATION }}
+          APP_STORE_ISSUER_ID: ${{ secrets.APP_STORE_ISSUER_ID }}
+          APP_STORE_KEY_ID: ${{ secrets.APP_STORE_KEY_ID }}
+
+      - name: Deploy do firebase
+        run: |
+          cd ios
+          bundle exec fastlane firebase
+        env:
+          FIREBASE_TESTER_GROUPS: ${{ secrets.FIREBASE_TESTER_GROUPS }}
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+          APPLE_ID: ${{ secrets.APPLE_ID }}
+          APP_STORE_ISSUER_ID: ${{ secrets.APP_STORE_ISSUER_ID }}
+          APP_STORE_KEY_ID: ${{ secrets.APP_STORE_KEY_ID }}
+          APP_STORE_CONNECT_APPLE_ID: ${{ secrets.APP_STORE_CONNECT_APPLE_ID }}
+          FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD: ${{ secrets.FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD }}
+          MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
+          MATCH_KEYCHAIN_PASSWORD: ${{ secrets.MATCH_KEYCHAIN_PASSWORD }}
+          MATCH_GIT_BASIC_AUTHORIZATION: ${{ secrets.MATCH_GIT_BASIC_AUTHORIZATION }}
+          ITMSTRANSPORTER_FORCE_ITMS_PACKAGE_UPLOAD: false
+          FASTLANE_PASSWORD: ${{ secrets.FASTLANE_PASSWORD }}
