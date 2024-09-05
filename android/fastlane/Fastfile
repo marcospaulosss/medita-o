@@ -36,6 +36,12 @@ platform :android do
     upload_to_play_store
   end
 
+  desc "Deploy a new version to the Google Play Internal Test"
+  lane :internal_test do
+    gradle(task: "clean assembleRelease")
+    upload_to_play_store(track: 'internal')
+  end
+
   desc "Upload dev app to Firebase App Distribution"
   lane :firebase do
     firebase_app_distribution(
