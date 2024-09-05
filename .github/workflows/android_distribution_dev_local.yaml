@@ -1,4 +1,4 @@
-name: Android distribution LOCAL
+name: Android distribution Development LOCAL
 
 on:
   workflow_dispatch:
