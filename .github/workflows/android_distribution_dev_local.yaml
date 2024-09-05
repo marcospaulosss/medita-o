@@ -1,9 +1,8 @@
-name: Android distribution Production LOCAL
+name: Android distribution Development LOCAL
 
 on:
-  push:
-    tags:
-      - 'v*.*.*'  # Padrão para tags no formato v0.0.0
+  workflow_dispatch:
+  workflow_call:
 
 jobs:
   build:
@@ -28,23 +27,13 @@ jobs:
           flutter pub get
           ./localization
           flutter packages pub run build_runner build --delete-conflicting-outputs
-          flutter build apk --release --flavor prod -t lib/core/flavors/main_prod.dart
-          flutter build appbundle --flavor prod -t lib/core/flavors/main_prod.dart
+          flutter build apk --debug --flavor dev -t lib/core/flavors/main_dev.dart
 
       - name: Deploy do firebase
         run: |
           ls -la build/app/outputs/flutter-apk
           cd android
-          bundle exec fastlane firebase_prod
-        env:
-          FIREBASE_TESTER_GROUPS: ${{ secrets.FIREBASE_TESTER_GROUPS }}
-          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
-
-      - name: Deploy do google play test internal
-        run: |
-          ls -la build/app/outputs/flutter-apk
-          cd android
-          bundle exec fastlane internal_test
+          bundle exec fastlane firebase
         env:
           FIREBASE_TESTER_GROUPS: ${{ secrets.FIREBASE_TESTER_GROUPS }}
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
