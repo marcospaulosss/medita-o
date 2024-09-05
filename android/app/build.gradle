@@ -78,9 +78,9 @@ android {
     signingConfigs {
         release {
             storeFile file('../fastlane/key.jks')
-            storePassword 'M4tr1x123'
-            keyAlias 'key'
-            keyPassword 'M4tr1x123'
+            storePassword 'p0r0r0c4*'
+            keyAlias 'polvo'
+            keyPassword 'p0r0r0c4*'
         }
     }
     buildTypes {
