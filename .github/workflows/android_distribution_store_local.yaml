@@ -1,9 +1,9 @@
-name: Android distribution Production LOCAL
+name: Android distribution Store LOCAL
 
 on:
   push:
     tags:
-      - 'v*'
+      - 'v*.*.*'  # Padrão para tags no formato v0.0.0
 
 jobs:
   build:
