@@ -38,12 +38,3 @@ jobs:
         env:
           FIREBASE_TESTER_GROUPS: ${{ secrets.FIREBASE_TESTER_GROUPS }}
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
-
-      - name: Deploy do google play test internal
-        run: |
-          ls -la build/app/outputs/flutter-apk
-          cd android
-          bundle exec fastlane internal_test
-        env:
-          FIREBASE_TESTER_GROUPS: ${{ secrets.FIREBASE_TESTER_GROUPS }}
-          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
