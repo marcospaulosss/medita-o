@@ -63,4 +63,15 @@ platform :android do
         firebase_cli_token: ENV['FIREBASE_TOKEN'],
       )
   end
+
+  desc "Upload production app to Play Store"
+  lane :upload_android_production_app do
+      upload_to_play_store(
+          package_name: "com.polvo.cincominutos",
+          json_key: "fastlane/minutos-3ae7f-fde6e0b502d4.json",
+          skip_upload_apk: true,
+          track: 'internal',
+          aab: "../build/app/outputs/bundle/storeRelease/app-store-release.aab",
+      )
+  end
 end
