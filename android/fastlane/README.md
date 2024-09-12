@@ -63,6 +63,14 @@ Upload dev app to Firebase App Distribution
 
 Upload prod app to Firebase App Distribution
 
+### android upload_android_production_app
+
+```sh
+[bundle exec] fastlane android upload_android_production_app
+```
+
+Upload production app to Play Store
+
 ----
 
 This README.md is auto-generated and will be re-generated every time [_fastlane_](https://fastlane.tools) is run.
