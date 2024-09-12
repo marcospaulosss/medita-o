@@ -24,7 +24,7 @@ jobs:
 
       - name: Decode and save the keystore file
         run: |
-          echo "${{ secrets.ANDROID_STORE_FILE }}" | base64 --decode > /tmp/keystore.keystore
+          echo "${{ secrets.ANDROID_STORE_FILE }}" | base64 --decode > /tmp/KeyStorePlay.keystore
           echo "${{ secrets.JSON_KEY }}" | base64 --decode > $GITHUB_WORKSPACE/android/fastlane/minutos-3ae7f-fde6e0b502d4.json
         env:
           ANDROID_STORE_FILE: ${{ secrets.ANDROID_STORE_FILE }}
@@ -41,7 +41,7 @@ jobs:
           ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
           ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
           ANDROID_STORE_PASSWORD: ${{ secrets.ANDROID_STORE_PASSWORD }}
-          ANDROID_STORE_FILE: /tmp/keystore.keystore
+          ANDROID_STORE_FILE: /tmp/KeyStorePlay.keystore
 
       - name: Deploy do firebase
         run: |

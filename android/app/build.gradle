@@ -80,10 +80,10 @@ android {
 
     signingConfigs {
         release {
-            storeFile file(getEnvVar("ANDROID_STORE_FILE", localProperties['storeFile']))
-            storePassword getEnvVar("ANDROID_STORE_PASSWORD", localProperties['storePassword'])
-            keyAlias getEnvVar("ANDROID_KEY_ALIAS", localProperties['keyAlias'])
-            keyPassword getEnvVar("ANDROID_KEY_PASSWORD", localProperties['keyPassword'])
+            storeFile file(System.getenv("ANDROID_STORE_FILE") ?: localProperties['storeFile'])
+            storePassword System.getenv("ANDROID_STORE_PASSWORD") ?: localProperties['storePassword']
+            keyAlias System.getenv("ANDROID_KEY_ALIAS") ?: localProperties['keyAlias']
+            keyPassword System.getenv("ANDROID_KEY_PASSWORD") ?: localProperties['keyPassword']
         }
     }
     buildTypes {
