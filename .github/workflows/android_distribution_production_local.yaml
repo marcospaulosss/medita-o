@@ -1,0 +1,40 @@
+name: Android distribution Production LOCAL
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'  # Padrão para tags no formato v0.0.0
+
+jobs:
+  build:
+    permissions:
+      checks: write
+      contents: write
+      packages: write
+    runs-on: [ marcOS ]
+
+    steps:
+      - name: Efetua checkout da branch
+        uses: actions/checkout@v3
+
+      - name: Setup Fastlane
+        run: |
+          cd android
+          bundle install
+
+      - name: Setup flutter e builda projeto LOCALMENTE
+        run: |
+          flutter clean
+          flutter pub get
+          ./localization
+          flutter packages pub run build_runner build --delete-conflicting-outputs
+          flutter build apk --debug --flavor prod -t lib/core/flavors/main_prod.dart
+
+      - name: Deploy do firebase
+        run: |
+          ls -la build/app/outputs/flutter-apk
+          cd android
+          bundle exec fastlane firebase_prod
+        env:
+          FIREBASE_TESTER_GROUPS: ${{ secrets.FIREBASE_TESTER_GROUPS }}
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
