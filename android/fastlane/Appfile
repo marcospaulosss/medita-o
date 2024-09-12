@@ -1,2 +1,2 @@
-json_key_file("./android/fastlane/minutos-3ae7f-fde6e0b502d4.json") # Path to the json secret file - Follow https://docs.fastlane.tools/actions/supply/#setup to get one
+json_key_file("./android/fastlane/minutos-3ae7f-a9cf4991f13f.json") # Path to the json secret file - Follow https://docs.fastlane.tools/actions/supply/#setup to get one
 package_name("eumedito.org.cinco_minutos.dev") # e.g. com.krausefx.app
