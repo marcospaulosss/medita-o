@@ -1,4 +1,4 @@
-name: iOS distribution LOCAL
+name: iOS distribution PROD LOCAL
 
 on:
   push:
@@ -36,12 +36,12 @@ jobs:
           cd ..
           flutter build ipa --export-options-plist lib/core/export_plist/Info_prod.plist --flavor prod -t lib/core/flavors/main_prod.dart
 
-      - name: Deploy para testflight
+      - name: Deploy para testflight produção
         run: |
           cd ios
-          bundle exec fastlane tf
+          bundle exec fastlane tf_prod
         env:
-          APPLE_ID: 687191889
+          APPLE_ID: ${{ secrets.APPLE_ID_PROD }}
           FASTLANE_PASSWORD: ${{ secrets.FASTLANE_PASSWORD }}
           APP_STORE_CONNECT_APPLE_ID: ${{ secrets.APP_STORE_CONNECT_APPLE_ID }}
           FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD: ${{ secrets.FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD }}
@@ -54,11 +54,11 @@ jobs:
       - name: Deploy do firebase
         run: |
           cd ios
-          bundle exec fastlane firebase
+          bundle exec fastlane firebase_production
         env:
           FIREBASE_TESTER_GROUPS: ${{ secrets.FIREBASE_TESTER_GROUPS }}
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
-          APPLE_ID: 687191889
+          APPLE_ID: ${{ secrets.APPLE_ID_PROD }}
           APP_STORE_ISSUER_ID: ${{ secrets.APP_STORE_ISSUER_ID }}
           APP_STORE_KEY_ID: ${{ secrets.APP_STORE_KEY_ID }}
           APP_STORE_CONNECT_APPLE_ID: ${{ secrets.APP_STORE_CONNECT_APPLE_ID }}
