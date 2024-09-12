@@ -39,6 +39,22 @@ For _fastlane_ installation instructions, see [Installing _fastlane_](https://do
 
 Download keys
 
+### ios create_keys_production
+
+```sh
+[bundle exec] fastlane ios create_keys_production
+```
+
+
+
+### ios download_keys_production
+
+```sh
+[bundle exec] fastlane ios download_keys_production
+```
+
+Download keys production
+
 ### ios firebase
 
 ```sh
@@ -54,6 +70,22 @@ Deploy to Firebase Distribution
 ```
 
 Upload to Test Flight
+
+### ios firebase_production
+
+```sh
+[bundle exec] fastlane ios firebase_production
+```
+
+Deploy to Firebase Distribution Productions
+
+### ios tf_prod
+
+```sh
+[bundle exec] fastlane ios tf_prod
+```
+
+Upload to Test Flight production
 
 ### ios inc
 
