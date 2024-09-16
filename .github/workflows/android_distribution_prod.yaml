@@ -50,13 +50,13 @@ jobs:
           flutter pub get
           ./localization
           flutter packages pub run build_runner build --delete-conflicting-outputs
-          flutter build apk --debug --flavor dev -t lib/core/flavors/main_dev.dart 
+          flutter build apk --debug --flavor prod -t lib/core/flavors/main_prod.dart
 
       - name: Deploy do firebase
         run: |
           ls -la build/app/outputs/flutter-apk
           cd android
-          bundle exec fastlane firebase
+          bundle exec fastlane firebase_prod
         env:
           FIREBASE_TESTER_GROUPS: ${{ secrets.FIREBASE_TESTER_GROUPS }}
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
