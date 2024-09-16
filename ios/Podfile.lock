@@ -11,6 +11,8 @@ PODS:
     - Flutter
   - camera_avfoundation (0.0.1):
     - Flutter
+  - device_calendar (0.0.1):
+    - Flutter
   - device_info_plus (0.0.1):
     - Flutter
   - FBAEMKit (17.0.2):
@@ -220,6 +222,8 @@ PODS:
     - Flutter
   - just_audio (0.0.1):
     - Flutter
+  - manage_calendar_events (0.0.1):
+    - Flutter
   - nanopb (2.30910.0):
     - nanopb/decode (= 2.30910.0)
     - nanopb/encode (= 2.30910.0)
@@ -239,6 +243,7 @@ DEPENDENCIES:
   - audio_session (from `.symlinks/plugins/audio_session/ios`)
   - audioplayers_darwin (from `.symlinks/plugins/audioplayers_darwin/ios`)
   - camera_avfoundation (from `.symlinks/plugins/camera_avfoundation/ios`)
+  - device_calendar (from `.symlinks/plugins/device_calendar/ios`)
   - device_info_plus (from `.symlinks/plugins/device_info_plus/ios`)
   - firebase_analytics (from `.symlinks/plugins/firebase_analytics/ios`)
   - firebase_auth (from `.symlinks/plugins/firebase_auth/ios`)
@@ -252,6 +257,7 @@ DEPENDENCIES:
   - google_sign_in_ios (from `.symlinks/plugins/google_sign_in_ios/darwin`)
   - image_picker_ios (from `.symlinks/plugins/image_picker_ios/ios`)
   - just_audio (from `.symlinks/plugins/just_audio/ios`)
+  - manage_calendar_events (from `.symlinks/plugins/manage_calendar_events/ios`)
   - path_provider_foundation (from `.symlinks/plugins/path_provider_foundation/darwin`)
   - url_launcher_ios (from `.symlinks/plugins/url_launcher_ios/ios`)
 
@@ -295,6 +301,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/audioplayers_darwin/ios"
   camera_avfoundation:
     :path: ".symlinks/plugins/camera_avfoundation/ios"
+  device_calendar:
+    :path: ".symlinks/plugins/device_calendar/ios"
   device_info_plus:
     :path: ".symlinks/plugins/device_info_plus/ios"
   firebase_analytics:
@@ -321,6 +329,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/image_picker_ios/ios"
   just_audio:
     :path: ".symlinks/plugins/just_audio/ios"
+  manage_calendar_events:
+    :path: ".symlinks/plugins/manage_calendar_events/ios"
   path_provider_foundation:
     :path: ".symlinks/plugins/path_provider_foundation/darwin"
   url_launcher_ios:
@@ -331,6 +341,7 @@ SPEC CHECKSUMS:
   audio_session: 088d2483ebd1dc43f51d253d4a1c517d9a2e7207
   audioplayers_darwin: 877d9a4d06331c5c374595e46e16453ac7eafa40
   camera_avfoundation: dd002b0330f4981e1bbcb46ae9b62829237459a4
+  device_calendar: 9cb33f88a02e19652ec7b8b122ca778f751b1f7b
   device_info_plus: 97af1d7e84681a90d0693e63169a5d50e0839a0d
   FBAEMKit: 619f96ea65427e8afca240d5b0f4703738dfdf5c
   FBSDKCoreKit: a5f384db2e9ee84e98494fed8f983d2bd79accff
@@ -369,6 +380,7 @@ SPEC CHECKSUMS:
   GTMSessionFetcher: 8000756fc1c19d2e5697b90311f7832d2e33f6cd
   image_picker_ios: c560581cceedb403a6ff17f2f816d7fea1421fc1
   just_audio: baa7252489dbcf47a4c7cc9ca663e9661c99aafa
+  manage_calendar_events: 9b2889799340398027b3e3f5c4891d41599ec257
   nanopb: 438bc412db1928dac798aa6fd75726007be04262
   path_provider_foundation: 2b6b4c569c0fb62ec74538f866245ac84301af46
   PromisesObjC: f5707f49cb48b9636751c5b2e7d227e43fba9f47
