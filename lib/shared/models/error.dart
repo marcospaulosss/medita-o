@@ -13,6 +13,7 @@ enum ErrorCodes {
   getMeError,
   getMeditionsError,
   createNewMeditationError,
+  createNewEventCalendar,
 }
 
 class CustomError extends Error {
@@ -42,6 +43,8 @@ class CustomError extends Error {
     ErrorCodes.getMeError: "Erro ao obter informações do usuário.",
     ErrorCodes.getMeditionsError: "Erro ao obter meditações.",
     ErrorCodes.createNewMeditationError: "Erro ao criar nova meditação.",
+    ErrorCodes.createNewEventCalendar:
+        "Erro ao criar um novo evento no calendário.",
   };
 
   CustomError sendErrorToCrashlytics(
