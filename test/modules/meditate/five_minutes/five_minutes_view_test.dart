@@ -81,6 +81,30 @@ void main() {
         await tester.tap(find.byIcon(Icons.play_arrow));
         await tester.pumpAndSettle();
       });
+
+      testWidgets('Should go to screem meditate info', (tester) async {
+        when(presenter.onOpenScreen()).thenAnswer((_) {});
+        when(presenter.goToMeditateInfo()).thenAnswer((_) {});
+
+        await tester.pumpWidget(createWidgetUnderTest());
+        await tester.pumpAndSettle();
+
+        final buttonFinder = find.textContaining('Aprenda o método');
+        await tester.tap(buttonFinder);
+
+        expect(find.text('Lembre-me de meditar').hitTestable(), findsOneWidget);
+        verify(presenter.goToMeditateInfo()).called(1);
+      });
+
+      testWidgets('Should go to screem remember meditate', (tester) async {
+        when(presenter.onOpenScreen()).thenAnswer((_) {});
+
+        await tester.pumpWidget(createWidgetUnderTest());
+        await tester.pumpAndSettle();
+
+        final buttonFinder = find.textContaining('Lembre-me de meditar');
+        await tester.tap(buttonFinder);
+      });
     });
 
     group("Simulation FiveMinutesViewState", () {

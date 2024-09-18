@@ -163,6 +163,16 @@ void main() {
 
         expect(find.text('30 minutos'), findsOneWidget);
       });
+
+      testWidgets('Should go to screem remember meditate', (tester) async {
+        when(presenter.onOpenScreen()).thenAnswer((_) {});
+
+        await tester.pumpWidget(createWidgetUnderTest());
+        await tester.pumpAndSettle();
+
+        final buttonFinder = find.textContaining('Lembre-me de meditar');
+        await tester.tap(buttonFinder);
+      });
     });
 
     group("Simuilation InYourTimeViewState", () {
