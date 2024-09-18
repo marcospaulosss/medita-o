@@ -107,23 +107,22 @@ class GuidedMeditationViewState extends State<GuidedMeditationView>
                       color: AppColors.germanderSpeedwell,
                     ),
                   ),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 18),
                   Text(
-                    'Essa meditação foi guiada por La Jardinera (Fubdadora da Organização Mãos sem Fronteiras - www.msfint.com)',
+                    MeditateStrings.of(context).titleGuidedMeditation,
                     textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 16),
+                    style: buildTextStyleDefault(),
                   ),
-                  SizedBox(height: 20),
-                  Image.network(
-                    'https://via.placeholder.com/300',
-                    // Substitua pela URL da imagem real
+                  const SizedBox(height: 29),
+                  Image.asset(
+                    'assets/images/fundation.png',
                     fit: BoxFit.cover,
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 28),
                   Text(
-                    'Essa meditação guiada é para liberar tensões acumuladas diariamente, com a prática, é possível alcançar estado de descanso profundo. Pode ser feita sentado, ou deitado, o importante é estar confortável. Assim que estiver em posição, faça 3 respirações, inspirando pelo nariz e expirando pela boca, de forma lenta e profunda. Assim, com a coluna reta, a respiração suave e lenta, olhos fechados, sinta a Paz e Harmonia.',
+                    MeditateStrings.of(context).descriptionGuidedMeditation,
                     textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 16),
+                    style: buildTextStyleDefault(),
                   ),
                 ],
               ),
@@ -131,6 +130,15 @@ class GuidedMeditationViewState extends State<GuidedMeditationView>
           ],
         ),
       ),
+    );
+  }
+
+  TextStyle buildTextStyleDefault() {
+    return const TextStyle(
+      fontSize: 16,
+      fontWeight: FontWeight.w400,
+      color: AppColors.steelWoolColor,
+      fontFamily: 'Apertura',
     );
   }
 
