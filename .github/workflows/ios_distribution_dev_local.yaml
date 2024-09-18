@@ -1,4 +1,4 @@
-name: iOS distribution LOCAL
+name: iOS distribution Dev LOCAL
 
 on:
   workflow_dispatch:
