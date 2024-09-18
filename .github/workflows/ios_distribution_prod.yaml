@@ -1,4 +1,4 @@
-name: iOS distribution Dev
+name: iOS distribution Prod
 
 on:
   workflow_dispatch:
