@@ -208,6 +208,36 @@ abstract class MeditateStrings {
   /// In pt, this message translates to:
   /// **'SOBRE'**
   String get aboutGuidedMeditation;
+
+  /// No description provided for @titleGuidedMeditation.
+  ///
+  /// In pt, this message translates to:
+  /// **'Essa meditação foi guiada por La Jardinera (Fubdadora da Organização Mãos sem Fronteiras - www.msfint.com)'**
+  String get titleGuidedMeditation;
+
+  /// No description provided for @descriptionGuidedMeditation.
+  ///
+  /// In pt, this message translates to:
+  /// **'Essa meditação guiada é para liberar tensões acumuladas diariamente, com a prática, é possível alcançar estado de descanso profundo. Pode ser feita sentado, ou deitado, o importante é estar confortável. Assim que estiver em posição, faça 3 respirações, inspirando pelo nariz e expirando pela boca, de forma lenta e profunda. Assim, com a coluna reta, a respiração suave e lenta, olhos fechados, sinta a Paz e Harmonia.'**
+  String get descriptionGuidedMeditation;
+
+  /// No description provided for @guidedMeditationProgramTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'meditaçao guiada LA JARDINERA'**
+  String get guidedMeditationProgramTitle;
+
+  /// No description provided for @seeTranslation.
+  ///
+  /// In pt, this message translates to:
+  /// **'Ver tradução'**
+  String get seeTranslation;
+
+  /// No description provided for @learnMore.
+  ///
+  /// In pt, this message translates to:
+  /// **'Saiba mais'**
+  String get learnMore;
 }
 
 class _MeditateStringsDelegate extends LocalizationsDelegate<MeditateStrings> {

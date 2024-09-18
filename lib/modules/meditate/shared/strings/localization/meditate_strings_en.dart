@@ -60,4 +60,19 @@ class MeditateStringsEn extends MeditateStrings {
 
   @override
   String get aboutGuidedMeditation => 'SOBRE';
+
+  @override
+  String get titleGuidedMeditation => 'Essa meditação foi guiada por La Jardinera (Fubdadora da Organização Mãos sem Fronteiras - www.msfint.com)';
+
+  @override
+  String get descriptionGuidedMeditation => 'Essa meditação guiada é para liberar tensões acumuladas diariamente, com a prática, é possível alcançar estado de descanso profundo. Pode ser feita sentado, ou deitado, o importante é estar confortável. Assim que estiver em posição, faça 3 respirações, inspirando pelo nariz e expirando pela boca, de forma lenta e profunda. Assim, com a coluna reta, a respiração suave e lenta, olhos fechados, sinta a Paz e Harmonia.';
+
+  @override
+  String get guidedMeditationProgramTitle => 'meditaçao guiada LA JARDINERA';
+
+  @override
+  String get seeTranslation => 'Ver tradução';
+
+  @override
+  String get learnMore => 'Saiba mais';
 }

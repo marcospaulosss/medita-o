@@ -7,4 +7,5 @@ abstract class AppTracks {
   static String trackTwenty = 'assets/audios/track_20.m4a';
   static String trackTwentyFive = 'assets/audios/track_25.m4a';
   static String trackThirty = 'assets/audios/track_30.m4a';
+  static String trackGuidedMeditation = 'assets/audios/guided_meditation.m4a';
 }

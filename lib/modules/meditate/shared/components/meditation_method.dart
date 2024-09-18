@@ -45,10 +45,14 @@ class MeditationMethod extends StatelessWidget {
   /// título
   final String title;
 
+  /// Tamanho do título
+  final double? titleSize;
+
   /// - [iconButton1] Primeiro botão com icone e label
   /// - [iconButton2] Segundo botão com icone e label
   /// - [spaceTop] espaço no topo
   /// - [title] título
+  /// - [titleSize] Tamanho do título
   /// construtor
   MeditationMethod({
     super.key,
@@ -56,6 +60,7 @@ class MeditationMethod extends StatelessWidget {
     this.iconButton2,
     this.spaceTop = 0,
     this.title = "",
+    this.titleSize = 52,
   });
 
   @override
@@ -70,13 +75,16 @@ class MeditationMethod extends StatelessWidget {
             EdgeInsets.only(left: 22, top: spaceTop, right: 22, bottom: 29),
         child: Column(
           children: [
-            Text(
-              title,
-              style: const TextStyle(
-                fontSize: 52,
-                fontWeight: FontWeight.w400,
-                fontFamily: "Blanch",
-                color: AppColors.germanderSpeedwell,
+            Container(
+              child: Text(
+                title,
+                style: TextStyle(
+                  fontSize: titleSize,
+                  fontWeight: FontWeight.w400,
+                  fontFamily: "Blanch",
+                  color: AppColors.germanderSpeedwell,
+                ),
+                textAlign: TextAlign.center,
               ),
             ),
             const SizedBox(height: 11),
