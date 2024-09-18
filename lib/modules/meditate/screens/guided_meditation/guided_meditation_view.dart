@@ -72,13 +72,66 @@ class GuidedMeditationViewState extends State<GuidedMeditationView>
   }
 
   /// Corpo da tela
-  Padding buildBody(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 13, left: 40, right: 40, bottom: 33),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [],
+  Widget buildBody(BuildContext context) {
+    return SingleChildScrollView(
+      child: Container(
+        padding: EdgeInsets.all(16.0),
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [Colors.blueAccent, Colors.white],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+          ),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Container(
+              padding: EdgeInsets.all(16.0),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(16.0),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black12,
+                    blurRadius: 10.0,
+                    offset: Offset(0, 5),
+                  ),
+                ],
+              ),
+              child: Column(
+                children: [
+                  Text(
+                    'SOBRE',
+                    style: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.blueAccent,
+                    ),
+                  ),
+                  SizedBox(height: 10),
+                  Text(
+                    'Essa meditação foi guiada por La Jardinera (Fubdadora da Organização Mãos sem Fronteiras - www.msfint.com)',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 16),
+                  ),
+                  SizedBox(height: 20),
+                  Image.network(
+                    'https://via.placeholder.com/300',
+                    // Substitua pela URL da imagem real
+                    fit: BoxFit.cover,
+                  ),
+                  SizedBox(height: 20),
+                  Text(
+                    'Essa meditação guiada é para liberar tensões acumuladas diariamente, com a prática, é possível alcançar estado de descanso profundo. Pode ser feita sentado, ou deitado, o importante é estar confortável. Assim que estiver em posição, faça 3 respirações, inspirando pelo nariz e expirando pela boca, de forma lenta e profunda. Assim, com a coluna reta, a respiração suave e lenta, olhos fechados, sinta a Paz e Harmonia.',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 16),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
