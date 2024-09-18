@@ -80,7 +80,7 @@ platform :ios do
 
         # https://docs.fastlane.tools/actions/upload_to_testflight
         upload_to_testflight(
-            ipa: "../build/ios/ipa/5 Minutos.ipa",
+            ipa: "../build/ios/ipa/Dev.ipa",
             skip_waiting_for_build_processing: true,
             apple_id: ENV["APP_STORE_CONNECT_APPLE_ID"]
         )
