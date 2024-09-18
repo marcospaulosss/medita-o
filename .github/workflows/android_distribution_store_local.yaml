@@ -43,7 +43,7 @@ jobs:
           ANDROID_STORE_PASSWORD: ${{ secrets.ANDROID_STORE_PASSWORD }}
           ANDROID_STORE_FILE: /tmp/KeyStorePlay.keystore
 
-      - name: Deploy do firebase
+      - name: Deploy do Google Play Store
         run: |
           ls -la build/app/outputs/bundle/storeRelease
           cd android
