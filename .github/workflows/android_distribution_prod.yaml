@@ -1,4 +1,4 @@
-name: Android distribution Dev
+name: Android distribution Production
 
 on:
   workflow_dispatch:
@@ -10,7 +10,7 @@ jobs:
       checks: write
       contents: write
       packages: write
-    runs-on: macos-latest
+    runs-on: ubuntu-latest  # Alterado para ubuntu-latest
 
     steps:
       - name: Efetua checkout da branch
@@ -36,23 +36,25 @@ jobs:
       - name: Setup Java
         uses: actions/setup-java@v3
         with:
-          distribution: 'temurin' # See 'Supported distributions' for available options
+          distribution: 'temurin'
           java-version: '17'
 
-      - name: Setup flutter e builda projeto
+      - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
           flutter-version: '3.22.1'
           channel: 'stable'
           token: ${{ secrets.GITHUB_TOKEN }}
-      - run: |
+
+      - name: Build projeto
+        run: |
           flutter clean
           flutter pub get
           ./localization
           flutter packages pub run build_runner build --delete-conflicting-outputs
           flutter build apk --debug --flavor prod -t lib/core/flavors/main_prod.dart
 
-      - name: Deploy do firebase
+      - name: Deploy do Firebase
         run: |
           ls -la build/app/outputs/flutter-apk
           cd android
