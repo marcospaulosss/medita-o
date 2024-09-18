@@ -57,4 +57,7 @@ class MeditateStringsEn extends MeditateStrings {
 
   @override
   String get inYourTime => 'No seu tempo';
+
+  @override
+  String get aboutGuidedMeditation => 'SOBRE';
 }

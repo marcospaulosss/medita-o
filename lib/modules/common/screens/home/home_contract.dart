@@ -38,6 +38,9 @@ abstract class Presenter implements ViewBinding<HomeViewContract> {
 
   /// Direciona para a tela do In Your Time
   void goToInYourTime();
+
+  /// Direciona para a tela de meditação guiada
+  void goToGuidedMeditation();
 }
 
 abstract class Repository {

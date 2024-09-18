@@ -2,6 +2,8 @@ import 'package:auto_route/auto_route.dart';
 import 'package:cinco_minutos_meditacao/core/di/helpers.dart';
 import 'package:cinco_minutos_meditacao/modules/meditate/screens/guided_meditation/guided_meditation_contract.dart';
 import 'package:cinco_minutos_meditacao/modules/meditate/screens/guided_meditation/guided_meditation_presenter.dart';
+import 'package:cinco_minutos_meditacao/modules/meditate/shared/strings/localization/meditate_strings.dart';
+import 'package:cinco_minutos_meditacao/shared/Theme/app_colors.dart';
 import 'package:cinco_minutos_meditacao/shared/components/app_background.dart';
 import 'package:cinco_minutos_meditacao/shared/components/generic_error_container.dart';
 import 'package:cinco_minutos_meditacao/shared/components/loading.dart';
@@ -34,6 +36,8 @@ class GuidedMeditationViewState extends State<GuidedMeditationView>
 
   @override
   void initState() {
+    stateController.showNormalState();
+
     presenter.bindView(this);
     presenter.initPresenter();
 
@@ -75,23 +79,16 @@ class GuidedMeditationViewState extends State<GuidedMeditationView>
   Widget buildBody(BuildContext context) {
     return SingleChildScrollView(
       child: Container(
-        padding: EdgeInsets.all(16.0),
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [Colors.blueAccent, Colors.white],
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-          ),
-        ),
+        padding: const EdgeInsets.all(40),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Container(
-              padding: EdgeInsets.all(16.0),
+              padding: const EdgeInsets.all(21),
               decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(16.0),
-                boxShadow: [
+                color: AppColors.brilliance2,
+                borderRadius: BorderRadius.circular(22),
+                boxShadow: const [
                   BoxShadow(
                     color: Colors.black12,
                     blurRadius: 10.0,
@@ -102,11 +99,12 @@ class GuidedMeditationViewState extends State<GuidedMeditationView>
               child: Column(
                 children: [
                   Text(
-                    'SOBRE',
-                    style: TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.blueAccent,
+                    MeditateStrings.of(context).aboutGuidedMeditation,
+                    style: const TextStyle(
+                      fontSize: 52,
+                      fontFamily: 'Blanch',
+                      fontWeight: FontWeight.w400,
+                      color: AppColors.germanderSpeedwell,
                     ),
                   ),
                   SizedBox(height: 10),
