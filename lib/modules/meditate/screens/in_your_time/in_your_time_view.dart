@@ -10,6 +10,7 @@ import 'package:cinco_minutos_meditacao/shared/components/app_background.dart';
 import 'package:cinco_minutos_meditacao/shared/components/generic_error_container.dart';
 import 'package:cinco_minutos_meditacao/shared/components/loading.dart';
 import 'package:cinco_minutos_meditacao/shared/helpers/multi_state_container/export.dart';
+import 'package:cinco_minutos_meditacao/shared/helpers/open_calendar.dart';
 import 'package:cinco_minutos_meditacao/shared/helpers/view_binding.dart';
 import 'package:flutter/material.dart';
 import 'package:just_audio/just_audio.dart';
@@ -123,7 +124,7 @@ class InYourTimeViewState extends State<InYourTimeView>
               type: MeditationMethodButtonType.combo,
             ),
             iconButton2: MeditationMethodButtonCustom(
-              onTap: () {},
+              onTap: () => openCalendar(),
               icon: Icons.access_time,
               label: MeditateStrings.of(context).remindMeditate,
               type: MeditationMethodButtonType.blue,

@@ -1,4 +1,4 @@
-name: Android distribution Dev
+name: Android distribution Store
 
 on:
   workflow_dispatch:
@@ -39,26 +39,37 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
+      - name: Decode and save the keystore file
+        run: |
+          echo "${{ secrets.ANDROID_STORE_FILE }}" | base64 --decode > /tmp/KeyStorePlay.keystore
+          echo "${{ secrets.JSON_KEY }}" | base64 --decode > $GITHUB_WORKSPACE/android/fastlane/minutos-3ae7f-fde6e0b502d4.json
+        env:
+          ANDROID_STORE_FILE: ${{ secrets.ANDROID_STORE_FILE }}
+          JSON_KEY: ${{ secrets.JSON_KEY }}
+
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.22.1'
+          flutter-version: '3.22.1'  # Ajuste para a versão do Flutter que você está usando
           channel: 'stable'
-          token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Build projeto
+      - name: Build projeto LOCALMENTE
         run: |
           flutter clean
           flutter pub get
           ./localization
           flutter packages pub run build_runner build --delete-conflicting-outputs
-          flutter build apk --debug --flavor dev -t lib/core/flavors/main_dev.dart 
-
-      - name: Deploy do Firebase
-        run: |
-          ls -la build/app/outputs/flutter-apk
-          cd android
-          bundle exec fastlane firebase
+          flutter build appbundle --release --flavor store -t lib/core/flavors/main_prod.dart
         env:
-          FIREBASE_TESTER_GROUPS: ${{ secrets.FIREBASE_TESTER_GROUPS }}
-          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+          ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+          ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+          ANDROID_STORE_PASSWORD: ${{ secrets.ANDROID_STORE_PASSWORD }}
+          ANDROID_STORE_FILE: /tmp/KeyStorePlay.keystore
+
+      - name: Deploy do Google Play Store
+        run: |
+          ls -la build/app/outputs/bundle/storeRelease
+          cd android
+          bundle exec fastlane upload_android_production_app
+        env:
+          JSON_KEY: ${{ secrets.JSON_KEY }}

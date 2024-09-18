@@ -10,6 +10,7 @@ jobs:
       checks: write
       contents: write
       packages: write
+    #    runs-on: [marcOS]
     runs-on: macos-latest
 
     steps:
@@ -71,14 +72,14 @@ jobs:
           pod deintegrate
           pod install
           cd ..
-          flutter build ipa --export-options-plist lib/core/export_plist/Info_dev.plist --flavor dev -t lib/core/flavors/main_dev.dart
+          flutter build ipa --export-options-plist lib/core/export_plist/Info_prod.plist --flavor prod -t lib/core/flavors/main_prod.dart
 
-      - name: Deploy para testflight
+      - name: Deploy para testflight produção
         run: |
           cd ios
-          bundle exec fastlane tf
+          bundle exec fastlane tf_prod
         env:
-          APPLE_ID: ${{ secrets.APPLE_ID }}
+          APPLE_ID: ${{ secrets.APPLE_ID_PROD }}
           FASTLANE_PASSWORD: ${{ secrets.FASTLANE_PASSWORD }}
           APP_STORE_CONNECT_APPLE_ID: ${{ secrets.APP_STORE_CONNECT_APPLE_ID }}
           FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD: ${{ secrets.FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD }}
