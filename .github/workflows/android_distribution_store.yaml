@@ -1,4 +1,4 @@
-name: Android distribution Dev
+name: Android distribution Store
 
 on:
   workflow_dispatch:
@@ -10,7 +10,7 @@ jobs:
       checks: write
       contents: write
       packages: write
-    runs-on: macos-latest
+    runs-on: ubuntu-latest  # Alterado para ubuntu-latest
 
     steps:
       - name: Efetua checkout da branch
@@ -36,7 +36,7 @@ jobs:
       - name: Setup Java
         uses: actions/setup-java@v3
         with:
-          distribution: 'temurin' # See 'Supported distributions' for available options
+          distribution: 'temurin'
           java-version: '17'
 
       - name: Decode and save the keystore file
@@ -47,7 +47,13 @@ jobs:
           ANDROID_STORE_FILE: ${{ secrets.ANDROID_STORE_FILE }}
           JSON_KEY: ${{ secrets.JSON_KEY }}
 
-      - name: Setup flutter e builda projeto LOCALMENTE
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.22.1'  # Ajuste para a versão do Flutter que você está usando
+          channel: 'stable'
+
+      - name: Build projeto LOCALMENTE
         run: |
           flutter clean
           flutter pub get
