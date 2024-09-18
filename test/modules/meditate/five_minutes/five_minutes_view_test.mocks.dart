@@ -70,3 +70,49 @@ class MockFiveMinutesPresenter extends _i1.Mock
         returnValueForMissingStub: _i4.Future<void>.value(),
       ) as _i4.Future<void>);
 }
+
+/// A class which mocks [FiveMinutesViewContract].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockFiveMinutesViewContract extends _i1.Mock
+    implements _i3.FiveMinutesViewContract {
+  MockFiveMinutesViewContract() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  void showLoading() => super.noSuchMethod(
+        Invocation.method(
+          #showLoading,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void showNormalState() => super.noSuchMethod(
+        Invocation.method(
+          #showNormalState,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void showError(String? message) => super.noSuchMethod(
+        Invocation.method(
+          #showError,
+          [message],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void meditationCompleted() => super.noSuchMethod(
+        Invocation.method(
+          #meditationCompleted,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
+}
