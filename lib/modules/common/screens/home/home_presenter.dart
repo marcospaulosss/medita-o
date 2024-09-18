@@ -124,6 +124,6 @@ class HomePresenter implements Presenter {
 
   @override
   void goToGuidedMeditation() {
-    _router.goTo(const GuidedMeditationRoute());
+    _router.goTo(const GuidedMeditationProgramRoute());
   }
 }
