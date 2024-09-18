@@ -202,6 +202,12 @@ abstract class MeditateStrings {
   /// In pt, this message translates to:
   /// **'No seu tempo'**
   String get inYourTime;
+
+  /// No description provided for @aboutGuidedMeditation.
+  ///
+  /// In pt, this message translates to:
+  /// **'SOBRE'**
+  String get aboutGuidedMeditation;
 }
 
 class _MeditateStringsDelegate extends LocalizationsDelegate<MeditateStrings> {
