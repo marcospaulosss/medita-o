@@ -1,9 +1,8 @@
 name: Android distribution Production LOCAL
 
 on:
-  push:
-    branches:
-      - 'main'
+  workflow_dispatch:
+  workflow_call:
 
 jobs:
   build:
