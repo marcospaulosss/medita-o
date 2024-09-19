@@ -16,18 +16,27 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+
+      - name: Get previous tag
+        id: prev_tag
+        run: echo ::set-output name=tag::$(git describe --tags --abbrev=0)
+
+      - name: Get commit messages since previous tag
+        id: commit_messages
+        run: |
+          commits=$(git log ${{ steps.prev_tag.outputs.tag }}..HEAD --pretty=format:"- %s")
+          echo "::set-output name=commits::${commits}"
+
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, você não precisa criar seu próprio token
         with:
-          tag_name: ${{ github.ref }}
-          release_name: Release ${{ github.ref }}
+          tag_name: ${{ github.sha }}
+          release_name: Release ${{ github.sha }}
           body: |
             ### O que foi feito?
-            - First Change
-            - Second Change
+            ${{ steps.commit_messages.outputs.commits }}
           draft: true
           prerelease: true
-
