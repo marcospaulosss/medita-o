@@ -80,7 +80,7 @@ class GuidedMeditationProgramViewState
       loadingStateBuilder: (context) => const Loading(),
       errorStateBuilder: (context) => GenericErrorContainer(
         message: messageError,
-        onRetry: () => initState(),
+        onRetry: () {},
       ),
     );
   }
