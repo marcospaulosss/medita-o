@@ -1,29 +1,16 @@
-name: Distribution
+name: Pre Release
 
 on:
-  workflow_dispatch:
+  push:
+    branches:
+      - 'main'
 
 jobs:
-  tests:
-    uses: polvo-labs/cincominutos-app/.github/workflows/tests.yaml@main
-
-  ios-distribution-dev:
-    needs: tests
-    uses: polvo-labs/cincominutos-app/.github/workflows/ios_distribution_dev.yaml@main
-    secrets: inherit
-
-  android-distribution-dev:
-    needs: tests
-    uses: polvo-labs/cincominutos-app/.github/workflows/android_distribution_dev.yaml@main
-    secrets: inherit
-
   pre-release:
-    needs: [ ios-distribution-dev, android-distribution-dev ]
     permissions:
       checks: write
       contents: write
       packages: write
-    #    runs-on: [ marcOS ]
     runs-on: ubuntu-latest
 
     steps:
@@ -43,3 +30,4 @@ jobs:
             - Second Change
           draft: true
           prerelease: true
+

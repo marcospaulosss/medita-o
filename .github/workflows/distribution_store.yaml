@@ -1,0 +1,21 @@
+name: Distribution Production Store
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - 'v*.*.*'  # Padrão para tags no formato v0.0.0
+
+jobs:
+  tests:
+    uses: polvo-labs/cincominutos-app/.github/workflows/tests.yaml@main
+
+  ios-distribution-prod:
+    needs: tests
+    uses: polvo-labs/cincominutos-app/.github/workflows/ios_distribution_store.yaml@main
+    secrets: inherit
+
+  android-distribution-prod:
+    needs: tests
+    uses: polvo-labs/cincominutos-app/.github/workflows/android_distribution_store.yaml@main
+    secrets: inherit

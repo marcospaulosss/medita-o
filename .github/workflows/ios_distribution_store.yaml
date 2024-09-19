@@ -1,4 +1,4 @@
-name: iOS distribution PROD
+name: iOS distribution Store
 
 on:
   workflow_dispatch:
@@ -10,6 +10,7 @@ jobs:
       checks: write
       contents: write
       packages: write
+    #    runs-on: [marcOS]
     runs-on: macos-latest
 
     steps:
@@ -75,20 +76,17 @@ jobs:
           cd ..
           flutter build ipa --export-options-plist lib/core/export_plist/Info_prod.plist --flavor prod -t lib/core/flavors/main_prod.dart
 
-      - name: Deploy do firebase
+      - name: Deploy para testflight produção
         run: |
           cd ios
-          bundle exec fastlane firebase_production
+          bundle exec fastlane tf_prod
         env:
-          FIREBASE_TESTER_GROUPS: ${{ secrets.FIREBASE_TESTER_GROUPS }}
-          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
-          APPLE_ID: ${{ secrets.APPLE_ID }}
-          APP_STORE_ISSUER_ID: ${{ secrets.APP_STORE_ISSUER_ID }}
-          APP_STORE_KEY_ID: ${{ secrets.APP_STORE_KEY_ID }}
+          APPLE_ID: ${{ secrets.APPLE_ID_PROD }}
+          FASTLANE_PASSWORD: ${{ secrets.FASTLANE_PASSWORD }}
           APP_STORE_CONNECT_APPLE_ID: ${{ secrets.APP_STORE_CONNECT_APPLE_ID }}
           FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD: ${{ secrets.FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD }}
           MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
           MATCH_KEYCHAIN_PASSWORD: ${{ secrets.MATCH_KEYCHAIN_PASSWORD }}
           MATCH_GIT_BASIC_AUTHORIZATION: ${{ secrets.MATCH_GIT_BASIC_AUTHORIZATION }}
-          ITMSTRANSPORTER_FORCE_ITMS_PACKAGE_UPLOAD: false
-          FASTLANE_PASSWORD: ${{ secrets.FASTLANE_PASSWORD }}
+          APP_STORE_ISSUER_ID: ${{ secrets.APP_STORE_ISSUER_ID }}
+          APP_STORE_KEY_ID: ${{ secrets.APP_STORE_KEY_ID }}
