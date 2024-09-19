@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>106395996253-bnp9gnivkdfa2ur8h1b4bcqt3b5a0o2l.apps.googleusercontent.com</string>
+	<string>106395996253-1o0qdh69ns2ttodsflvjth1n59j5sadr.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.106395996253-bnp9gnivkdfa2ur8h1b4bcqt3b5a0o2l</string>
+	<string>com.googleusercontent.apps.106395996253-1o0qdh69ns2ttodsflvjth1n59j5sadr</string>
 	<key>ANDROID_CLIENT_ID</key>
 	<string>106395996253-08bcto7ojojf3aqhnosen8l2dfvq4p8e.apps.googleusercontent.com</string>
 	<key>API_KEY</key>
@@ -15,7 +15,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.polvo.Aplicativo5</string>
+	<string>eumedito.org.cincoMinutos</string>
 	<key>PROJECT_ID</key>
 	<string>minutos-3ae7f</string>
 	<key>STORAGE_BUCKET</key>
@@ -31,6 +31,12 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:106395996253:ios:310bf8e16de1457e03bdb4</string>
+	<string>1:106395996253:ios:aae3ffe9c1d3a56803bdb4</string>
+
+	<key>NSCameraUsageDescription</key>
+    <string>We need access to the camera to take photos.</string>
+    <key>NSPhotoLibraryUsageDescription</key>
+    <string>We need access to the photo library to select photos.</string>
+
 </dict>
 </plist>
