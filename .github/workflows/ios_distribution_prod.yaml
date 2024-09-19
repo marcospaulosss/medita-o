@@ -38,7 +38,7 @@ jobs:
       - name: Download keys match
         run: |
           cd ios
-          bundle exec fastlane download_keys
+          bundle exec fastlane download_keys_production
         env:
           APPLE_ID: ${{ secrets.APPLE_ID_PROD }}
           FASTLANE_PASSWORD: ${{ secrets.FASTLANE_PASSWORD }}
@@ -94,7 +94,7 @@ jobs:
       - name: Deploy do firebase
         run: |
           cd ios
-          bundle exec fastlane firebase
+          bundle exec fastlane firebase_production
         env:
           FIREBASE_TESTER_GROUPS: ${{ secrets.FIREBASE_TESTER_GROUPS }}
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
