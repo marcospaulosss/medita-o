@@ -1,0 +1,21 @@
+name: Distribution Production RC
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - 'rc*.*.*'  # Padrão para tags no formato rc0.0.0
+
+jobs:
+  tests:
+    uses: polvo-labs/cincominutos-app/.github/workflows/tests.yaml@main
+
+  ios-distribution-prod:
+    needs: tests
+    uses: polvo-labs/cincominutos-app/.github/workflows/ios_distribution_prod.yaml@main
+    secrets: inherit
+
+  android-distribution-prod:
+    needs: tests
+    uses: polvo-labs/cincominutos-app/.github/workflows/android_distribution_prod.yaml@main
+    secrets: inherit
