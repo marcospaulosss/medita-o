@@ -16,4 +16,9 @@ abstract class MeditateEvents {
   static AnalyticsEvent get inYourTimeScreenOpened {
     return AnalyticsEvent(name: "abriu_tela_programa_no_seu_tempo");
   }
+
+  /// Evento disparado quando a tela da programa no seu tempo.
+  static AnalyticsEvent get guidedMeditationProgramScreenOpened {
+    return AnalyticsEvent(name: "abriu_tela_programa_meditacao_guiada");
+  }
 }

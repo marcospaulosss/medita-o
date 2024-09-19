@@ -92,7 +92,7 @@ platform :ios do
         # https://firebase.google.com/docs/app-distribution/ios/distribute-fastlane
         # bundle exec fastlane add_plugin firebase_app_distribution
         firebase_app_distribution(
-            app: ENV["FIREBASE_APP_ID_IOS"],
+            app: ENV["FIREBASE_APP_ID_IOS_PROD"],
             ipa_path: "../build/ios/ipa/5 Minutos.ipa",
             firebase_cli_token: ENV["FIREBASE_TOKEN"],
             groups: "testers"
