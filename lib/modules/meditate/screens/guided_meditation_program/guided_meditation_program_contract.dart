@@ -20,7 +20,7 @@ abstract class Presenter
   void onOpenScreen();
 
   /// Direciona para a tela de informações de como meditar
-  void goToMeditateInfo();
+  void goToGuidedMeditation();
 
   /// Submete a meditação concluída
   void submitMeditateCompleted(int time);

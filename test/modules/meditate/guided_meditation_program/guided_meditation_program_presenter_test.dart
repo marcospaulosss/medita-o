@@ -36,9 +36,9 @@ void main() {
     });
 
     test('should call goToMeditateInfo when goToMeditateInfo is called', () {
-      presenter.goToMeditateInfo();
+      presenter.goToGuidedMeditation();
 
-      verify(router.goTo(const MeditateInfoRoute())).called(1);
+      verify(router.goTo(const GuidedMeditationRoute())).called(1);
     });
 
     test(
