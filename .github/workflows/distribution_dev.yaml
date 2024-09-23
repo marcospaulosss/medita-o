@@ -1,4 +1,4 @@
-name: Distribution
+name: Distribution DEV
 
 on:
   workflow_dispatch:
