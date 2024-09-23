@@ -55,5 +55,8 @@ run-helper.cmd.template
 run-helper.sh.template
 run-helper.sh
 run.sh
+_diag
+node_modules/
+externals/
 
 **/minutos-3ae7f-fde6e0b502d4.json

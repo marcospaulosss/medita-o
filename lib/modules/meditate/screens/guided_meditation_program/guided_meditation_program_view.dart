@@ -10,7 +10,6 @@ import 'package:cinco_minutos_meditacao/shared/components/app_background.dart';
 import 'package:cinco_minutos_meditacao/shared/components/generic_error_container.dart';
 import 'package:cinco_minutos_meditacao/shared/components/loading.dart';
 import 'package:cinco_minutos_meditacao/shared/helpers/multi_state_container/export.dart';
-import 'package:cinco_minutos_meditacao/shared/helpers/open_calendar.dart';
 import 'package:cinco_minutos_meditacao/shared/helpers/view_binding.dart';
 import 'package:flutter/material.dart';
 import 'package:just_audio/just_audio.dart';
@@ -118,12 +117,12 @@ class GuidedMeditationProgramViewState
           const SizedBox(height: 26),
           MeditationMethod(
             iconButton1: MeditationMethodButtonCustom(
-              onTap: () => presenter.goToMeditateInfo(),
+              onTap: () {},
               icon: Icons.translate,
               label: MeditateStrings.of(context).seeTranslation,
             ),
             iconButton2: MeditationMethodButtonCustom(
-              onTap: () => openCalendar(),
+              onTap: () => presenter.goToGuidedMeditation(),
               icon: Icons.help_outline,
               label: MeditateStrings.of(context).learnMore,
               type: MeditationMethodButtonType.white,
