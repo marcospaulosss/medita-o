@@ -85,9 +85,9 @@ class MockGuidedMeditationProgramPresenter extends _i1.Mock
       );
 
   @override
-  void goToMeditateInfo() => super.noSuchMethod(
+  void goToGuidedMeditation() => super.noSuchMethod(
         Invocation.method(
-          #goToMeditateInfo,
+          #goToGuidedMeditation,
           [],
         ),
         returnValueForMissingStub: null,

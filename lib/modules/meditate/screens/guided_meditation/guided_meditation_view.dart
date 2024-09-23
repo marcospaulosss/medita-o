@@ -5,9 +5,6 @@ import 'package:cinco_minutos_meditacao/modules/meditate/screens/guided_meditati
 import 'package:cinco_minutos_meditacao/modules/meditate/shared/strings/localization/meditate_strings.dart';
 import 'package:cinco_minutos_meditacao/shared/Theme/app_colors.dart';
 import 'package:cinco_minutos_meditacao/shared/components/app_background.dart';
-import 'package:cinco_minutos_meditacao/shared/components/generic_error_container.dart';
-import 'package:cinco_minutos_meditacao/shared/components/loading.dart';
-import 'package:cinco_minutos_meditacao/shared/helpers/multi_state_container/export.dart';
 import 'package:cinco_minutos_meditacao/shared/helpers/view_binding.dart';
 import 'package:flutter/material.dart';
 
@@ -28,16 +25,11 @@ class GuidedMeditationViewState extends State<GuidedMeditationView>
   /// Presenter
   Presenter presenter = resolve<GuidedMeditationPresenter>();
 
-  /// Controlador do estado da tela
-  final stateController = MultiStateContainerController();
-
   /// Mensagem de erro
   late String messageError = "";
 
   @override
   void initState() {
-    stateController.showNormalState();
-
     presenter.bindView(this);
     presenter.initPresenter();
 
@@ -53,15 +45,7 @@ class GuidedMeditationViewState extends State<GuidedMeditationView>
 
   @override
   Widget build(BuildContext context) {
-    return MultiStateContainer(
-      controller: stateController,
-      normalStateBuilder: (context) => buildScaffold(context),
-      loadingStateBuilder: (context) => const Loading(),
-      errorStateBuilder: (context) => GenericErrorContainer(
-        message: messageError,
-        onRetry: () => presenter.initPresenter(),
-      ),
-    );
+    return buildScaffold(context);
   }
 
   Widget buildScaffold(BuildContext context) {
@@ -140,24 +124,5 @@ class GuidedMeditationViewState extends State<GuidedMeditationView>
       color: AppColors.steelWoolColor,
       fontFamily: 'Apertura',
     );
-  }
-
-  /// Mostra o estado de carregamento
-  @override
-  void showLoading() {
-    stateController.showLoadingState();
-  }
-
-  /// Mostra o estado normal
-  @override
-  void showNormalState() {
-    stateController.showNormalState();
-  }
-
-  /// Mostra o estado de erro
-  @override
-  void showError(String message) {
-    messageError = message;
-    stateController.showErrorState();
   }
 }
