@@ -51,5 +51,9 @@ app.*.map.json
 
 # Web related
 actions-runner/**
+run-helper.cmd.template
+run-helper.sh.template
+run-helper.sh
+run.sh
 
 **/minutos-3ae7f-fde6e0b502d4.json
