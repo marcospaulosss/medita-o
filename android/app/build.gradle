@@ -76,20 +76,18 @@ android {
     }
 
     signingConfigs {
+        debug {}
         release {
-            def storeFilePath = System.getenv("ANDROID_STORE_FILE") ?: localProperties.getProperty('storeFile')
-            if (storeFilePath) {
-                storeFile file(storeFilePath)
-                storePassword System.getenv("ANDROID_STORE_PASSWORD") ?: localProperties.getProperty('storePassword')
-                keyAlias System.getenv("ANDROID_KEY_ALIAS") ?: localProperties.getProperty('keyAlias')
-                keyPassword System.getenv("ANDROID_KEY_PASSWORD") ?: localProperties.getProperty('keyPassword')
-            } else {
-                println "Warning: No signing config specified. Using debug signing config."
-                signingConfig signingConfigs.debug
-            }
+            storeFile file(System.getenv("ANDROID_STORE_FILE") ?: localProperties['storeFile'])
+            storePassword System.getenv("ANDROID_STORE_PASSWORD") ?: localProperties['storePassword']
+            keyAlias System.getenv("ANDROID_KEY_ALIAS") ?: localProperties['keyAlias']
+            keyPassword System.getenv("ANDROID_KEY_PASSWORD") ?: localProperties['keyPassword']
         }
     }
     buildTypes {
+        debug {
+            signingConfig signingConfigs.debug
+        }
         release {
             signingConfig signingConfigs.release
         }
