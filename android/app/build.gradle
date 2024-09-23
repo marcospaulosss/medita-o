@@ -79,7 +79,7 @@ android {
         debug {}
         release {
             def storeFilePath = System.getenv("ANDROID_STORE_FILE") ?: localProperties['storeFile']
-            if (storeFilePath != null || storeFilePath.isNotEmpty()) {
+            if (storeFilePath != null && !storeFilePath.isEmpty()) {
                 storeFile file(storeFilePath)
                 storePassword System.getenv("ANDROID_STORE_PASSWORD") ?: localProperties['storePassword']
                 keyAlias System.getenv("ANDROID_KEY_ALIAS") ?: localProperties['keyAlias']
