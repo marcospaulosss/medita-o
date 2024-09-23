@@ -26,8 +26,8 @@ class GuidedMeditationProgramPresenter implements Presenter {
 
   /// Direciona para a tela de informações de como meditar
   @override
-  void goToMeditateInfo() {
-    _router.goTo(const MeditateInfoRoute());
+  void goToGuidedMeditation() {
+    _router.goTo(const GuidedMeditationRoute());
   }
 
   /// Submete a meditação concluída
