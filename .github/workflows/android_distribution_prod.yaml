@@ -1,4 +1,4 @@
-name: Android distribution Production
+name: Android distribution PROD
 
 on:
   workflow_dispatch:
@@ -31,7 +31,6 @@ jobs:
       - name: Setup Fastlane
         run: |
           cd android
-          gem install bundler:2.4.22
           bundle install
 
       - name: Setup Java
@@ -47,7 +46,7 @@ jobs:
           channel: 'stable'
           token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Setup flutter e builda projeto
+      - name: Build projeto
         run: |
           flutter clean
           flutter pub get
@@ -55,7 +54,7 @@ jobs:
           flutter packages pub run build_runner build --delete-conflicting-outputs
           flutter build apk --debug --flavor prod -t lib/core/flavors/main_prod.dart
 
-      - name: Deploy do firebase
+      - name: Deploy do Firebase
         run: |
           ls -la build/app/outputs/flutter-apk
           cd android
