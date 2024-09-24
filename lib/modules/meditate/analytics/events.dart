@@ -17,13 +17,18 @@ abstract class MeditateEvents {
     return AnalyticsEvent(name: "abriu_tela_programa_no_seu_tempo");
   }
 
-  /// Evento disparado quando a tela da programa no seu tempo.
+  /// Evento disparado quando a tela da programa de meditação guiada.
   static AnalyticsEvent get guidedMeditationProgramScreenOpened {
     return AnalyticsEvent(name: "abriu_tela_programa_meditacao_guiada");
   }
 
-  /// Evento disparado quando a tela da programa no seu tempo.
+  /// Evento disparado quando a tela sobre a meditação guiada.
   static AnalyticsEvent get guidedMeditationAbout {
     return AnalyticsEvent(name: "abriu_tela_saiba_mais_meditacao_guiada");
+  }
+
+  /// Evento disparado quando a tela de doação é aberta.
+  static AnalyticsEvent get donationScreenOpened {
+    return AnalyticsEvent(name: "abriu_tela_doacao");
   }
 }

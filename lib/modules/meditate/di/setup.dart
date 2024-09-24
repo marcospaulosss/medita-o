@@ -1,3 +1,4 @@
+import 'package:cinco_minutos_meditacao/modules/meditate/di/donation.dart';
 import 'package:cinco_minutos_meditacao/modules/meditate/di/five_minutes.dart';
 import 'package:cinco_minutos_meditacao/modules/meditate/di/guided_meditation.dart';
 import 'package:cinco_minutos_meditacao/modules/meditate/di/guided_meditation_program.dart';
@@ -10,4 +11,5 @@ void setupInjectors() {
   InYourTimeInjector.setup();
   GuidedMeditationInjector.setup();
   GuidedMeditationProgramInjector.setup();
+  DonationInjector.setup();
 }

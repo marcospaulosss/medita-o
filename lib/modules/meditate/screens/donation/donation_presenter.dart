@@ -1,10 +1,10 @@
 import 'package:cinco_minutos_meditacao/core/routers/app_router.dart';
-import 'package:cinco_minutos_meditacao/modules/meditate/screens/guided_meditation/guided_meditation_contract.dart';
+import 'package:cinco_minutos_meditacao/modules/meditate/screens/donation/donation_contract.dart';
 
-class GuidedMeditationPresenter implements Presenter {
+class DonationPresenter implements Presenter {
   /// View
   @override
-  GuidedMeditationViewContract? view;
+  DonationViewContract? view;
 
   /// Repositório
   final Repository _repository;
@@ -15,11 +15,7 @@ class GuidedMeditationPresenter implements Presenter {
   /// - [repository] : Repositório
   /// - [router] : Router
   /// construtor
-  GuidedMeditationPresenter(
-      this._repository, this._router); //this._authService, );
-
-  /// variável de controle de erro
-  bool error = false;
+  DonationPresenter(this._repository, this._router);
 
   /// evento disparado ao abrir a tela
   void onOpenScreen() {

@@ -31,6 +31,7 @@ jobs:
       - name: Setup Fastlane
         run: |
           cd android
+          gem install bundler:2.4.22
           bundle install
 
       - name: Setup Java
