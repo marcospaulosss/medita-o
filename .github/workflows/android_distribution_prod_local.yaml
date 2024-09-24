@@ -32,6 +32,7 @@ jobs:
       - name: Deploy do firebase
         run: |
           ls -la build/app/outputs/flutter-apk
+          firebase projects:list --token "$FIREBASE_TOKEN"
           cd android
           bundle exec fastlane firebase_prod
         env:
