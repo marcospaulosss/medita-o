@@ -45,6 +45,7 @@ dependencies:
   timezone: ^0.9.4
   manage_calendar_events: ^2.0.3
   add_2_calendar: ^3.0.1
+  youtube_player_flutter: ^8.0.0
 
 dev_dependencies:
   flutter_test:
