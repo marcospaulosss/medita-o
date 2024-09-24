@@ -61,7 +61,7 @@ Upload dev app to Firebase App Distribution
 [bundle exec] fastlane android firebase_prod
 ```
 
-Upload prod app to Firebase App Distribution
+Upload dev app to Firebase App Distribution
 
 ### android upload_android_production_app
 
