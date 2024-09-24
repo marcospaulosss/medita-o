@@ -86,31 +86,4 @@ class MockGuidedMeditationViewContract extends _i1.Mock
   MockGuidedMeditationViewContract() {
     _i1.throwOnMissingStub(this);
   }
-
-  @override
-  void showLoading() => super.noSuchMethod(
-        Invocation.method(
-          #showLoading,
-          [],
-        ),
-        returnValueForMissingStub: null,
-      );
-
-  @override
-  void showNormalState() => super.noSuchMethod(
-        Invocation.method(
-          #showNormalState,
-          [],
-        ),
-        returnValueForMissingStub: null,
-      );
-
-  @override
-  void showError(String? message) => super.noSuchMethod(
-        Invocation.method(
-          #showError,
-          [message],
-        ),
-        returnValueForMissingStub: null,
-      );
 }
