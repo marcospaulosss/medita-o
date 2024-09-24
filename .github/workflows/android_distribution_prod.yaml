@@ -19,7 +19,8 @@ jobs:
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '2.7'
+          ruby-version: '3.3'
+          bundler-cache: true
 
       - name: Install SSH key
         uses: shimataro/ssh-key-action@v2
@@ -31,6 +32,7 @@ jobs:
       - name: Setup Fastlane
         run: |
           cd android
+          gem install bundler:2.4.19
           bundle install
 
       - name: Setup Java
@@ -42,11 +44,11 @@ jobs:
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.22.1'
+          flutter-version: '3.22.2'
           channel: 'stable'
           token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Build projeto
+      - name: Setup flutter e builda projeto
         run: |
           flutter clean
           flutter pub get
@@ -54,7 +56,7 @@ jobs:
           flutter packages pub run build_runner build --delete-conflicting-outputs
           flutter build apk --debug --flavor prod -t lib/core/flavors/main_prod.dart
 
-      - name: Deploy do Firebase
+      - name: Deploy do firebase
         run: |
           ls -la build/app/outputs/flutter-apk
           cd android
