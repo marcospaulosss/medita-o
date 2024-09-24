@@ -1,8 +1,8 @@
 import 'package:cinco_minutos_meditacao/shared/helpers/view_binding.dart';
 
-abstract class GuidedMeditationViewContract {}
+abstract class DonationViewContract {}
 
-abstract class Presenter implements ViewBinding<GuidedMeditationViewContract> {
+abstract class Presenter implements ViewBinding<DonationViewContract> {
   /// Inicializa o presenter
   void initPresenter();
 }

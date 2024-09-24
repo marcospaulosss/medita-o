@@ -1,20 +1,20 @@
 import 'package:cinco_minutos_meditacao/core/analytics/manager.dart';
 import 'package:cinco_minutos_meditacao/core/di/helpers.dart';
 import 'package:cinco_minutos_meditacao/core/routers/app_router.dart';
-import 'package:cinco_minutos_meditacao/modules/meditate/screens/guided_meditation/guided_meditation_presenter.dart';
-import 'package:cinco_minutos_meditacao/modules/meditate/screens/guided_meditation/guided_meditation_repository.dart';
+import 'package:cinco_minutos_meditacao/modules/meditate/screens/donation/donation_presenter.dart';
+import 'package:cinco_minutos_meditacao/modules/meditate/screens/donation/donation_repository.dart';
 
-abstract class GuidedMeditationInjector {
+abstract class DonationInjector {
   static void setup() {
-    registerFactory<GuidedMeditationPresenter>(
-      () => GuidedMeditationPresenter(
-        resolve<GuidedMeditationRepository>(),
+    registerFactory<DonationPresenter>(
+      () => DonationPresenter(
+        resolve<DonationRepository>(),
         resolve<AppRouter>(),
       ),
     );
 
-    registerFactory<GuidedMeditationRepository>(
-      () => GuidedMeditationRepository(
+    registerFactory<DonationRepository>(
+      () => DonationRepository(
         resolve<AnalyticsManager>(),
       ),
     );
