@@ -238,6 +238,30 @@ abstract class MeditateStrings {
   /// In pt, this message translates to:
   /// **'Saiba mais'**
   String get learnMore;
+
+  /// No description provided for @donationTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'SUA DOAÇÃO AJUDA A PAZ SER CADA VEZ MAIS MUNDIAL!'**
+  String get donationTitle;
+
+  /// No description provided for @donationDescription.
+  ///
+  /// In pt, this message translates to:
+  /// **'Todas as doações recebidas ajudam o Instituto Mãos Sem Fronteiras a capacitarem mais voluntários e levarem a paz para cada vez mais pessoas.'**
+  String get donationDescription;
+
+  /// No description provided for @donate.
+  ///
+  /// In pt, this message translates to:
+  /// **'DOAR'**
+  String get donate;
+
+  /// No description provided for @donationFooterDescription.
+  ///
+  /// In pt, this message translates to:
+  /// **'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\\\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.'**
+  String get donationFooterDescription;
 }
 
 class _MeditateStringsDelegate extends LocalizationsDelegate<MeditateStrings> {
