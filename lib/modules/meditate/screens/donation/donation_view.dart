@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:cinco_minutos_meditacao/core/di/helpers.dart';
 import 'package:cinco_minutos_meditacao/modules/meditate/screens/donation/donation_contract.dart';
 import 'package:cinco_minutos_meditacao/modules/meditate/screens/donation/donation_presenter.dart';
+import 'package:cinco_minutos_meditacao/modules/meditate/shared/strings/localization/meditate_strings.dart';
 import 'package:cinco_minutos_meditacao/shared/Theme/app_colors.dart';
 import 'package:cinco_minutos_meditacao/shared/components/app_background.dart';
 import 'package:cinco_minutos_meditacao/shared/helpers/view_binding.dart';
@@ -27,9 +28,6 @@ class DonationViewState extends State<DonationView>
 
   /// Controller do player de vídeo
   late YoutubePlayerController _controller;
-
-  /// Mensagem de erro
-  late String messageError = "";
 
   @override
   void initState() {
@@ -105,29 +103,29 @@ class DonationViewState extends State<DonationView>
                       _controller.addListener(() {});
                     },
                   ),
-                  const Padding(
-                    padding: EdgeInsets.symmetric(vertical: 16.0),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 16.0),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text(
-                          'SUA DOAÇÃO AJUDA A PAZ SER CADA VEZ MAIS MUNDIAL!',
-                          style: TextStyle(
+                        Text(
+                          MeditateStrings.of(context).donationTitle,
+                          style: const TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.w700,
                             color: AppColors.steelWoolColor,
                           ),
                         ),
-                        SizedBox(height: 8),
+                        const SizedBox(height: 8),
                         Text(
-                          'Todas as doações recebidas ajudam o Instituto Mãos Sem Fronteiras a capacitarem mais voluntários e levarem a paz para cada vez mais pessoas.',
-                          style: TextStyle(
+                          MeditateStrings.of(context).donationDescription,
+                          style: const TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.w400,
                             color: AppColors.steelWoolColor,
                           ),
                         ),
-                        SizedBox(height: 25),
+                        const SizedBox(height: 25),
                       ],
                     ),
                   ),
@@ -139,9 +137,9 @@ class DonationViewState extends State<DonationView>
                       color: AppColors.germanderSpeedwell,
                       borderRadius: BorderRadius.circular(15),
                     ),
-                    child: const Text(
-                      "DOAR",
-                      style: TextStyle(
+                    child: Text(
+                      MeditateStrings.of(context).donate,
+                      style: const TextStyle(
                         fontSize: 52,
                         fontWeight: FontWeight.w400,
                         color: AppColors.white,
@@ -149,11 +147,11 @@ class DonationViewState extends State<DonationView>
                       ),
                     ),
                   ),
-                  const Padding(
-                    padding: EdgeInsets.symmetric(vertical: 16.0),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 16.0),
                     child: Text(
-                      'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
-                      style: TextStyle(
+                      MeditateStrings.of(context).donationFooterDescription,
+                      style: const TextStyle(
                         fontSize: 7,
                         fontWeight: FontWeight.w400,
                         color: AppColors.steelWoolColor,
