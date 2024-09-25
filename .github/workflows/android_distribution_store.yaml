@@ -19,7 +19,8 @@ jobs:
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '2.7'
+          ruby-version: '3.3'
+          bundler-cache: true
 
       - name: Install SSH key
         uses: shimataro/ssh-key-action@v2
@@ -31,6 +32,8 @@ jobs:
       - name: Setup Fastlane
         run: |
           cd android
+          echo "gem 'ostruct'" >> Gemfile
+          gem install bundler:2.4.19
           bundle install
 
       - name: Setup Java
@@ -50,8 +53,9 @@ jobs:
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.22.1'  # Ajuste para a versão do Flutter que você está usando
+          flutter-version: '3.22.2'
           channel: 'stable'
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build projeto LOCALMENTE
         run: |
