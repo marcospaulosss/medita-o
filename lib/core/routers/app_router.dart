@@ -21,6 +21,7 @@ class AppRouter extends $AppRouter {
         AutoRoute(page: GuidedMeditationRoute.page, guards: [AuthGuard()]),
         AutoRoute(
             page: GuidedMeditationProgramRoute.page, guards: [AuthGuard()]),
+        AutoRoute(page: DonationRoute.page, guards: [AuthGuard()]),
       ];
 
   /// Direciona para a tela selecionada e remove a tela anterior

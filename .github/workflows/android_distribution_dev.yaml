@@ -19,7 +19,8 @@ jobs:
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '2.7'
+          ruby-version: '3.3'
+          bundler-cache: true
 
       - name: Install SSH key
         uses: shimataro/ssh-key-action@v2
@@ -31,6 +32,7 @@ jobs:
       - name: Setup Fastlane
         run: |
           cd android
+          echo "gem 'ostruct'" >> Gemfile
           gem install bundler:2.4.19
           bundle install
 
@@ -54,11 +56,6 @@ jobs:
           ./localization
           flutter packages pub run build_runner build --delete-conflicting-outputs
           flutter build apk --debug --flavor dev -t lib/core/flavors/main_dev.dart
-        env:
-          ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
-          ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
-          ANDROID_STORE_PASSWORD: ${{ secrets.ANDROID_STORE_PASSWORD }}
-          ANDROID_STORE_FILE: /tmp/KeyStorePlay.keystore
 
       - name: Deploy do Firebase
         run: |

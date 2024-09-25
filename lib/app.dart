@@ -65,6 +65,7 @@ class _AppState extends State<App> {
             bottomNavigationBar: _showBottomNavigationBar
                 ? BottomNavBar(
                     routeName: routeName,
+                    router: _appRouter,
                   )
                 : null,
           ),
