@@ -1,4 +1,4 @@
-name: Distribution DEV LOCAL
+name: Distribution Production Store LOCAL
 
 on:
   workflow_dispatch:
