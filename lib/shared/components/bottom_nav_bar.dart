@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:cinco_minutos_meditacao/core/routers/app_router.dart';
 import 'package:cinco_minutos_meditacao/core/routers/app_router.gr.dart';
 import 'package:cinco_minutos_meditacao/shared/Theme/app_colors.dart';
 import 'package:cinco_minutos_meditacao/shared/helpers/bottom_navigation_bar.dart';
@@ -8,9 +9,13 @@ class BottomNavBar extends StatefulWidget {
   /// Nome da rota atual
   String routeName = '';
 
+  /// Router
+  final AppRouter router;
+
   /// - [routeName] Nome da rota atual
+  /// - [router] Router
   /// construtor
-  BottomNavBar({required this.routeName, super.key});
+  BottomNavBar({required this.routeName, required this.router, super.key});
 
   @override
   State<BottomNavBar> createState() => _BottomNavBarState();
@@ -35,8 +40,15 @@ class _BottomNavBarState extends State<BottomNavBar> {
           navigatorItem(
             "assets/images/icons/Balão.png",
             "Meditar",
-            shouldShowIdentify(widget.routeName),
+            shouldShowIdentify(widget.routeName, identifier: Identifiers.home),
             const HomeRoute(),
+          ),
+          navigatorItem(
+            "assets/images/icons/favorite.png",
+            "Doar",
+            shouldShowIdentify(widget.routeName,
+                identifier: Identifiers.donation),
+            const DonationRoute(),
           ),
         ],
       ),
@@ -47,7 +59,8 @@ class _BottomNavBarState extends State<BottomNavBar> {
       String image, String text, bool isSelected, PageRouteInfo route) {
     return GestureDetector(
       onTap: () {
-        AutoRouter.of(context).replace(route);
+        shouldShowIdentify(widget.routeName);
+        widget.router.goToReplace(route);
       },
       child: Column(
         children: [
