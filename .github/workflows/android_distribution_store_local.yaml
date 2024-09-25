@@ -35,7 +35,7 @@ jobs:
           flutter pub get
           ./localization
           flutter packages pub run build_runner build --delete-conflicting-outputs
-          flutter build appbundle --release --flavor store -t lib/core/flavors/main_prod.dart
+          flutter build appbundle --no-tree-shake-icons --release --flavor store -t lib/core/flavors/main_prod.dart
         env:
           ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
           ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
