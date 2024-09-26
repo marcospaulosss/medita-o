@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:cinco_minutos_meditacao/core/routers/app_router.dart';
 import 'package:cinco_minutos_meditacao/core/routers/app_router.gr.dart';
 import 'package:cinco_minutos_meditacao/shared/Theme/app_colors.dart';
+import 'package:cinco_minutos_meditacao/shared/Theme/app_images.dart';
 import 'package:cinco_minutos_meditacao/shared/helpers/bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';
 
@@ -38,13 +39,20 @@ class _BottomNavBarState extends State<BottomNavBar> {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           navigatorItem(
-            "assets/images/icons/Balão.png",
+            AppImages.balloonIcon,
             "Meditar",
             shouldShowIdentify(widget.routeName, identifier: Identifiers.home),
             const HomeRoute(),
           ),
           navigatorItem(
-            "assets/images/icons/favorite.png",
+            AppImages.meditometerIcon,
+            "Meditômetro",
+            shouldShowIdentify(widget.routeName,
+                identifier: Identifiers.meditometer),
+            const MeditometerRoute(),
+          ),
+          navigatorItem(
+            AppImages.favorite,
             "Doar",
             shouldShowIdentify(widget.routeName,
                 identifier: Identifiers.donation),
