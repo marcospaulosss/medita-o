@@ -5,6 +5,7 @@ import 'package:cinco_minutos_meditacao/modules/meditate/screens/meditate_info/m
 import 'package:cinco_minutos_meditacao/modules/meditate/shared/components/video_card.dart';
 import 'package:cinco_minutos_meditacao/modules/meditate/shared/strings/localization/meditate_strings.dart';
 import 'package:cinco_minutos_meditacao/shared/Theme/app_colors.dart';
+import 'package:cinco_minutos_meditacao/shared/clients/models/responses/meditations_response.dart';
 import 'package:cinco_minutos_meditacao/shared/components/Meditometer.dart';
 import 'package:cinco_minutos_meditacao/shared/components/app_background.dart';
 import 'package:cinco_minutos_meditacao/shared/components/app_header.dart';
@@ -80,7 +81,7 @@ class MeditateInfoViewState extends State<MeditateInfoView>
                 _meditateInfoModel!.userResponse?.name.split(" ").first ?? "",
             description1: MeditateStrings.of(context).alreadyAdded,
             description2:
-                "${_meditateInfoModel!.meditationsByUserResponse?.totalMinutes ?? 0} ${MeditateStrings.of(context).minutes} ",
+                "${_meditateInfoModel!.meditationsByUserResponse?.formattedDecimalPattern ?? 0} ${MeditateStrings.of(context).minutes} ",
             description3: MeditateStrings.of(context).worldPeace,
             photo: _meditateInfoModel!.userResponse?.profilePhotoPath,
             updateImage: () => presenter.updateImageProfile(),

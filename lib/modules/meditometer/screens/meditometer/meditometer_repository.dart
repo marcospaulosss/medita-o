@@ -3,15 +3,16 @@ import 'dart:io';
 
 import 'package:cinco_minutos_meditacao/core/analytics/manager.dart';
 import 'package:cinco_minutos_meditacao/core/wrappers/secure_storage.dart';
-import 'package:cinco_minutos_meditacao/modules/common/analytics/events.dart';
-import 'package:cinco_minutos_meditacao/modules/common/screens/home/home_contract.dart';
+import 'package:cinco_minutos_meditacao/modules/meditometer/analytics/events.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/client_api.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/meditations_response.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/user_response.dart';
 import 'package:cinco_minutos_meditacao/shared/models/error.dart';
 import 'package:dio/dio.dart';
 
-class HomeRepository implements Repository {
+import 'meditometer_contract.dart';
+
+class MeditometerRepository implements Repository {
   /// Analytics
   final AnalyticsManager _analytics;
 
@@ -29,19 +30,13 @@ class HomeRepository implements Repository {
   /// - [error] : Erro customizado
   /// - [secureStorage] : Secure Storage
   /// construtor
-  HomeRepository(
+  MeditometerRepository(
       this._analytics, this._clientApi, this._error, this._secureStorage);
 
   /// envia o evento de tela aberta
   @override
   void sendOpenScreenEvent() {
-    _analytics.sendEvent(CommonEvents.homeScreenOpened);
-  }
-
-  /// efetua o logout do usuário
-  @override
-  void logOut() {
-    _secureStorage.setIsLogged(false);
+    _analytics.sendEvent(MeditometerEvents.meditometerScreenOpened);
   }
 
   /// Busca informações do usuário
@@ -79,27 +74,6 @@ class HomeRepository implements Repository {
     }
   }
 
-  /// Atualiza a imagem de perfil do usuário
-  @override
-  Future<CustomError?> uploadImageProfile(File file) async {
-    try {
-      await _clientApi.uploadPhoto(file);
-
-      return null;
-    } on TimeoutException {
-      return _error.sendErrorToCrashlytics(
-          code: ErrorCodes.timeoutException, stackTrace: StackTrace.current);
-    } on DioException catch (e) {
-      return _error.sendErrorToCrashlytics(
-        code: ErrorCodes.getMeError,
-        stackTrace: StackTrace.current,
-      );
-    } catch (e) {
-      return _error.sendErrorToCrashlytics(
-          code: ErrorCodes.getMeError, stackTrace: StackTrace.current);
-    }
-  }
-
   /// Busca a quantidade de meditações realizadas no mundo
   @override
   Future<(MeditationsResponse?, CustomError?)> requestMeditations() async {
@@ -127,6 +101,27 @@ class HomeRepository implements Repository {
         _error.sendErrorToCrashlytics(
             code: ErrorCodes.getMeditionsError, stackTrace: StackTrace.current)
       );
+    }
+  }
+
+  /// Atualiza a imagem de perfil do usuário
+  @override
+  Future<CustomError?> uploadImageProfile(File file) async {
+    try {
+      await _clientApi.uploadPhoto(file);
+
+      return null;
+    } on TimeoutException {
+      return _error.sendErrorToCrashlytics(
+          code: ErrorCodes.timeoutException, stackTrace: StackTrace.current);
+    } on DioException catch (e) {
+      return _error.sendErrorToCrashlytics(
+        code: ErrorCodes.getMeError,
+        stackTrace: StackTrace.current,
+      );
+    } catch (e) {
+      return _error.sendErrorToCrashlytics(
+          code: ErrorCodes.getMeError, stackTrace: StackTrace.current);
     }
   }
 }

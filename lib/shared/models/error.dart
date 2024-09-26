@@ -14,6 +14,7 @@ enum ErrorCodes {
   getMeditionsError,
   createNewMeditationError,
   createNewEventCalendar,
+  cameraError,
 }
 
 class CustomError extends Error {
@@ -45,6 +46,7 @@ class CustomError extends Error {
     ErrorCodes.createNewMeditationError: "Erro ao criar nova meditação.",
     ErrorCodes.createNewEventCalendar:
         "Erro ao criar um novo evento no calendário.",
+    ErrorCodes.cameraError: "Erro ao acessar a câmera.",
   };
 
   CustomError sendErrorToCrashlytics(
