@@ -80,9 +80,9 @@ class MeditometerViewState extends State<MeditometerView>
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           AppHeader(
-            nameUser: model.userResponse!.name.split(" ").first,
+            nameUser: model.userResponse?.name.split(" ").first ?? "",
             description1: CommonStrings.of(context).homeHeaderDescription1,
-            photo: model.userResponse!.profilePhotoPath,
+            photo: model.userResponse?.profilePhotoPath ?? "",
             updateImage: () => presenter.updateImageProfile(),
           ),
           buildTitle(),
@@ -153,7 +153,7 @@ class MeditometerViewState extends State<MeditometerView>
               ),
             ),
             Text(
-              model.meditationsResponse!.formattedDecimalPattern,
+              model.meditationsResponse?.formattedDecimalPattern ?? "0",
               style: const TextStyle(
                 fontSize: 50,
                 color: AppColors.frankBlue,
