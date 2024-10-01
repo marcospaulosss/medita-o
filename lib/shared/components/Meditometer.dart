@@ -47,7 +47,7 @@ class Meditometer extends StatelessWidget {
           ),
         ),
         Text(
-          meditationsResponse?.totalMinutes.toString() ?? "0",
+          meditationsResponse!.formattedDecimalPattern,
           style: const TextStyle(
             fontSize: 58,
             fontWeight: FontWeight.w900,

@@ -1,4 +1,5 @@
 import 'package:cinco_minutos_meditacao/shared/services/log_service.dart';
+import 'package:dio/dio.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 
 enum ErrorCodes {
@@ -14,6 +15,7 @@ enum ErrorCodes {
   getMeditionsError,
   createNewMeditationError,
   createNewEventCalendar,
+  cameraError,
 }
 
 class CustomError extends Error {
@@ -45,13 +47,23 @@ class CustomError extends Error {
     ErrorCodes.createNewMeditationError: "Erro ao criar nova meditação.",
     ErrorCodes.createNewEventCalendar:
         "Erro ao criar um novo evento no calendário.",
+    ErrorCodes.cameraError: "Erro ao acessar a câmera.",
   };
 
   CustomError sendErrorToCrashlytics(
-      {String? message, ErrorCodes? code, StackTrace? stackTrace}) {
+      {String? message,
+      ErrorCodes? code,
+      StackTrace? stackTrace,
+      DioException? dioException}) {
     this.code = code;
     this.message = message ?? _defaultMessages[code] ?? "Erro desconhecido.";
     this.stackTrace = stackTrace;
+
+    if (dioException != null) {
+      FirebaseCrashlytics.instance.log(dioException.message ?? "");
+      FirebaseCrashlytics.instance.recordError(dioException, stackTrace);
+      LogService().log(dioException.message!, null, stackTrace);
+    }
 
     FirebaseCrashlytics.instance.log(this.message ?? "");
     FirebaseCrashlytics.instance.recordError(this.message, stackTrace);
