@@ -26,6 +26,7 @@ import 'package:cinco_minutos_meditacao/shared/clients/models/responses/register
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/user_response.dart'
     as _i4;
 import 'package:cinco_minutos_meditacao/shared/models/error.dart' as _i6;
+import 'package:dio/dio.dart' as _i17;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:mockito/src/dummies.dart' as _i16;
 
@@ -441,6 +442,7 @@ class MockCustomError extends _i1.Mock implements _i6.CustomError {
     String? message,
     _i6.ErrorCodes? code,
     StackTrace? stackTrace,
+    _i17.DioException? dioException,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -450,6 +452,7 @@ class MockCustomError extends _i1.Mock implements _i6.CustomError {
             #message: message,
             #code: code,
             #stackTrace: stackTrace,
+            #dioException: dioException,
           },
         ),
         returnValue: _FakeCustomError_4(
@@ -461,6 +464,7 @@ class MockCustomError extends _i1.Mock implements _i6.CustomError {
               #message: message,
               #code: code,
               #stackTrace: stackTrace,
+              #dioException: dioException,
             },
           ),
         ),

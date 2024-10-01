@@ -78,6 +78,7 @@ void main() {
       when(error.sendErrorToCrashlytics(
         code: ErrorCodes.createNewMeditationError,
         stackTrace: anyNamed('stackTrace'),
+        dioException: anyNamed('dioException'),
       )).thenReturn(error);
 
       await repository.requestRegisterMeditateCompleted(5);
@@ -87,6 +88,7 @@ void main() {
       verify(error.sendErrorToCrashlytics(
         code: ErrorCodes.createNewMeditationError,
         stackTrace: anyNamed('stackTrace'),
+        dioException: anyNamed('dioException'),
       )).called(1);
     });
 

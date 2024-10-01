@@ -98,7 +98,8 @@ class LoginRepository extends Repository {
           message:
               "Erro ao realizar login com e-mail e senha - ${e.response?.statusCode}",
           code: ErrorCodes.loginEmailPasswordError,
-          stackTrace: e.stackTrace);
+          stackTrace: e.stackTrace,
+          dioException: e);
     } catch (e) {
       return error.sendErrorToCrashlytics(
           message: "Erro ao realizar login com e-mail e senha - 500",
