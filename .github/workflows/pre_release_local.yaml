@@ -1,4 +1,4 @@
-name: Pre Release
+name: Pre Release Local
 
 on:
   workflow_dispatch:
