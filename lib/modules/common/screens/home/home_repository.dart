@@ -68,6 +68,7 @@ class HomeRepository implements Repository {
         _error.sendErrorToCrashlytics(
           code: ErrorCodes.getMeError,
           stackTrace: StackTrace.current,
+          dioException: e,
         )
       );
     } catch (e) {
@@ -93,6 +94,7 @@ class HomeRepository implements Repository {
       return _error.sendErrorToCrashlytics(
         code: ErrorCodes.getMeError,
         stackTrace: StackTrace.current,
+        dioException: e,
       );
     } catch (e) {
       return _error.sendErrorToCrashlytics(
@@ -100,6 +102,7 @@ class HomeRepository implements Repository {
     }
   }
 
+  /// Busca a quantidade de meditações realizadas no mundo
   @override
   Future<(MeditationsResponse?, CustomError?)> requestMeditations() async {
     try {
@@ -118,6 +121,7 @@ class HomeRepository implements Repository {
         _error.sendErrorToCrashlytics(
           code: ErrorCodes.getMeditionsError,
           stackTrace: StackTrace.current,
+          dioException: e,
         )
       );
     } catch (e) {

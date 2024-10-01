@@ -3,6 +3,7 @@ import 'package:cinco_minutos_meditacao/core/routers/app_router.gr.dart';
 enum Identifiers {
   home,
   donation,
+  meditometer,
 }
 
 bool shouldShowBottomNavigationBar(String routeName) {
@@ -15,6 +16,7 @@ bool shouldShowBottomNavigationBar(String routeName) {
     GuidedMeditationRoute.name,
     GuidedMeditationProgramRoute.name,
     DonationRoute.name,
+    MeditometerRoute.name,
   ];
   return routesWithBottomNavigationBar.contains(routeName);
 }
@@ -39,6 +41,8 @@ getRoutesWithBottomNavigationBar({Identifiers? identifier}) {
       ];
     case Identifiers.donation:
       return [DonationRoute.name];
+    case Identifiers.meditometer:
+      return [MeditometerRoute.name];
     default:
       return [
         HomeRoute.name,

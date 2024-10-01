@@ -1,3 +1,4 @@
+import 'package:intl/intl.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 /// total : 1
@@ -21,4 +22,9 @@ class MeditationsResponse {
       _$MeditationsResponseFromJson(json);
 
   Map<String, dynamic> toJson() => _$MeditationsResponseToJson(this);
+}
+
+extension MeditationsHelpers on MeditationsResponse {
+  String get formattedDecimalPattern =>
+      NumberFormat.decimalPattern('pt_BR').format(totalMinutes);
 }

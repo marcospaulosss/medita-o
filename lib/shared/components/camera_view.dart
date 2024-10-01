@@ -2,6 +2,8 @@ import 'dart:io';
 
 import 'package:auto_route/auto_route.dart';
 import 'package:camera/camera.dart';
+import 'package:cinco_minutos_meditacao/core/di/helpers.dart';
+import 'package:cinco_minutos_meditacao/shared/models/error.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -34,6 +36,9 @@ class _CameraViewState extends State<CameraView> {
 
   /// imagem capturada
   File? _image;
+
+  /// erro customizado
+  CustomError error = resolve<CustomError>();
 
   @override
   void initState() {
@@ -111,17 +116,41 @@ class _CameraViewState extends State<CameraView> {
   /// Inicializa a camera
   Future<void> _initializeCamera() async {
     cameras = await availableCameras();
-    frontCamera = cameras.firstWhere(
-        (camera) => camera.lensDirection == CameraLensDirection.front);
+
+    // Tenta encontrar a câmera frontal
+    try {
+      frontCamera = cameras.firstWhere(
+        (camera) => camera.lensDirection == CameraLensDirection.front,
+      );
+    } catch (e) {
+      // Se não encontrar, use a primeira câmera disponível ou trate o erro
+      if (cameras.isNotEmpty) {
+        frontCamera = cameras.first;
+      } else {
+        error.sendErrorToCrashlytics(
+            code: ErrorCodes.cameraError, stackTrace: StackTrace.current);
+
+        Navigator.of(context).pop(error);
+        return;
+      }
+    }
+
     _controller = CameraController(
       frontCamera,
       ResolutionPreset.max,
     );
 
-    await _controller.initialize();
-    setState(() {
-      isCameraInitialized = true;
-    });
+    try {
+      await _controller.initialize();
+      setState(() {
+        isCameraInitialized = true;
+      });
+    } catch (e) {
+      error.sendErrorToCrashlytics(
+          code: ErrorCodes.cameraError, stackTrace: StackTrace.current);
+      Navigator.of(context).pop(error);
+      return;
+    }
   }
 
   /// Captura uma imagem

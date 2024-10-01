@@ -5,15 +5,16 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:async' as _i5;
 
-import 'package:auto_route/auto_route.dart' as _i9;
-import 'package:cinco_minutos_meditacao/core/routers/app_router.dart' as _i8;
+import 'package:auto_route/auto_route.dart' as _i10;
+import 'package:cinco_minutos_meditacao/core/routers/app_router.dart' as _i9;
 import 'package:cinco_minutos_meditacao/modules/authentication/screens/login/login_contracts.dart'
-    as _i10;
-import 'package:cinco_minutos_meditacao/shared/clients/models/requests/auth_request.dart'
     as _i11;
+import 'package:cinco_minutos_meditacao/shared/clients/models/requests/auth_request.dart'
+    as _i12;
 import 'package:cinco_minutos_meditacao/shared/models/error.dart' as _i3;
 import 'package:cinco_minutos_meditacao/shared/services/auth_service.dart'
     as _i4;
+import 'package:dio/dio.dart' as _i8;
 import 'package:firebase_auth/firebase_auth.dart' as _i6;
 import 'package:firebase_core/firebase_core.dart' as _i2;
 import 'package:mockito/mockito.dart' as _i1;
@@ -158,6 +159,7 @@ class MockCustomError extends _i1.Mock implements _i3.CustomError {
     String? message,
     _i3.ErrorCodes? code,
     StackTrace? stackTrace,
+    _i8.DioException? dioException,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -167,6 +169,7 @@ class MockCustomError extends _i1.Mock implements _i3.CustomError {
             #message: message,
             #code: code,
             #stackTrace: stackTrace,
+            #dioException: dioException,
           },
         ),
         returnValue: _FakeCustomError_1(
@@ -178,6 +181,7 @@ class MockCustomError extends _i1.Mock implements _i3.CustomError {
               #message: message,
               #code: code,
               #stackTrace: stackTrace,
+              #dioException: dioException,
             },
           ),
         ),
@@ -187,19 +191,19 @@ class MockCustomError extends _i1.Mock implements _i3.CustomError {
 /// A class which mocks [AppRouter].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockAppRouter extends _i1.Mock implements _i8.AppRouter {
+class MockAppRouter extends _i1.Mock implements _i9.AppRouter {
   MockAppRouter() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  List<_i9.AutoRoute> get routes => (super.noSuchMethod(
+  List<_i10.AutoRoute> get routes => (super.noSuchMethod(
         Invocation.getter(#routes),
-        returnValue: <_i9.AutoRoute>[],
-      ) as List<_i9.AutoRoute>);
+        returnValue: <_i10.AutoRoute>[],
+      ) as List<_i10.AutoRoute>);
 
   @override
-  void goToReplace(_i9.PageRouteInfo<dynamic>? route) => super.noSuchMethod(
+  void goToReplace(_i10.PageRouteInfo<dynamic>? route) => super.noSuchMethod(
         Invocation.method(
           #goToReplace,
           [route],
@@ -209,8 +213,8 @@ class MockAppRouter extends _i1.Mock implements _i8.AppRouter {
 
   @override
   void goTo(
-    _i9.PageRouteInfo<dynamic>? route, {
-    _i8.OnCloseRoute? onClose,
+    _i10.PageRouteInfo<dynamic>? route, {
+    _i9.OnCloseRoute? onClose,
   }) =>
       super.noSuchMethod(
         Invocation.method(
@@ -225,7 +229,7 @@ class MockAppRouter extends _i1.Mock implements _i8.AppRouter {
 /// A class which mocks [LoginViewContract].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockLoginViewContract extends _i1.Mock implements _i10.LoginViewContract {
+class MockLoginViewContract extends _i1.Mock implements _i11.LoginViewContract {
   MockLoginViewContract() {
     _i1.throwOnMissingStub(this);
   }
@@ -279,7 +283,7 @@ class MockLoginViewContract extends _i1.Mock implements _i10.LoginViewContract {
 /// A class which mocks [Repository].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockRepository extends _i1.Mock implements _i10.Repository {
+class MockRepository extends _i1.Mock implements _i11.Repository {
   MockRepository() {
     _i1.throwOnMissingStub(this);
   }
@@ -306,7 +310,7 @@ class MockRepository extends _i1.Mock implements _i10.Repository {
 
   @override
   _i5.Future<_i3.CustomError?> authenticateUserByEmailPassword(
-          _i11.AuthRequest? authRequest) =>
+          _i12.AuthRequest? authRequest) =>
       (super.noSuchMethod(
         Invocation.method(
           #authenticateUserByEmailPassword,

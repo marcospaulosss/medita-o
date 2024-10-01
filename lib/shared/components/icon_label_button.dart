@@ -73,11 +73,15 @@ class IconLabelButton extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             if (widgetPicture != null)
-              (position == Position.left) ? widgetPicture! : label!,
+              (position == Position.left)
+                  ? widgetPicture!
+                  : Flexible(child: label!),
             if (label != null && widgetPicture != null)
               SizedBox(width: spaceBetween),
             if (label != null)
-              (position == Position.left) ? label! : widgetPicture!,
+              (position == Position.left)
+                  ? Flexible(child: label!)
+                  : widgetPicture!,
           ],
         ),
       ),
