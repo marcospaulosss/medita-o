@@ -63,7 +63,9 @@ class RegisterRepository extends Repository {
           return _error;
         default:
           return _error.sendErrorToCrashlytics(
-              code: ErrorCodes.registerError, stackTrace: StackTrace.current);
+              code: ErrorCodes.registerError,
+              stackTrace: StackTrace.current,
+              dioException: e);
       }
     } catch (e) {
       return _error.sendErrorToCrashlytics(
