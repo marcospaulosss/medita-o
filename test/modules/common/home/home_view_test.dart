@@ -113,7 +113,7 @@ main() async {
             find.byType(SingleChildScrollView), const Offset(0.0, -900));
         await tester.pumpAndSettle();
 
-        expect(find.textContaining("123123"), findsOneWidget);
+        expect(find.textContaining("123.123"), findsOneWidget);
         expect(find.textContaining("meditados no mundo", findRichText: true),
             findsOneWidget);
         expect(find.text("PAÍSES ALCANÇADOS"), findsOneWidget);

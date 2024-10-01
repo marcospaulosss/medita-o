@@ -6,6 +6,8 @@ import 'package:cinco_minutos_meditacao/modules/authentication/di/setup.dart'
 import 'package:cinco_minutos_meditacao/modules/common/di/setup.dart' as common;
 import 'package:cinco_minutos_meditacao/modules/meditate/di/setup.dart'
     as meditate;
+import 'package:cinco_minutos_meditacao/modules/meditometer/di/setup.dart'
+    as meditometer;
 
 abstract class DI {
   /// Resolve e retorna a instância do app.
@@ -17,5 +19,6 @@ abstract class DI {
     common.setupInjectors();
     authentication.setupInjectors();
     meditate.setupInjectors();
+    meditometer.setupInjectors();
   }
 }

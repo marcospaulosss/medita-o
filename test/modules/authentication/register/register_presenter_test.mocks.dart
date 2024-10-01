@@ -3,15 +3,16 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i7;
+import 'dart:async' as _i8;
 
-import 'package:auto_route/auto_route.dart' as _i6;
-import 'package:cinco_minutos_meditacao/core/routers/app_router.dart' as _i5;
+import 'package:auto_route/auto_route.dart' as _i7;
+import 'package:cinco_minutos_meditacao/core/routers/app_router.dart' as _i6;
 import 'package:cinco_minutos_meditacao/modules/authentication/screens/register/register_contracts.dart'
     as _i3;
 import 'package:cinco_minutos_meditacao/shared/clients/models/requests/auth_request.dart'
-    as _i8;
+    as _i9;
 import 'package:cinco_minutos_meditacao/shared/models/error.dart' as _i2;
+import 'package:dio/dio.dart' as _i5;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:mockito/src/dummies.dart' as _i4;
 
@@ -143,6 +144,7 @@ class MockCustomError extends _i1.Mock implements _i2.CustomError {
     String? message,
     _i2.ErrorCodes? code,
     StackTrace? stackTrace,
+    _i5.DioException? dioException,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -152,6 +154,7 @@ class MockCustomError extends _i1.Mock implements _i2.CustomError {
             #message: message,
             #code: code,
             #stackTrace: stackTrace,
+            #dioException: dioException,
           },
         ),
         returnValue: _FakeCustomError_0(
@@ -163,6 +166,7 @@ class MockCustomError extends _i1.Mock implements _i2.CustomError {
               #message: message,
               #code: code,
               #stackTrace: stackTrace,
+              #dioException: dioException,
             },
           ),
         ),
@@ -172,19 +176,19 @@ class MockCustomError extends _i1.Mock implements _i2.CustomError {
 /// A class which mocks [AppRouter].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockAppRouter extends _i1.Mock implements _i5.AppRouter {
+class MockAppRouter extends _i1.Mock implements _i6.AppRouter {
   MockAppRouter() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  List<_i6.AutoRoute> get routes => (super.noSuchMethod(
+  List<_i7.AutoRoute> get routes => (super.noSuchMethod(
         Invocation.getter(#routes),
-        returnValue: <_i6.AutoRoute>[],
-      ) as List<_i6.AutoRoute>);
+        returnValue: <_i7.AutoRoute>[],
+      ) as List<_i7.AutoRoute>);
 
   @override
-  void goToReplace(_i6.PageRouteInfo<dynamic>? route) => super.noSuchMethod(
+  void goToReplace(_i7.PageRouteInfo<dynamic>? route) => super.noSuchMethod(
         Invocation.method(
           #goToReplace,
           [route],
@@ -194,8 +198,8 @@ class MockAppRouter extends _i1.Mock implements _i5.AppRouter {
 
   @override
   void goTo(
-    _i6.PageRouteInfo<dynamic>? route, {
-    _i5.OnCloseRoute? onClose,
+    _i7.PageRouteInfo<dynamic>? route, {
+    _i6.OnCloseRoute? onClose,
   }) =>
       super.noSuchMethod(
         Invocation.method(
@@ -225,12 +229,12 @@ class MockRepository extends _i1.Mock implements _i3.Repository {
       );
 
   @override
-  _i7.Future<_i2.CustomError?> requestRegister(_i8.AuthRequest? authRequest) =>
+  _i8.Future<_i2.CustomError?> requestRegister(_i9.AuthRequest? authRequest) =>
       (super.noSuchMethod(
         Invocation.method(
           #requestRegister,
           [authRequest],
         ),
-        returnValue: _i7.Future<_i2.CustomError?>.value(),
-      ) as _i7.Future<_i2.CustomError?>);
+        returnValue: _i8.Future<_i2.CustomError?>.value(),
+      ) as _i8.Future<_i2.CustomError?>);
 }

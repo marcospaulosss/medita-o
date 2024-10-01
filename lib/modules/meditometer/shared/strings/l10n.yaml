@@ -1,0 +1,7 @@
+arb-dir: .
+template-arb-file: meditometer_pt.arb
+output-dir: ./localization
+output-localization-file: meditometer_strings.dart
+output-class: MeditometerStrings
+nullable-getter: false
+synthetic-package: false

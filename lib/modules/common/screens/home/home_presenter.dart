@@ -81,6 +81,13 @@ class HomePresenter implements Presenter {
         return;
       }
 
+      if (result is CustomError) {
+        CustomError err = CustomError();
+        err.code = ErrorCodes.cameraError;
+        view!.showError(err.getErrorMessage);
+        return;
+      }
+
       CustomError? err = await _repository.uploadImageProfile(result);
       if (err != null) {
         view!.showError(err.getErrorMessage);

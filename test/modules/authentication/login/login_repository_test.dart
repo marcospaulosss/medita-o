@@ -213,10 +213,11 @@ void main() {
         );
         when(mockSocialClientApi.login(any)).thenThrow(dioError);
         when(mockCustomError.sendErrorToCrashlytics(
-                message: anyNamed("message"),
-                code: anyNamed("code"),
-                stackTrace: anyNamed("stackTrace")))
-            .thenReturn(mockCustomError);
+          message: anyNamed("message"),
+          code: anyNamed("code"),
+          stackTrace: anyNamed("stackTrace"),
+          dioException: anyNamed('dioException'),
+        )).thenReturn(mockCustomError);
         when(mockCustomError.code)
             .thenReturn(ErrorCodes.loginEmailPasswordError);
 
