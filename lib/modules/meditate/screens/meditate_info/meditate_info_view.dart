@@ -116,7 +116,8 @@ class MeditateInfoViewState extends State<MeditateInfoView>
           const SizedBox(height: 30),
           Center(
             child: Meditometer(
-              meditationsResponse: _meditateInfoModel!.meditationsResponse,
+              meditationsResponse: _meditateInfoModel?.meditationsResponse ??
+                  MeditationsResponse(0, 0),
             ),
           ),
         ],
