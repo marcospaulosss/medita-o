@@ -9,7 +9,7 @@ import 'dart:io' as _i13;
 import 'package:cinco_minutos_meditacao/core/analytics/event.dart' as _i8;
 import 'package:cinco_minutos_meditacao/core/analytics/manager.dart' as _i7;
 import 'package:cinco_minutos_meditacao/core/wrappers/secure_storage.dart'
-    as _i16;
+    as _i17;
 import 'package:cinco_minutos_meditacao/shared/clients/client_api.dart' as _i9;
 import 'package:cinco_minutos_meditacao/shared/clients/models/requests/auth_request.dart'
     as _i12;
@@ -26,6 +26,7 @@ import 'package:cinco_minutos_meditacao/shared/clients/models/responses/register
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/user_response.dart'
     as _i4;
 import 'package:cinco_minutos_meditacao/shared/models/error.dart' as _i6;
+import 'package:dio/dio.dart' as _i16;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:mockito/src/dummies.dart' as _i15;
 
@@ -292,6 +293,7 @@ class MockCustomError extends _i1.Mock implements _i6.CustomError {
     String? message,
     _i6.ErrorCodes? code,
     StackTrace? stackTrace,
+    _i16.DioException? dioException,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -301,6 +303,7 @@ class MockCustomError extends _i1.Mock implements _i6.CustomError {
             #message: message,
             #code: code,
             #stackTrace: stackTrace,
+            #dioException: dioException,
           },
         ),
         returnValue: _FakeCustomError_4(
@@ -312,6 +315,7 @@ class MockCustomError extends _i1.Mock implements _i6.CustomError {
               #message: message,
               #code: code,
               #stackTrace: stackTrace,
+              #dioException: dioException,
             },
           ),
         ),
@@ -321,7 +325,7 @@ class MockCustomError extends _i1.Mock implements _i6.CustomError {
 /// A class which mocks [SecureStorage].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockSecureStorage extends _i1.Mock implements _i16.SecureStorage {
+class MockSecureStorage extends _i1.Mock implements _i17.SecureStorage {
   MockSecureStorage() {
     _i1.throwOnMissingStub(this);
   }

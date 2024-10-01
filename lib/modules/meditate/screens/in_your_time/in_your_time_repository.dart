@@ -59,6 +59,7 @@ class InYourTimeRepository implements Repository {
       error.sendErrorToCrashlytics(
         code: ErrorCodes.createNewMeditationError,
         stackTrace: StackTrace.current,
+        dioException: e,
       );
     } catch (e) {
       error.sendErrorToCrashlytics(

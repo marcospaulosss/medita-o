@@ -108,6 +108,7 @@ void main() {
       when(customError.sendErrorToCrashlytics(
         code: ErrorCodes.getMeError,
         stackTrace: anyNamed('stackTrace'),
+        dioException: anyNamed('dioException'),
       )).thenReturn(customError);
 
       // act
@@ -177,6 +178,7 @@ void main() {
       when(customError.sendErrorToCrashlytics(
         code: ErrorCodes.getMeError,
         stackTrace: anyNamed('stackTrace'),
+        dioException: anyNamed('dioException'),
       )).thenReturn(customError);
 
       // act
@@ -232,6 +234,7 @@ void main() {
       when(customError.sendErrorToCrashlytics(
         code: ErrorCodes.getMeditionsError,
         stackTrace: anyNamed('stackTrace'),
+        dioException: anyNamed('dioException'),
       )).thenReturn(customError);
 
       // act

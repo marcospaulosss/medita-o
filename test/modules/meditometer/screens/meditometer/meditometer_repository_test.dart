@@ -85,6 +85,7 @@ void main() {
       when(error.sendErrorToCrashlytics(
         code: ErrorCodes.getMeError,
         stackTrace: anyNamed('stackTrace'),
+        dioException: anyNamed('dioException'),
       )).thenReturn(error);
 
       final result = await repository.requestUser();
@@ -93,6 +94,7 @@ void main() {
       verify(error.sendErrorToCrashlytics(
         code: ErrorCodes.getMeError,
         stackTrace: anyNamed('stackTrace'),
+        dioException: anyNamed('dioException'),
       )).called(1);
     });
 
@@ -145,6 +147,7 @@ void main() {
       when(error.sendErrorToCrashlytics(
         code: ErrorCodes.getMeditionsError,
         stackTrace: anyNamed('stackTrace'),
+        dioException: anyNamed('dioException'),
       )).thenReturn(error);
 
       final result = await repository.requestMeditations();
@@ -153,6 +156,7 @@ void main() {
       verify(error.sendErrorToCrashlytics(
         code: ErrorCodes.getMeditionsError,
         stackTrace: anyNamed('stackTrace'),
+        dioException: anyNamed('dioException'),
       )).called(1);
     });
 
@@ -207,6 +211,7 @@ void main() {
       when(error.sendErrorToCrashlytics(
         code: ErrorCodes.getMeError,
         stackTrace: anyNamed('stackTrace'),
+        dioException: anyNamed('dioException'),
       )).thenReturn(error);
 
       final result = await repository.uploadImageProfile(file);
@@ -215,6 +220,7 @@ void main() {
       verify(error.sendErrorToCrashlytics(
         code: ErrorCodes.getMeError,
         stackTrace: anyNamed('stackTrace'),
+        dioException: anyNamed('dioException'),
       )).called(1);
     });
 

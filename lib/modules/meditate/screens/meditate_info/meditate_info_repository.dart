@@ -62,6 +62,7 @@ class MeditateInfoRepository implements Repository {
         _error.sendErrorToCrashlytics(
           code: ErrorCodes.getMeError,
           stackTrace: StackTrace.current,
+          dioException: e,
         )
       );
     } catch (e) {
@@ -87,6 +88,7 @@ class MeditateInfoRepository implements Repository {
       return _error.sendErrorToCrashlytics(
         code: ErrorCodes.getMeError,
         stackTrace: StackTrace.current,
+        dioException: e,
       );
     } catch (e) {
       return _error.sendErrorToCrashlytics(
@@ -116,6 +118,7 @@ class MeditateInfoRepository implements Repository {
         _error.sendErrorToCrashlytics(
           code: ErrorCodes.getMeditionsError,
           stackTrace: StackTrace.current,
+          dioException: e,
         )
       );
     } catch (e) {
@@ -146,6 +149,7 @@ class MeditateInfoRepository implements Repository {
         _error.sendErrorToCrashlytics(
           code: ErrorCodes.getMeditionsError,
           stackTrace: StackTrace.current,
+          dioException: e,
         )
       );
     } catch (e) {

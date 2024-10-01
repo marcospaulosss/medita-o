@@ -145,20 +145,22 @@ void main() {
       );
       when(mockClientApi.register(authRequest)).thenThrow(dioError);
       when(mockCustomError.sendErrorToCrashlytics(
-              message: anyNamed('message'),
-              code: anyNamed('code'),
-              stackTrace: anyNamed('stackTrace')))
-          .thenReturn(mockCustomError);
+        message: anyNamed('message'),
+        code: anyNamed('code'),
+        stackTrace: anyNamed('stackTrace'),
+        dioException: anyNamed('dioException'),
+      )).thenReturn(mockCustomError);
 
       final result = await repository.requestRegister(authRequest);
 
       expect(result, isA<CustomError>());
       verify(mockClientApi.register(authRequest)).called(1);
       verify(mockCustomError.sendErrorToCrashlytics(
-              message: anyNamed('message'),
-              code: anyNamed('code'),
-              stackTrace: anyNamed('stackTrace')))
-          .called(1);
+        message: anyNamed('message'),
+        code: anyNamed('code'),
+        stackTrace: anyNamed('stackTrace'),
+        dioException: anyNamed('dioException'),
+      )).called(1);
     });
   });
 }

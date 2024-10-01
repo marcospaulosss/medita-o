@@ -1,4 +1,5 @@
 import 'package:cinco_minutos_meditacao/shared/services/log_service.dart';
+import 'package:dio/dio.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 
 enum ErrorCodes {
@@ -50,10 +51,19 @@ class CustomError extends Error {
   };
 
   CustomError sendErrorToCrashlytics(
-      {String? message, ErrorCodes? code, StackTrace? stackTrace}) {
+      {String? message,
+      ErrorCodes? code,
+      StackTrace? stackTrace,
+      DioException? dioException}) {
     this.code = code;
     this.message = message ?? _defaultMessages[code] ?? "Erro desconhecido.";
     this.stackTrace = stackTrace;
+
+    if (dioException != null) {
+      FirebaseCrashlytics.instance.log(dioException.message ?? "");
+      FirebaseCrashlytics.instance.recordError(dioException, stackTrace);
+      LogService().log(dioException.message!, null, stackTrace);
+    }
 
     FirebaseCrashlytics.instance.log(this.message ?? "");
     FirebaseCrashlytics.instance.recordError(this.message, stackTrace);
