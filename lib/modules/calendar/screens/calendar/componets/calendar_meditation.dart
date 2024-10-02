@@ -4,13 +4,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
 
-class CalendarioWidget extends StatefulWidget {
+class CalendarMeditation extends StatefulWidget {
+  /// Construtor
+  const CalendarMeditation({
+    super.key,
+  });
+
   @override
-  _CalendarioWidgetState createState() => _CalendarioWidgetState();
+  State<CalendarMeditation> createState() => _CalendarMeditationState();
 }
 
-class _CalendarioWidgetState extends State<CalendarioWidget> {
+class _CalendarMeditationState extends State<CalendarMeditation> {
+  /// Tipo de visualização atual
   String _currentView = 'Semana';
+
+  /// Data focada
   DateTime _focusedDate = DateTime.now();
 
   @override

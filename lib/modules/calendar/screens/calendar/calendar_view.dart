@@ -82,7 +82,7 @@ class CalendarViewState extends State<CalendarView>
             updateImage: () => presenter.updateImageProfile(),
           ),
           buildTitle(),
-          CalendarioWidget(),
+          const CalendarMeditation(),
         ],
       ),
     );

@@ -3,6 +3,7 @@ import 'package:cinco_minutos_meditacao/core/routers/app_router.gr.dart';
 import 'package:cinco_minutos_meditacao/modules/calendar/screens/calendar/calendar_contract.dart';
 import 'package:cinco_minutos_meditacao/modules/calendar/screens/calendar/calendar_model.dart';
 import 'package:cinco_minutos_meditacao/shared/models/error.dart';
+import 'package:intl/intl.dart';
 
 class CalendarPresenter implements Presenter {
   /// View
@@ -52,6 +53,10 @@ class CalendarPresenter implements Presenter {
       model.meditationsResponse = meditations;
       view!.showNormalState(model);
     }
+
+    DateTime now = DateTime.now();
+    String formattedDate = DateFormat('yyyy-MM-dd').format(now);
+    _repository.requestCalendarWeek(formattedDate);
   }
 
   /// Atualiza a imagem de perfil do usuário
