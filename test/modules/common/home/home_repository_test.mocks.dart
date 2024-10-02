@@ -391,6 +391,15 @@ class MockClientApi extends _i1.Mock implements _i12.ClientApi {
         returnValue: _i10.Future<void>.value(),
         returnValueForMissingStub: _i10.Future<void>.value(),
       ) as _i10.Future<void>);
+
+  @override
+  _i10.Future<dynamic> calendarWeek(String? date) => (super.noSuchMethod(
+        Invocation.method(
+          #calendarWeek,
+          [date],
+        ),
+        returnValue: _i10.Future<dynamic>.value(),
+      ) as _i10.Future<dynamic>);
 }
 
 /// A class which mocks [CustomError].

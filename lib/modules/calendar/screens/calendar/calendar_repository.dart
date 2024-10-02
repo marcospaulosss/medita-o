@@ -127,4 +127,25 @@ class CalendarRepository implements Repository {
           code: ErrorCodes.getMeError, stackTrace: StackTrace.current);
     }
   }
+
+  @override
+  Future<void> requestCalendarWeek(String date) async {
+    try {
+      var teste = await _clientApi.calendarWeek(date);
+      print(teste);
+    } on TimeoutException {
+      // return _error.sendErrorToCrashlytics(
+      //     code: ErrorCodes.timeoutException, stackTrace: StackTrace.current);
+    } on DioException catch (e) {
+      print(e);
+      // return _error.sendErrorToCrashlytics(
+      //   code: ErrorCodes.getMeError,
+      //   stackTrace: StackTrace.current,
+      //   dioException: e,
+      // );
+    } catch (e) {
+      // return _error.sendErrorToCrashlytics(
+      //     code: ErrorCodes.getMeError, stackTrace: StackTrace.current);
+    }
+  }
 }

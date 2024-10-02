@@ -37,4 +37,7 @@ abstract class Repository {
 
   /// Atualiza a imagem de perfil do usuário
   Future<CustomError?> uploadImageProfile(File file);
+
+  /// Busca a quantidade de meditações realizadas na semana
+  Future<void> requestCalendarWeek(String date);
 }

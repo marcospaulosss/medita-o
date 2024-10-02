@@ -94,6 +94,8 @@ platform :ios do
 
     desc "Upload to Test Flight production"
     lane :tf_prod do
+        inc
+
         upload_to_testflight(
             ipa: "../build/ios/ipa/5 Minutos.ipa",
             skip_waiting_for_build_processing: true,

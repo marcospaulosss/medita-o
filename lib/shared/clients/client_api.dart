@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:auto_route/annotations.dart';
 import 'package:cinco_minutos_meditacao/core/environment/manager.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/interceptor.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/models/requests/auth_request.dart';
@@ -70,4 +71,9 @@ abstract class ClientApi {
   /// solicita a criação de uma nova meditação
   @POST('/meditations')
   Future<void> createNewMeditation(@Body() CreateNewMeditationsRequest body);
+
+  /// - [ Calendar ] : Cliente de calendário
+  /// Obtem as meditações realizadas pelo usuário
+  @GET('/calendar/week')
+  Future<dynamic> calendarWeek(@Query('date') String date);
 }
