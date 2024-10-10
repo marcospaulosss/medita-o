@@ -5,8 +5,13 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
 
 class CalendarMeditation extends StatefulWidget {
+  /// Calendário da semana
+  final List<int> weekCalendar;
+
+  /// - [weekCalendar] : Calendário da semana
   /// Construtor
   const CalendarMeditation({
+    required this.weekCalendar,
     super.key,
   });
 
@@ -36,9 +41,9 @@ class _CalendarMeditationState extends State<CalendarMeditation> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         _buildToggleButton('Semana'),
-        const SizedBox(width: 8),
+        const SizedBox(width: 4),
         _buildToggleButton('Mês'),
-        const SizedBox(width: 8),
+        const SizedBox(width: 4),
         _buildToggleButton('Ano'),
       ],
     );
@@ -53,7 +58,7 @@ class _CalendarMeditationState extends State<CalendarMeditation> {
         });
       },
       child: Container(
-        width: 113,
+        width: 100,
         alignment: Alignment.center,
         padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 14),
         decoration: BoxDecoration(
@@ -67,9 +72,10 @@ class _CalendarMeditationState extends State<CalendarMeditation> {
         child: Text(
           text,
           style: TextStyle(
-              color: isSelected ? AppColors.blueNCS : AppColors.blueMana,
-              fontWeight: FontWeight.w700,
-              fontSize: 20),
+            color: isSelected ? AppColors.blueNCS : AppColors.blueMana,
+            fontWeight: FontWeight.w700,
+            fontSize: 16,
+          ),
         ),
       ),
     );
@@ -77,7 +83,7 @@ class _CalendarMeditationState extends State<CalendarMeditation> {
 
   Widget _buildCalendar() {
     return Container(
-      margin: const EdgeInsets.all(16),
+      margin: const EdgeInsets.only(left: 40, right: 40, bottom: 16, top: 16),
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         color: Colors.white,
@@ -197,7 +203,7 @@ class _CalendarMeditationState extends State<CalendarMeditation> {
             const SizedBox(height: 16),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [0, 0, 0, 15, 5, 35, 15]
+              children: widget.weekCalendar
                   .map((minutes) => _buildDayBalloon(minutes))
                   .toList(),
             ),

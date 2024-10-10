@@ -7,6 +7,7 @@ import 'package:cinco_minutos_meditacao/modules/meditometer/analytics/events.dar
 import 'package:cinco_minutos_meditacao/shared/clients/client_api.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/meditations_response.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/user_response.dart';
+import 'package:cinco_minutos_meditacao/shared/clients/models/responses/week_calendar_response.dart';
 import 'package:cinco_minutos_meditacao/shared/models/error.dart';
 import 'package:dio/dio.dart';
 
@@ -129,23 +130,35 @@ class CalendarRepository implements Repository {
   }
 
   @override
-  Future<void> requestCalendarWeek(String date) async {
+  Future<(WeekCalendarResponse?, CustomError?)> requestCalendarWeek(
+      String date) async {
     try {
-      var teste = await _clientApi.calendarWeek(date);
-      print(teste);
+      WeekCalendarResponse weekCalendar = await _clientApi.calendarWeek(date);
+
+      return (weekCalendar, null);
     } on TimeoutException {
-      // return _error.sendErrorToCrashlytics(
-      //     code: ErrorCodes.timeoutException, stackTrace: StackTrace.current);
+      return (
+        null,
+        _error.sendErrorToCrashlytics(
+            code: ErrorCodes.timeoutException, stackTrace: StackTrace.current)
+      );
     } on DioException catch (e) {
-      print(e);
-      // return _error.sendErrorToCrashlytics(
-      //   code: ErrorCodes.getMeError,
-      //   stackTrace: StackTrace.current,
-      //   dioException: e,
-      // );
+      return (
+        null,
+        _error.sendErrorToCrashlytics(
+          code: ErrorCodes.getCalendarError,
+          stackTrace: StackTrace.current,
+          dioException: e,
+        )
+      );
     } catch (e) {
-      // return _error.sendErrorToCrashlytics(
-      //     code: ErrorCodes.getMeError, stackTrace: StackTrace.current);
+      return (
+        null,
+        _error.sendErrorToCrashlytics(
+          code: ErrorCodes.getCalendarError,
+          stackTrace: StackTrace.current,
+        )
+      );
     }
   }
 }
