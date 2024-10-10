@@ -24,6 +24,9 @@ abstract class Presenter implements ViewBinding<CalendarViewContract> {
 
   /// Atualiza a imagem de perfil do usuário
   Future<void> updateImageProfile();
+
+  /// Busca a quantidade de meditações realizadas na semana
+  Future<CalendarModel> getWeekCalendar(String date);
 }
 
 abstract class Repository {

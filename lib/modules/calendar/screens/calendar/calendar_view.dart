@@ -16,6 +16,7 @@ import 'package:cinco_minutos_meditacao/shared/components/loading.dart';
 import 'package:cinco_minutos_meditacao/shared/helpers/multi_state_container/export.dart';
 import 'package:cinco_minutos_meditacao/shared/helpers/view_binding.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 @RoutePage()
 class CalendarView extends StatefulWidget {
@@ -85,7 +86,10 @@ class CalendarViewState extends State<CalendarView>
             updateImage: () => presenter.updateImageProfile(),
           ),
           buildTitle(),
-          CalendarMeditation(weekCalendar: model?.weekCalendar ?? []),
+          CalendarMeditation(
+            weekCalendar: model?.weekCalendar ?? [],
+            getWeekCalendar: getWeekCalendar,
+          ),
           buildMeditometerCard(),
         ],
       ),
@@ -196,6 +200,15 @@ class CalendarViewState extends State<CalendarView>
         ),
       ),
     );
+  }
+
+  Future<void> getWeekCalendar(DateTime time) async {
+    String formattedDate = DateFormat('yyyy-MM-dd').format(time);
+    var weekCalendar = await presenter.getWeekCalendar(formattedDate);
+
+    setState(() {
+      model = weekCalendar;
+    });
   }
 
   BoxShadow buildBoxShadowDefault() {
