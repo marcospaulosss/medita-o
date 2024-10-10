@@ -8,10 +8,15 @@ class CalendarMeditation extends StatefulWidget {
   /// Calendário da semana
   final List<int> weekCalendar;
 
+  /// função para obter o calendário da semana
+  final Function getWeekCalendar;
+
   /// - [weekCalendar] : Calendário da semana
+  /// - [getWeekCalendar] : função para obter o calendário da semana
   /// Construtor
   const CalendarMeditation({
     required this.weekCalendar,
+    required this.getWeekCalendar,
     super.key,
   });
 
@@ -399,6 +404,7 @@ class _CalendarMeditationState extends State<CalendarMeditation> {
     setState(() {
       if (_currentView == 'Semana') {
         _focusedDate = _focusedDate.subtract(const Duration(days: 7));
+        widget.getWeekCalendar(_focusedDate);
       } else if (_currentView == 'Mês') {
         _focusedDate = DateTime(_focusedDate.year, _focusedDate.month - 1, 1);
       } else {
@@ -411,6 +417,7 @@ class _CalendarMeditationState extends State<CalendarMeditation> {
     setState(() {
       if (_currentView == 'Semana') {
         _focusedDate = _focusedDate.add(const Duration(days: 7));
+        widget.getWeekCalendar(_focusedDate);
       } else if (_currentView == 'Mês') {
         _focusedDate = DateTime(_focusedDate.year, _focusedDate.month + 1, 1);
       } else {

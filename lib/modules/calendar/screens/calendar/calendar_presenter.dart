@@ -103,4 +103,24 @@ class CalendarPresenter implements Presenter {
       view!.showNormalState(model);
     });
   }
+
+  @override
+  Future<CalendarModel> getWeekCalendar(String date) async {
+    var (weekCalendar, errorCalendar) =
+        await _repository.requestCalendarWeek(date);
+    if (errorCalendar != null) {
+      view!.showError(errorCalendar.getErrorMessage);
+      return model;
+    }
+
+    List<int> meditationsWeek = [];
+    for (var item in weekCalendar!.week!.values) {
+      meditationsWeek.add(item['minutes']);
+    }
+
+    model.weekCalendar = meditationsWeek;
+    model.weekCalendarResponse = weekCalendar;
+
+    return model;
+  }
 }
