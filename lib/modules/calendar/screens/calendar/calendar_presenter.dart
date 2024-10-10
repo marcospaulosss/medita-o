@@ -51,12 +51,26 @@ class CalendarPresenter implements Presenter {
     if (user != null && meditations != null) {
       model.userResponse = user;
       model.meditationsResponse = meditations;
-      view!.showNormalState(model);
     }
 
     DateTime now = DateTime.now();
     String formattedDate = DateFormat('yyyy-MM-dd').format(now);
-    _repository.requestCalendarWeek(formattedDate);
+    var (weekCalendar, errorCalendar) =
+        await _repository.requestCalendarWeek(formattedDate);
+    if (errorCalendar != null) {
+      view!.showError(errorCalendar.getErrorMessage);
+      return;
+    }
+
+    List<int> meditationsWeek = [];
+    for (var item in weekCalendar!.week!.values) {
+      meditationsWeek.add(item['minutes']);
+    }
+
+    model.weekCalendar = meditationsWeek;
+    model.weekCalendarResponse = weekCalendar;
+
+    view!.showNormalState(model);
   }
 
   /// Atualiza a imagem de perfil do usuário

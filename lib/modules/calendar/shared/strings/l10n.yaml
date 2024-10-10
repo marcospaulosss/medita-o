@@ -1,7 +1,7 @@
 arb-dir: .
-template-arb-file: meditometer_pt.arb
+template-arb-file: calendar_pt.arb
 output-dir: ./localization
-output-localization-file: meditometer_strings.dart
-output-class: MeditometerStrings
+output-localization-file: calendar_strings.dart
+output-class: CalendarStrings
 nullable-getter: false
 synthetic-package: false
