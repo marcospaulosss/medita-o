@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:cinco_minutos_meditacao/modules/calendar/screens/calendar/calendar_model.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/meditations_response.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/user_response.dart';
+import 'package:cinco_minutos_meditacao/shared/clients/models/responses/week_calendar_response.dart';
 import 'package:cinco_minutos_meditacao/shared/helpers/view_binding.dart';
 import 'package:cinco_minutos_meditacao/shared/models/error.dart';
 
@@ -39,5 +40,6 @@ abstract class Repository {
   Future<CustomError?> uploadImageProfile(File file);
 
   /// Busca a quantidade de meditações realizadas na semana
-  Future<void> requestCalendarWeek(String date);
+  Future<(WeekCalendarResponse?, CustomError?)> requestCalendarWeek(
+      String date);
 }
