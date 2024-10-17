@@ -1,3 +1,4 @@
+import 'package:cinco_minutos_meditacao/modules/calendar/screens/calendar/calendar_model.dart';
 import 'package:cinco_minutos_meditacao/shared/Theme/app_colors.dart';
 import 'package:cinco_minutos_meditacao/shared/Theme/app_images.dart';
 import 'package:flutter/material.dart';
@@ -8,15 +9,25 @@ class CalendarMeditation extends StatefulWidget {
   /// Calendário da semana
   final List<int> weekCalendar;
 
+  /// Calendário do mês
+  final List<int> monthCalendar;
+
+  /// Tipo de calendário
+  final CalendarType type;
+
   /// função para obter o calendário da semana
-  final Function getWeekCalendar;
+  final Function getCalendar;
 
   /// - [weekCalendar] : Calendário da semana
+  /// - [monthCalendar] : Calendário do mês
+  /// - [type] : Tipo de calendário
   /// - [getWeekCalendar] : função para obter o calendário da semana
   /// Construtor
   const CalendarMeditation({
     required this.weekCalendar,
-    required this.getWeekCalendar,
+    required this.monthCalendar,
+    required this.type,
+    required this.getCalendar,
     super.key,
   });
 
@@ -30,6 +41,18 @@ class _CalendarMeditationState extends State<CalendarMeditation> {
 
   /// Data focada
   DateTime _focusedDate = DateTime.now();
+
+  @override
+  void initState() {
+    if (widget.type == CalendarType.week) {
+      _currentView = 'Semana';
+    } else if (widget.type == CalendarType.month) {
+      _currentView = 'Mês';
+    } else {
+      _currentView = 'Ano';
+    }
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -61,6 +84,12 @@ class _CalendarMeditationState extends State<CalendarMeditation> {
         setState(() {
           _currentView = text;
         });
+
+        if (_currentView == 'Semana') {
+          widget.getCalendar(_focusedDate, CalendarType.week);
+        } else if (_currentView == 'Mês') {
+          widget.getCalendar(_focusedDate, CalendarType.month);
+        } else {}
       },
       child: Container(
         width: 100,
@@ -278,39 +307,7 @@ class _CalendarMeditationState extends State<CalendarMeditation> {
             int day = index - firstDayOfWeek + 1;
 
             if (day > 0 && day <= daysInMonth) {
-              int minutes = [
-                0,
-                10,
-                15,
-                5,
-                0,
-                5,
-                15,
-                5,
-                0,
-                0,
-                15,
-                5,
-                5,
-                15,
-                0,
-                5,
-                0,
-                5,
-                0,
-                10,
-                5,
-                20,
-                10,
-                5,
-                0,
-                5,
-                5,
-                0,
-                0,
-                0,
-                0
-              ][day - 1];
+              int minutes = widget.monthCalendar[day - 1];
 
               return LayoutBuilder(
                 builder: (context, constraints) {
@@ -328,7 +325,7 @@ class _CalendarMeditationState extends State<CalendarMeditation> {
                       const SizedBox(height: 1),
                       SizedBox(
                         width: constraints.maxWidth * 0.85,
-                        height: constraints.maxHeight * 0.65,
+                        height: constraints.maxHeight * 0.60,
                         child: _buildDayBalloon(minutes),
                       ),
                     ],
@@ -374,7 +371,7 @@ class _CalendarMeditationState extends State<CalendarMeditation> {
         ),
         SizedBox(
           width: 50,
-          height: 50,
+          height: 45,
           child: Stack(
             alignment: Alignment.center,
             children: [
@@ -404,7 +401,7 @@ class _CalendarMeditationState extends State<CalendarMeditation> {
     setState(() {
       if (_currentView == 'Semana') {
         _focusedDate = _focusedDate.subtract(const Duration(days: 7));
-        widget.getWeekCalendar(_focusedDate);
+        widget.getCalendar(_focusedDate, CalendarType.week);
       } else if (_currentView == 'Mês') {
         _focusedDate = DateTime(_focusedDate.year, _focusedDate.month - 1, 1);
       } else {
@@ -417,7 +414,7 @@ class _CalendarMeditationState extends State<CalendarMeditation> {
     setState(() {
       if (_currentView == 'Semana') {
         _focusedDate = _focusedDate.add(const Duration(days: 7));
-        widget.getWeekCalendar(_focusedDate);
+        widget.getCalendar(_focusedDate, CalendarType.week);
       } else if (_currentView == 'Mês') {
         _focusedDate = DateTime(_focusedDate.year, _focusedDate.month + 1, 1);
       } else {
