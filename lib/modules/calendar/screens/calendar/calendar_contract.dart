@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:cinco_minutos_meditacao/modules/calendar/screens/calendar/calendar_model.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/meditations_response.dart';
+import 'package:cinco_minutos_meditacao/shared/clients/models/responses/month_calendar_response.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/user_response.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/week_calendar_response.dart';
 import 'package:cinco_minutos_meditacao/shared/helpers/view_binding.dart';
@@ -26,7 +27,7 @@ abstract class Presenter implements ViewBinding<CalendarViewContract> {
   Future<void> updateImageProfile();
 
   /// Busca a quantidade de meditações realizadas na semana
-  Future<CalendarModel> getWeekCalendar(String date);
+  Future<CalendarModel> getCalendar(String date, CalendarType type);
 }
 
 abstract class Repository {
@@ -45,4 +46,12 @@ abstract class Repository {
   /// Busca a quantidade de meditações realizadas na semana
   Future<(WeekCalendarResponse?, CustomError?)> requestCalendarWeek(
       String date);
+
+  /// Busca a quantidade de meditações realizadas na semana
+  Future<(MonthCalendarResponse?, CustomError?)> requestCalendarMonth(
+      String date);
+
+  /// Busca a quantidade de meditações realizadas na semana
+// Future<(WeekCalendarResponse?, CustomError?)> requestCalendarWeek(
+//     String date);
 }

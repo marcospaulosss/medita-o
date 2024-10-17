@@ -2,6 +2,8 @@ import 'package:cinco_minutos_meditacao/core/routers/app_router.dart';
 import 'package:cinco_minutos_meditacao/core/routers/app_router.gr.dart';
 import 'package:cinco_minutos_meditacao/modules/calendar/screens/calendar/calendar_contract.dart';
 import 'package:cinco_minutos_meditacao/modules/calendar/screens/calendar/calendar_model.dart';
+import 'package:cinco_minutos_meditacao/shared/clients/models/responses/month_calendar_response.dart';
+import 'package:cinco_minutos_meditacao/shared/clients/models/responses/week_calendar_response.dart';
 import 'package:cinco_minutos_meditacao/shared/models/error.dart';
 import 'package:intl/intl.dart';
 
@@ -105,20 +107,53 @@ class CalendarPresenter implements Presenter {
   }
 
   @override
-  Future<CalendarModel> getWeekCalendar(String date) async {
-    var (weekCalendar, errorCalendar) =
-        await _repository.requestCalendarWeek(date);
-    if (errorCalendar != null) {
-      view!.showError(errorCalendar.getErrorMessage);
-      return model;
+  Future<CalendarModel> getCalendar(String date, CalendarType type) async {
+    view!.showLoading();
+
+    WeekCalendarResponse? weekCalendar;
+    MonthCalendarResponse? monthCalendar;
+    CustomError? errorCalendar;
+
+    switch (type) {
+      case CalendarType.year:
+      // return await getCalendarDay(date);
+      case CalendarType.month:
+        (monthCalendar, errorCalendar) =
+            await _repository.requestCalendarMonth(date);
+        if (errorCalendar != null) {
+          view!.showError(errorCalendar.getErrorMessage);
+          return model;
+        }
+
+        int numberOfDaysInMonth = 31;
+        List<int> meditationsMonth = List.filled(numberOfDaysInMonth, 0);
+        monthCalendar!.month!.forEach((day, data) {
+          // Converter o dia para um índice (subtrair 1 porque a lista começa em 0)
+          int dayIndex = int.parse(day) - 1;
+          // Atualizar a lista com os minutos do dia específico
+          meditationsMonth[dayIndex] = data['minutes'];
+        });
+        // List<int> meditationsMonth = [];
+        // for (var item in monthCalendar!.month!.values) {
+        //   meditationsMonth.add(item['minutes']);
+        // }
+        model.monthCalendar = meditationsMonth;
+
+      default:
+        (weekCalendar, errorCalendar) =
+            await _repository.requestCalendarWeek(date);
+        if (errorCalendar != null) {
+          view!.showError(errorCalendar.getErrorMessage);
+          return model;
+        }
+
+        List<int> meditationsWeek = [];
+        for (var item in weekCalendar!.week!.values) {
+          meditationsWeek.add(item['minutes']);
+        }
+        model.weekCalendar = meditationsWeek;
     }
 
-    List<int> meditationsWeek = [];
-    for (var item in weekCalendar!.week!.values) {
-      meditationsWeek.add(item['minutes']);
-    }
-
-    model.weekCalendar = meditationsWeek;
     model.weekCalendarResponse = weekCalendar;
 
     return model;

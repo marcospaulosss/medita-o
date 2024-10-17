@@ -88,7 +88,9 @@ class CalendarViewState extends State<CalendarView>
           buildTitle(),
           CalendarMeditation(
             weekCalendar: model?.weekCalendar ?? [],
-            getWeekCalendar: getWeekCalendar,
+            monthCalendar: model?.monthCalendar ?? [],
+            type: model.calendarType ?? CalendarType.week,
+            getCalendar: getCalendar,
           ),
           buildMeditometerCard(),
         ],
@@ -202,13 +204,16 @@ class CalendarViewState extends State<CalendarView>
     );
   }
 
-  Future<void> getWeekCalendar(DateTime time) async {
+  Future<void> getCalendar(DateTime time, CalendarType type) async {
     String formattedDate = DateFormat('yyyy-MM-dd').format(time);
-    var weekCalendar = await presenter.getWeekCalendar(formattedDate);
+    var calendar = await presenter.getCalendar(formattedDate, type);
 
     setState(() {
-      model = weekCalendar;
+      model = calendar;
+      model.calendarType = type;
     });
+
+    stateController.showNormalState();
   }
 
   BoxShadow buildBoxShadowDefault() {
