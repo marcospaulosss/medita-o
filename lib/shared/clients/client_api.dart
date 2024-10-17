@@ -7,6 +7,7 @@ import 'package:cinco_minutos_meditacao/shared/clients/models/requests/authentic
 import 'package:cinco_minutos_meditacao/shared/clients/models/requests/create_new_meditations_request.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/authenticate_google_response.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/meditations_response.dart';
+import 'package:cinco_minutos_meditacao/shared/clients/models/responses/month_calendar_response.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/register_response.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/user_response.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/week_calendar_response.dart';
@@ -76,4 +77,9 @@ abstract class ClientApi {
   /// Obtem as meditações realizadas pelo usuário
   @GET('/calendar/week')
   Future<WeekCalendarResponse> calendarWeek(@Query('date') String date);
+
+  /// Obtem as meditações realizadas pelo usuário no mes
+  @GET('/calendar/month')
+  Future<MonthCalendarResponse> calendarMonth(
+      @Query('month') int month, @Query('year') int year);
 }

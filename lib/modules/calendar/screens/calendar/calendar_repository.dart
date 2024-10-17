@@ -6,6 +6,7 @@ import 'package:cinco_minutos_meditacao/core/wrappers/secure_storage.dart';
 import 'package:cinco_minutos_meditacao/modules/meditometer/analytics/events.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/client_api.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/meditations_response.dart';
+import 'package:cinco_minutos_meditacao/shared/clients/models/responses/month_calendar_response.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/user_response.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/week_calendar_response.dart';
 import 'package:cinco_minutos_meditacao/shared/models/error.dart';
@@ -136,6 +137,42 @@ class CalendarRepository implements Repository {
       WeekCalendarResponse weekCalendar = await _clientApi.calendarWeek(date);
 
       return (weekCalendar, null);
+    } on TimeoutException {
+      return (
+        null,
+        _error.sendErrorToCrashlytics(
+            code: ErrorCodes.timeoutException, stackTrace: StackTrace.current)
+      );
+    } on DioException catch (e) {
+      return (
+        null,
+        _error.sendErrorToCrashlytics(
+          code: ErrorCodes.getCalendarError,
+          stackTrace: StackTrace.current,
+          dioException: e,
+        )
+      );
+    } catch (e) {
+      return (
+        null,
+        _error.sendErrorToCrashlytics(
+          code: ErrorCodes.getCalendarError,
+          stackTrace: StackTrace.current,
+        )
+      );
+    }
+  }
+
+  @override
+  Future<(MonthCalendarResponse?, CustomError?)> requestCalendarMonth(
+      String date) async {
+    try {
+      int month = int.parse(date.split('-')[1]);
+      int year = int.parse(date.split('-')[0]);
+      MonthCalendarResponse monthCalendar =
+          await _clientApi.calendarMonth(month, year);
+
+      return (monthCalendar, null);
     } on TimeoutException {
       return (
         null,
