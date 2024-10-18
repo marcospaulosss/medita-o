@@ -11,6 +11,7 @@ import 'package:cinco_minutos_meditacao/shared/clients/models/responses/month_ca
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/register_response.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/user_response.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/week_calendar_response.dart';
+import 'package:cinco_minutos_meditacao/shared/clients/models/responses/year_calendar_response.dart';
 import 'package:curl_logger_dio_interceptor/curl_logger_dio_interceptor.dart';
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
@@ -82,4 +83,8 @@ abstract class ClientApi {
   @GET('/calendar/month')
   Future<MonthCalendarResponse> calendarMonth(
       @Query('month') int month, @Query('year') int year);
+
+  /// Obtem as meditações realizadas pelo usuário no ano
+  @GET('/calendar/year')
+  Future<YearCalendarResponse> calendarYear(@Query('year') int year);
 }

@@ -1,23 +1,23 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'month_calendar_response.dart';
+part of 'year_calendar_response.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-MonthCalendarResponse _$MonthCalendarResponseFromJson(
+YearCalendarResponse _$YearCalendarResponseFromJson(
         Map<String, dynamic> json) =>
-    MonthCalendarResponse(
-      month: json['month'],
+    YearCalendarResponse(
+      year: json['year'],
       total: (json['total'] as num?)?.toInt(),
       totalMinutes: (json['total_minutes'] as num?)?.toInt(),
     );
 
-Map<String, dynamic> _$MonthCalendarResponseToJson(
-        MonthCalendarResponse instance) =>
+Map<String, dynamic> _$YearCalendarResponseToJson(
+        YearCalendarResponse instance) =>
     <String, dynamic>{
-      'month': instance.month,
+      'year': instance.year,
       'total': instance.total,
       'total_minutes': instance.totalMinutes,
     };

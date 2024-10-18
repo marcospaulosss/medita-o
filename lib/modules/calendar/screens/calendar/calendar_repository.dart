@@ -9,6 +9,7 @@ import 'package:cinco_minutos_meditacao/shared/clients/models/responses/meditati
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/month_calendar_response.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/user_response.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/week_calendar_response.dart';
+import 'package:cinco_minutos_meditacao/shared/clients/models/responses/year_calendar_response.dart';
 import 'package:cinco_minutos_meditacao/shared/models/error.dart';
 import 'package:dio/dio.dart';
 
@@ -173,6 +174,40 @@ class CalendarRepository implements Repository {
           await _clientApi.calendarMonth(month, year);
 
       return (monthCalendar, null);
+    } on TimeoutException {
+      return (
+        null,
+        _error.sendErrorToCrashlytics(
+            code: ErrorCodes.timeoutException, stackTrace: StackTrace.current)
+      );
+    } on DioException catch (e) {
+      return (
+        null,
+        _error.sendErrorToCrashlytics(
+          code: ErrorCodes.getCalendarError,
+          stackTrace: StackTrace.current,
+          dioException: e,
+        )
+      );
+    } catch (e) {
+      return (
+        null,
+        _error.sendErrorToCrashlytics(
+          code: ErrorCodes.getCalendarError,
+          stackTrace: StackTrace.current,
+        )
+      );
+    }
+  }
+
+  @override
+  Future<(YearCalendarResponse?, CustomError?)> requestCalendarYear(
+      String date) async {
+    try {
+      int year = int.parse(date.split('-')[0]);
+      YearCalendarResponse yearCalendar = await _clientApi.calendarYear(year);
+
+      return (yearCalendar, null);
     } on TimeoutException {
       return (
         null,
