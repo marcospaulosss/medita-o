@@ -88,7 +88,8 @@ class CalendarViewState extends State<CalendarView>
           buildTitle(),
           CalendarMeditation(
             weekCalendar: model?.weekCalendar ?? [],
-            monthCalendar: model?.monthCalendar ?? [],
+            monthCalendar: model?.monthCalendar ?? List.filled(31, 0),
+            yearCalendar: model?.yearCalendar ?? List.filled(12, 0),
             type: model.calendarType ?? CalendarType.week,
             getCalendar: getCalendar,
           ),
@@ -114,6 +115,16 @@ class CalendarViewState extends State<CalendarView>
   }
 
   Widget buildMeditometerCard() {
+    String totalMinutes = "0";
+    if (model.calendarType == CalendarType.week) {
+      totalMinutes = model.weekCalendarResponse?.totalMinutes.toString() ?? "0";
+    } else if (model.calendarType == CalendarType.month) {
+      totalMinutes =
+          model.monthCalendarResponse?.totalMinutes.toString() ?? "0";
+    } else if (model.calendarType == CalendarType.year) {
+      totalMinutes = model.yearCalendarResponse?.totalMinutes.toString() ?? "0";
+    }
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 40.0),
       child: Container(
@@ -132,7 +143,7 @@ class CalendarViewState extends State<CalendarView>
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Text(
-                  model.weekCalendarResponse?.totalMinutes.toString() ?? "0",
+                  totalMinutes,
                   style: const TextStyle(
                     fontSize: 48,
                     fontWeight: FontWeight.bold,

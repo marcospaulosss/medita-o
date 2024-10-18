@@ -12,6 +12,9 @@ class CalendarMeditation extends StatefulWidget {
   /// Calendário do mês
   final List<int> monthCalendar;
 
+  /// Calendário do ano
+  final List<int> yearCalendar;
+
   /// Tipo de calendário
   final CalendarType type;
 
@@ -20,12 +23,14 @@ class CalendarMeditation extends StatefulWidget {
 
   /// - [weekCalendar] : Calendário da semana
   /// - [monthCalendar] : Calendário do mês
+  /// - [yearCalendar] : Calendário do ano
   /// - [type] : Tipo de calendário
   /// - [getWeekCalendar] : função para obter o calendário da semana
   /// Construtor
   const CalendarMeditation({
     required this.weekCalendar,
     required this.monthCalendar,
+    required this.yearCalendar,
     required this.type,
     required this.getCalendar,
     super.key,
@@ -51,6 +56,7 @@ class _CalendarMeditationState extends State<CalendarMeditation> {
     } else {
       _currentView = 'Ano';
     }
+
     super.initState();
   }
 
@@ -89,7 +95,9 @@ class _CalendarMeditationState extends State<CalendarMeditation> {
           widget.getCalendar(_focusedDate, CalendarType.week);
         } else if (_currentView == 'Mês') {
           widget.getCalendar(_focusedDate, CalendarType.month);
-        } else {}
+        } else {
+          widget.getCalendar(_focusedDate, CalendarType.year);
+        }
       },
       child: Container(
         width: 100,
@@ -342,23 +350,28 @@ class _CalendarMeditationState extends State<CalendarMeditation> {
   }
 
   Widget _buildYearCalendar() {
+    final List<String> monthNames = [
+      'JAN',
+      'FEV',
+      'MAR',
+      'ABR',
+      'MAI',
+      'JUN',
+      'JUL',
+      'AGO',
+      'SET',
+      'OUT',
+      'NOV',
+      'DEZ'
+    ];
+
     return GridView.count(
       shrinkWrap: true,
       crossAxisCount: 4,
-      children: [
-        _buildMonthBalloon('JAN', 255),
-        _buildMonthBalloon('FEV', 45),
-        _buildMonthBalloon('MAR', 65),
-        _buildMonthBalloon('ABR', 0),
-        _buildMonthBalloon('MAI', 0),
-        _buildMonthBalloon('JUN', 0),
-        _buildMonthBalloon('JUL', 0),
-        _buildMonthBalloon('AGO', 0),
-        _buildMonthBalloon('SET', 0),
-        _buildMonthBalloon('OUT', 0),
-        _buildMonthBalloon('NOV', 0),
-        _buildMonthBalloon('DEZ', 0),
-      ],
+      children: List.generate(12, (index) {
+        return _buildMonthBalloon(
+            monthNames[index], widget.yearCalendar[index]);
+      }),
     );
   }
 
@@ -398,16 +411,18 @@ class _CalendarMeditationState extends State<CalendarMeditation> {
   }
 
   void _previousPeriod() {
-    setState(() {
-      if (_currentView == 'Semana') {
-        _focusedDate = _focusedDate.subtract(const Duration(days: 7));
-        widget.getCalendar(_focusedDate, CalendarType.week);
-      } else if (_currentView == 'Mês') {
-        _focusedDate = DateTime(_focusedDate.year, _focusedDate.month - 1, 1);
-      } else {
-        _focusedDate = DateTime(_focusedDate.year - 1);
-      }
-    });
+    if (_currentView == 'Semana') {
+      _focusedDate = _focusedDate.subtract(const Duration(days: 7));
+      widget.getCalendar(_focusedDate, CalendarType.week);
+    } else if (_currentView == 'Mês') {
+      _focusedDate = DateTime(_focusedDate.year, _focusedDate.month - 1, 1);
+      widget.getCalendar(_focusedDate, CalendarType.month);
+    } else {
+      _focusedDate = DateTime(_focusedDate.year - 1);
+      widget.getCalendar(_focusedDate, CalendarType.year);
+    }
+
+    setState(() {});
   }
 
   void _nextPeriod() {
@@ -417,8 +432,10 @@ class _CalendarMeditationState extends State<CalendarMeditation> {
         widget.getCalendar(_focusedDate, CalendarType.week);
       } else if (_currentView == 'Mês') {
         _focusedDate = DateTime(_focusedDate.year, _focusedDate.month + 1, 1);
+        widget.getCalendar(_focusedDate, CalendarType.month);
       } else {
         _focusedDate = DateTime(_focusedDate.year + 1);
+        widget.getCalendar(_focusedDate, CalendarType.year);
       }
     });
   }
