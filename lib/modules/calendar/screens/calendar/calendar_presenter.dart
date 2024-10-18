@@ -4,6 +4,7 @@ import 'package:cinco_minutos_meditacao/modules/calendar/screens/calendar/calend
 import 'package:cinco_minutos_meditacao/modules/calendar/screens/calendar/calendar_model.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/month_calendar_response.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/week_calendar_response.dart';
+import 'package:cinco_minutos_meditacao/shared/clients/models/responses/year_calendar_response.dart';
 import 'package:cinco_minutos_meditacao/shared/models/error.dart';
 import 'package:intl/intl.dart';
 
@@ -108,15 +109,36 @@ class CalendarPresenter implements Presenter {
 
   @override
   Future<CalendarModel> getCalendar(String date, CalendarType type) async {
-    view!.showLoading();
-
     WeekCalendarResponse? weekCalendar;
     MonthCalendarResponse? monthCalendar;
+    YearCalendarResponse? yearCalendar;
     CustomError? errorCalendar;
 
     switch (type) {
       case CalendarType.year:
-      // return await getCalendarDay(date);
+        (yearCalendar, errorCalendar) =
+            await _repository.requestCalendarYear(date);
+        if (errorCalendar != null) {
+          view!.showError(errorCalendar.getErrorMessage);
+          return model;
+        }
+
+        int numberOfDaysInYear = 12;
+        List<int> meditationsYear = List.filled(numberOfDaysInYear, 0);
+        if (yearCalendar!.year != null && yearCalendar.year!.isNotEmpty) {
+          yearCalendar!.year!.forEach((year, data) {
+            // Converter o dia para um índice (subtrair 1 porque a lista começa em 0)
+            int yearIndex = int.parse(year) - 1;
+            // Atualizar a lista com os minutos do dia específico
+            meditationsYear[yearIndex] = data['minutes'];
+          });
+          // List<int> meditationsMonth = [];
+          // for (var item in monthCalendar!.month!.values) {
+          //   meditationsMonth.add(item['minutes']);
+          // }
+        }
+        model.yearCalendar = meditationsYear;
+
       case CalendarType.month:
         (monthCalendar, errorCalendar) =
             await _repository.requestCalendarMonth(date);
@@ -127,16 +149,18 @@ class CalendarPresenter implements Presenter {
 
         int numberOfDaysInMonth = 31;
         List<int> meditationsMonth = List.filled(numberOfDaysInMonth, 0);
-        monthCalendar!.month!.forEach((day, data) {
-          // Converter o dia para um índice (subtrair 1 porque a lista começa em 0)
-          int dayIndex = int.parse(day) - 1;
-          // Atualizar a lista com os minutos do dia específico
-          meditationsMonth[dayIndex] = data['minutes'];
-        });
-        // List<int> meditationsMonth = [];
-        // for (var item in monthCalendar!.month!.values) {
-        //   meditationsMonth.add(item['minutes']);
-        // }
+        if (monthCalendar!.month != null && monthCalendar.month!.isNotEmpty) {
+          monthCalendar!.month!.forEach((day, data) {
+            // Converter o dia para um índice (subtrair 1 porque a lista começa em 0)
+            int dayIndex = int.parse(day) - 1;
+            // Atualizar a lista com os minutos do dia específico
+            meditationsMonth[dayIndex] = data['minutes'];
+          });
+          // List<int> meditationsMonth = [];
+          // for (var item in monthCalendar!.month!.values) {
+          //   meditationsMonth.add(item['minutes']);
+          // }
+        }
         model.monthCalendar = meditationsMonth;
 
       default:
@@ -155,6 +179,8 @@ class CalendarPresenter implements Presenter {
     }
 
     model.weekCalendarResponse = weekCalendar;
+    model.monthCalendarResponse = monthCalendar;
+    model.yearCalendarResponse = yearCalendar;
 
     return model;
   }
