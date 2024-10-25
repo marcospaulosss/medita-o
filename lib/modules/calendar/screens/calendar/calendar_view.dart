@@ -116,13 +116,17 @@ class CalendarViewState extends State<CalendarView>
 
   Widget buildMeditometerCard() {
     String totalMinutes = "0";
+    String nameCalendar = "";
     if (model.calendarType == CalendarType.week) {
       totalMinutes = model.weekCalendarResponse?.totalMinutes.toString() ?? "0";
+      nameCalendar = CalendarStrings.of(context).week;
     } else if (model.calendarType == CalendarType.month) {
       totalMinutes =
           model.monthCalendarResponse?.totalMinutes.toString() ?? "0";
+      nameCalendar = CalendarStrings.of(context).month;
     } else if (model.calendarType == CalendarType.year) {
       totalMinutes = model.yearCalendarResponse?.totalMinutes.toString() ?? "0";
+      nameCalendar = CalendarStrings.of(context).year;
     }
 
     return Padding(
@@ -171,7 +175,7 @@ class CalendarViewState extends State<CalendarView>
                         ),
                         children: [
                           TextSpan(
-                            text: CalendarStrings.of(context).week,
+                            text: nameCalendar,
                             style: const TextStyle(
                               fontSize: 19,
                               fontWeight: FontWeight.bold,
@@ -225,15 +229,6 @@ class CalendarViewState extends State<CalendarView>
     });
 
     stateController.showNormalState();
-  }
-
-  BoxShadow buildBoxShadowDefault() {
-    return BoxShadow(
-      color: Colors.grey.withOpacity(0.5),
-      spreadRadius: 5,
-      blurRadius: 7,
-      offset: const Offset(0, 3),
-    );
   }
 
   /// Mostra o estado de carregamento

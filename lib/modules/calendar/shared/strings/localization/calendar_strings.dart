@@ -112,6 +112,18 @@ abstract class CalendarStrings {
   /// In pt, this message translates to:
   /// **'semana'**
   String get week;
+
+  /// No description provided for @month.
+  ///
+  /// In pt, this message translates to:
+  /// **'mês'**
+  String get month;
+
+  /// No description provided for @year.
+  ///
+  /// In pt, this message translates to:
+  /// **'ano'**
+  String get year;
 }
 
 class _CalendarStringsDelegate extends LocalizationsDelegate<CalendarStrings> {
