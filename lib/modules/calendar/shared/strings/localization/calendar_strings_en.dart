@@ -12,4 +12,10 @@ class CalendarStringsEn extends CalendarStrings {
 
   @override
   String get week => 'semana';
+
+  @override
+  String get month => 'mês';
+
+  @override
+  String get year => 'ano';
 }

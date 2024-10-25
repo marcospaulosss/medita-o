@@ -132,10 +132,6 @@ class CalendarPresenter implements Presenter {
             // Atualizar a lista com os minutos do dia específico
             meditationsYear[yearIndex] = data['minutes'];
           });
-          // List<int> meditationsMonth = [];
-          // for (var item in monthCalendar!.month!.values) {
-          //   meditationsMonth.add(item['minutes']);
-          // }
         }
         model.yearCalendar = meditationsYear;
 
@@ -156,10 +152,6 @@ class CalendarPresenter implements Presenter {
             // Atualizar a lista com os minutos do dia específico
             meditationsMonth[dayIndex] = data['minutes'];
           });
-          // List<int> meditationsMonth = [];
-          // for (var item in monthCalendar!.month!.values) {
-          //   meditationsMonth.add(item['minutes']);
-          // }
         }
         model.monthCalendar = meditationsMonth;
 
