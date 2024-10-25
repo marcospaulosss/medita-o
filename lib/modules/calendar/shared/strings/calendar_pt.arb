@@ -1,5 +1,7 @@
 {
   "youMeditated": "Você meditou:",
   "minutes": "Minutos esta ",
-  "week": "semana"
+  "week": "semana",
+  "month": "mês",
+  "year": "ano"
 }
