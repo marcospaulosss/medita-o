@@ -143,6 +143,10 @@ cd ios
 pod deintegrate
 pod install
 cd ..
+cd android
+./gradlew clean
+cd ..
+
 ```
 
 # Inicia o runner do github actions localmente
