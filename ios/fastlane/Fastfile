@@ -75,6 +75,8 @@ platform :ios do
 
     desc "Upload to Test Flight"
     lane :tf do
+        inc
+
         upload_to_testflight(
             ipa: "../build/ios/ipa/Dev.ipa",
             skip_waiting_for_build_processing: true,
