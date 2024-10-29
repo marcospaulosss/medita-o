@@ -4,10 +4,12 @@ AUTHENTICATION_STRINGS_PATH=$ROOT/lib/modules/authentication/shared/strings
 SHARED_STRINGS_PATH=$ROOT/lib/shared/strings
 MEDITATE_STRINGS_PATH=$ROOT/lib/modules/meditate/shared/strings
 MEDITOMETER_STRINGS_PATH=$ROOT/lib/modules/meditometer/shared/strings
+CALENDAR_STRINGS_PATH=$ROOT/lib/modules/calendar/shared/strings
 
 cd $COMMON_STRINGS_PATH && flutter gen-l10n > /dev/null
 cd $AUTHENTICATION_STRINGS_PATH && flutter gen-l10n > /dev/null
 cd $SHARED_STRINGS_PATH && flutter gen-l10n > /dev/null
 cd $MEDITATE_STRINGS_PATH && flutter gen-l10n > /dev/null
 cd $MEDITOMETER_STRINGS_PATH && flutter gen-l10n > /dev/null
+cd $CALENDAR_STRINGS_PATH && flutter gen-l10n > /dev/null
 cd $ROOT
