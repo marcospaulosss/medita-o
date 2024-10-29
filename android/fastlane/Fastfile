@@ -47,6 +47,7 @@ platform :android do
       android_artifact_type: "APK",
       android_artifact_path: "../build/app/outputs/flutter-apk/app-dev-debug.apk",
       firebase_cli_token: ENV['FIREBASE_TOKEN'],
+      service_credentials_file: "../android/app/src/dev/google-service-account.json",
     )
   end
 
