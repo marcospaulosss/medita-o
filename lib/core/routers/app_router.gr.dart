@@ -8,124 +8,146 @@
 // coverage:ignore-file
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:auto_route/auto_route.dart' as _i14;
+import 'package:auto_route/auto_route.dart' as _i15;
 import 'package:cinco_minutos_meditacao/modules/authentication/screens/login/login_view.dart'
-    as _i8;
-import 'package:cinco_minutos_meditacao/modules/authentication/screens/register/register_view.dart'
-    as _i12;
-import 'package:cinco_minutos_meditacao/modules/authentication/screens/register_success/register_success_view.dart'
-    as _i11;
-import 'package:cinco_minutos_meditacao/modules/common/screens/home/home_view.dart'
-    as _i6;
-import 'package:cinco_minutos_meditacao/modules/common/screens/splash_screen/splash_screen_view.dart'
-    as _i13;
-import 'package:cinco_minutos_meditacao/modules/meditate/screens/donation/donation_view.dart'
-    as _i2;
-import 'package:cinco_minutos_meditacao/modules/meditate/screens/five_minutes/five_minutes_view.dart'
-    as _i3;
-import 'package:cinco_minutos_meditacao/modules/meditate/screens/guided_meditation/guided_meditation_view.dart'
-    as _i5;
-import 'package:cinco_minutos_meditacao/modules/meditate/screens/guided_meditation_program/guided_meditation_program_view.dart'
-    as _i4;
-import 'package:cinco_minutos_meditacao/modules/meditate/screens/in_your_time/in_your_time_view.dart'
-    as _i7;
-import 'package:cinco_minutos_meditacao/modules/meditate/screens/meditate_info/meditate_info_view.dart'
     as _i9;
-import 'package:cinco_minutos_meditacao/modules/meditometer/screens/meditometer/meditometer_view.dart'
-    as _i10;
-import 'package:cinco_minutos_meditacao/shared/components/camera_view.dart'
+import 'package:cinco_minutos_meditacao/modules/authentication/screens/register/register_view.dart'
+    as _i13;
+import 'package:cinco_minutos_meditacao/modules/authentication/screens/register_success/register_success_view.dart'
+    as _i12;
+import 'package:cinco_minutos_meditacao/modules/calendar/screens/calendar/calendar_view.dart'
     as _i1;
+import 'package:cinco_minutos_meditacao/modules/common/screens/home/home_view.dart'
+    as _i7;
+import 'package:cinco_minutos_meditacao/modules/common/screens/splash_screen/splash_screen_view.dart'
+    as _i14;
+import 'package:cinco_minutos_meditacao/modules/meditate/screens/donation/donation_view.dart'
+    as _i3;
+import 'package:cinco_minutos_meditacao/modules/meditate/screens/five_minutes/five_minutes_view.dart'
+    as _i4;
+import 'package:cinco_minutos_meditacao/modules/meditate/screens/guided_meditation/guided_meditation_view.dart'
+    as _i6;
+import 'package:cinco_minutos_meditacao/modules/meditate/screens/guided_meditation_program/guided_meditation_program_view.dart'
+    as _i5;
+import 'package:cinco_minutos_meditacao/modules/meditate/screens/in_your_time/in_your_time_view.dart'
+    as _i8;
+import 'package:cinco_minutos_meditacao/modules/meditate/screens/meditate_info/meditate_info_view.dart'
+    as _i10;
+import 'package:cinco_minutos_meditacao/modules/meditometer/screens/meditometer/meditometer_view.dart'
+    as _i11;
+import 'package:cinco_minutos_meditacao/shared/components/camera_view.dart'
+    as _i2;
 
-abstract class $AppRouter extends _i14.RootStackRouter {
+abstract class $AppRouter extends _i15.RootStackRouter {
   $AppRouter({super.navigatorKey});
 
   @override
-  final Map<String, _i14.PageFactory> pagesMap = {
-    CameraRoute.name: (routeData) {
-      return _i14.AutoRoutePage<dynamic>(
+  final Map<String, _i15.PageFactory> pagesMap = {
+    CalendarRoute.name: (routeData) {
+      return _i15.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i1.CameraView(),
+        child: const _i1.CalendarView(),
+      );
+    },
+    CameraRoute.name: (routeData) {
+      return _i15.AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const _i2.CameraView(),
       );
     },
     DonationRoute.name: (routeData) {
-      return _i14.AutoRoutePage<dynamic>(
+      return _i15.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i2.DonationView(),
+        child: const _i3.DonationView(),
       );
     },
     FiveMinutesRoute.name: (routeData) {
-      return _i14.AutoRoutePage<dynamic>(
+      return _i15.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i3.FiveMinutesView(),
+        child: const _i4.FiveMinutesView(),
       );
     },
     GuidedMeditationProgramRoute.name: (routeData) {
-      return _i14.AutoRoutePage<dynamic>(
+      return _i15.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i4.GuidedMeditationProgramView(),
+        child: const _i5.GuidedMeditationProgramView(),
       );
     },
     GuidedMeditationRoute.name: (routeData) {
-      return _i14.AutoRoutePage<dynamic>(
+      return _i15.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i5.GuidedMeditationView(),
+        child: const _i6.GuidedMeditationView(),
       );
     },
     HomeRoute.name: (routeData) {
-      return _i14.AutoRoutePage<dynamic>(
+      return _i15.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i6.HomeView(),
+        child: const _i7.HomeView(),
       );
     },
     InYourTimeRoute.name: (routeData) {
-      return _i14.AutoRoutePage<dynamic>(
+      return _i15.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i7.InYourTimeView(),
+        child: const _i8.InYourTimeView(),
       );
     },
     LoginRoute.name: (routeData) {
-      return _i14.AutoRoutePage<dynamic>(
+      return _i15.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i8.LoginView(),
+        child: const _i9.LoginView(),
       );
     },
     MeditateInfoRoute.name: (routeData) {
-      return _i14.AutoRoutePage<dynamic>(
+      return _i15.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i9.MeditateInfoView(),
+        child: const _i10.MeditateInfoView(),
       );
     },
     MeditometerRoute.name: (routeData) {
-      return _i14.AutoRoutePage<dynamic>(
+      return _i15.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i10.MeditometerView(),
+        child: const _i11.MeditometerView(),
       );
     },
     RegisterSuccessRoute.name: (routeData) {
-      return _i14.AutoRoutePage<dynamic>(
+      return _i15.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i11.RegisterSuccessView(),
+        child: const _i12.RegisterSuccessView(),
       );
     },
     RegisterRoute.name: (routeData) {
-      return _i14.AutoRoutePage<dynamic>(
+      return _i15.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i12.RegisterView(),
+        child: const _i13.RegisterView(),
       );
     },
     SplashScreenRoute.name: (routeData) {
-      return _i14.AutoRoutePage<dynamic>(
+      return _i15.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i13.SplashScreenView(),
+        child: const _i14.SplashScreenView(),
       );
     },
   };
 }
 
 /// generated route for
-/// [_i1.CameraView]
-class CameraRoute extends _i14.PageRouteInfo<void> {
-  const CameraRoute({List<_i14.PageRouteInfo>? children})
+/// [_i1.CalendarView]
+class CalendarRoute extends _i15.PageRouteInfo<void> {
+  const CalendarRoute({List<_i15.PageRouteInfo>? children})
+      : super(
+          CalendarRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'CalendarRoute';
+
+  static const _i15.PageInfo<void> page = _i15.PageInfo<void>(name);
+}
+
+/// generated route for
+/// [_i2.CameraView]
+class CameraRoute extends _i15.PageRouteInfo<void> {
+  const CameraRoute({List<_i15.PageRouteInfo>? children})
       : super(
           CameraRoute.name,
           initialChildren: children,
@@ -133,13 +155,13 @@ class CameraRoute extends _i14.PageRouteInfo<void> {
 
   static const String name = 'CameraRoute';
 
-  static const _i14.PageInfo<void> page = _i14.PageInfo<void>(name);
+  static const _i15.PageInfo<void> page = _i15.PageInfo<void>(name);
 }
 
 /// generated route for
-/// [_i2.DonationView]
-class DonationRoute extends _i14.PageRouteInfo<void> {
-  const DonationRoute({List<_i14.PageRouteInfo>? children})
+/// [_i3.DonationView]
+class DonationRoute extends _i15.PageRouteInfo<void> {
+  const DonationRoute({List<_i15.PageRouteInfo>? children})
       : super(
           DonationRoute.name,
           initialChildren: children,
@@ -147,13 +169,13 @@ class DonationRoute extends _i14.PageRouteInfo<void> {
 
   static const String name = 'DonationRoute';
 
-  static const _i14.PageInfo<void> page = _i14.PageInfo<void>(name);
+  static const _i15.PageInfo<void> page = _i15.PageInfo<void>(name);
 }
 
 /// generated route for
-/// [_i3.FiveMinutesView]
-class FiveMinutesRoute extends _i14.PageRouteInfo<void> {
-  const FiveMinutesRoute({List<_i14.PageRouteInfo>? children})
+/// [_i4.FiveMinutesView]
+class FiveMinutesRoute extends _i15.PageRouteInfo<void> {
+  const FiveMinutesRoute({List<_i15.PageRouteInfo>? children})
       : super(
           FiveMinutesRoute.name,
           initialChildren: children,
@@ -161,13 +183,13 @@ class FiveMinutesRoute extends _i14.PageRouteInfo<void> {
 
   static const String name = 'FiveMinutesRoute';
 
-  static const _i14.PageInfo<void> page = _i14.PageInfo<void>(name);
+  static const _i15.PageInfo<void> page = _i15.PageInfo<void>(name);
 }
 
 /// generated route for
-/// [_i4.GuidedMeditationProgramView]
-class GuidedMeditationProgramRoute extends _i14.PageRouteInfo<void> {
-  const GuidedMeditationProgramRoute({List<_i14.PageRouteInfo>? children})
+/// [_i5.GuidedMeditationProgramView]
+class GuidedMeditationProgramRoute extends _i15.PageRouteInfo<void> {
+  const GuidedMeditationProgramRoute({List<_i15.PageRouteInfo>? children})
       : super(
           GuidedMeditationProgramRoute.name,
           initialChildren: children,
@@ -175,13 +197,13 @@ class GuidedMeditationProgramRoute extends _i14.PageRouteInfo<void> {
 
   static const String name = 'GuidedMeditationProgramRoute';
 
-  static const _i14.PageInfo<void> page = _i14.PageInfo<void>(name);
+  static const _i15.PageInfo<void> page = _i15.PageInfo<void>(name);
 }
 
 /// generated route for
-/// [_i5.GuidedMeditationView]
-class GuidedMeditationRoute extends _i14.PageRouteInfo<void> {
-  const GuidedMeditationRoute({List<_i14.PageRouteInfo>? children})
+/// [_i6.GuidedMeditationView]
+class GuidedMeditationRoute extends _i15.PageRouteInfo<void> {
+  const GuidedMeditationRoute({List<_i15.PageRouteInfo>? children})
       : super(
           GuidedMeditationRoute.name,
           initialChildren: children,
@@ -189,13 +211,13 @@ class GuidedMeditationRoute extends _i14.PageRouteInfo<void> {
 
   static const String name = 'GuidedMeditationRoute';
 
-  static const _i14.PageInfo<void> page = _i14.PageInfo<void>(name);
+  static const _i15.PageInfo<void> page = _i15.PageInfo<void>(name);
 }
 
 /// generated route for
-/// [_i6.HomeView]
-class HomeRoute extends _i14.PageRouteInfo<void> {
-  const HomeRoute({List<_i14.PageRouteInfo>? children})
+/// [_i7.HomeView]
+class HomeRoute extends _i15.PageRouteInfo<void> {
+  const HomeRoute({List<_i15.PageRouteInfo>? children})
       : super(
           HomeRoute.name,
           initialChildren: children,
@@ -203,13 +225,13 @@ class HomeRoute extends _i14.PageRouteInfo<void> {
 
   static const String name = 'HomeRoute';
 
-  static const _i14.PageInfo<void> page = _i14.PageInfo<void>(name);
+  static const _i15.PageInfo<void> page = _i15.PageInfo<void>(name);
 }
 
 /// generated route for
-/// [_i7.InYourTimeView]
-class InYourTimeRoute extends _i14.PageRouteInfo<void> {
-  const InYourTimeRoute({List<_i14.PageRouteInfo>? children})
+/// [_i8.InYourTimeView]
+class InYourTimeRoute extends _i15.PageRouteInfo<void> {
+  const InYourTimeRoute({List<_i15.PageRouteInfo>? children})
       : super(
           InYourTimeRoute.name,
           initialChildren: children,
@@ -217,13 +239,13 @@ class InYourTimeRoute extends _i14.PageRouteInfo<void> {
 
   static const String name = 'InYourTimeRoute';
 
-  static const _i14.PageInfo<void> page = _i14.PageInfo<void>(name);
+  static const _i15.PageInfo<void> page = _i15.PageInfo<void>(name);
 }
 
 /// generated route for
-/// [_i8.LoginView]
-class LoginRoute extends _i14.PageRouteInfo<void> {
-  const LoginRoute({List<_i14.PageRouteInfo>? children})
+/// [_i9.LoginView]
+class LoginRoute extends _i15.PageRouteInfo<void> {
+  const LoginRoute({List<_i15.PageRouteInfo>? children})
       : super(
           LoginRoute.name,
           initialChildren: children,
@@ -231,13 +253,13 @@ class LoginRoute extends _i14.PageRouteInfo<void> {
 
   static const String name = 'LoginRoute';
 
-  static const _i14.PageInfo<void> page = _i14.PageInfo<void>(name);
+  static const _i15.PageInfo<void> page = _i15.PageInfo<void>(name);
 }
 
 /// generated route for
-/// [_i9.MeditateInfoView]
-class MeditateInfoRoute extends _i14.PageRouteInfo<void> {
-  const MeditateInfoRoute({List<_i14.PageRouteInfo>? children})
+/// [_i10.MeditateInfoView]
+class MeditateInfoRoute extends _i15.PageRouteInfo<void> {
+  const MeditateInfoRoute({List<_i15.PageRouteInfo>? children})
       : super(
           MeditateInfoRoute.name,
           initialChildren: children,
@@ -245,13 +267,13 @@ class MeditateInfoRoute extends _i14.PageRouteInfo<void> {
 
   static const String name = 'MeditateInfoRoute';
 
-  static const _i14.PageInfo<void> page = _i14.PageInfo<void>(name);
+  static const _i15.PageInfo<void> page = _i15.PageInfo<void>(name);
 }
 
 /// generated route for
-/// [_i10.MeditometerView]
-class MeditometerRoute extends _i14.PageRouteInfo<void> {
-  const MeditometerRoute({List<_i14.PageRouteInfo>? children})
+/// [_i11.MeditometerView]
+class MeditometerRoute extends _i15.PageRouteInfo<void> {
+  const MeditometerRoute({List<_i15.PageRouteInfo>? children})
       : super(
           MeditometerRoute.name,
           initialChildren: children,
@@ -259,13 +281,13 @@ class MeditometerRoute extends _i14.PageRouteInfo<void> {
 
   static const String name = 'MeditometerRoute';
 
-  static const _i14.PageInfo<void> page = _i14.PageInfo<void>(name);
+  static const _i15.PageInfo<void> page = _i15.PageInfo<void>(name);
 }
 
 /// generated route for
-/// [_i11.RegisterSuccessView]
-class RegisterSuccessRoute extends _i14.PageRouteInfo<void> {
-  const RegisterSuccessRoute({List<_i14.PageRouteInfo>? children})
+/// [_i12.RegisterSuccessView]
+class RegisterSuccessRoute extends _i15.PageRouteInfo<void> {
+  const RegisterSuccessRoute({List<_i15.PageRouteInfo>? children})
       : super(
           RegisterSuccessRoute.name,
           initialChildren: children,
@@ -273,13 +295,13 @@ class RegisterSuccessRoute extends _i14.PageRouteInfo<void> {
 
   static const String name = 'RegisterSuccessRoute';
 
-  static const _i14.PageInfo<void> page = _i14.PageInfo<void>(name);
+  static const _i15.PageInfo<void> page = _i15.PageInfo<void>(name);
 }
 
 /// generated route for
-/// [_i12.RegisterView]
-class RegisterRoute extends _i14.PageRouteInfo<void> {
-  const RegisterRoute({List<_i14.PageRouteInfo>? children})
+/// [_i13.RegisterView]
+class RegisterRoute extends _i15.PageRouteInfo<void> {
+  const RegisterRoute({List<_i15.PageRouteInfo>? children})
       : super(
           RegisterRoute.name,
           initialChildren: children,
@@ -287,13 +309,13 @@ class RegisterRoute extends _i14.PageRouteInfo<void> {
 
   static const String name = 'RegisterRoute';
 
-  static const _i14.PageInfo<void> page = _i14.PageInfo<void>(name);
+  static const _i15.PageInfo<void> page = _i15.PageInfo<void>(name);
 }
 
 /// generated route for
-/// [_i13.SplashScreenView]
-class SplashScreenRoute extends _i14.PageRouteInfo<void> {
-  const SplashScreenRoute({List<_i14.PageRouteInfo>? children})
+/// [_i14.SplashScreenView]
+class SplashScreenRoute extends _i15.PageRouteInfo<void> {
+  const SplashScreenRoute({List<_i15.PageRouteInfo>? children})
       : super(
           SplashScreenRoute.name,
           initialChildren: children,
@@ -301,5 +323,5 @@ class SplashScreenRoute extends _i14.PageRouteInfo<void> {
 
   static const String name = 'SplashScreenRoute';
 
-  static const _i14.PageInfo<void> page = _i14.PageInfo<void>(name);
+  static const _i15.PageInfo<void> page = _i15.PageInfo<void>(name);
 }
