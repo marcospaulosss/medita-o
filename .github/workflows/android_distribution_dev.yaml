@@ -61,6 +61,8 @@ jobs:
         run: |
           ls -la build/app/outputs/flutter-apk
           cd android
+          echo "$SERVICE_CREDENTIALS_FILE_HOMOLOG" | base64 --decode > ./fastlane/google-service-account.json 
+          ls -la app/src/dev/
           bundle exec fastlane firebase
         env:
           FIREBASE_TESTER_GROUPS: ${{ secrets.FIREBASE_TESTER_GROUPS }}
