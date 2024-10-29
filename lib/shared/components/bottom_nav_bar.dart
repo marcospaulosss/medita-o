@@ -58,6 +58,13 @@ class _BottomNavBarState extends State<BottomNavBar> {
                 identifier: Identifiers.donation),
             const DonationRoute(),
           ),
+          navigatorItem(
+            AppImages.calendarIcon,
+            "Calendário",
+            shouldShowIdentify(widget.routeName,
+                identifier: Identifiers.calendar),
+            const CalendarRoute(),
+          ),
         ],
       ),
     );

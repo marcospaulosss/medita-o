@@ -3,32 +3,38 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i10;
-import 'dart:io' as _i13;
+import 'dart:async' as _i13;
+import 'dart:io' as _i16;
 
-import 'package:cinco_minutos_meditacao/core/analytics/event.dart' as _i8;
-import 'package:cinco_minutos_meditacao/core/analytics/manager.dart' as _i7;
+import 'package:cinco_minutos_meditacao/core/analytics/event.dart' as _i11;
+import 'package:cinco_minutos_meditacao/core/analytics/manager.dart' as _i10;
 import 'package:cinco_minutos_meditacao/core/wrappers/secure_storage.dart'
-    as _i15;
-import 'package:cinco_minutos_meditacao/shared/clients/client_api.dart' as _i9;
+    as _i18;
+import 'package:cinco_minutos_meditacao/shared/clients/client_api.dart' as _i12;
 import 'package:cinco_minutos_meditacao/shared/clients/models/requests/auth_request.dart'
-    as _i12;
+    as _i15;
 import 'package:cinco_minutos_meditacao/shared/clients/models/requests/authenticate_google_request.dart'
-    as _i11;
-import 'package:cinco_minutos_meditacao/shared/clients/models/requests/create_new_meditations_request.dart'
     as _i14;
+import 'package:cinco_minutos_meditacao/shared/clients/models/requests/create_new_meditations_request.dart'
+    as _i17;
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/authenticate_google_response.dart'
     as _i2;
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/meditations_response.dart'
     as _i5;
+import 'package:cinco_minutos_meditacao/shared/clients/models/responses/month_calendar_response.dart'
+    as _i7;
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/register_response.dart'
     as _i3;
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/user_response.dart'
     as _i4;
-import 'package:cinco_minutos_meditacao/shared/models/error.dart' as _i6;
-import 'package:dio/dio.dart' as _i17;
+import 'package:cinco_minutos_meditacao/shared/clients/models/responses/week_calendar_response.dart'
+    as _i6;
+import 'package:cinco_minutos_meditacao/shared/clients/models/responses/year_calendar_response.dart'
+    as _i8;
+import 'package:cinco_minutos_meditacao/shared/models/error.dart' as _i9;
+import 'package:dio/dio.dart' as _i20;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:mockito/src/dummies.dart' as _i16;
+import 'package:mockito/src/dummies.dart' as _i19;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -86,8 +92,41 @@ class _FakeMeditationsResponse_3 extends _i1.SmartFake
         );
 }
 
-class _FakeCustomError_4 extends _i1.SmartFake implements _i6.CustomError {
-  _FakeCustomError_4(
+class _FakeWeekCalendarResponse_4 extends _i1.SmartFake
+    implements _i6.WeekCalendarResponse {
+  _FakeWeekCalendarResponse_4(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeMonthCalendarResponse_5 extends _i1.SmartFake
+    implements _i7.MonthCalendarResponse {
+  _FakeMonthCalendarResponse_5(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeYearCalendarResponse_6 extends _i1.SmartFake
+    implements _i8.YearCalendarResponse {
+  _FakeYearCalendarResponse_6(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeCustomError_7 extends _i1.SmartFake implements _i9.CustomError {
+  _FakeCustomError_7(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -99,13 +138,13 @@ class _FakeCustomError_4 extends _i1.SmartFake implements _i6.CustomError {
 /// A class which mocks [AnalyticsManager].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockAnalyticsManager extends _i1.Mock implements _i7.AnalyticsManager {
+class MockAnalyticsManager extends _i1.Mock implements _i10.AnalyticsManager {
   MockAnalyticsManager() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  void sendEvent(_i8.AnalyticsEvent? event) => super.noSuchMethod(
+  void sendEvent(_i11.AnalyticsEvent? event) => super.noSuchMethod(
         Invocation.method(
           #sendEvent,
           [event],
@@ -117,20 +156,20 @@ class MockAnalyticsManager extends _i1.Mock implements _i7.AnalyticsManager {
 /// A class which mocks [ClientApi].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockClientApi extends _i1.Mock implements _i9.ClientApi {
+class MockClientApi extends _i1.Mock implements _i12.ClientApi {
   MockClientApi() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i10.Future<_i2.AuthenticateGoogleResponse> authGoogle(
-          _i11.AuthenticateGoogleRequest? token) =>
+  _i13.Future<_i2.AuthenticateGoogleResponse> authGoogle(
+          _i14.AuthenticateGoogleRequest? token) =>
       (super.noSuchMethod(
         Invocation.method(
           #authGoogle,
           [token],
         ),
-        returnValue: _i10.Future<_i2.AuthenticateGoogleResponse>.value(
+        returnValue: _i13.Future<_i2.AuthenticateGoogleResponse>.value(
             _FakeAuthenticateGoogleResponse_0(
           this,
           Invocation.method(
@@ -138,73 +177,73 @@ class MockClientApi extends _i1.Mock implements _i9.ClientApi {
             [token],
           ),
         )),
-      ) as _i10.Future<_i2.AuthenticateGoogleResponse>);
+      ) as _i13.Future<_i2.AuthenticateGoogleResponse>);
 
   @override
-  _i10.Future<_i3.RegisterResponse> login(_i12.AuthRequest? body) =>
+  _i13.Future<_i3.RegisterResponse> login(_i15.AuthRequest? body) =>
       (super.noSuchMethod(
         Invocation.method(
           #login,
           [body],
         ),
         returnValue:
-            _i10.Future<_i3.RegisterResponse>.value(_FakeRegisterResponse_1(
+            _i13.Future<_i3.RegisterResponse>.value(_FakeRegisterResponse_1(
           this,
           Invocation.method(
             #login,
             [body],
           ),
         )),
-      ) as _i10.Future<_i3.RegisterResponse>);
+      ) as _i13.Future<_i3.RegisterResponse>);
 
   @override
-  _i10.Future<_i3.RegisterResponse> register(_i12.AuthRequest? body) =>
+  _i13.Future<_i3.RegisterResponse> register(_i15.AuthRequest? body) =>
       (super.noSuchMethod(
         Invocation.method(
           #register,
           [body],
         ),
         returnValue:
-            _i10.Future<_i3.RegisterResponse>.value(_FakeRegisterResponse_1(
+            _i13.Future<_i3.RegisterResponse>.value(_FakeRegisterResponse_1(
           this,
           Invocation.method(
             #register,
             [body],
           ),
         )),
-      ) as _i10.Future<_i3.RegisterResponse>);
+      ) as _i13.Future<_i3.RegisterResponse>);
 
   @override
-  _i10.Future<_i4.UserResponse> user() => (super.noSuchMethod(
+  _i13.Future<_i4.UserResponse> user() => (super.noSuchMethod(
         Invocation.method(
           #user,
           [],
         ),
-        returnValue: _i10.Future<_i4.UserResponse>.value(_FakeUserResponse_2(
+        returnValue: _i13.Future<_i4.UserResponse>.value(_FakeUserResponse_2(
           this,
           Invocation.method(
             #user,
             [],
           ),
         )),
-      ) as _i10.Future<_i4.UserResponse>);
+      ) as _i13.Future<_i4.UserResponse>);
 
   @override
-  _i10.Future<dynamic> uploadPhoto(_i13.File? photo) => (super.noSuchMethod(
+  _i13.Future<dynamic> uploadPhoto(_i16.File? photo) => (super.noSuchMethod(
         Invocation.method(
           #uploadPhoto,
           [photo],
         ),
-        returnValue: _i10.Future<dynamic>.value(),
-      ) as _i10.Future<dynamic>);
+        returnValue: _i13.Future<dynamic>.value(),
+      ) as _i13.Future<dynamic>);
 
   @override
-  _i10.Future<_i5.MeditationsResponse> meditations() => (super.noSuchMethod(
+  _i13.Future<_i5.MeditationsResponse> meditations() => (super.noSuchMethod(
         Invocation.method(
           #meditations,
           [],
         ),
-        returnValue: _i10.Future<_i5.MeditationsResponse>.value(
+        returnValue: _i13.Future<_i5.MeditationsResponse>.value(
             _FakeMeditationsResponse_3(
           this,
           Invocation.method(
@@ -212,16 +251,16 @@ class MockClientApi extends _i1.Mock implements _i9.ClientApi {
             [],
           ),
         )),
-      ) as _i10.Future<_i5.MeditationsResponse>);
+      ) as _i13.Future<_i5.MeditationsResponse>);
 
   @override
-  _i10.Future<_i5.MeditationsResponse> meditationsByUser(String? userId) =>
+  _i13.Future<_i5.MeditationsResponse> meditationsByUser(String? userId) =>
       (super.noSuchMethod(
         Invocation.method(
           #meditationsByUser,
           [userId],
         ),
-        returnValue: _i10.Future<_i5.MeditationsResponse>.value(
+        returnValue: _i13.Future<_i5.MeditationsResponse>.value(
             _FakeMeditationsResponse_3(
           this,
           Invocation.method(
@@ -229,174 +268,234 @@ class MockClientApi extends _i1.Mock implements _i9.ClientApi {
             [userId],
           ),
         )),
-      ) as _i10.Future<_i5.MeditationsResponse>);
+      ) as _i13.Future<_i5.MeditationsResponse>);
 
   @override
-  _i10.Future<void> createNewMeditation(
-          _i14.CreateNewMeditationsRequest? body) =>
+  _i13.Future<void> createNewMeditation(
+          _i17.CreateNewMeditationsRequest? body) =>
       (super.noSuchMethod(
         Invocation.method(
           #createNewMeditation,
           [body],
         ),
-        returnValue: _i10.Future<void>.value(),
-        returnValueForMissingStub: _i10.Future<void>.value(),
-      ) as _i10.Future<void>);
+        returnValue: _i13.Future<void>.value(),
+        returnValueForMissingStub: _i13.Future<void>.value(),
+      ) as _i13.Future<void>);
+
+  @override
+  _i13.Future<_i6.WeekCalendarResponse> calendarWeek(String? date) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #calendarWeek,
+          [date],
+        ),
+        returnValue: _i13.Future<_i6.WeekCalendarResponse>.value(
+            _FakeWeekCalendarResponse_4(
+          this,
+          Invocation.method(
+            #calendarWeek,
+            [date],
+          ),
+        )),
+      ) as _i13.Future<_i6.WeekCalendarResponse>);
+
+  @override
+  _i13.Future<_i7.MonthCalendarResponse> calendarMonth(
+    int? month,
+    int? year,
+  ) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #calendarMonth,
+          [
+            month,
+            year,
+          ],
+        ),
+        returnValue: _i13.Future<_i7.MonthCalendarResponse>.value(
+            _FakeMonthCalendarResponse_5(
+          this,
+          Invocation.method(
+            #calendarMonth,
+            [
+              month,
+              year,
+            ],
+          ),
+        )),
+      ) as _i13.Future<_i7.MonthCalendarResponse>);
+
+  @override
+  _i13.Future<_i8.YearCalendarResponse> calendarYear(int? year) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #calendarYear,
+          [year],
+        ),
+        returnValue: _i13.Future<_i8.YearCalendarResponse>.value(
+            _FakeYearCalendarResponse_6(
+          this,
+          Invocation.method(
+            #calendarYear,
+            [year],
+          ),
+        )),
+      ) as _i13.Future<_i8.YearCalendarResponse>);
 }
 
 /// A class which mocks [SecureStorage].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockSecureStorage extends _i1.Mock implements _i15.SecureStorage {
+class MockSecureStorage extends _i1.Mock implements _i18.SecureStorage {
   MockSecureStorage() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i10.Future<String> get tokenAPI => (super.noSuchMethod(
+  _i13.Future<String> get tokenAPI => (super.noSuchMethod(
         Invocation.getter(#tokenAPI),
-        returnValue: _i10.Future<String>.value(_i16.dummyValue<String>(
+        returnValue: _i13.Future<String>.value(_i19.dummyValue<String>(
           this,
           Invocation.getter(#tokenAPI),
         )),
-      ) as _i10.Future<String>);
+      ) as _i13.Future<String>);
 
   @override
-  _i10.Future<bool> get isLogged => (super.noSuchMethod(
+  _i13.Future<bool> get isLogged => (super.noSuchMethod(
         Invocation.getter(#isLogged),
-        returnValue: _i10.Future<bool>.value(false),
-      ) as _i10.Future<bool>);
+        returnValue: _i13.Future<bool>.value(false),
+      ) as _i13.Future<bool>);
 
   @override
-  _i10.Future<String> get userId => (super.noSuchMethod(
+  _i13.Future<String> get userId => (super.noSuchMethod(
         Invocation.getter(#userId),
-        returnValue: _i10.Future<String>.value(_i16.dummyValue<String>(
+        returnValue: _i13.Future<String>.value(_i19.dummyValue<String>(
           this,
           Invocation.getter(#userId),
         )),
-      ) as _i10.Future<String>);
+      ) as _i13.Future<String>);
 
   @override
-  _i10.Future<String> get userName => (super.noSuchMethod(
+  _i13.Future<String> get userName => (super.noSuchMethod(
         Invocation.getter(#userName),
-        returnValue: _i10.Future<String>.value(_i16.dummyValue<String>(
+        returnValue: _i13.Future<String>.value(_i19.dummyValue<String>(
           this,
           Invocation.getter(#userName),
         )),
-      ) as _i10.Future<String>);
+      ) as _i13.Future<String>);
 
   @override
-  _i10.Future<String> get userEmail => (super.noSuchMethod(
+  _i13.Future<String> get userEmail => (super.noSuchMethod(
         Invocation.getter(#userEmail),
-        returnValue: _i10.Future<String>.value(_i16.dummyValue<String>(
+        returnValue: _i13.Future<String>.value(_i19.dummyValue<String>(
           this,
           Invocation.getter(#userEmail),
         )),
-      ) as _i10.Future<String>);
+      ) as _i13.Future<String>);
 
   @override
-  _i10.Future<String> get googleId => (super.noSuchMethod(
+  _i13.Future<String> get googleId => (super.noSuchMethod(
         Invocation.getter(#googleId),
-        returnValue: _i10.Future<String>.value(_i16.dummyValue<String>(
+        returnValue: _i13.Future<String>.value(_i19.dummyValue<String>(
           this,
           Invocation.getter(#googleId),
         )),
-      ) as _i10.Future<String>);
+      ) as _i13.Future<String>);
 
   @override
-  _i10.Future<String> get profilePhoto => (super.noSuchMethod(
+  _i13.Future<String> get profilePhoto => (super.noSuchMethod(
         Invocation.getter(#profilePhoto),
-        returnValue: _i10.Future<String>.value(_i16.dummyValue<String>(
+        returnValue: _i13.Future<String>.value(_i19.dummyValue<String>(
           this,
           Invocation.getter(#profilePhoto),
         )),
-      ) as _i10.Future<String>);
+      ) as _i13.Future<String>);
 
   @override
-  _i10.Future<dynamic> setAllToNull() => (super.noSuchMethod(
+  _i13.Future<dynamic> setAllToNull() => (super.noSuchMethod(
         Invocation.method(
           #setAllToNull,
           [],
         ),
-        returnValue: _i10.Future<dynamic>.value(),
-      ) as _i10.Future<dynamic>);
+        returnValue: _i13.Future<dynamic>.value(),
+      ) as _i13.Future<dynamic>);
 
   @override
-  _i10.Future<void> setTokenAPI(String? tokenAPI) => (super.noSuchMethod(
+  _i13.Future<void> setTokenAPI(String? tokenAPI) => (super.noSuchMethod(
         Invocation.method(
           #setTokenAPI,
           [tokenAPI],
         ),
-        returnValue: _i10.Future<void>.value(),
-        returnValueForMissingStub: _i10.Future<void>.value(),
-      ) as _i10.Future<void>);
+        returnValue: _i13.Future<void>.value(),
+        returnValueForMissingStub: _i13.Future<void>.value(),
+      ) as _i13.Future<void>);
 
   @override
-  _i10.Future<void> setIsLogged(bool? isLogged) => (super.noSuchMethod(
+  _i13.Future<void> setIsLogged(bool? isLogged) => (super.noSuchMethod(
         Invocation.method(
           #setIsLogged,
           [isLogged],
         ),
-        returnValue: _i10.Future<void>.value(),
-        returnValueForMissingStub: _i10.Future<void>.value(),
-      ) as _i10.Future<void>);
+        returnValue: _i13.Future<void>.value(),
+        returnValueForMissingStub: _i13.Future<void>.value(),
+      ) as _i13.Future<void>);
 
   @override
-  _i10.Future<void> setUserId(String? userId) => (super.noSuchMethod(
+  _i13.Future<void> setUserId(String? userId) => (super.noSuchMethod(
         Invocation.method(
           #setUserId,
           [userId],
         ),
-        returnValue: _i10.Future<void>.value(),
-        returnValueForMissingStub: _i10.Future<void>.value(),
-      ) as _i10.Future<void>);
+        returnValue: _i13.Future<void>.value(),
+        returnValueForMissingStub: _i13.Future<void>.value(),
+      ) as _i13.Future<void>);
 
   @override
-  _i10.Future<void> setUserName(String? userName) => (super.noSuchMethod(
+  _i13.Future<void> setUserName(String? userName) => (super.noSuchMethod(
         Invocation.method(
           #setUserName,
           [userName],
         ),
-        returnValue: _i10.Future<void>.value(),
-        returnValueForMissingStub: _i10.Future<void>.value(),
-      ) as _i10.Future<void>);
+        returnValue: _i13.Future<void>.value(),
+        returnValueForMissingStub: _i13.Future<void>.value(),
+      ) as _i13.Future<void>);
 
   @override
-  _i10.Future<void> setUserEmail(String? userEmail) => (super.noSuchMethod(
+  _i13.Future<void> setUserEmail(String? userEmail) => (super.noSuchMethod(
         Invocation.method(
           #setUserEmail,
           [userEmail],
         ),
-        returnValue: _i10.Future<void>.value(),
-        returnValueForMissingStub: _i10.Future<void>.value(),
-      ) as _i10.Future<void>);
+        returnValue: _i13.Future<void>.value(),
+        returnValueForMissingStub: _i13.Future<void>.value(),
+      ) as _i13.Future<void>);
 
   @override
-  _i10.Future<void> setGoogleId(String? googleId) => (super.noSuchMethod(
+  _i13.Future<void> setGoogleId(String? googleId) => (super.noSuchMethod(
         Invocation.method(
           #setGoogleId,
           [googleId],
         ),
-        returnValue: _i10.Future<void>.value(),
-        returnValueForMissingStub: _i10.Future<void>.value(),
-      ) as _i10.Future<void>);
+        returnValue: _i13.Future<void>.value(),
+        returnValueForMissingStub: _i13.Future<void>.value(),
+      ) as _i13.Future<void>);
 
   @override
-  _i10.Future<void> setProfilePhoto(String? profilePhoto) =>
+  _i13.Future<void> setProfilePhoto(String? profilePhoto) =>
       (super.noSuchMethod(
         Invocation.method(
           #setProfilePhoto,
           [profilePhoto],
         ),
-        returnValue: _i10.Future<void>.value(),
-        returnValueForMissingStub: _i10.Future<void>.value(),
-      ) as _i10.Future<void>);
+        returnValue: _i13.Future<void>.value(),
+        returnValueForMissingStub: _i13.Future<void>.value(),
+      ) as _i13.Future<void>);
 }
 
 /// A class which mocks [CustomError].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockCustomError extends _i1.Mock implements _i6.CustomError {
+class MockCustomError extends _i1.Mock implements _i9.CustomError {
   MockCustomError() {
     _i1.throwOnMissingStub(this);
   }
@@ -411,7 +510,7 @@ class MockCustomError extends _i1.Mock implements _i6.CustomError {
       );
 
   @override
-  set code(_i6.ErrorCodes? _code) => super.noSuchMethod(
+  set code(_i9.ErrorCodes? _code) => super.noSuchMethod(
         Invocation.setter(
           #code,
           _code,
@@ -431,18 +530,18 @@ class MockCustomError extends _i1.Mock implements _i6.CustomError {
   @override
   String get getErrorMessage => (super.noSuchMethod(
         Invocation.getter(#getErrorMessage),
-        returnValue: _i16.dummyValue<String>(
+        returnValue: _i19.dummyValue<String>(
           this,
           Invocation.getter(#getErrorMessage),
         ),
       ) as String);
 
   @override
-  _i6.CustomError sendErrorToCrashlytics({
+  _i9.CustomError sendErrorToCrashlytics({
     String? message,
-    _i6.ErrorCodes? code,
+    _i9.ErrorCodes? code,
     StackTrace? stackTrace,
-    _i17.DioException? dioException,
+    _i20.DioException? dioException,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -455,7 +554,7 @@ class MockCustomError extends _i1.Mock implements _i6.CustomError {
             #dioException: dioException,
           },
         ),
-        returnValue: _FakeCustomError_4(
+        returnValue: _FakeCustomError_7(
           this,
           Invocation.method(
             #sendErrorToCrashlytics,
@@ -468,5 +567,5 @@ class MockCustomError extends _i1.Mock implements _i6.CustomError {
             },
           ),
         ),
-      ) as _i6.CustomError);
+      ) as _i9.CustomError);
 }

@@ -4,6 +4,7 @@ enum Identifiers {
   home,
   donation,
   meditometer,
+  calendar,
 }
 
 bool shouldShowBottomNavigationBar(String routeName) {
@@ -17,6 +18,7 @@ bool shouldShowBottomNavigationBar(String routeName) {
     GuidedMeditationProgramRoute.name,
     DonationRoute.name,
     MeditometerRoute.name,
+    CalendarRoute.name,
   ];
   return routesWithBottomNavigationBar.contains(routeName);
 }
@@ -43,6 +45,8 @@ getRoutesWithBottomNavigationBar({Identifiers? identifier}) {
       return [DonationRoute.name];
     case Identifiers.meditometer:
       return [MeditometerRoute.name];
+    case Identifiers.calendar:
+      return [CalendarRoute.name];
     default:
       return [
         HomeRoute.name,

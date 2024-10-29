@@ -3,6 +3,8 @@ import 'package:cinco_minutos_meditacao/core/di/helpers.dart';
 import 'package:cinco_minutos_meditacao/core/di/singletons.dart' as singletons;
 import 'package:cinco_minutos_meditacao/modules/authentication/di/setup.dart'
     as authentication;
+import 'package:cinco_minutos_meditacao/modules/calendar/di/setup.dart'
+    as calendar;
 import 'package:cinco_minutos_meditacao/modules/common/di/setup.dart' as common;
 import 'package:cinco_minutos_meditacao/modules/meditate/di/setup.dart'
     as meditate;
@@ -20,5 +22,6 @@ abstract class DI {
     authentication.setupInjectors();
     meditate.setupInjectors();
     meditometer.setupInjectors();
+    calendar.setupInjectors();
   }
 }

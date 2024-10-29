@@ -137,7 +137,7 @@ class _CameraViewState extends State<CameraView> {
 
     _controller = CameraController(
       frontCamera,
-      ResolutionPreset.max,
+      ResolutionPreset.low,
     );
 
     try {
@@ -160,13 +160,9 @@ class _CameraViewState extends State<CameraView> {
     }
 
     final XFile? picture = await _controller.takePicture();
-    setState(() {
-      if (picture != null) {
-        _image = File(picture.path);
-
-        Navigator.of(context).pop(_image);
-      }
-    });
+    if (picture != null) {
+      _showPreviewDialog(File(picture.path));
+    }
   }
 
   /// Seleciona uma imagem da galeria
@@ -192,5 +188,37 @@ class _CameraViewState extends State<CameraView> {
     setState(() {
       _isFlashOn = !_isFlashOn;
     });
+  }
+
+  void _showPreviewDialog(File imageFile) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Pré-visualizar Imagem'),
+          content: Image.file(imageFile),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: const Text('Rejeitar'),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop(); // Fecha o diálogo
+                setState(() {
+                  _image = imageFile;
+                });
+
+                Navigator.of(context)
+                    .pop(imageFile); // Retorna a imagem aprovada
+              },
+              child: const Text('Aprovar'),
+            ),
+          ],
+        );
+      },
+    );
   }
 }
