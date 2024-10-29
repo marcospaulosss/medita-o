@@ -102,22 +102,6 @@
       },
       "oauth_client": [
         {
-          "client_id": "106395996253-08bcto7ojojf3aqhnosen8l2dfvq4p8e.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "eumedito.org.cinco_minutos.dev",
-            "certificate_hash": "ff4e61cdbcd87da0baf80b214a697a295ee4afc3"
-          }
-        },
-        {
-          "client_id": "106395996253-78prpsbt0f6ncc9lm0pddul23950l4kt.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "eumedito.org.cinco_minutos.dev",
-            "certificate_hash": "61e8abd068607ee445bbeaf9d145e66a4c7b718d"
-          }
-        },
-        {
           "client_id": "106395996253-uef8scsv4hjnfkqne0tpm0c28u9j61cg.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
