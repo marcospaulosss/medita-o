@@ -46,7 +46,7 @@ platform :android do
       groups: "testers",
       android_artifact_type: "APK",
       android_artifact_path: "../build/app/outputs/flutter-apk/app-dev-debug.apk",
-      service_credentials_file: "./fastlane/google-service-account.json",
+      service_credentials_file: "../android/fastlane/google-service-account.json",
     )
   end
 
