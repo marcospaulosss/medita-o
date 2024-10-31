@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:auto_route/auto_route.dart';
 import 'package:camera/camera.dart';
 import 'package:cinco_minutos_meditacao/core/di/helpers.dart';
+import 'package:cinco_minutos_meditacao/shared/Theme/app_colors.dart';
 import 'package:cinco_minutos_meditacao/shared/models/error.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -56,12 +57,18 @@ class _CameraViewState extends State<CameraView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColors.black,
       body: isCameraInitialized
           ? Stack(
               alignment: Alignment.center,
               children: [
                 Positioned.fill(
-                  child: CameraPreview(_controller),
+                  top: 110,
+                  bottom: 200,
+                  child: AspectRatio(
+                    aspectRatio: 3 / 4,
+                    child: CameraPreview(_controller),
+                  ),
                 ),
                 Positioned(
                   top: 60,
@@ -137,7 +144,7 @@ class _CameraViewState extends State<CameraView> {
 
     _controller = CameraController(
       frontCamera,
-      ResolutionPreset.low,
+      ResolutionPreset.medium,
     );
 
     try {
@@ -196,7 +203,7 @@ class _CameraViewState extends State<CameraView> {
       builder: (BuildContext context) {
         return AlertDialog(
           title: const Text('Pré-visualizar Imagem'),
-          content: Image.file(imageFile),
+          content: Image.file(imageFile, fit: BoxFit.cover),
           actions: [
             TextButton(
               onPressed: () {

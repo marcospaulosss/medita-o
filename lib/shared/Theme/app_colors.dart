@@ -22,6 +22,7 @@ abstract class AppColors {
 
   /// black variations
   static const black54 = Colors.black54;
+  static const black = Colors.black;
 
   /// white variations
   static const brilliance = Color(0xfffcfcfc);
