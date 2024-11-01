@@ -49,6 +49,7 @@ class HomeViewState extends State<HomeView> implements HomeViewContract {
   @override
   void dispose() {
     presenter.unbindView();
+    stateController.dispose();
 
     super.dispose();
   }

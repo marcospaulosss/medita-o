@@ -65,6 +65,13 @@ class _BottomNavBarState extends State<BottomNavBar> {
                 identifier: Identifiers.calendar),
             const CalendarRoute(),
           ),
+          navigatorItem(
+            AppImages.profile,
+            "Perfil",
+            shouldShowIdentify(widget.routeName,
+                identifier: Identifiers.profile),
+            const ProfileRoute(),
+          ),
         ],
       ),
     );
