@@ -7,6 +7,9 @@ class AppHeader extends StatelessWidget {
   /// Nome do usuário
   final String nameUser;
 
+  /// cor do texto do nome do usuário
+  Color? colorName;
+
   /// frases que formam a descrição
   final String description1;
   final String description2;
@@ -19,6 +22,7 @@ class AppHeader extends StatelessWidget {
   final Function updateImage;
 
   /// - [nameUser] Nome do usuário
+  /// - [colorName] cor do texto do nome do usuário
   /// - [description] frase de descrição
   /// - [photo] foto do usuário
   /// - [updateImage] função para atualizar a imagem
@@ -26,6 +30,7 @@ class AppHeader extends StatelessWidget {
   AppHeader({
     super.key,
     this.nameUser = "",
+    this.colorName = AppColors.white,
     this.description1 = "",
     this.description2 = "",
     this.description3 = "",
@@ -48,9 +53,9 @@ class AppHeader extends StatelessWidget {
                 padding: const EdgeInsets.only(left: 78.0, top: 30),
                 child: Text(
                   "${SharedStrings.of(context).hello}, $nameUser!",
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontSize: 23,
-                    color: AppColors.white,
+                    color: colorName,
                     fontWeight: FontWeight.w700,
                   ),
                 ),
