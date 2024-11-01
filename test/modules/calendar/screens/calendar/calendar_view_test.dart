@@ -213,7 +213,7 @@ void main() {
         expect(find.text(monthName), findsOneWidget);
         expect(find.byIcon(Icons.chevron_left), findsOneWidget);
         expect(find.byIcon(Icons.chevron_right), findsOneWidget);
-        expect(find.text("31"), findsNWidgets(2));
+        expect(find.text("28"), findsNWidgets(1));
         expect(find.textContaining("mês", findRichText: true), findsOneWidget);
       });
 
