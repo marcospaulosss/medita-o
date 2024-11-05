@@ -9,5 +9,7 @@ class LogService {
       error: err,
       stackTrace: trace,
     );
+
+    developer.log(err.toString());
   }
 }

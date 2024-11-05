@@ -1,9 +1,11 @@
 import 'package:cinco_minutos_meditacao/modules/authentication/shared/helpers/validators.dart';
 import 'package:cinco_minutos_meditacao/modules/authentication/shared/strings/localization/authentication_strings.dart';
+import 'package:cinco_minutos_meditacao/modules/common/shared/strings/localization/common_strings.dart';
 import 'package:cinco_minutos_meditacao/shared/Theme/app_colors.dart';
 import 'package:cinco_minutos_meditacao/shared/components/icon_label_button.dart';
-import 'package:cinco_minutos_meditacao/shared/components/icon_text.dart';
 import 'package:cinco_minutos_meditacao/shared/components/text_field_input.dart';
+import 'package:datepicker_dropdown/datepicker_dropdown.dart';
+import 'package:datepicker_dropdown/order_format.dart';
 import 'package:flutter/material.dart';
 
 class FormProfile extends StatefulWidget {
@@ -32,21 +34,49 @@ class _FormProfileState extends State<FormProfile> {
   /// Controlador do campo de texto de nome
   final TextEditingController lastNameController = TextEditingController();
 
-  /// Controlador do campo de texto de senha
-  final TextEditingController passwordController = TextEditingController();
+  AutovalidateMode _autovalidate = AutovalidateMode.disabled;
 
-  /// Controlador do campo de texto de repetir senha
-  final TextEditingController repeatPasswordController =
-      TextEditingController();
+  int _selectedDay = 14;
+  int _selectedMonth = 2;
+  int _selectedYear = 1993;
 
-  /// Se a senha está oculta
-  bool obscurePasswordText = true;
+  final List<String> listGender = [
+    'Masculino',
+    'Feminino',
+  ];
+  String? selectedValueGender = "Feminino";
 
-  /// Se a senha está oculta
-  bool obscureRepeatPasswordText = true;
-
-  /// Se o usuário quer lembrar a senha
-  bool rememberPassword = true;
+  final List<String> listState = [
+    'BR',
+    'Acre',
+    'Alagoas',
+    'Amapá',
+    'Amazonas',
+    'Bahia',
+    'Ceará',
+    'Distrito Federal',
+    'Espírito Santo',
+    'Goiás',
+    'Maranhão',
+    'Mato Grosso',
+    'Mato Grosso do Sul',
+    'Minas Gerais',
+    'Pará',
+    'Paraíba',
+    'Paraná',
+    'Pernambuco',
+    'Piauí',
+    'Rio de Janeiro',
+    'Rio Grande do Norte',
+    'Rio Grande do Sul',
+    'Rondônia',
+    'Roraima',
+    'Santa Catarina',
+    'São Paulo',
+    'Sergipe',
+    'Tocantins',
+  ];
+  String? selectedValueStates = "BR";
 
   @override
   void initState() {
@@ -58,8 +88,6 @@ class _FormProfileState extends State<FormProfile> {
     emailController.dispose();
     nameController.dispose();
     lastNameController.dispose();
-    passwordController.dispose();
-    repeatPasswordController.dispose();
 
     super.dispose();
   }
@@ -68,50 +96,32 @@ class _FormProfileState extends State<FormProfile> {
   Widget build(BuildContext context) {
     return Form(
       key: _formKey,
-      child: Padding(
+      autovalidateMode: _autovalidate,
+      child: Container(
         padding: const EdgeInsets.only(top: 21, bottom: 18),
+        width: double.infinity,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             TextFieldInput(
-              hintText: AuthenticationStrings.of(context).name,
+              hintText: CommonStrings.of(context).profileFormName,
               controller: nameController,
               keyboardType: TextInputType.text,
               label: AuthenticationStrings.of(context).name,
               contentPadding: const EdgeInsets.only(left: 10, right: 10),
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(12),
-                borderSide: const BorderSide(
-                  color: AppColors.brainstemGrey,
-                  width: 1,
-                ),
-              ),
-              labelStyle: const TextStyle(
-                fontSize: 15,
-                fontWeight: FontWeight.w400,
-                color: AppColors.frankBlue,
-              ),
+              border: buildOutlineInputBorderDefault(),
+              labelStyle: buildTextStyleDefault(),
               validator: (value) => Validators.required(context, value),
             ),
             const SizedBox(height: 9),
             TextFieldInput(
-              hintText: "Sobrenome",
+              hintText: CommonStrings.of(context).profileFormLastName,
               controller: lastNameController,
               keyboardType: TextInputType.text,
-              label: "Sobrenome",
+              label: CommonStrings.of(context).profileFormLastName,
               contentPadding: const EdgeInsets.only(left: 10, right: 10),
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(12),
-                borderSide: const BorderSide(
-                  color: AppColors.brainstemGrey,
-                  width: 1,
-                ),
-              ),
-              labelStyle: const TextStyle(
-                fontSize: 15,
-                fontWeight: FontWeight.w400,
-                color: AppColors.frankBlue,
-              ),
+              border: buildOutlineInputBorderDefault(),
+              labelStyle: buildTextStyleDefault(),
               validator: (value) => Validators.required(context, value),
             ),
             const SizedBox(height: 9),
@@ -121,69 +131,43 @@ class _FormProfileState extends State<FormProfile> {
               keyboardType: TextInputType.emailAddress,
               label: AuthenticationStrings.of(context).email,
               contentPadding: const EdgeInsets.only(left: 10, right: 10),
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(12),
-                borderSide: const BorderSide(
-                  color: AppColors.brainstemGrey,
-                  width: 1,
-                ),
-              ),
+              border: buildOutlineInputBorderDefault(),
+              labelStyle: buildTextStyleDefault(),
               validator: (value) => Validators.email(context, value),
             ),
             const SizedBox(height: 9),
-            TextFieldInput(
-              hintText: AuthenticationStrings.of(context).obscurePassword,
-              controller: passwordController,
-              obscureText: obscurePasswordText,
-              keyboardType: TextInputType.text,
-              label: AuthenticationStrings.of(context).password,
-              contentPadding: const EdgeInsets.only(left: 10, right: 10),
-              style: const TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.w400,
-                color: AppColors.brainstemGrey,
-              ),
-              suffixIcon: IconButton(
-                onPressed: () => setState(() {
-                  obscurePasswordText = !obscurePasswordText;
-                }),
-                icon: Icon(
-                  (obscurePasswordText)
-                      ? Icons.visibility_outlined
-                      : Icons.visibility_off_outlined,
-                  color: AppColors.frankBlue,
-                  size: 20,
-                ),
-              ),
-              validator: (value) => Validators.required(context, value),
-            ),
+            buildDropBoxNasc(),
             const SizedBox(height: 9),
-            TextFieldInput(
-              hintText: AuthenticationStrings.of(context).obscurePassword,
-              controller: repeatPasswordController,
-              obscureText: obscureRepeatPasswordText,
-              keyboardType: TextInputType.text,
-              label: AuthenticationStrings.of(context).confirmPassword,
-              contentPadding: const EdgeInsets.only(left: 10, right: 10),
-              style: const TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.w400,
-                color: AppColors.brainstemGrey,
-              ),
-              suffixIcon: IconButton(
-                onPressed: () => setState(() {
-                  obscureRepeatPasswordText = !obscureRepeatPasswordText;
-                }),
-                icon: Icon(
-                  (obscureRepeatPasswordText)
-                      ? Icons.visibility_outlined
-                      : Icons.visibility_off_outlined,
-                  color: AppColors.frankBlue,
-                  size: 20,
+            buildDropBox("Gênero", listGender, selectedValueGender,
+                (String value) {
+              setState(() {
+                selectedValueGender = value;
+              });
+            }),
+            const SizedBox(height: 9),
+            Row(
+              children: [
+                Container(
+                  width: MediaQuery.of(context).size.width * 0.45,
+                  child: buildDropBox(
+                      "Onde Reside", listState, selectedValueStates,
+                      (String value) {
+                    setState(() {
+                      selectedValueStates = value;
+                    });
+                  }),
                 ),
-              ),
-              validator: (value) => Validators.repeatPassword(
-                  context, value, passwordController.text),
+                const SizedBox(width: 7),
+                Container(
+                  width: MediaQuery.of(context).size.width * 0.32,
+                  child: buildDropBox(null, listGender, selectedValueGender,
+                      (String value) {
+                    setState(() {
+                      selectedValueGender = value;
+                    });
+                  }),
+                ),
+              ],
             ),
             const SizedBox(height: 20),
             buildQuestionsLogin(),
@@ -193,48 +177,163 @@ class _FormProfileState extends State<FormProfile> {
     );
   }
 
+  Column buildDropBox(String? title, List<String> list, String? selectedValue,
+      Function onChange) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          title ?? "",
+          style: buildTextStyleDefault(),
+        ),
+        const SizedBox(height: 5),
+        Container(
+          padding: const EdgeInsets.symmetric(horizontal: 21),
+          decoration: buildBoxDecorationDropBoxDefault(),
+          child: DropdownButtonHideUnderline(
+            child: DropdownButton<String>(
+              isExpanded: true,
+              value: selectedValue,
+              icon: const Icon(
+                Icons.arrow_drop_down,
+                color: AppColors.brainstemGrey,
+              ),
+              borderRadius: BorderRadius.circular(12),
+              dropdownColor: AppColors.white,
+              iconSize: 24,
+              elevation: 16,
+              style: buildTextStyleDropBoxDefault(),
+              onChanged: (String? newValue) => onChange(newValue!),
+              items: list
+                  .map(
+                    (String item) => DropdownMenuItem<String>(
+                      value: item,
+                      child: Text(
+                        item,
+                        style: buildTextStyleDropBoxDefault(),
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                  )
+                  .toList(),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  TextStyle buildTextStyleDropBoxDefault() {
+    return const TextStyle(
+      fontSize: 20,
+      fontWeight: FontWeight.w400,
+      color: AppColors.brainstemGrey,
+    );
+  }
+
+  BoxDecoration buildBoxDecorationDropBoxDefault() {
+    return BoxDecoration(
+      border: Border.all(
+        color: AppColors.brainstemGrey,
+        width: 1,
+      ),
+      borderRadius: BorderRadius.circular(12),
+      color: AppColors.white,
+    );
+  }
+
+  Column buildDropBoxNasc() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Text(
+          "Data de Nascimento",
+          style: TextStyle(
+            fontSize: 15,
+            fontWeight: FontWeight.w400,
+            color: AppColors.frankBlue,
+          ),
+        ),
+        const SizedBox(height: 5),
+        DropdownDatePicker(
+          locale: "pt_BR",
+          dateformatorder: OrderFormat.DMY,
+          icon: const Icon(
+            Icons.arrow_drop_down,
+            color: AppColors.brainstemGrey,
+          ),
+          hintDay: 'Dia',
+          hintMonth: 'Mês',
+          hintYear: 'Ano',
+          textStyle: const TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.w400,
+            color: AppColors.brainstemGrey,
+          ),
+          boxDecoration: BoxDecoration(
+            color: AppColors.white,
+            borderRadius: BorderRadius.circular(12),
+          ),
+          dayFlex: 2,
+          inputDecoration: InputDecoration(
+            contentPadding: const EdgeInsets.all(0),
+            border: buildOutlineInputBorderDefault(),
+          ),
+          isFormValidator: true,
+          startYear: 1900,
+          endYear: 2020,
+          width: 7,
+          // selectedDay: _selectedDay,
+          // selectedMonth: _selectedMonth,
+          // selectedYear: _selectedYear,
+          onChangedDay: (value) {
+            setState(() {
+              _selectedDay = int.parse(value!);
+            });
+          },
+          onChangedMonth: (value) {
+            setState(() {
+              _selectedMonth = int.parse(value!);
+            });
+          },
+          onChangedYear: (value) {
+            setState(() {
+              _selectedYear = int.parse(value!);
+            });
+          }, // optional
+        ),
+      ],
+    );
+  }
+
+  TextStyle buildTextStyleDefault() {
+    return const TextStyle(
+      fontSize: 15,
+      fontWeight: FontWeight.w400,
+      color: AppColors.frankBlue,
+    );
+  }
+
+  OutlineInputBorder buildOutlineInputBorderDefault() {
+    return OutlineInputBorder(
+      borderRadius: BorderRadius.circular(12),
+      borderSide: const BorderSide(
+        color: AppColors.brainstemGrey,
+        width: 1,
+      ),
+    );
+  }
+
   Column buildQuestionsLogin() {
     return Column(
       children: [
-        Padding(
-          padding: const EdgeInsets.only(left: 14, right: 14, bottom: 20),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              IconText(
-                icon: Icon(
-                  Icons.check,
-                  size: 28,
-                  color: rememberPassword
-                      ? AppColors.frankBlue
-                      : Colors.transparent,
-                  opticalSize: 1,
-                ),
-                onTap: () {
-                  print("Lembrar Senha");
-                  setState(() {
-                    rememberPassword = !rememberPassword;
-                  });
-                },
-                text: Text(
-                  AuthenticationStrings.of(context).rememberPassword,
-                  style: const TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w400,
-                    color: AppColors.frankBlue,
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
         IconLabelButton(
           onTap: () {
             if (_formKey.currentState!.validate()) {
               widget.onRegister(
                 nameController.text,
                 emailController.text,
-                passwordController.text,
+                lastNameController.text,
               );
             }
           },

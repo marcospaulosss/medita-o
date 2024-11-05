@@ -4,5 +4,9 @@
   "fiveMinutes": "5 min",
   "learnMethod": "Aprenda o \nmétodo",
   "guidedMeditate": "Meditação \nguiada",
-  "meditateTime": "Medite no \nseu tempo"
+  "meditateTime": "Medite no \nseu tempo",
+  "profileHeaderDescription1": "Clique aqui e complete o seu perfil!",
+  "profileUpdateInfo": "Atualize seus dados de perfil e acompanhe seus minutos meditados!",
+  "profileFormName": "Nome",
+  "profileFormLastName": "Sobrenome"
 }
