@@ -32,11 +32,11 @@ class UserResponse {
 
   /// id do google
   @JsonKey(name: 'google_id')
-  String googleId;
+  String? googleId;
 
   /// id do facebook
   @JsonKey(name: 'facebook_id')
-  dynamic facebookId;
+  dynamic? facebookId;
 
   /// url da foto de perfil
   @JsonKey(name: 'profile_photo_path')
@@ -44,11 +44,11 @@ class UserResponse {
 
   /// data de criação
   @JsonKey(name: 'created_at')
-  String createdAt;
+  String? createdAt;
 
   /// data de atualização
   @JsonKey(name: 'updated_at')
-  String updatedAt;
+  String? updatedAt;
 
   /// - [id] : id do usuário
   /// - [name] : nome do usuário
