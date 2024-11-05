@@ -1,5 +1,6 @@
 import 'package:auto_route/annotations.dart';
 import 'package:cinco_minutos_meditacao/modules/common/screens/profile/components/form_profile.dart';
+import 'package:cinco_minutos_meditacao/modules/common/shared/strings/localization/common_strings.dart';
 import 'package:cinco_minutos_meditacao/shared/Theme/app_colors.dart';
 import 'package:cinco_minutos_meditacao/shared/components/app_header.dart';
 import 'package:cinco_minutos_meditacao/shared/components/generic_error_container.dart';
@@ -63,7 +64,8 @@ class _ProfileViewState extends State<ProfileView> {
                 // updateImage: () => presenter.updateImageProfile(),
                 nameUser: "Gabriela",
                 colorName: AppColors.chineseBlue,
-                description1: "Clique aqui e complete o seu perfil!",
+                description1:
+                    CommonStrings.of(context).profileHeaderDescription1,
                 updateImage: () {},
               ),
             ),
@@ -80,8 +82,8 @@ class _ProfileViewState extends State<ProfileView> {
       child: Column(
         children: [
           Text(
-            "Atualize seus dados de perfil e acompanhe seus minutos meditados!",
-            style: TextStyle(
+            CommonStrings.of(context).profileUpdateInfo,
+            style: const TextStyle(
               fontSize: 19,
               color: AppColors.frankBlue,
               fontWeight: FontWeight.w400,

@@ -130,6 +130,30 @@ abstract class CommonStrings {
   /// In pt, this message translates to:
   /// **'Medite no \nseu tempo'**
   String get meditateTime;
+
+  /// No description provided for @profileHeaderDescription1.
+  ///
+  /// In pt, this message translates to:
+  /// **'Clique aqui e complete o seu perfil!'**
+  String get profileHeaderDescription1;
+
+  /// No description provided for @profileUpdateInfo.
+  ///
+  /// In pt, this message translates to:
+  /// **'Atualize seus dados de perfil e acompanhe seus minutos meditados!'**
+  String get profileUpdateInfo;
+
+  /// No description provided for @profileFormName.
+  ///
+  /// In pt, this message translates to:
+  /// **'Nome'**
+  String get profileFormName;
+
+  /// No description provided for @profileFormLastName.
+  ///
+  /// In pt, this message translates to:
+  /// **'Sobrenome'**
+  String get profileFormLastName;
 }
 
 class _CommonStringsDelegate extends LocalizationsDelegate<CommonStrings> {
