@@ -18,10 +18,11 @@ class ProfileView extends StatefulWidget {
   const ProfileView({super.key});
 
   @override
-  State<ProfileView> createState() => _ProfileViewState();
+  State<ProfileView> createState() => ProfileViewState();
 }
 
-class _ProfileViewState extends State<ProfileView>
+@visibleForTesting
+class ProfileViewState extends State<ProfileView>
     implements ProfileViewContract {
   /// Presenter
   Presenter presenter = resolve<ProfilePresenter>();
