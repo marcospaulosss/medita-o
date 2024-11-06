@@ -6,4 +6,9 @@ abstract class CommonEvents {
   static AnalyticsEvent get homeScreenOpened {
     return AnalyticsEvent(name: "abriu_tela_home");
   }
+
+  /// Evento disparado quando a tela de perfil do app é acessada.
+  static AnalyticsEvent get profileScreenOpened {
+    return AnalyticsEvent(name: "abriu_tela_perfil");
+  }
 }

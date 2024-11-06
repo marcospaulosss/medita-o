@@ -1,5 +1,6 @@
 import 'package:cinco_minutos_meditacao/modules/authentication/shared/helpers/validators.dart';
 import 'package:cinco_minutos_meditacao/modules/authentication/shared/strings/localization/authentication_strings.dart';
+import 'package:cinco_minutos_meditacao/modules/common/screens/profile/profile_model.dart';
 import 'package:cinco_minutos_meditacao/modules/common/shared/strings/localization/common_strings.dart';
 import 'package:cinco_minutos_meditacao/shared/Theme/app_colors.dart';
 import 'package:cinco_minutos_meditacao/shared/components/icon_label_button.dart';
@@ -12,10 +13,18 @@ class FormProfile extends StatefulWidget {
   /// Função de registro
   Function onRegister;
 
+  /// Modelo da tela
+  ProfileModel profileModel;
+
   /// - [key] : Chave de identificação do widget
   /// - [onRegister] : Mensagem de erro de e-mail inválido
+  /// - [profileModel] : Modelo da tela
   /// construtor
-  FormProfile({super.key, required this.onRegister});
+  FormProfile({
+    super.key,
+    required this.onRegister,
+    required this.profileModel,
+  });
 
   @override
   State<FormProfile> createState() => _FormProfileState();
@@ -39,6 +48,16 @@ class _FormProfileState extends State<FormProfile> {
     'BR', 'Acre', 'Alagoas', //... continue a lista completa
   ];
   String? selectedValueStates = 'BR';
+
+  @override
+  void initState() {
+    nameController.text =
+        widget.profileModel.userResponse?.name.split(" ").first ?? '';
+    lastNameController.text =
+        widget.profileModel.userResponse?.name.split(" ").last ?? '';
+    emailController.text = widget.profileModel.userResponse?.email ?? '';
+    super.initState();
+  }
 
   @override
   void dispose() {
@@ -128,14 +147,7 @@ class _FormProfileState extends State<FormProfile> {
               ],
             ),
             const SizedBox(height: 26),
-            _buildQuestionsLogin(),
-            _buildPrivacyPolicy(),
-            const Divider(
-              color: AppColors.frankBlue,
-              thickness: 1,
-              height: 30,
-            ),
-            _buildExitApp(),
+            _buildSave(),
           ],
         ),
       ),
@@ -158,66 +170,6 @@ class _FormProfileState extends State<FormProfile> {
       border: _buildOutlineInputBorderDefault(),
       labelStyle: _buildTextStyleDefault(),
       validator: validator,
-    );
-  }
-
-  Widget _buildPrivacyPolicy() {
-    return GestureDetector(
-      child: RichText(
-        textAlign: TextAlign.center,
-        text: TextSpan(
-          text: CommonStrings.of(context).privacyPolicy1,
-          style: const TextStyle(
-            fontSize: 13,
-            fontWeight: FontWeight.w300,
-            color: AppColors.frankBlue,
-            fontFamily: 'Heebo',
-          ),
-          children: [
-            TextSpan(
-              text: CommonStrings.of(context).privacyPolicy2,
-              style: const TextStyle(
-                fontSize: 13,
-                fontWeight: FontWeight.w400,
-                color: AppColors.frankBlue,
-                decoration: TextDecoration.underline,
-                fontFamily: 'Heebo',
-              ),
-            ),
-          ],
-        ),
-      ),
-      onTap: () {
-        debugPrint("Política de Privacidade");
-      },
-    );
-  }
-
-  Widget _buildExitApp() {
-    return GestureDetector(
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: [
-          Text(
-            CommonStrings.of(context).exitApp,
-            style: const TextStyle(
-              fontSize: 13,
-              fontWeight: FontWeight.w400,
-              color: AppColors.frankBlue,
-              fontFamily: 'Heebo',
-            ),
-          ),
-          const SizedBox(width: 10),
-          const Icon(
-            Icons.exit_to_app,
-            color: AppColors.frankBlue,
-            size: 20,
-          ),
-        ],
-      ),
-      onTap: () {
-        debugPrint("Sair do App");
-      },
     );
   }
 
@@ -331,7 +283,7 @@ class _FormProfileState extends State<FormProfile> {
     );
   }
 
-  Widget _buildQuestionsLogin() {
+  Widget _buildSave() {
     return Column(
       children: [
         IconLabelButton(
@@ -363,7 +315,6 @@ class _FormProfileState extends State<FormProfile> {
             ),
           ),
         ),
-        const SizedBox(height: 18),
       ],
     );
   }
