@@ -8,5 +8,16 @@
   "profileHeaderDescription1": "Clique aqui e complete o seu perfil!",
   "profileUpdateInfo": "Atualize seus dados de perfil e acompanhe seus minutos meditados!",
   "profileFormName": "Nome",
-  "profileFormLastName": "Sobrenome"
+  "profileFormLastName": "Sobrenome",
+  "gender": "Gênero",
+  "whereYouLive": "Onde Reside",
+  "privacyPolicy1": "Ao salvar os seus dados você concorda com a nossa ",
+  "privacyPolicy2": "Política de Privacidade",
+  "exitApp": "SAIR DO APP",
+  "dateBirth": "Data de Nascimento",
+  "datePickerLocation": "pt_BR",
+  "day": "Dia",
+  "month": "Mês",
+  "year": "Ano",
+  "profileLabelButton": "Salvar Dados"
 }
