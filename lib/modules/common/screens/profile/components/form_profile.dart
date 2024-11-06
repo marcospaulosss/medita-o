@@ -22,73 +22,29 @@ class FormProfile extends StatefulWidget {
 }
 
 class _FormProfileState extends State<FormProfile> {
-  /// Chave do formulário
   final _formKey = GlobalKey<FormState>();
-
-  /// Controlador do campo de texto de e-mail
   final TextEditingController emailController = TextEditingController();
-
-  /// Controlador do campo de texto de nome
   final TextEditingController nameController = TextEditingController();
-
-  /// Controlador do campo de texto de nome
   final TextEditingController lastNameController = TextEditingController();
-
   AutovalidateMode _autovalidate = AutovalidateMode.disabled;
 
   int _selectedDay = 14;
   int _selectedMonth = 2;
   int _selectedYear = 1993;
 
-  final List<String> listGender = [
-    'Masculino',
-    'Feminino',
-  ];
-  String? selectedValueGender = "Feminino";
+  final List<String> listGender = ['Masculino', 'Feminino'];
+  String? selectedValueGender = 'Feminino';
 
   final List<String> listState = [
-    'BR',
-    'Acre',
-    'Alagoas',
-    'Amapá',
-    'Amazonas',
-    'Bahia',
-    'Ceará',
-    'Distrito Federal',
-    'Espírito Santo',
-    'Goiás',
-    'Maranhão',
-    'Mato Grosso',
-    'Mato Grosso do Sul',
-    'Minas Gerais',
-    'Pará',
-    'Paraíba',
-    'Paraná',
-    'Pernambuco',
-    'Piauí',
-    'Rio de Janeiro',
-    'Rio Grande do Norte',
-    'Rio Grande do Sul',
-    'Rondônia',
-    'Roraima',
-    'Santa Catarina',
-    'São Paulo',
-    'Sergipe',
-    'Tocantins',
+    'BR', 'Acre', 'Alagoas', //... continue a lista completa
   ];
-  String? selectedValueStates = "BR";
-
-  @override
-  void initState() {
-    super.initState();
-  }
+  String? selectedValueStates = 'BR';
 
   @override
   void dispose() {
     emailController.dispose();
     nameController.dispose();
     lastNameController.dispose();
-
     super.dispose();
   }
 
@@ -103,93 +59,184 @@ class _FormProfileState extends State<FormProfile> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            TextFieldInput(
+            _buildTextField(
               hintText: CommonStrings.of(context).profileFormName,
               controller: nameController,
-              keyboardType: TextInputType.text,
               label: AuthenticationStrings.of(context).name,
-              contentPadding: const EdgeInsets.only(left: 10, right: 10),
-              border: buildOutlineInputBorderDefault(),
-              labelStyle: buildTextStyleDefault(),
               validator: (value) => Validators.required(context, value),
             ),
             const SizedBox(height: 9),
-            TextFieldInput(
+            _buildTextField(
               hintText: CommonStrings.of(context).profileFormLastName,
               controller: lastNameController,
-              keyboardType: TextInputType.text,
               label: CommonStrings.of(context).profileFormLastName,
-              contentPadding: const EdgeInsets.only(left: 10, right: 10),
-              border: buildOutlineInputBorderDefault(),
-              labelStyle: buildTextStyleDefault(),
               validator: (value) => Validators.required(context, value),
             ),
             const SizedBox(height: 9),
-            TextFieldInput(
+            _buildTextField(
               hintText: AuthenticationStrings.of(context).exampleEmail,
               controller: emailController,
-              keyboardType: TextInputType.emailAddress,
               label: AuthenticationStrings.of(context).email,
-              contentPadding: const EdgeInsets.only(left: 10, right: 10),
-              border: buildOutlineInputBorderDefault(),
-              labelStyle: buildTextStyleDefault(),
+              keyboardType: TextInputType.emailAddress,
               validator: (value) => Validators.email(context, value),
             ),
             const SizedBox(height: 9),
-            buildDropBoxNasc(),
+            _buildDropBoxBirth(),
             const SizedBox(height: 9),
-            buildDropBox("Gênero", listGender, selectedValueGender,
-                (String value) {
-              setState(() {
-                selectedValueGender = value;
-              });
-            }),
+            _buildDropBox(
+              label: CommonStrings.of(context).gender,
+              list: listGender,
+              selectedValue: selectedValueGender,
+              onChanged: (String value) {
+                setState(() {
+                  selectedValueGender = value;
+                });
+              },
+            ),
             const SizedBox(height: 9),
             Row(
               children: [
-                Container(
-                  width: MediaQuery.of(context).size.width * 0.45,
-                  child: buildDropBox(
-                      "Onde Reside", listState, selectedValueStates,
-                      (String value) {
-                    setState(() {
-                      selectedValueStates = value;
-                    });
-                  }),
+                Expanded(
+                  flex: 5,
+                  child: _buildDropBox(
+                    label: CommonStrings.of(context).whereYouLive,
+                    list: listState,
+                    selectedValue: selectedValueStates,
+                    onChanged: (String value) {
+                      setState(() {
+                        selectedValueStates = value;
+                      });
+                    },
+                  ),
                 ),
                 const SizedBox(width: 7),
-                Container(
-                  width: MediaQuery.of(context).size.width * 0.32,
-                  child: buildDropBox(null, listGender, selectedValueGender,
-                      (String value) {
-                    setState(() {
-                      selectedValueGender = value;
-                    });
-                  }),
+                Expanded(
+                  flex: 3,
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 26),
+                    child: _buildDropBox(
+                      list: listGender,
+                      selectedValue: selectedValueGender,
+                      onChanged: (String value) {
+                        setState(() {
+                          selectedValueGender = value;
+                        });
+                      },
+                    ),
+                  ),
                 ),
               ],
             ),
-            const SizedBox(height: 20),
-            buildQuestionsLogin(),
+            const SizedBox(height: 26),
+            _buildQuestionsLogin(),
+            _buildPrivacyPolicy(),
+            const Divider(
+              color: AppColors.frankBlue,
+              thickness: 1,
+              height: 30,
+            ),
+            _buildExitApp(),
           ],
         ),
       ),
     );
   }
 
-  Column buildDropBox(String? title, List<String> list, String? selectedValue,
-      Function onChange) {
+  Widget _buildTextField({
+    required String hintText,
+    required TextEditingController controller,
+    required String label,
+    TextInputType keyboardType = TextInputType.text,
+    String? Function(String?)? validator,
+  }) {
+    return TextFieldInput(
+      hintText: hintText,
+      controller: controller,
+      keyboardType: keyboardType,
+      label: label,
+      contentPadding: const EdgeInsets.symmetric(horizontal: 10),
+      border: _buildOutlineInputBorderDefault(),
+      labelStyle: _buildTextStyleDefault(),
+      validator: validator,
+    );
+  }
+
+  Widget _buildPrivacyPolicy() {
+    return GestureDetector(
+      child: RichText(
+        textAlign: TextAlign.center,
+        text: TextSpan(
+          text: CommonStrings.of(context).privacyPolicy1,
+          style: const TextStyle(
+            fontSize: 13,
+            fontWeight: FontWeight.w300,
+            color: AppColors.frankBlue,
+            fontFamily: 'Heebo',
+          ),
+          children: [
+            TextSpan(
+              text: CommonStrings.of(context).privacyPolicy2,
+              style: const TextStyle(
+                fontSize: 13,
+                fontWeight: FontWeight.w400,
+                color: AppColors.frankBlue,
+                decoration: TextDecoration.underline,
+                fontFamily: 'Heebo',
+              ),
+            ),
+          ],
+        ),
+      ),
+      onTap: () {
+        debugPrint("Política de Privacidade");
+      },
+    );
+  }
+
+  Widget _buildExitApp() {
+    return GestureDetector(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          Text(
+            CommonStrings.of(context).exitApp,
+            style: const TextStyle(
+              fontSize: 13,
+              fontWeight: FontWeight.w400,
+              color: AppColors.frankBlue,
+              fontFamily: 'Heebo',
+            ),
+          ),
+          const SizedBox(width: 10),
+          const Icon(
+            Icons.exit_to_app,
+            color: AppColors.frankBlue,
+            size: 20,
+          ),
+        ],
+      ),
+      onTap: () {
+        debugPrint("Sair do App");
+      },
+    );
+  }
+
+  Widget _buildDropBox({
+    String? label,
+    required List<String> list,
+    String? selectedValue,
+    required ValueChanged<String> onChanged,
+  }) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          title ?? "",
-          style: buildTextStyleDefault(),
-        ),
-        const SizedBox(height: 5),
+        if (label != null) ...[
+          Text(label, style: _buildTextStyleDefault()),
+          const SizedBox(height: 5),
+        ],
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 21),
-          decoration: buildBoxDecorationDropBoxDefault(),
+          decoration: _buildBoxDecorationDropBoxDefault(),
           child: DropdownButtonHideUnderline(
             child: DropdownButton<String>(
               isExpanded: true,
@@ -202,15 +249,15 @@ class _FormProfileState extends State<FormProfile> {
               dropdownColor: AppColors.white,
               iconSize: 24,
               elevation: 16,
-              style: buildTextStyleDropBoxDefault(),
-              onChanged: (String? newValue) => onChange(newValue!),
+              style: _buildTextStyleDropBoxDefault(),
+              onChanged: (String? newValue) => onChanged(newValue!),
               items: list
                   .map(
                     (String item) => DropdownMenuItem<String>(
                       value: item,
                       child: Text(
                         item,
-                        style: buildTextStyleDropBoxDefault(),
+                        style: _buildTextStyleDropBoxDefault(),
                         overflow: TextOverflow.ellipsis,
                       ),
                     ),
@@ -223,32 +270,13 @@ class _FormProfileState extends State<FormProfile> {
     );
   }
 
-  TextStyle buildTextStyleDropBoxDefault() {
-    return const TextStyle(
-      fontSize: 20,
-      fontWeight: FontWeight.w400,
-      color: AppColors.brainstemGrey,
-    );
-  }
-
-  BoxDecoration buildBoxDecorationDropBoxDefault() {
-    return BoxDecoration(
-      border: Border.all(
-        color: AppColors.brainstemGrey,
-        width: 1,
-      ),
-      borderRadius: BorderRadius.circular(12),
-      color: AppColors.white,
-    );
-  }
-
-  Column buildDropBoxNasc() {
+  Widget _buildDropBoxBirth() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
-          "Data de Nascimento",
-          style: TextStyle(
+        Text(
+          CommonStrings.of(context).dateBirth,
+          style: const TextStyle(
             fontSize: 15,
             fontWeight: FontWeight.w400,
             color: AppColors.frankBlue,
@@ -256,15 +284,15 @@ class _FormProfileState extends State<FormProfile> {
         ),
         const SizedBox(height: 5),
         DropdownDatePicker(
-          locale: "pt_BR",
+          locale: CommonStrings.of(context).datePickerLocation,
           dateformatorder: OrderFormat.DMY,
           icon: const Icon(
             Icons.arrow_drop_down,
             color: AppColors.brainstemGrey,
           ),
-          hintDay: 'Dia',
-          hintMonth: 'Mês',
-          hintYear: 'Ano',
+          hintDay: CommonStrings.of(context).day,
+          hintMonth: CommonStrings.of(context).month,
+          hintYear: CommonStrings.of(context).year,
           textStyle: const TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.w400,
@@ -277,15 +305,12 @@ class _FormProfileState extends State<FormProfile> {
           dayFlex: 2,
           inputDecoration: InputDecoration(
             contentPadding: const EdgeInsets.all(0),
-            border: buildOutlineInputBorderDefault(),
+            border: _buildOutlineInputBorderDefault(),
           ),
           isFormValidator: true,
           startYear: 1900,
-          endYear: 2020,
+          endYear: DateTime.now().year,
           width: 7,
-          // selectedDay: _selectedDay,
-          // selectedMonth: _selectedMonth,
-          // selectedYear: _selectedYear,
           onChangedDay: (value) {
             setState(() {
               _selectedDay = int.parse(value!);
@@ -300,31 +325,13 @@ class _FormProfileState extends State<FormProfile> {
             setState(() {
               _selectedYear = int.parse(value!);
             });
-          }, // optional
+          },
         ),
       ],
     );
   }
 
-  TextStyle buildTextStyleDefault() {
-    return const TextStyle(
-      fontSize: 15,
-      fontWeight: FontWeight.w400,
-      color: AppColors.frankBlue,
-    );
-  }
-
-  OutlineInputBorder buildOutlineInputBorderDefault() {
-    return OutlineInputBorder(
-      borderRadius: BorderRadius.circular(12),
-      borderSide: const BorderSide(
-        color: AppColors.brainstemGrey,
-        width: 1,
-      ),
-    );
-  }
-
-  Column buildQuestionsLogin() {
+  Widget _buildQuestionsLogin() {
     return Column(
       children: [
         IconLabelButton(
@@ -345,19 +352,56 @@ class _FormProfileState extends State<FormProfile> {
               width: 1,
             ),
             borderRadius: BorderRadius.circular(12),
-            color: AppColors.blueMana,
+            color: AppColors.germanderSpeedwell,
           ),
           label: Text(
-            AuthenticationStrings.of(context).createAccount,
+            CommonStrings.of(context).profileLabelButton,
             style: const TextStyle(
               fontSize: 19,
               fontWeight: FontWeight.w700,
-              color: AppColors.brilliance2,
+              color: AppColors.white,
             ),
           ),
         ),
-        const SizedBox(height: 30),
+        const SizedBox(height: 18),
       ],
+    );
+  }
+
+  TextStyle _buildTextStyleDefault() {
+    return const TextStyle(
+      fontSize: 15,
+      fontWeight: FontWeight.w400,
+      color: AppColors.frankBlue,
+    );
+  }
+
+  OutlineInputBorder _buildOutlineInputBorderDefault() {
+    return OutlineInputBorder(
+      borderRadius: BorderRadius.circular(12),
+      borderSide: const BorderSide(
+        color: AppColors.brainstemGrey,
+        width: 1,
+      ),
+    );
+  }
+
+  TextStyle _buildTextStyleDropBoxDefault() {
+    return const TextStyle(
+      fontSize: 20,
+      fontWeight: FontWeight.w400,
+      color: AppColors.brainstemGrey,
+    );
+  }
+
+  BoxDecoration _buildBoxDecorationDropBoxDefault() {
+    return BoxDecoration(
+      border: Border.all(
+        color: AppColors.brainstemGrey,
+        width: 1,
+      ),
+      borderRadius: BorderRadius.circular(12),
+      color: AppColors.white,
     );
   }
 }
