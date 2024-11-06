@@ -14,20 +14,25 @@ class AuthService {
 
   Future<(AuthCredential?, Object?)> loginGoogle() async {
     try {
+      print("Iniciando login com o Google...");
       final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
+      if (googleUser == null) {
+        print("Login cancelado pelo usuário.");
+        return (null, "Login cancelado");
+      }
       final GoogleSignInAuthentication googleAuth =
-          await googleUser!.authentication;
+          await googleUser.authentication;
 
-      /// Credenciais para o firebase
+      print("Autenticando...");
       final AuthCredential credential = GoogleAuthProvider.credential(
         accessToken: googleAuth.accessToken,
         idToken: googleAuth.idToken,
       );
 
-      // UserCredential result = await _auth.signInWithCredential(credential);
-
       return (credential, null);
     } catch (error, stackTrace) {
+      print("Erro durante o login com o Google: $error");
+      LogService().log("Erro login com o Google", error, stackTrace);
       var err = CustomError().sendErrorToCrashlytics(
           code: ErrorCodes.loginGoogleError, stackTrace: stackTrace);
       return (null, err);
