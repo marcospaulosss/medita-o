@@ -50,7 +50,7 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Setup Firebase files
-        run: echo "${{ secrets.SERVICE_CREDENTIALS_FILE_HOMOLOG }}" > android/app/google-services.json
+        run: echo "${{ secrets.SERVICE_CREDENTIALS_FILE_HOMOLOG }}" | base64 --decode > android/app/google-services.json
 
       - name: Build projeto
         run: |
