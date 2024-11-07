@@ -51,7 +51,7 @@ class CalendarRepository implements Repository {
       await _secureStorage.setUserId(response.id.toString());
       await _secureStorage.setUserName(response.name);
       await _secureStorage.setUserEmail(response.email);
-      await _secureStorage.setGoogleId(response.googleId);
+      await _secureStorage.setGoogleId(response.googleId ?? "");
 
       return (response, null);
     } on TimeoutException {

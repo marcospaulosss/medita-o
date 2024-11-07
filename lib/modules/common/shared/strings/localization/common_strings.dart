@@ -130,6 +130,96 @@ abstract class CommonStrings {
   /// In pt, this message translates to:
   /// **'Medite no \nseu tempo'**
   String get meditateTime;
+
+  /// No description provided for @profileHeaderDescription1.
+  ///
+  /// In pt, this message translates to:
+  /// **'Clique aqui e complete o seu perfil!'**
+  String get profileHeaderDescription1;
+
+  /// No description provided for @profileUpdateInfo.
+  ///
+  /// In pt, this message translates to:
+  /// **'Atualize seus dados de perfil e acompanhe seus minutos meditados!'**
+  String get profileUpdateInfo;
+
+  /// No description provided for @profileFormName.
+  ///
+  /// In pt, this message translates to:
+  /// **'Nome'**
+  String get profileFormName;
+
+  /// No description provided for @profileFormLastName.
+  ///
+  /// In pt, this message translates to:
+  /// **'Sobrenome'**
+  String get profileFormLastName;
+
+  /// No description provided for @gender.
+  ///
+  /// In pt, this message translates to:
+  /// **'Gênero'**
+  String get gender;
+
+  /// No description provided for @whereYouLive.
+  ///
+  /// In pt, this message translates to:
+  /// **'Onde Reside'**
+  String get whereYouLive;
+
+  /// No description provided for @privacyPolicy1.
+  ///
+  /// In pt, this message translates to:
+  /// **'Ao salvar os seus dados você concorda com a nossa '**
+  String get privacyPolicy1;
+
+  /// No description provided for @privacyPolicy2.
+  ///
+  /// In pt, this message translates to:
+  /// **'Política de Privacidade'**
+  String get privacyPolicy2;
+
+  /// No description provided for @exitApp.
+  ///
+  /// In pt, this message translates to:
+  /// **'SAIR DO APP'**
+  String get exitApp;
+
+  /// No description provided for @dateBirth.
+  ///
+  /// In pt, this message translates to:
+  /// **'Data de Nascimento'**
+  String get dateBirth;
+
+  /// No description provided for @datePickerLocation.
+  ///
+  /// In pt, this message translates to:
+  /// **'pt_BR'**
+  String get datePickerLocation;
+
+  /// No description provided for @day.
+  ///
+  /// In pt, this message translates to:
+  /// **'Dia'**
+  String get day;
+
+  /// No description provided for @month.
+  ///
+  /// In pt, this message translates to:
+  /// **'Mês'**
+  String get month;
+
+  /// No description provided for @year.
+  ///
+  /// In pt, this message translates to:
+  /// **'Ano'**
+  String get year;
+
+  /// No description provided for @profileLabelButton.
+  ///
+  /// In pt, this message translates to:
+  /// **'Salvar Dados'**
+  String get profileLabelButton;
 }
 
 class _CommonStringsDelegate extends LocalizationsDelegate<CommonStrings> {
