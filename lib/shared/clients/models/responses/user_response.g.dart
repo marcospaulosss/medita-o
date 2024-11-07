@@ -11,11 +11,11 @@ UserResponse _$UserResponseFromJson(Map<String, dynamic> json) => UserResponse(
       json['name'] as String,
       json['email'] as String,
       json['email_verified_at'],
-      json['google_id'] as String,
+      json['google_id'] as String?,
       json['facebook_id'],
       json['profile_photo_path'] as String?,
-      json['created_at'] as String,
-      json['updated_at'] as String,
+      json['created_at'] as String?,
+      json['updated_at'] as String?,
     );
 
 Map<String, dynamic> _$UserResponseToJson(UserResponse instance) =>

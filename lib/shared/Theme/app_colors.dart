@@ -12,6 +12,7 @@ abstract class AppColors {
   static const azureishWhite = Color(0xffddebf1);
   static const vividCerulean = Color(0xff00ACDC);
   static const freshAir = Color(0xffA3E8FC);
+  static const chineseBlue = Color(0xff364E93);
 
   /// gray variations
   static const brainstemGrey = Color(0xffB6B6B6);
