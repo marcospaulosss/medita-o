@@ -49,6 +49,9 @@ jobs:
           channel: 'stable'
           token: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Setup Firebase files
+        run: echo "${{ secrets.SERVICE_CREDENTIALS_FILE_HOMOLOG }}" | base64 --decode > android/app/google-services.json
+
       - name: Build projeto
         run: |
           flutter clean
@@ -61,7 +64,6 @@ jobs:
         run: |
           ls -la build/app/outputs/flutter-apk
           cd android
-          echo "$SERVICE_CREDENTIALS_FILE_HOMOLOG" | base64 --decode > ./fastlane/google-service-account.json 
           ls -la app/src/dev/
           bundle exec fastlane firebase
         env:
