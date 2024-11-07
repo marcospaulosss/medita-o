@@ -49,11 +49,9 @@ jobs:
           channel: 'stable'
           token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Setup Firebase files
-        run: echo "${{ secrets.SERVICE_CREDENTIALS_FILE_HOMOLOG }}" | base64 --decode > android/app/google-services.json
-
       - name: Build projeto
         run: |
+          ls -la android/app/src/dev/
           flutter clean
           flutter pub get
           ./localization
