@@ -125,4 +125,13 @@ class MockProfilePresenter extends _i1.Mock implements _i3.ProfilePresenter {
         returnValue: _i5.Future<void>.value(),
         returnValueForMissingStub: _i5.Future<void>.value(),
       ) as _i5.Future<void>);
+
+  @override
+  void getCities(dynamic countryId) => super.noSuchMethod(
+        Invocation.method(
+          #getCities,
+          [countryId],
+        ),
+        returnValueForMissingStub: null,
+      );
 }
