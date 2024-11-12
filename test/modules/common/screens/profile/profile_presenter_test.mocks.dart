@@ -6,14 +6,16 @@
 import 'dart:async' as _i4;
 import 'dart:io' as _i9;
 
-import 'package:auto_route/auto_route.dart' as _i12;
-import 'package:cinco_minutos_meditacao/core/routers/app_router.dart' as _i11;
+import 'package:auto_route/auto_route.dart' as _i13;
+import 'package:cinco_minutos_meditacao/core/routers/app_router.dart' as _i12;
 import 'package:cinco_minutos_meditacao/modules/common/screens/profile/profile_contract.dart'
     as _i6;
 import 'package:cinco_minutos_meditacao/modules/common/screens/profile/profile_model.dart'
-    as _i13;
+    as _i14;
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/countries_response.dart'
     as _i10;
+import 'package:cinco_minutos_meditacao/shared/clients/models/responses/states_response.dart'
+    as _i11;
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/user_response.dart'
     as _i7;
 import 'package:cinco_minutos_meditacao/shared/models/error.dart' as _i8;
@@ -161,24 +163,36 @@ class MockRepository extends _i1.Mock implements _i6.Repository {
                 _i4.Future<(_i10.CountriesResponse?, _i8.CustomError?)>.value(
                     (null, null)),
           ) as _i4.Future<(_i10.CountriesResponse?, _i8.CustomError?)>);
+
+  @override
+  _i4.Future<(_i11.StatesResponse?, _i8.CustomError?)>
+      requestGetStatesByCountryId(int? countryId) => (super.noSuchMethod(
+            Invocation.method(
+              #requestGetStatesByCountryId,
+              [countryId],
+            ),
+            returnValue:
+                _i4.Future<(_i11.StatesResponse?, _i8.CustomError?)>.value(
+                    (null, null)),
+          ) as _i4.Future<(_i11.StatesResponse?, _i8.CustomError?)>);
 }
 
 /// A class which mocks [AppRouter].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockAppRouter extends _i1.Mock implements _i11.AppRouter {
+class MockAppRouter extends _i1.Mock implements _i12.AppRouter {
   MockAppRouter() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  List<_i12.AutoRoute> get routes => (super.noSuchMethod(
+  List<_i13.AutoRoute> get routes => (super.noSuchMethod(
         Invocation.getter(#routes),
-        returnValue: <_i12.AutoRoute>[],
-      ) as List<_i12.AutoRoute>);
+        returnValue: <_i13.AutoRoute>[],
+      ) as List<_i13.AutoRoute>);
 
   @override
-  void goToReplace(_i12.PageRouteInfo<dynamic>? route) => super.noSuchMethod(
+  void goToReplace(_i13.PageRouteInfo<dynamic>? route) => super.noSuchMethod(
         Invocation.method(
           #goToReplace,
           [route],
@@ -188,8 +202,8 @@ class MockAppRouter extends _i1.Mock implements _i11.AppRouter {
 
   @override
   void goTo(
-    _i12.PageRouteInfo<dynamic>? route, {
-    _i11.OnCloseRoute? onClose,
+    _i13.PageRouteInfo<dynamic>? route, {
+    _i12.OnCloseRoute? onClose,
   }) =>
       super.noSuchMethod(
         Invocation.method(
@@ -220,7 +234,7 @@ class MockProfileViewContract extends _i1.Mock
       );
 
   @override
-  void showNormalState(_i13.ProfileModel? model) => super.noSuchMethod(
+  void showNormalState(_i14.ProfileModel? model) => super.noSuchMethod(
         Invocation.method(
           #showNormalState,
           [model],

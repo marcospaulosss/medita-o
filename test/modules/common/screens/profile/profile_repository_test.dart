@@ -5,6 +5,8 @@ import 'package:cinco_minutos_meditacao/core/analytics/manager.dart';
 import 'package:cinco_minutos_meditacao/core/wrappers/secure_storage.dart';
 import 'package:cinco_minutos_meditacao/modules/common/screens/profile/profile_repository.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/client_api.dart';
+import 'package:cinco_minutos_meditacao/shared/clients/models/responses/countries_response.dart';
+import 'package:cinco_minutos_meditacao/shared/clients/models/responses/states_response.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/user_response.dart';
 import 'package:cinco_minutos_meditacao/shared/models/error.dart';
 import 'package:dio/dio.dart';
@@ -191,6 +193,143 @@ void main() {
       final result = await repository.uploadImageProfile(file);
 
       expect(result, isA<CustomError>());
+      verify(mockCustomError.sendErrorToCrashlytics(
+        code: anyNamed('code'),
+        stackTrace: anyNamed('stackTrace'),
+      )).called(1);
+    });
+
+    test('requestGetCountries returns coutries response on success', () async {
+      CountriesResponse countriesResponse =
+          CountriesResponse([Countries(1, 'Brazil')]);
+      when(mockClientApi.countries())
+          .thenAnswer((_) async => countriesResponse);
+
+      final result = await repository.requestGetCountries();
+
+      expect(result, (countriesResponse, null));
+    });
+
+    test('requestGetCountries handles timeout exception', () async {
+      when(mockClientApi.countries())
+          .thenThrow(TimeoutException('Request timed out'));
+      when(mockCustomError.sendErrorToCrashlytics(
+        code: ErrorCodes.timeoutException,
+        stackTrace: anyNamed('stackTrace'),
+      )).thenReturn(CustomError());
+
+      var (result, err) = await repository.requestGetCountries();
+
+      expect(err, isA<CustomError>());
+      expect(result, isNull);
+      verify(mockCustomError.sendErrorToCrashlytics(
+        code: ErrorCodes.timeoutException,
+        stackTrace: anyNamed('stackTrace'),
+      )).called(1);
+    });
+
+    test('requestGetCountries handles Dio exception', () async {
+      final dioException =
+          DioException(requestOptions: RequestOptions(path: ''));
+      when(mockClientApi.countries()).thenThrow(dioException);
+      when(mockCustomError.sendErrorToCrashlytics(
+        message: anyNamed('message'),
+        code: anyNamed('code'),
+        stackTrace: anyNamed('stackTrace'),
+        dioException: anyNamed('dioException'),
+      )).thenReturn(CustomError());
+
+      var (result, err) = await repository.requestGetCountries();
+
+      expect(err, isA<CustomError>());
+      expect(result, isNull);
+      verify(mockCustomError.sendErrorToCrashlytics(
+        message: anyNamed('message'),
+        code: anyNamed('code'),
+        stackTrace: anyNamed('stackTrace'),
+        dioException: anyNamed('dioException'),
+      )).called(1);
+    });
+
+    test('requestGetCountries handles Generic exception', () async {
+      when(mockClientApi.countries()).thenThrow(Exception('Generic error'));
+      when(mockCustomError.sendErrorToCrashlytics(
+        code: anyNamed('code'),
+        stackTrace: anyNamed('stackTrace'),
+      )).thenReturn(CustomError());
+
+      var (result, err) = await repository.requestGetCountries();
+
+      expect(err, isA<CustomError>());
+      expect(result, isNull);
+      verify(mockCustomError.sendErrorToCrashlytics(
+        code: anyNamed('code'),
+        stackTrace: anyNamed('stackTrace'),
+      )).called(1);
+    });
+
+    test('requestGetStatesByCountryId returns states response on success',
+        () async {
+      StatesResponse statesResponse = StatesResponse([States(1, 1, 'Brazil')]);
+      when(mockClientApi.states(any)).thenAnswer((_) async => statesResponse);
+
+      final result = await repository.requestGetStatesByCountryId(1);
+
+      expect(result, (statesResponse, null));
+    });
+
+    test('requestGetStatesByCountryId handles timeout exception', () async {
+      when(mockClientApi.states(any))
+          .thenThrow(TimeoutException('Request timed out'));
+      when(mockCustomError.sendErrorToCrashlytics(
+        code: ErrorCodes.timeoutException,
+        stackTrace: anyNamed('stackTrace'),
+      )).thenReturn(CustomError());
+
+      var (result, err) = await repository.requestGetStatesByCountryId(1);
+
+      expect(err, isA<CustomError>());
+      expect(result, isNull);
+      verify(mockCustomError.sendErrorToCrashlytics(
+        code: ErrorCodes.timeoutException,
+        stackTrace: anyNamed('stackTrace'),
+      )).called(1);
+    });
+
+    test('requestGetStatesByCountryId handles Dio exception', () async {
+      final dioException =
+          DioException(requestOptions: RequestOptions(path: ''));
+      when(mockClientApi.states(any)).thenThrow(dioException);
+      when(mockCustomError.sendErrorToCrashlytics(
+        message: anyNamed('message'),
+        code: anyNamed('code'),
+        stackTrace: anyNamed('stackTrace'),
+        dioException: anyNamed('dioException'),
+      )).thenReturn(CustomError());
+
+      var (result, err) = await repository.requestGetStatesByCountryId(1);
+
+      expect(err, isA<CustomError>());
+      expect(result, isNull);
+      verify(mockCustomError.sendErrorToCrashlytics(
+        message: anyNamed('message'),
+        code: anyNamed('code'),
+        stackTrace: anyNamed('stackTrace'),
+        dioException: anyNamed('dioException'),
+      )).called(1);
+    });
+
+    test('requestGetStatesByCountryId handles Generic exception', () async {
+      when(mockClientApi.states(any)).thenThrow(Exception('Generic error'));
+      when(mockCustomError.sendErrorToCrashlytics(
+        code: anyNamed('code'),
+        stackTrace: anyNamed('stackTrace'),
+      )).thenReturn(CustomError());
+
+      var (result, err) = await repository.requestGetStatesByCountryId(1);
+
+      expect(err, isA<CustomError>());
+      expect(result, isNull);
       verify(mockCustomError.sendErrorToCrashlytics(
         code: anyNamed('code'),
         stackTrace: anyNamed('stackTrace'),
