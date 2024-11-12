@@ -1,8 +1,8 @@
 import 'dart:io';
 
-import 'package:cinco_minutos_meditacao/modules/common/screens/home/home_model.dart';
 import 'package:cinco_minutos_meditacao/modules/common/screens/profile/profile_model.dart';
-import 'package:cinco_minutos_meditacao/shared/clients/models/responses/meditations_response.dart';
+import 'package:cinco_minutos_meditacao/shared/clients/models/responses/countries_response.dart';
+import 'package:cinco_minutos_meditacao/shared/clients/models/responses/states_response.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/user_response.dart';
 import 'package:cinco_minutos_meditacao/shared/helpers/view_binding.dart';
 import 'package:cinco_minutos_meditacao/shared/models/error.dart';
@@ -30,6 +30,9 @@ abstract class Presenter implements ViewBinding<ProfileViewContract> {
 
   /// Atualiza a imagem de perfil do usuário
   Future<void> updateImageProfile();
+
+  /// Busca os estados do país selecionado
+  Future<void> getStates(countryId);
 }
 
 abstract class Repository {
@@ -44,4 +47,11 @@ abstract class Repository {
 
   /// Atualiza a imagem de perfil do usuário
   Future<CustomError?> uploadImageProfile(File file);
+
+  /// Busca os países
+  Future<(CountriesResponse?, CustomError?)> requestGetCountries();
+
+  /// Busca os estados do país selecionado
+  Future<(StatesResponse?, CustomError?)> requestGetStatesByCountryId(
+      int countryId);
 }

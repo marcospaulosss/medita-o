@@ -102,6 +102,7 @@ class ProfileViewState extends State<ProfileView>
           FormProfile(
             onRegister: () {},
             profileModel: model,
+            onSelectedCountry: (countryId) => getCities(countryId),
           ),
           _buildPrivacyPolicy(),
           const Divider(
@@ -171,6 +172,11 @@ class ProfileViewState extends State<ProfileView>
       ),
       onTap: () => presenter.logOut(),
     );
+  }
+
+  void getCities(int countryId) async {
+    await presenter.getStates(countryId);
+    setState(() {});
   }
 
   @override

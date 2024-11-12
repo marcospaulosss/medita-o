@@ -6,14 +6,17 @@ import 'package:cinco_minutos_meditacao/shared/clients/models/requests/auth_requ
 import 'package:cinco_minutos_meditacao/shared/clients/models/requests/authenticate_google_request.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/models/requests/create_new_meditations_request.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/authenticate_google_response.dart';
+import 'package:cinco_minutos_meditacao/shared/clients/models/responses/countries_response.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/meditations_response.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/month_calendar_response.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/register_response.dart';
+import 'package:cinco_minutos_meditacao/shared/clients/models/responses/states_response.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/user_response.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/week_calendar_response.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/year_calendar_response.dart';
 import 'package:curl_logger_dio_interceptor/curl_logger_dio_interceptor.dart';
 import 'package:dio/dio.dart';
+import 'package:retrofit/http.dart';
 import 'package:retrofit/retrofit.dart';
 
 part 'client_api.g.dart';
@@ -87,4 +90,13 @@ abstract class ClientApi {
   /// Obtem as meditações realizadas pelo usuário no ano
   @GET('/calendar/year')
   Future<YearCalendarResponse> calendarYear(@Query('year') int year);
+
+  /// - [ Helpers ] : Cliente de ajuda e complementos
+  /// Obtem o paizes disponíveis
+  @GET('/countries')
+  Future<CountriesResponse> countries();
+
+  /// Obtem os estados de um país
+  @GET('/states')
+  Future<StatesResponse> states(@Query('country_id') int countryId);
 }
