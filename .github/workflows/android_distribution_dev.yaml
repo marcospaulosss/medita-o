@@ -54,6 +54,8 @@ jobs:
 
       - name: Build projeto
         run: |
+          cd android
+          ./gradlew signingReport
           flutter clean
           flutter pub get
           ./localization
