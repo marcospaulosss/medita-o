@@ -42,9 +42,9 @@ class _FormProfileState extends State<FormProfile> {
   final TextEditingController lastNameController = TextEditingController();
   AutovalidateMode _autovalidate = AutovalidateMode.disabled;
 
-  int _selectedDay = 14;
-  int _selectedMonth = 2;
-  int _selectedYear = 1993;
+  int? _selectedDay;
+  int? _selectedMonth;
+  int? _selectedYear;
 
   final List<String> listGender = ['Masculino', 'Feminino'];
   String? selectedValueGender = 'Feminino';
@@ -59,6 +59,12 @@ class _FormProfileState extends State<FormProfile> {
 
   @override
   void initState() {
+    parseData();
+
+    super.initState();
+  }
+
+  void parseData() {
     nameController.text =
         widget.profileModel.userResponse?.name.split(" ").first ?? '';
     lastNameController.text =
@@ -76,7 +82,15 @@ class _FormProfileState extends State<FormProfile> {
       }
     });
 
-    super.initState();
+    if (widget.profileModel.userResponse?.birthdate != null) {
+      _selectedDay = DateTime.now().day;
+      _selectedMonth = DateTime.now().month;
+      _selectedYear = DateTime.now().year;
+    }
+
+    if (widget.profileModel.userResponse?.genre != null) {
+      selectedValueGender = widget.profileModel.userResponse!.genre;
+    }
   }
 
   @override
@@ -310,6 +324,9 @@ class _FormProfileState extends State<FormProfile> {
           startYear: 1900,
           endYear: DateTime.now().year,
           width: 7,
+          selectedDay: _selectedDay,
+          selectedMonth: _selectedMonth,
+          selectedYear: _selectedYear,
           onChangedDay: (value) {
             setState(() {
               _selectedDay = int.parse(value!);
