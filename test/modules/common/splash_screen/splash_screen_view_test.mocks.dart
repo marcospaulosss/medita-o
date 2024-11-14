@@ -117,6 +117,17 @@ class _FakeAndroidBuildVersion_7 extends _i1.SmartFake
         );
 }
 
+class _FakeAndroidDisplayMetrics_8 extends _i1.SmartFake
+    implements _i2.AndroidDisplayMetrics {
+  _FakeAndroidDisplayMetrics_8(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
 /// A class which mocks [DeviceInfoPlugin].
 ///
 /// See the documentation for Mockito's code generation for more information.
@@ -369,6 +380,15 @@ class MockAndroidDeviceInfo extends _i1.Mock implements _i2.AndroidDeviceInfo {
       ) as List<String>);
 
   @override
+  _i2.AndroidDisplayMetrics get displayMetrics => (super.noSuchMethod(
+        Invocation.getter(#displayMetrics),
+        returnValue: _FakeAndroidDisplayMetrics_8(
+          this,
+          Invocation.getter(#displayMetrics),
+        ),
+      ) as _i2.AndroidDisplayMetrics);
+
+  @override
   String get serialNumber => (super.noSuchMethod(
         Invocation.getter(#serialNumber),
         returnValue: _i11.dummyValue<String>(
@@ -376,12 +396,6 @@ class MockAndroidDeviceInfo extends _i1.Mock implements _i2.AndroidDeviceInfo {
           Invocation.getter(#serialNumber),
         ),
       ) as String);
-
-  @override
-  bool get isLowRamDevice => (super.noSuchMethod(
-        Invocation.getter(#isLowRamDevice),
-        returnValue: false,
-      ) as bool);
 
   @override
   Map<String, dynamic> get data => (super.noSuchMethod(
