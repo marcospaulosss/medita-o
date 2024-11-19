@@ -60,16 +60,18 @@ void main() {
         () async {
       // arrange
       UserResponse userResponse = UserResponse(
-        1,
-        'Test',
-        'test@test.com',
-        'teste',
-        'googleId',
-        'facebookId',
-        'appleId',
-        '23/04/2024',
-        '23/04/2024',
-      );
+          1,
+          'Test',
+          'test@test.com',
+          'teste',
+          'googleId',
+          'facebookId',
+          'appleId',
+          '23/04/2024',
+          '23/04/2024',
+          'masculino',
+          '1983-07-02',
+          'São Paulo');
       when(clientApi.user()).thenAnswer((_) async => userResponse);
 
       // act

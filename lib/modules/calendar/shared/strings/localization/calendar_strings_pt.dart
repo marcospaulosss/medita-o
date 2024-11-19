@@ -1,5 +1,7 @@
 import 'calendar_strings.dart';
 
+// ignore_for_file: type=lint
+
 /// The translations for Portuguese (`pt`).
 class CalendarStringsPt extends CalendarStrings {
   CalendarStringsPt([String locale = 'pt']) : super(locale);

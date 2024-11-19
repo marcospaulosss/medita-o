@@ -9,6 +9,8 @@ import 'meditate_strings_en.dart';
 import 'meditate_strings_es.dart';
 import 'meditate_strings_pt.dart';
 
+// ignore_for_file: type=lint
+
 /// Callers can lookup localized strings with an instance of MeditateStrings
 /// returned by `MeditateStrings.of(context)`.
 ///

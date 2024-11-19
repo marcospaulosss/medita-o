@@ -1,5 +1,7 @@
 import 'meditate_strings.dart';
 
+// ignore_for_file: type=lint
+
 /// The translations for Spanish Castilian (`es`).
 class MeditateStringsEs extends MeditateStrings {
   MeditateStringsEs([String locale = 'es']) : super(locale);

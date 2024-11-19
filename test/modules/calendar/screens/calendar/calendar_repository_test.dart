@@ -52,8 +52,19 @@ void main() {
   });
 
   group('requestUser', () {
-    final userResponse = UserResponse(1, 'John Doe', 'john@example.com',
-        '2024-10-10', '12345', '12323', 'path', '2024-10-10', '2024-10-10');
+    final userResponse = UserResponse(
+        1,
+        'John Doe',
+        'john@example.com',
+        '2024-10-10',
+        '12345',
+        '12323',
+        'path',
+        '2024-10-10',
+        '2024-10-10',
+        'masculino',
+        '1983-07-02',
+        'São Paulo');
 
     test('should return UserResponse on success', () async {
       // Arrange
