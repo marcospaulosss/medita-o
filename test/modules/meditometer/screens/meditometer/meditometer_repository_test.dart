@@ -51,7 +51,10 @@ void main() {
           '12345',
           './assets/images/avatar.png',
           '2024-09-28',
-          '2024-09-28');
+          '2024-09-28',
+          'Feminino',
+          '1983-07-02',
+          'São Paulo');
       when(clientApi.user()).thenAnswer((_) async => userResponse);
 
       final result = await repository.requestUser();

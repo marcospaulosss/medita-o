@@ -9,6 +9,8 @@ import 'authentication_strings_en.dart';
 import 'authentication_strings_es.dart';
 import 'authentication_strings_pt.dart';
 
+// ignore_for_file: type=lint
+
 /// Callers can lookup localized strings with an instance of AuthenticationStrings
 /// returned by `AuthenticationStrings.of(context)`.
 ///

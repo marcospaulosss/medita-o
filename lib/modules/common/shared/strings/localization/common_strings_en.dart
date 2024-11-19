@@ -1,5 +1,7 @@
 import 'common_strings.dart';
 
+// ignore_for_file: type=lint
+
 /// The translations for English (`en`).
 class CommonStringsEn extends CommonStrings {
   CommonStringsEn([String locale = 'en']) : super(locale);
