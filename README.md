@@ -175,3 +175,8 @@ open coverage_report/index.html
 ```shell
 flutter config --jdk-dir /Library/Java/JavaVirtualMachines/liberica-jdk-11.jdk/Contents/Home
 ```
+
+# solução para rodar simulador ios no avable sthe simulator
+
+Go to System Settings → General → Storage → Developer
+Delete "Developer Caches"

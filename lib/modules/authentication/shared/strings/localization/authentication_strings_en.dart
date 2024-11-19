@@ -1,5 +1,7 @@
 import 'authentication_strings.dart';
 
+// ignore_for_file: type=lint
+
 /// The translations for English (`en`).
 class AuthenticationStringsEn extends AuthenticationStrings {
   AuthenticationStringsEn([String locale = 'en']) : super(locale);

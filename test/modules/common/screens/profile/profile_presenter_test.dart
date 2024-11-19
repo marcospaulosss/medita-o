@@ -56,16 +56,18 @@ void main() {
     test('initPresenter should show loading, fetch user, and show normal state',
         () async {
       UserResponse userResponse = UserResponse(
-        1,
-        'Test',
-        'test@test.com',
-        'teste',
-        'googleId',
-        'facebookId',
-        'appleId',
-        '23/04/2024',
-        '23/04/2024',
-      );
+          1,
+          'Test',
+          'test@test.com',
+          'teste',
+          'googleId',
+          'facebookId',
+          'appleId',
+          '23/04/2024',
+          '23/04/2024',
+          'masculino',
+          '1983-07-02',
+          'São Paulo');
       CountriesResponse countriesResponse =
           CountriesResponse([Countries(1, 'Brazil')]);
       when(mockRepository.requestUser())
@@ -99,16 +101,18 @@ void main() {
         () async {
       final error = CustomError();
       UserResponse userResponse = UserResponse(
-        1,
-        'Test',
-        'test@test.com',
-        'teste',
-        'googleId',
-        'facebookId',
-        'appleId',
-        '23/04/2024',
-        '23/04/2024',
-      );
+          1,
+          'Test',
+          'test@test.com',
+          'teste',
+          'googleId',
+          'facebookId',
+          'appleId',
+          '23/04/2024',
+          '23/04/2024',
+          'masculino',
+          '1983-07-02',
+          'São Paulo');
       when(mockRepository.requestUser())
           .thenAnswer((_) async => (userResponse, null));
       when(mockRepository.requestGetCountries())
@@ -126,16 +130,18 @@ void main() {
         () async {
       final imageFile = File('path/to/image');
       UserResponse userResponse = UserResponse(
-        1,
-        'Test',
-        'test@test.com',
-        'teste',
-        'googleId',
-        'facebookId',
-        'appleId',
-        '23/04/2024',
-        '23/04/2024',
-      );
+          1,
+          'Test',
+          'test@test.com',
+          'teste',
+          'googleId',
+          'facebookId',
+          'appleId',
+          '23/04/2024',
+          '23/04/2024',
+          'masculino',
+          '1983-07-02',
+          'São Paulo');
       final result = 'image_path';
       when(mockAppRouter.goTo(any, onClose: anyNamed('onClose')))
           .thenAnswer((invocation) {

@@ -1,5 +1,7 @@
 import 'meditometer_strings.dart';
 
+// ignore_for_file: type=lint
+
 /// The translations for Spanish Castilian (`es`).
 class MeditometerStringsEs extends MeditometerStrings {
   MeditometerStringsEs([String locale = 'es']) : super(locale);
