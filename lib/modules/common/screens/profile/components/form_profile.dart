@@ -82,7 +82,7 @@ class _FormProfileState extends State<FormProfile> {
       }
     });
 
-    if (widget.profileModel.userResponse?.birthdate == null) {
+    if (widget.profileModel.userResponse?.birthdate != null) {
       _selectedDay = DateTime.now().day;
       _selectedMonth = DateTime.now().month;
       _selectedYear = DateTime.now().year;
