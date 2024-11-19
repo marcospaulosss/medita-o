@@ -3,6 +3,8 @@ import 'dart:io';
 import 'package:cinco_minutos_meditacao/core/routers/app_router.dart';
 import 'package:cinco_minutos_meditacao/modules/common/screens/profile/profile_contract.dart';
 import 'package:cinco_minutos_meditacao/modules/common/screens/profile/profile_presenter.dart';
+import 'package:cinco_minutos_meditacao/shared/clients/models/responses/countries_response.dart';
+import 'package:cinco_minutos_meditacao/shared/clients/models/responses/states_response.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/user_response.dart';
 import 'package:cinco_minutos_meditacao/shared/models/error.dart';
 import 'package:cinco_minutos_meditacao/shared/services/auth_service.dart';
@@ -54,24 +56,32 @@ void main() {
     test('initPresenter should show loading, fetch user, and show normal state',
         () async {
       UserResponse userResponse = UserResponse(
-        1,
-        'Test',
-        'test@test.com',
-        'teste',
-        'googleId',
-        'facebookId',
-        'appleId',
-        '23/04/2024',
-        '23/04/2024',
-      );
+          1,
+          'Test',
+          'test@test.com',
+          'teste',
+          'googleId',
+          'facebookId',
+          'appleId',
+          '23/04/2024',
+          '23/04/2024',
+          'masculino',
+          '1983-07-02',
+          'São Paulo');
+      CountriesResponse countriesResponse =
+          CountriesResponse([Countries(1, 'Brazil')]);
       when(mockRepository.requestUser())
           .thenAnswer((_) async => (userResponse, null));
+      when(mockRepository.requestGetCountries())
+          .thenAnswer((_) async => (countriesResponse, null));
 
       await presenter.initPresenter();
 
       verify(mockView.showLoading()).called(1);
       verify(mockRepository.requestUser()).called(1);
+      verify(mockRepository.requestGetCountries()).called(1);
       expect(presenter.profileModel.userResponse, equals(userResponse));
+      expect(presenter.profileModel.countryResponse, equals(countriesResponse));
       verify(mockView.showNormalState(presenter.profileModel)).called(1);
     });
 
@@ -86,20 +96,52 @@ void main() {
       verify(mockView.showError(error.getErrorMessage)).called(1);
     });
 
+    test(
+        'initPresenter should handle error in requestGetCountries and show error message',
+        () async {
+      final error = CustomError();
+      UserResponse userResponse = UserResponse(
+          1,
+          'Test',
+          'test@test.com',
+          'teste',
+          'googleId',
+          'facebookId',
+          'appleId',
+          '23/04/2024',
+          '23/04/2024',
+          'masculino',
+          '1983-07-02',
+          'São Paulo');
+      when(mockRepository.requestUser())
+          .thenAnswer((_) async => (userResponse, null));
+      when(mockRepository.requestGetCountries())
+          .thenAnswer((_) async => (null, error));
+
+      await presenter.initPresenter();
+
+      verify(mockView.showLoading()).called(1);
+      verify(mockRepository.requestUser()).called(1);
+      verify(mockRepository.requestGetCountries()).called(1);
+      verify(mockView.showError(error.getErrorMessage)).called(1);
+    });
+
     test('updateImageProfile should handle image update and refresh user data',
         () async {
       final imageFile = File('path/to/image');
       UserResponse userResponse = UserResponse(
-        1,
-        'Test',
-        'test@test.com',
-        'teste',
-        'googleId',
-        'facebookId',
-        'appleId',
-        '23/04/2024',
-        '23/04/2024',
-      );
+          1,
+          'Test',
+          'test@test.com',
+          'teste',
+          'googleId',
+          'facebookId',
+          'appleId',
+          '23/04/2024',
+          '23/04/2024',
+          'masculino',
+          '1983-07-02',
+          'São Paulo');
       final result = 'image_path';
       when(mockAppRouter.goTo(any, onClose: anyNamed('onClose')))
           .thenAnswer((invocation) {
@@ -162,5 +204,28 @@ void main() {
       verify(mockAppRouter.goTo(any, onClose: anyNamed('onClose'))).called(1);
       verify(mockView.showError(error.getErrorMessage)).called(1);
     });
+
+    test('getStates should handle image update and refresh user data',
+        () async {
+      StatesResponse statesResponse = StatesResponse([States(1, 1, 'Test')]);
+
+      when(mockRepository.requestGetStatesByCountryId(any))
+          .thenAnswer((_) async => (statesResponse, null));
+
+      await presenter.getStates(1);
+
+      verify(mockRepository.requestGetStatesByCountryId(any)).called(1);
+      verify(mockView.showNormalState(any)).called(1);
+    });
+  });
+
+  test('getStates should show error message when request fails', () async {
+    when(mockRepository.requestGetStatesByCountryId(any))
+        .thenAnswer((_) async => (null, CustomError()));
+
+    await presenter.getStates(1);
+
+    verify(mockRepository.requestGetStatesByCountryId(any)).called(1);
+    verify(mockView.showError(any)).called(1);
   });
 }

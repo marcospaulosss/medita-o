@@ -65,16 +65,18 @@ void main() {
       when(homeRepository.sendOpenScreenEvent()).thenAnswer((_) async {});
       when(homeRepository.requestUser()).thenAnswer((_) async => (
             UserResponse(
-              1,
-              "name",
-              "email",
-              "avatar",
-              "token",
-              "phone",
-              "document",
-              "password",
-              "createdAt",
-            ),
+                1,
+                "name",
+                "email",
+                "avatar",
+                "token",
+                "phone",
+                "document",
+                "password",
+                "createdAt",
+                'masculino',
+                '1983-07-02',
+                'São Paulo'),
             null
           ));
       when(homeRepository.requestMeditations())
@@ -119,7 +121,10 @@ void main() {
                 '1',
                 "https://google.com",
                 DateTime.now().toString(),
-                DateTime.now().toString()),
+                DateTime.now().toString(),
+                'masculino',
+                '1983-07-02',
+                'São Paulo'),
             null
           ));
       when(homeRepository.requestMeditations())
@@ -147,7 +152,10 @@ void main() {
           '1',
           "https://google.com",
           DateTime.now().toString(),
-          DateTime.now().toString()); // Simula a resposta do usuário
+          DateTime.now().toString(),
+          'masculino',
+          '1983-07-02',
+          'São Paulo'); // Simula a resposta do usuário
 
       when(appRouter.goTo(any, onClose: anyNamed('onClose')))
           .thenAnswer((invocation) {
@@ -209,16 +217,18 @@ void main() {
         () {
       final homeModel = HomeModel(
         userResponse: UserResponse(
-          1,
-          "name",
-          "email",
-          "avatar",
-          "token",
-          "phone",
-          "document",
-          "password",
-          "createdAt",
-        ),
+            1,
+            "name",
+            "email",
+            "avatar",
+            "token",
+            "phone",
+            "document",
+            "password",
+            "createdAt",
+            'masculino',
+            '1983-07-02',
+            'São Paulo'),
         meditationsResponse: MeditationsResponse(1, 30),
       );
 
@@ -242,16 +252,18 @@ void main() {
         () {
       final homeModel = HomeModel(
         userResponse: UserResponse(
-          1,
-          "name",
-          "email",
-          "avatar",
-          "token",
-          "phone",
-          "document",
-          "password",
-          "createdAt",
-        ),
+            1,
+            "name",
+            "email",
+            "avatar",
+            "token",
+            "phone",
+            "document",
+            "password",
+            "createdAt",
+            'masculino',
+            '1983-07-02',
+            'São Paulo'),
         meditationsResponse: null,
       );
 

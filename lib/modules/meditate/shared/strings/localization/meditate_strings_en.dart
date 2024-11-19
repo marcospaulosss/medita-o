@@ -1,5 +1,7 @@
 import 'meditate_strings.dart';
 
+// ignore_for_file: type=lint
+
 /// The translations for English (`en`).
 class MeditateStringsEn extends MeditateStrings {
   MeditateStringsEn([String locale = 'en']) : super(locale);

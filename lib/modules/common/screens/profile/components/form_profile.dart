@@ -16,14 +16,19 @@ class FormProfile extends StatefulWidget {
   /// Modelo da tela
   ProfileModel profileModel;
 
+  /// Função de seleção de país
+  Function onSelectedCountry;
+
   /// - [key] : Chave de identificação do widget
   /// - [onRegister] : Mensagem de erro de e-mail inválido
   /// - [profileModel] : Modelo da tela
+  /// - [onSelectedCountry] : Função de seleção de país
   /// construtor
   FormProfile({
     super.key,
     required this.onRegister,
     required this.profileModel,
+    required this.onSelectedCountry,
   });
 
   @override
@@ -37,26 +42,68 @@ class _FormProfileState extends State<FormProfile> {
   final TextEditingController lastNameController = TextEditingController();
   AutovalidateMode _autovalidate = AutovalidateMode.disabled;
 
-  int _selectedDay = 14;
-  int _selectedMonth = 2;
-  int _selectedYear = 1993;
+  int? _selectedDay;
+  int? _selectedMonth;
+  int? _selectedYear;
 
   final List<String> listGender = ['Masculino', 'Feminino'];
   String? selectedValueGender = 'Feminino';
 
-  final List<String> listState = [
-    'BR', 'Acre', 'Alagoas', //... continue a lista completa
-  ];
-  String? selectedValueStates = 'BR';
+  List<String> listCountries = ['Brazil'];
+  String? selectedValueCounty = 'Brazil';
+  int? selectedIdCounty = 0;
+
+  List<String> listStates = ['São Paulo'];
+  String? selectedValueStates = 'São Paulo';
+  int? selectedIdState = 0;
 
   @override
   void initState() {
+    parseData();
+
+    super.initState();
+  }
+
+  void parseData() {
     nameController.text =
         widget.profileModel.userResponse?.name.split(" ").first ?? '';
     lastNameController.text =
         widget.profileModel.userResponse?.name.split(" ").last ?? '';
     emailController.text = widget.profileModel.userResponse?.email ?? '';
-    super.initState();
+
+    listCountries = widget.profileModel.countryResponse!.countries!
+        .map((item) => item.name as String)
+        .toList();
+
+    widget.profileModel.countryResponse!.countries!.forEach((element) {
+      if (element.name == selectedValueCounty) {
+        selectedIdCounty = element.id;
+        widget.onSelectedCountry(selectedIdCounty);
+      }
+    });
+
+    if (widget.profileModel.userResponse?.birthdate == null) {
+      _selectedDay = DateTime.now().day;
+      _selectedMonth = DateTime.now().month;
+      _selectedYear = DateTime.now().year;
+    }
+
+    if (widget.profileModel.userResponse?.genre != null) {
+      selectedValueGender = widget.profileModel.userResponse!.genre;
+    }
+  }
+
+  @override
+  void didUpdateWidget(covariant FormProfile oldWidget) {
+    super.didUpdateWidget(oldWidget);
+
+    if (widget.profileModel.statesResponse != null) {
+      listStates = widget.profileModel.statesResponse!.states!
+          .map((item) => item.name as String)
+          .toList();
+
+      selectedValueStates = listStates.first;
+    }
   }
 
   @override
@@ -119,11 +166,19 @@ class _FormProfileState extends State<FormProfile> {
                   flex: 5,
                   child: _buildDropBox(
                     label: CommonStrings.of(context).whereYouLive,
-                    list: listState,
-                    selectedValue: selectedValueStates,
+                    list: listCountries,
+                    selectedValue: selectedValueCounty,
                     onChanged: (String value) {
-                      setState(() {
-                        selectedValueStates = value;
+                      widget.profileModel.countryResponse!.countries!
+                          .forEach((element) {
+                        if (element.name == value) {
+                          widget.onSelectedCountry(element.id);
+
+                          setState(() {
+                            selectedIdCounty = element.id;
+                            selectedValueCounty = value;
+                          });
+                        }
                       });
                     },
                   ),
@@ -134,11 +189,17 @@ class _FormProfileState extends State<FormProfile> {
                   child: Padding(
                     padding: const EdgeInsets.only(top: 26),
                     child: _buildDropBox(
-                      list: listGender,
-                      selectedValue: selectedValueGender,
+                      list: listStates,
+                      selectedValue: selectedValueStates,
                       onChanged: (String value) {
-                        setState(() {
-                          selectedValueGender = value;
+                        widget.profileModel.statesResponse!.states!
+                            .forEach((element) {
+                          if (element.name == value) {
+                            setState(() {
+                              selectedIdState = element.id;
+                              selectedValueStates = value;
+                            });
+                          }
                         });
                       },
                     ),
@@ -263,6 +324,9 @@ class _FormProfileState extends State<FormProfile> {
           startYear: 1900,
           endYear: DateTime.now().year,
           width: 7,
+          selectedDay: _selectedDay,
+          selectedMonth: _selectedMonth,
+          selectedYear: _selectedYear,
           onChangedDay: (value) {
             setState(() {
               _selectedDay = int.parse(value!);

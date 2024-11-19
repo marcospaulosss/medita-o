@@ -57,10 +57,19 @@ class ProfilePresenter implements Presenter {
 
     view?.showLoading();
     UserResponse? user = await getMe();
-    if (user != null) {
-      profileModel.userResponse = user;
-      view!.showNormalState(profileModel);
+    if (user == null) {
+      return;
     }
+
+    var (countries, error) = await _repository.requestGetCountries();
+    if (error != null) {
+      view?.showError(error.getErrorMessage);
+      return;
+    }
+
+    profileModel.userResponse = user;
+    profileModel.countryResponse = countries;
+    view!.showNormalState(profileModel);
   }
 
   /// Busca informações do usuário
@@ -97,5 +106,18 @@ class ProfilePresenter implements Presenter {
       profileModel.userResponse = user;
       view?.showNormalState(profileModel);
     });
+  }
+
+  @override
+  Future<void> getStates(countryId) async {
+    var (states, error) =
+        await _repository.requestGetStatesByCountryId(countryId);
+    if (error != null) {
+      view?.showError(error.getErrorMessage);
+      return;
+    }
+
+    profileModel.statesResponse = states;
+    view!.showNormalState(profileModel);
   }
 }

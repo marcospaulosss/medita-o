@@ -1,5 +1,7 @@
 import 'shared_strings.dart';
 
+// ignore_for_file: type=lint
+
 /// The translations for English (`en`).
 class SharedStringsEn extends SharedStrings {
   SharedStringsEn([String locale = 'en']) : super(locale);

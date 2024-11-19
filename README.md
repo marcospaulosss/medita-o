@@ -169,3 +169,14 @@ lcov --remove coverage/new_lcov.info '**/strings/localization/**' -o coverage/ne
 genhtml -o coverage_report coverage/new2_lcov.info
 open coverage_report/index.html
 ```
+
+# solução para setar o jdk do flutter no mac quando esta dando divergencia de versão no flutter doctor
+
+```shell
+flutter config --jdk-dir /Library/Java/JavaVirtualMachines/liberica-jdk-11.jdk/Contents/Home
+```
+
+# solução para rodar simulador ios no avable sthe simulator
+
+Go to System Settings → General → Storage → Developer
+Delete "Developer Caches"
