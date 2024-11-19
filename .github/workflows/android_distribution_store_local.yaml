@@ -21,26 +21,13 @@ jobs:
           cd android
           bundle install
 
-      - name: Decode and save the keystore file
-        run: |
-          echo "${{ secrets.ANDROID_STORE_FILE }}" | base64 --decode > /tmp/KeyStorePlay.keystore
-          echo "${{ secrets.JSON_KEY }}" | base64 --decode > $GITHUB_WORKSPACE/android/fastlane/minutos-3ae7f-fde6e0b502d4.json
-        env:
-          ANDROID_STORE_FILE: ${{ secrets.ANDROID_STORE_FILE }}
-          JSON_KEY: ${{ secrets.JSON_KEY }}
-
       - name: Setup flutter e builda projeto LOCALMENTE
         run: |
           flutter clean
           flutter pub get
           ./localization
           flutter packages pub run build_runner build --delete-conflicting-outputs
-          flutter build appbundle --no-tree-shake-icons --release --flavor store -t lib/core/flavors/main_prod.dart
-        env:
-          ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
-          ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
-          ANDROID_STORE_PASSWORD: ${{ secrets.ANDROID_STORE_PASSWORD }}
-          ANDROID_STORE_FILE: /tmp/KeyStorePlay.keystore
+          flutter build appbundle --no-tree-shake-icons --release --flavor store -t lib/core/flavors/main_prod.dart -v
 
       - name: Deploy do Google Play Store
         run: |
