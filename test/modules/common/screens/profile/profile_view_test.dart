@@ -82,7 +82,7 @@ main() async {
               DateTime.now().toString(),
               DateTime.now().toString(),
               'Masculino',
-              '1983-07-02',
+              null,
               'Brazil'),
           countryResponse: CountriesResponse([
             Countries(
@@ -294,7 +294,7 @@ main() async {
               DateTime.now().toString(),
               DateTime.now().toString(),
               'Masculino',
-              '1983-07-02',
+              null,
               'São Paulo'),
           countryResponse: CountriesResponse([
             Countries(
