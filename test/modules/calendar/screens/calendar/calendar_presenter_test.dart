@@ -45,8 +45,19 @@ void main() {
   });
 
   group('initPresenter', () {
-    final userResponse = UserResponse(1, 'John Doe', 'john@example.com',
-        '2024-10-10', '12345', '12323', 'path', '2024-10-10', '2024-10-10');
+    final userResponse = UserResponse(
+        1,
+        'John Doe',
+        'john@example.com',
+        '2024-10-10',
+        '12345',
+        '12323',
+        'path',
+        '2024-10-10',
+        '2024-10-10',
+        'masculino',
+        '1983-07-02',
+        'São Paulo');
     final meditationsResponse = MeditationsResponse(1000, 5000);
     final weekCalendarResponse = WeekCalendarResponse(week: {
       '2024-10-22': {'minutes': 30},
@@ -155,8 +166,19 @@ void main() {
     test('should update user profile on success', () async {
       // Arrange
       final file = File('path/to/file');
-      final userResponse = UserResponse(1, 'John Doe', 'john@example.com',
-          '2024-10-10', '12345', '12323', 'path', '2024-10-10', '2024-10-10');
+      final userResponse = UserResponse(
+          1,
+          'John Doe',
+          'john@example.com',
+          '2024-10-10',
+          '12345',
+          '12323',
+          'path',
+          '2024-10-10',
+          '2024-10-10',
+          'masculino',
+          '1983-07-02',
+          'São Paulo');
       when(mockRouter.goTo(any, onClose: anyNamed('onClose')))
           .thenAnswer((invocation) async {
         final onClose =

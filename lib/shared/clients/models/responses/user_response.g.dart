@@ -16,6 +16,9 @@ UserResponse _$UserResponseFromJson(Map<String, dynamic> json) => UserResponse(
       json['profile_photo_path'] as String?,
       json['created_at'] as String?,
       json['updated_at'] as String?,
+      json['genre'] as String?,
+      json['birthdate'] as String?,
+      json['city'] as String?,
     );
 
 Map<String, dynamic> _$UserResponseToJson(UserResponse instance) =>
@@ -29,4 +32,7 @@ Map<String, dynamic> _$UserResponseToJson(UserResponse instance) =>
       'profile_photo_path': instance.profilePhotoPath,
       'created_at': instance.createdAt,
       'updated_at': instance.updatedAt,
+      'genre': instance.genre,
+      'birthdate': instance.birthdate,
+      'city': instance.city,
     };

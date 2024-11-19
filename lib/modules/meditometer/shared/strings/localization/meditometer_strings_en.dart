@@ -1,5 +1,7 @@
 import 'meditometer_strings.dart';
 
+// ignore_for_file: type=lint
+
 /// The translations for English (`en`).
 class MeditometerStringsEn extends MeditometerStrings {
   MeditometerStringsEn([String locale = 'en']) : super(locale);

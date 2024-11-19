@@ -17,6 +17,7 @@ enum ErrorCodes {
   createNewEventCalendar,
   cameraError,
   getCalendarError,
+  getCountriesError,
 }
 
 class CustomError extends Error {
@@ -50,6 +51,7 @@ class CustomError extends Error {
         "Erro ao criar um novo evento no calendário.",
     ErrorCodes.cameraError: "Erro ao acessar a câmera.",
     ErrorCodes.getCalendarError: "Erro ao acessar o calendário.",
+    ErrorCodes.getCountriesError: "Erro ao buscar os países.",
   };
 
   CustomError sendErrorToCrashlytics(

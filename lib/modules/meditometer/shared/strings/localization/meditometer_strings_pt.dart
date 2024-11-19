@@ -1,5 +1,7 @@
 import 'meditometer_strings.dart';
 
+// ignore_for_file: type=lint
+
 /// The translations for Portuguese (`pt`).
 class MeditometerStringsPt extends MeditometerStrings {
   MeditometerStringsPt([String locale = 'pt']) : super(locale);

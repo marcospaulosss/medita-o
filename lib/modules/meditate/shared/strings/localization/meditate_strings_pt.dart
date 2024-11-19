@@ -1,5 +1,7 @@
 import 'meditate_strings.dart';
 
+// ignore_for_file: type=lint
+
 /// The translations for Portuguese (`pt`).
 class MeditateStringsPt extends MeditateStrings {
   MeditateStringsPt([String locale = 'pt']) : super(locale);

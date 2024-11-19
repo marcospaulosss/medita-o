@@ -50,6 +50,18 @@ class UserResponse {
   @JsonKey(name: 'updated_at')
   String? updatedAt;
 
+  /// gênero
+  @JsonKey(name: 'genre')
+  String? genre;
+
+  /// data de nascimento
+  @JsonKey(name: 'birthdate')
+  String? birthdate;
+
+  /// cidade
+  @JsonKey(name: 'city')
+  String? city;
+
   /// - [id] : id do usuário
   /// - [name] : nome do usuário
   /// - [email] : email do usuário
@@ -59,17 +71,24 @@ class UserResponse {
   /// - [profilePhotoPath] : url da foto de perfil
   /// - [createdAt] : data de criação
   /// - [updatedAt] : data de atualização
+  /// - [genre] : gênero
+  /// - [birthdate] : data de nascimento
+  /// - [city] : cidade
   /// construtor
   UserResponse(
-      this.id,
-      this.name,
-      this.email,
-      this.emailVerifiedAt,
-      this.googleId,
-      this.facebookId,
-      this.profilePhotoPath,
-      this.createdAt,
-      this.updatedAt);
+    this.id,
+    this.name,
+    this.email,
+    this.emailVerifiedAt,
+    this.googleId,
+    this.facebookId,
+    this.profilePhotoPath,
+    this.createdAt,
+    this.updatedAt,
+    this.genre,
+    this.birthdate,
+    this.city,
+  );
 
   factory UserResponse.fromJson(Map<String, dynamic> json) =>
       _$UserResponseFromJson(json);

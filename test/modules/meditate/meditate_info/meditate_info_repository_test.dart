@@ -48,8 +48,19 @@ void main() {
         'requestUser should return UserResponse and null error when successful',
         () async {
       // arrange
-      final userResponse = UserResponse(1, 'name', 'email', 'photo', 'token', 1,
-          'created_at', '', 'updated_at');
+      final userResponse = UserResponse(
+          1,
+          'name',
+          'email',
+          'photo',
+          'token',
+          1,
+          'created_at',
+          '',
+          'updated_at',
+          'Feminino',
+          '1983-07-02',
+          'São Paulo');
       when(clientApi.user()).thenAnswer((_) async => userResponse);
 
       // act

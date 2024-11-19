@@ -6,6 +6,8 @@ import 'package:cinco_minutos_meditacao/core/wrappers/secure_storage.dart';
 import 'package:cinco_minutos_meditacao/modules/common/analytics/events.dart';
 import 'package:cinco_minutos_meditacao/modules/common/screens/profile/profile_contract.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/client_api.dart';
+import 'package:cinco_minutos_meditacao/shared/clients/models/responses/countries_response.dart';
+import 'package:cinco_minutos_meditacao/shared/clients/models/responses/states_response.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/user_response.dart';
 import 'package:cinco_minutos_meditacao/shared/models/error.dart';
 import 'package:dio/dio.dart';
@@ -59,9 +61,9 @@ class ProfileRepository implements Repository {
     } on TimeoutException {
       return (null, _handleTimeoutError());
     } on DioException catch (e) {
-      return (null, _handleDioError(e));
+      return (null, _handleDioError(e, ErrorCodes.getMeError));
     } catch (e, stackTrace) {
-      return (null, _handleGenericError(stackTrace));
+      return (null, _handleGenericError(stackTrace, ErrorCodes.getMeError));
     }
   }
 
@@ -75,9 +77,48 @@ class ProfileRepository implements Repository {
     } on TimeoutException {
       return _handleTimeoutError();
     } on DioException catch (e) {
-      return _handleDioError(e);
+      return _handleDioError(e, ErrorCodes.getMeError);
     } catch (e, stackTrace) {
-      return _handleGenericError(stackTrace);
+      return _handleGenericError(stackTrace, ErrorCodes.getMeError);
+    }
+  }
+
+  /// Busca os países
+  @override
+  Future<(CountriesResponse?, CustomError?)> requestGetCountries() async {
+    try {
+      CountriesResponse countries = await _clientApi.countries();
+
+      return (countries, null);
+    } on TimeoutException {
+      return (null, _handleTimeoutError());
+    } on DioException catch (e) {
+      return (null, _handleDioError(e, ErrorCodes.getCountriesError));
+    } catch (e, stackTrace) {
+      return (
+        null,
+        _handleGenericError(stackTrace, ErrorCodes.getCountriesError)
+      );
+    }
+  }
+
+  /// Busca os estados do país selecionado
+  @override
+  Future<(StatesResponse?, CustomError?)> requestGetStatesByCountryId(
+      int countryId) async {
+    try {
+      StatesResponse states = await _clientApi.states(countryId);
+
+      return (states, null);
+    } on TimeoutException {
+      return (null, _handleTimeoutError());
+    } on DioException catch (e) {
+      return (null, _handleDioError(e, ErrorCodes.getCountriesError));
+    } catch (e, stackTrace) {
+      return (
+        null,
+        _handleGenericError(stackTrace, ErrorCodes.getCountriesError)
+      );
     }
   }
 
@@ -95,17 +136,17 @@ class ProfileRepository implements Repository {
     );
   }
 
-  CustomError _handleDioError(DioException e) {
+  CustomError _handleDioError(DioException e, ErrorCodes code) {
     return _error.sendErrorToCrashlytics(
-      code: ErrorCodes.getMeError,
+      code: code,
       stackTrace: StackTrace.current,
       dioException: e,
     );
   }
 
-  CustomError _handleGenericError(StackTrace stackTrace) {
+  CustomError _handleGenericError(StackTrace stackTrace, ErrorCodes code) {
     return _error.sendErrorToCrashlytics(
-      code: ErrorCodes.getMeError,
+      code: code,
       stackTrace: stackTrace,
     );
   }

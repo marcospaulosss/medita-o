@@ -7,6 +7,8 @@ import 'package:cinco_minutos_meditacao/modules/common/screens/profile/profile_p
 import 'package:cinco_minutos_meditacao/modules/common/screens/profile/profile_view.dart';
 import 'package:cinco_minutos_meditacao/modules/common/shared/strings/localization/common_strings.dart';
 import 'package:cinco_minutos_meditacao/shared/Theme/app_images.dart';
+import 'package:cinco_minutos_meditacao/shared/clients/models/responses/countries_response.dart';
+import 'package:cinco_minutos_meditacao/shared/clients/models/responses/states_response.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/user_response.dart';
 import 'package:cinco_minutos_meditacao/shared/components/app_header.dart';
 import 'package:cinco_minutos_meditacao/shared/components/text_field_input.dart';
@@ -30,7 +32,7 @@ main() async {
   final GetIt sl = GetIt.instance;
   sl.registerLazySingleton<ProfilePresenter>(() => presenter);
 
-  group("Home", () {
+  group("Profile", () {
     late ProfileView view;
 
     setUp(() {
@@ -55,12 +57,13 @@ main() async {
     }
 
     group("Validate Screen", () {
-      testWidgets("Should show home screen", (tester) async {
+      testWidgets("Should show profile screen", (tester) async {
         await tester.pumpWidget(createWidgetUnderTest());
 
         when(presenter.initPresenter()).thenAnswer((_) {
           return Future.value();
         });
+        when(presenter.getStates(any)).thenAnswer((_) => Future.value());
 
         await tester.pump();
         verify(presenter.initPresenter()).called(1);
@@ -69,16 +72,40 @@ main() async {
             tester.state(find.byType(ProfileView)) as ProfileViewState;
         profileViewState.showNormalState(ProfileModel(
           userResponse: UserResponse(
-            1,
-            "Marcos Santos",
-            "marcos@gmail.com",
-            "",
-            "1",
-            "1",
-            "",
-            DateTime.now().toString(),
-            DateTime.now().toString(),
-          ),
+              1,
+              "Marcos Santos",
+              "marcos@gmail.com",
+              "",
+              "1",
+              "1",
+              "",
+              DateTime.now().toString(),
+              DateTime.now().toString(),
+              'Masculino',
+              '1983-07-02',
+              'Brazil'),
+          countryResponse: CountriesResponse([
+            Countries(
+              1,
+              "Brazil",
+            ),
+            Countries(
+              2,
+              "PR",
+            ),
+          ]),
+          statesResponse: StatesResponse([
+            States(
+              1,
+              2,
+              "PR",
+            ),
+            States(
+              2,
+              3,
+              "SC",
+            ),
+          ]),
         ));
         await tester.pumpAndSettle();
 
@@ -96,7 +123,7 @@ main() async {
             ),
             findsOneWidget);
         expect(find.byType(FormProfile), findsOneWidget);
-        expect(find.textContaining("Nome"), findsWidgets);
+        expect(find.text("Nome"), findsWidgets);
         expect(find.textContaining("Sobrenome"), findsWidgets);
         expect(find.textContaining("E-mail"), findsOneWidget);
         expect(find.textContaining("Data de Nascimento"), findsOneWidget);
@@ -109,9 +136,9 @@ main() async {
         await tester.pumpAndSettle();
 
         expect(find.text("Gênero"), findsOneWidget);
-        expect(find.text("Feminino"), findsWidgets);
+        expect(find.text("Masculino"), findsOneWidget);
         expect(find.text("Onde Reside"), findsOneWidget);
-        expect(find.text("BR"), findsOneWidget);
+        expect(find.text("Brazil"), findsOneWidget);
         expect(find.text("Salvar Dados"), findsOneWidget);
 
         expect(
@@ -139,16 +166,40 @@ main() async {
             tester.state(find.byType(ProfileView)) as ProfileViewState;
         profileViewState.showNormalState(ProfileModel(
           userResponse: UserResponse(
-            1,
-            "Marcos",
-            "marcos@gmail.com",
-            "",
-            "1",
-            "1",
-            "",
-            DateTime.now().toString(),
-            DateTime.now().toString(),
-          ),
+              1,
+              "Marcos Santos",
+              "marcos@gmail.com",
+              "",
+              "1",
+              "1",
+              "",
+              DateTime.now().toString(),
+              DateTime.now().toString(),
+              'Masculino',
+              '1983-07-02',
+              'São Paulo'),
+          countryResponse: CountriesResponse([
+            Countries(
+              1,
+              "Brazil",
+            ),
+            Countries(
+              2,
+              "PR",
+            ),
+          ]),
+          statesResponse: StatesResponse([
+            States(
+              1,
+              2,
+              "PR",
+            ),
+            States(
+              2,
+              3,
+              "SC",
+            ),
+          ]),
         ));
         await tester.pumpAndSettle();
 
@@ -172,16 +223,40 @@ main() async {
             tester.state(find.byType(ProfileView)) as ProfileViewState;
         profileViewState.showNormalState(ProfileModel(
           userResponse: UserResponse(
-            1,
-            "Marcos",
-            "marcos@gmail.com",
-            "",
-            "1",
-            "1",
-            "",
-            DateTime.now().toString(),
-            DateTime.now().toString(),
-          ),
+              1,
+              "Marcos Santos",
+              "marcos@gmail.com",
+              "",
+              "1",
+              "1",
+              "",
+              DateTime.now().toString(),
+              DateTime.now().toString(),
+              'Masculino',
+              '1983-07-02',
+              'São Paulo'),
+          countryResponse: CountriesResponse([
+            Countries(
+              1,
+              "Brazil",
+            ),
+            Countries(
+              2,
+              "PR",
+            ),
+          ]),
+          statesResponse: StatesResponse([
+            States(
+              1,
+              2,
+              "PR",
+            ),
+            States(
+              2,
+              3,
+              "SC",
+            ),
+          ]),
         ));
         await tester.pumpAndSettle();
 
@@ -209,16 +284,40 @@ main() async {
             tester.state(find.byType(ProfileView)) as ProfileViewState;
         profileViewState.showNormalState(ProfileModel(
           userResponse: UserResponse(
-            1,
-            "Marcos",
-            "marcos@gmail.com",
-            "",
-            "1",
-            "1",
-            "",
-            DateTime.now().toString(),
-            DateTime.now().toString(),
-          ),
+              1,
+              "Marcos Santos",
+              "marcos@gmail.com",
+              "",
+              "1",
+              "1",
+              "",
+              DateTime.now().toString(),
+              DateTime.now().toString(),
+              'Masculino',
+              '1983-07-02',
+              'São Paulo'),
+          countryResponse: CountriesResponse([
+            Countries(
+              1,
+              "Brazil",
+            ),
+            Countries(
+              2,
+              "PR",
+            ),
+          ]),
+          statesResponse: StatesResponse([
+            States(
+              1,
+              2,
+              "PR",
+            ),
+            States(
+              2,
+              3,
+              "SC",
+            ),
+          ]),
         ));
         await tester.pumpAndSettle();
 
@@ -259,16 +358,40 @@ main() async {
             tester.state(find.byType(ProfileView)) as ProfileViewState;
         profileViewState.showNormalState(ProfileModel(
           userResponse: UserResponse(
-            1,
-            "Marcos",
-            "marcos@gmail.com",
-            "",
-            "1",
-            "1",
-            "",
-            DateTime.now().toString(),
-            DateTime.now().toString(),
-          ),
+              1,
+              "Marcos Santos",
+              "marcos@gmail.com",
+              "",
+              "1",
+              "1",
+              "",
+              DateTime.now().toString(),
+              DateTime.now().toString(),
+              'Feminino',
+              '1983-07-02',
+              'São Paulo'),
+          countryResponse: CountriesResponse([
+            Countries(
+              1,
+              "Brazil",
+            ),
+            Countries(
+              2,
+              "PR",
+            ),
+          ]),
+          statesResponse: StatesResponse([
+            States(
+              1,
+              2,
+              "PR",
+            ),
+            States(
+              2,
+              3,
+              "SC",
+            ),
+          ]),
         ));
         await tester.pumpAndSettle();
 
@@ -297,16 +420,40 @@ main() async {
             tester.state(find.byType(ProfileView)) as ProfileViewState;
         profileViewState.showNormalState(ProfileModel(
           userResponse: UserResponse(
-            1,
-            "Marcos",
-            "marcos@gmail.com",
-            "",
-            "1",
-            "1",
-            "",
-            DateTime.now().toString(),
-            DateTime.now().toString(),
-          ),
+              1,
+              "Marcos Santos",
+              "marcos@gmail.com",
+              "",
+              "1",
+              "1",
+              "",
+              DateTime.now().toString(),
+              DateTime.now().toString(),
+              'Masculino',
+              '1983-07-02',
+              'São Paulo'),
+          countryResponse: CountriesResponse([
+            Countries(
+              1,
+              "Brazil",
+            ),
+            Countries(
+              2,
+              "PR",
+            ),
+          ]),
+          statesResponse: StatesResponse([
+            States(
+              1,
+              2,
+              "PR",
+            ),
+            States(
+              2,
+              3,
+              "SC",
+            ),
+          ]),
         ));
         await tester.pumpAndSettle();
 
@@ -314,12 +461,12 @@ main() async {
             find.byType(SingleChildScrollView), const Offset(0.0, -900));
         await tester.pumpAndSettle();
 
-        await tester.tap(find.text('BR').first);
+        await tester.tap(find.text('Brazil').first);
         await tester.pumpAndSettle();
-        await tester.tap(find.text('BR').first);
+        await tester.tap(find.text('Brazil').first);
         await tester.pumpAndSettle();
 
-        expect(find.text('BR'), findsWidgets);
+        expect(find.text('Brazil'), findsWidgets);
       });
 
       testWidgets("Should validate o click in state", (tester) async {
@@ -335,16 +482,40 @@ main() async {
             tester.state(find.byType(ProfileView)) as ProfileViewState;
         profileViewState.showNormalState(ProfileModel(
           userResponse: UserResponse(
-            1,
-            "Marcos",
-            "marcos@gmail.com",
-            "",
-            "1",
-            "1",
-            "",
-            DateTime.now().toString(),
-            DateTime.now().toString(),
-          ),
+              1,
+              "Marcos Santos",
+              "marcos@gmail.com",
+              "",
+              "1",
+              "1",
+              "",
+              DateTime.now().toString(),
+              DateTime.now().toString(),
+              'Feminino',
+              '1983-07-02',
+              'São Paulo'),
+          countryResponse: CountriesResponse([
+            Countries(
+              1,
+              "Brazil",
+            ),
+            Countries(
+              2,
+              "PR",
+            ),
+          ]),
+          statesResponse: StatesResponse([
+            States(
+              1,
+              2,
+              "PR",
+            ),
+            States(
+              2,
+              3,
+              "SC",
+            ),
+          ]),
         ));
         await tester.pumpAndSettle();
 
@@ -352,7 +523,7 @@ main() async {
             find.byType(SingleChildScrollView), const Offset(0.0, -900));
         await tester.pumpAndSettle();
 
-        await tester.tap(find.text('Feminino').at(1));
+        await tester.tap(find.text('Feminino'));
         await tester.pumpAndSettle();
         await tester.tap(find.text('Masculino').first);
         await tester.pumpAndSettle();
@@ -404,16 +575,40 @@ main() async {
             tester.state(find.byType(ProfileView)) as ProfileViewState;
         profileViewState.showNormalState(ProfileModel(
           userResponse: UserResponse(
-            1,
-            "Marcos",
-            "marcos@gmail.com",
-            "",
-            "1",
-            "1",
-            "",
-            DateTime.now().toString(),
-            DateTime.now().toString(),
-          ),
+              1,
+              "Marcos Santos",
+              "marcos@gmail.com",
+              "",
+              "1",
+              "1",
+              "",
+              DateTime.now().toString(),
+              DateTime.now().toString(),
+              'Masculino',
+              '1983-07-02',
+              'São Paulo'),
+          countryResponse: CountriesResponse([
+            Countries(
+              1,
+              "Brazil",
+            ),
+            Countries(
+              2,
+              "PR",
+            ),
+          ]),
+          statesResponse: StatesResponse([
+            States(
+              1,
+              2,
+              "PR",
+            ),
+            States(
+              2,
+              3,
+              "SC",
+            ),
+          ]),
         ));
         await tester.pump();
       });
