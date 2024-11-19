@@ -67,16 +67,18 @@ main() async {
             tester.state(find.byType(HomeView)) as HomeViewState;
         homeViewState.showNormalState(HomeModel(
           userResponse: UserResponse(
-            1,
-            "Marcos",
-            "marcos@gmail.com",
-            "",
-            "1",
-            "1",
-            "",
-            DateTime.now().toString(),
-            DateTime.now().toString(),
-          ),
+              1,
+              "Marcos",
+              "marcos@gmail.com",
+              "",
+              "1",
+              "1",
+              "",
+              DateTime.now().toString(),
+              DateTime.now().toString(),
+              'masculino',
+              '1983-07-02',
+              'São Paulo'),
           meditationsResponse: MeditationsResponse(2, 123123),
         ));
         await tester.pumpAndSettle();
@@ -137,16 +139,18 @@ main() async {
             tester.state(find.byType(HomeView)) as HomeViewState;
         homeViewState.showNormalState(HomeModel(
           userResponse: UserResponse(
-            1,
-            "Marcos",
-            "marcos@gmail.com",
-            "",
-            "1",
-            "1",
-            "",
-            DateTime.now().toString(),
-            DateTime.now().toString(),
-          ),
+              1,
+              "Marcos",
+              "marcos@gmail.com",
+              "",
+              "1",
+              "1",
+              "",
+              DateTime.now().toString(),
+              DateTime.now().toString(),
+              'masculino',
+              '1983-07-02',
+              'São Paulo'),
           meditationsResponse: MeditationsResponse(2, 123123),
         ));
         await tester.pumpAndSettle();
@@ -172,16 +176,18 @@ main() async {
             tester.state(find.byType(HomeView)) as HomeViewState;
         homeViewState.showNormalState(HomeModel(
           userResponse: UserResponse(
-            1,
-            "Marcos",
-            "marcos@gmail.com",
-            "",
-            "1",
-            "1",
-            "",
-            DateTime.now().toString(),
-            DateTime.now().toString(),
-          ),
+              1,
+              "Marcos",
+              "marcos@gmail.com",
+              "",
+              "1",
+              "1",
+              "",
+              DateTime.now().toString(),
+              DateTime.now().toString(),
+              'masculino',
+              '1983-07-02',
+              'São Paulo'),
           meditationsResponse: MeditationsResponse(2, 123123),
         ));
         await tester.pumpAndSettle();
@@ -207,16 +213,18 @@ main() async {
             tester.state(find.byType(HomeView)) as HomeViewState;
         homeViewState.showNormalState(HomeModel(
           userResponse: UserResponse(
-            1,
-            "Marcos",
-            "marcos@gmail.com",
-            "",
-            "1",
-            "1",
-            "",
-            DateTime.now().toString(),
-            DateTime.now().toString(),
-          ),
+              1,
+              "Marcos",
+              "marcos@gmail.com",
+              "",
+              "1",
+              "1",
+              "",
+              DateTime.now().toString(),
+              DateTime.now().toString(),
+              'masculino',
+              '1983-07-02',
+              'São Paulo'),
           meditationsResponse: MeditationsResponse(2, 123123),
         ));
         await tester.pumpAndSettle();
@@ -271,16 +279,18 @@ main() async {
             tester.state(find.byType(HomeView)) as HomeViewState;
         homeViewState.showNormalState(HomeModel(
           userResponse: UserResponse(
-            1,
-            "Marcos",
-            "marcos@gmail.com",
-            "",
-            "1",
-            "1",
-            "",
-            DateTime.now().toString(),
-            DateTime.now().toString(),
-          ),
+              1,
+              "Marcos",
+              "marcos@gmail.com",
+              "",
+              "1",
+              "1",
+              "",
+              DateTime.now().toString(),
+              DateTime.now().toString(),
+              'masculino',
+              '1983-07-02',
+              'São Paulo'),
           meditationsResponse: MeditationsResponse(2, 123123),
         ));
         await tester.pump();

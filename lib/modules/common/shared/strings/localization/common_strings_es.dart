@@ -1,5 +1,7 @@
 import 'common_strings.dart';
 
+// ignore_for_file: type=lint
+
 /// The translations for Spanish Castilian (`es`).
 class CommonStringsEs extends CommonStrings {
   CommonStringsEs([String locale = 'es']) : super(locale);

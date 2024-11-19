@@ -1,5 +1,7 @@
 import 'shared_strings.dart';
 
+// ignore_for_file: type=lint
+
 /// The translations for Portuguese (`pt`).
 class SharedStringsPt extends SharedStrings {
   SharedStringsPt([String locale = 'pt']) : super(locale);

@@ -9,6 +9,8 @@ import 'shared_strings_en.dart';
 import 'shared_strings_es.dart';
 import 'shared_strings_pt.dart';
 
+// ignore_for_file: type=lint
+
 /// Callers can lookup localized strings with an instance of SharedStrings
 /// returned by `SharedStrings.of(context)`.
 ///

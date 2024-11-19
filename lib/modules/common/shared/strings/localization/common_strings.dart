@@ -9,6 +9,8 @@ import 'common_strings_en.dart';
 import 'common_strings_es.dart';
 import 'common_strings_pt.dart';
 
+// ignore_for_file: type=lint
+
 /// Callers can lookup localized strings with an instance of CommonStrings
 /// returned by `CommonStrings.of(context)`.
 ///

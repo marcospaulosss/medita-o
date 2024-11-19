@@ -1,5 +1,7 @@
 import 'authentication_strings.dart';
 
+// ignore_for_file: type=lint
+
 /// The translations for Portuguese (`pt`).
 class AuthenticationStringsPt extends AuthenticationStrings {
   AuthenticationStringsPt([String locale = 'pt']) : super(locale);

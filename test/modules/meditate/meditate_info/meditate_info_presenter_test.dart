@@ -90,8 +90,10 @@ void main() {
             '1',
             'https://google.com.br/image.png',
             DateTime.now().toString(),
-            DateTime.now()
-                .toString()); // Supondo que você tenha uma classe UserResponse
+            DateTime.now().toString(),
+            'Feminino',
+            '1983-07-02',
+            'São Paulo'); // Supondo que você tenha uma classe UserResponse
 
         when(repository.uploadImageProfile(any)).thenAnswer((_) async => null);
         when(repository.requestUser())
