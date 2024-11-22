@@ -28,8 +28,19 @@ jobs:
           ANDROID_STORE_FILE: ${{ secrets.ANDROID_STORE_FILE }}
           JSON_KEY: ${{ secrets.JSON_KEY }}
 
+      - name: Setup JDK 11
+        run: |
+          export JAVA_HOME=/Library/Java/JavaVirtualMachines/liberica-jdk-11.jdk/Contents/Home
+          echo "JAVA_HOME is set to $JAVA_HOME"
+
+      - name: Build with Gradle
+        run: ./gradlew bundleStoreRelease --info
+        env:
+          JAVA_HOME: ${{ env.JAVA_HOME }}
+
       - name: Setup flutter e builda projeto LOCALMENTE
         run: |
+          echo $JAVA_HOME
           flutter clean
           flutter pub get
           ./localization
@@ -40,6 +51,7 @@ jobs:
           ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
           ANDROID_STORE_PASSWORD: ${{ secrets.ANDROID_STORE_PASSWORD }}
           ANDROID_STORE_FILE: /tmp/KeyStorePlay.keystore
+          JAVA_HOME: ${{ env.JAVA_HOME }}
 
       - name: Deploy do Google Play Store
         run: |
