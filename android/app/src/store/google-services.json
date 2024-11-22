@@ -2,7 +2,7 @@
   "project_info": {
     "project_number": "106395996253",
     "project_id": "minutos-3ae7f",
-    "storage_bucket": "minutos-3ae7f.appspot.com"
+    "storage_bucket": "minutos-3ae7f.firebasestorage.app"
   },
   "client": [
     {
@@ -13,6 +13,14 @@
         }
       },
       "oauth_client": [
+        {
+          "client_id": "106395996253-55g06p59cbhqcf5ei5i2901v7i3d98qg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.polvo.cincominutos",
+            "certificate_hash": "32ff99dc42daf4b07eff59f5195113b7b5d5cba3"
+          }
+        },
         {
           "client_id": "106395996253-5uuc2me8eat6mk3thb4k28e0v4gq1n4i.apps.googleusercontent.com",
           "client_type": 3
@@ -58,14 +66,6 @@
           }
         },
         {
-          "client_id": "106395996253-m4h2d9u355su1660jtjqjkvr3ndrd6hq.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "eumedito.org.cinco_minutos",
-            "certificate_hash": "ff4e61cdbcd87da0baf80b214a697a295ee4afc3"
-          }
-        },
-        {
           "client_id": "106395996253-5uuc2me8eat6mk3thb4k28e0v4gq1n4i.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -102,23 +102,7 @@
       },
       "oauth_client": [
         {
-          "client_id": "106395996253-08bcto7ojojf3aqhnosen8l2dfvq4p8e.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "eumedito.org.cinco_minutos.dev",
-            "certificate_hash": "ff4e61cdbcd87da0baf80b214a697a295ee4afc3"
-          }
-        },
-        {
-          "client_id": "106395996253-78prpsbt0f6ncc9lm0pddul23950l4kt.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "eumedito.org.cinco_minutos.dev",
-            "certificate_hash": "61e8abd068607ee445bbeaf9d145e66a4c7b718d"
-          }
-        },
-        {
-          "client_id": "106395996253-uef8scsv4hjnfkqne0tpm0c28u9j61cg.apps.googleusercontent.com",
+          "client_id": "106395996253-hmji1fgji2t8skkfge94t7hqe0ufk8bl.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "eumedito.org.cinco_minutos.dev",
