@@ -34,7 +34,9 @@ jobs:
           echo "JAVA_HOME is set to $JAVA_HOME"
 
       - name: Build with Gradle
-        run: ./gradlew bundleStoreRelease --info
+        run: |
+          cd android
+          ./gradlew bundleStoreRelease --info
         env:
           JAVA_HOME: ${{ env.JAVA_HOME }}
 
