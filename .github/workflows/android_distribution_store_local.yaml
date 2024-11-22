@@ -33,13 +33,6 @@ jobs:
           export JAVA_HOME=/Library/Java/JavaVirtualMachines/liberica-jdk-11.jdk/Contents/Home
           echo "JAVA_HOME is set to $JAVA_HOME"
 
-      - name: Build with Gradle
-        run: |
-          cd android
-          ./gradlew bundleStoreRelease --info
-        env:
-          JAVA_HOME: ${{ env.JAVA_HOME }}
-
       - name: Setup flutter e builda projeto LOCALMENTE
         run: |
           echo $JAVA_HOME
