@@ -468,7 +468,7 @@ void main() {
         DateTime nextYear = DateTime(now.year, now.month, now.day - 7);
         String monthName = DateFormat('dd', 'pt_BR').format(nextYear);
 
-        expect(find.text(monthName), findsOneWidget);
+        expect(find.text(monthName), findsNWidgets(3));
         expect(find.byIcon(Icons.chevron_left), findsOneWidget);
         expect(find.byIcon(Icons.chevron_right), findsOneWidget);
       });
