@@ -18,6 +18,7 @@ enum ErrorCodes {
   cameraError,
   getCalendarError,
   getCountriesError,
+  updateProfileError,
 }
 
 class CustomError extends Error {
@@ -52,6 +53,7 @@ class CustomError extends Error {
     ErrorCodes.cameraError: "Erro ao acessar a câmera.",
     ErrorCodes.getCalendarError: "Erro ao acessar o calendário.",
     ErrorCodes.getCountriesError: "Erro ao buscar os países.",
+    ErrorCodes.updateProfileError: "Erro ao atualizar o perfil.",
   };
 
   CustomError sendErrorToCrashlytics(
