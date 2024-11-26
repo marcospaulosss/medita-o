@@ -6,6 +6,7 @@ import 'package:cinco_minutos_meditacao/core/wrappers/secure_storage.dart';
 import 'package:cinco_minutos_meditacao/modules/common/analytics/events.dart';
 import 'package:cinco_minutos_meditacao/modules/common/screens/profile/profile_contract.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/client_api.dart';
+import 'package:cinco_minutos_meditacao/shared/clients/models/requests/user_request.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/countries_response.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/states_response.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/user_response.dart';
@@ -149,5 +150,28 @@ class ProfileRepository implements Repository {
       code: code,
       stackTrace: stackTrace,
     );
+  }
+
+  @override
+  Future<(UserResponse?, CustomError?)> requestUpdateUser(
+      UserRequest user) async {
+    try {
+      await _clientApi.updateUser(user);
+
+      UserResponse response = await _clientApi.user();
+
+      await _saveUserToSecureStorage(response);
+
+      return (response, null);
+    } on TimeoutException {
+      return (null, _handleTimeoutError());
+    } on DioException catch (e) {
+      return (null, _handleDioError(e, ErrorCodes.updateProfileError));
+    } catch (e, stackTrace) {
+      return (
+        null,
+        _handleGenericError(stackTrace, ErrorCodes.updateProfileError)
+      );
+    }
   }
 }

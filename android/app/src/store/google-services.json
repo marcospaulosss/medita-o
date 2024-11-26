@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "106395996253-48hekqafd16180d4ksfb1bt6fr9pnfnb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.polvo.cincominutos",
+            "certificate_hash": "61e8abd068607ee445bbeaf9d145e66a4c7b718d"
+          }
+        },
+        {
           "client_id": "106395996253-55g06p59cbhqcf5ei5i2901v7i3d98qg.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
@@ -66,6 +74,22 @@
           }
         },
         {
+          "client_id": "106395996253-j4v219h71u2qse5b1d7shekd4gbhvper.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "eumedito.org.cinco_minutos",
+            "certificate_hash": "61e8abd068607ee445bbeaf9d145e66a4c7b718d"
+          }
+        },
+        {
+          "client_id": "106395996253-pmq7qdp9bujaj535tlpc44uo4tgga12g.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "eumedito.org.cinco_minutos",
+            "certificate_hash": "ff4e61cdbcd87da0baf80b214a697a295ee4afc3"
+          }
+        },
+        {
           "client_id": "106395996253-5uuc2me8eat6mk3thb4k28e0v4gq1n4i.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -101,6 +125,14 @@
         }
       },
       "oauth_client": [
+        {
+          "client_id": "106395996253-dud0698aem2lkl1s91tr8p683fhhv2ur.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "eumedito.org.cinco_minutos.dev",
+            "certificate_hash": "61e8abd068607ee445bbeaf9d145e66a4c7b718d"
+          }
+        },
         {
           "client_id": "106395996253-hmji1fgji2t8skkfge94t7hqe0ufk8bl.apps.googleusercontent.com",
           "client_type": 1,

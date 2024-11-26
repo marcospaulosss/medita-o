@@ -5,6 +5,7 @@ import 'package:cinco_minutos_meditacao/shared/clients/interceptor.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/models/requests/auth_request.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/models/requests/authenticate_google_request.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/models/requests/create_new_meditations_request.dart';
+import 'package:cinco_minutos_meditacao/shared/clients/models/requests/user_request.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/authenticate_google_response.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/countries_response.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/meditations_response.dart';
@@ -58,6 +59,10 @@ abstract class ClientApi {
   /// Obtem informações do usuário logado
   @GET('/user')
   Future<UserResponse> user();
+
+  /// Obtem informações do usuário logado
+  @PATCH('/user')
+  Future<void> updateUser(@Body() UserRequest body);
 
   /// solicita a atualização da foto do usuário
   @POST('/user/photo')
