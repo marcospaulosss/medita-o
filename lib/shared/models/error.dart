@@ -19,6 +19,8 @@ enum ErrorCodes {
   getCalendarError,
   getCountriesError,
   updateProfileError,
+  getTokenApiError,
+  socialShareError,
 }
 
 class CustomError extends Error {
@@ -54,6 +56,8 @@ class CustomError extends Error {
     ErrorCodes.getCalendarError: "Erro ao acessar o calendário.",
     ErrorCodes.getCountriesError: "Erro ao buscar os países.",
     ErrorCodes.updateProfileError: "Erro ao atualizar o perfil.",
+    ErrorCodes.getTokenApiError: "Erro ao buscar o token da API.",
+    ErrorCodes.socialShareError: "Erro ao compartilhar imagem.",
   };
 
   CustomError sendErrorToCrashlytics(

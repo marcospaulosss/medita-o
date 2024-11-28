@@ -412,6 +412,15 @@ class MockClientApi extends _i1.Mock implements _i14.ClientApi {
           ),
         )),
       ) as _i15.Future<_i10.StatesResponse>);
+
+  @override
+  _i15.Future<dynamic> getShareCalendar() => (super.noSuchMethod(
+        Invocation.method(
+          #getShareCalendar,
+          [],
+        ),
+        returnValue: _i15.Future<dynamic>.value(),
+      ) as _i15.Future<dynamic>);
 }
 
 /// A class which mocks [SecureStorage].

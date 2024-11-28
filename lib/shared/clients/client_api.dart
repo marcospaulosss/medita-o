@@ -104,4 +104,9 @@ abstract class ClientApi {
   /// Obtem os estados de um país
   @GET('/states')
   Future<StatesResponse> states(@Query('country_id') int countryId);
+
+  /// - [ Share ] : Cliente de compartilhamento
+  /// Obtem o paizes disponíveis
+  @GET('/share/calendar')
+  Future<dynamic> getShareCalendar();
 }

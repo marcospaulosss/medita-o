@@ -26,6 +26,9 @@ abstract class Presenter implements ViewBinding<MeditometerViewContract> {
 
   /// Direciona para a tela de sobre o app
   void goToAbout();
+
+  /// Direciona para a tela de configurações
+  Future<void> socialShare();
 }
 
 abstract class Repository {
@@ -40,4 +43,7 @@ abstract class Repository {
 
   /// Atualiza a imagem de perfil do usuário
   Future<CustomError?> uploadImageProfile(File file);
+
+  /// Busca o token da API
+  Future<(String?, CustomError?)> getTokenApi();
 }
