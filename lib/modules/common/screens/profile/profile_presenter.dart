@@ -68,9 +68,21 @@ class ProfilePresenter implements Presenter {
       return;
     }
 
-    if (user.city != null) {
-      var (states, error) = await _repository
-          .requestGetStatesByCountryId(user.city!.state.country.id);
+    if (user.state != null) {
+      var (states, error) =
+          await _repository.requestGetStatesByCountryId(user.state!.country.id);
+      if (error != null) {
+        view?.showError(error.getErrorMessage);
+        return;
+      }
+
+      profileModel.statesResponse = states;
+    } else {
+      int? brazilId = countries!.countries!
+          .firstWhere((element) => element.name == 'Brazil')
+          .id;
+      var (states, error) =
+          await _repository.requestGetStatesByCountryId(brazilId ?? 0);
       if (error != null) {
         view?.showError(error.getErrorMessage);
         return;
@@ -157,9 +169,9 @@ class ProfilePresenter implements Presenter {
       return;
     }
 
-    if (user.city != null) {
+    if (user.state != null) {
       var (states, error) = await _repository
-          .requestGetStatesByCountryId(userResponse!.city!.state.country.id);
+          .requestGetStatesByCountryId(userResponse!.state!.country.id);
       if (error != null) {
         view?.showError(error.getErrorMessage);
         return;

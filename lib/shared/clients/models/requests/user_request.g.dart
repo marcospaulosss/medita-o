@@ -12,7 +12,7 @@ UserRequest _$UserRequestFromJson(Map<String, dynamic> json) => UserRequest(
       json['email'] as String,
       json['genre'] as String?,
       json['birthdate'] as String?,
-      (json['city_id'] as num?)?.toInt(),
+      (json['state_id'] as num?)?.toInt(),
     );
 
 Map<String, dynamic> _$UserRequestToJson(UserRequest instance) =>
@@ -22,5 +22,5 @@ Map<String, dynamic> _$UserRequestToJson(UserRequest instance) =>
       'email': instance.email,
       'genre': instance.genre,
       'birthdate': instance.birthdate,
-      'city_id': instance.city,
+      'state_id': instance.state,
     };

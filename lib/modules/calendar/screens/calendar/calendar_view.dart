@@ -191,7 +191,7 @@ class CalendarViewState extends State<CalendarView>
             ),
             const SizedBox(height: 16),
             IconLabelButton(
-              onTap: () {},
+              onTap: () => presenter.socialShare(),
               decoration: BoxDecoration(
                 color: AppColors.germanderSpeedwell,
                 borderRadius: BorderRadius.circular(12),

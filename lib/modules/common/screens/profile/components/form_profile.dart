@@ -78,23 +78,26 @@ class _FormProfileState extends State<FormProfile> {
         .map((item) => item.name as String)
         .toList();
 
-    if (widget.profileModel.userResponse!.city != null) {
+    listStates = widget.profileModel.statesResponse!.states!
+        .map((item) => item.name as String)
+        .toList();
+
+    if (widget.profileModel.userResponse!.state != null) {
       selectedValueCounty =
-          widget.profileModel.userResponse!.city!.state.country.name;
-      selectedIdCounty =
-          widget.profileModel.userResponse!.city!.state.country.id;
+          widget.profileModel.userResponse!.state!.country.name;
+      selectedIdCounty = widget.profileModel.userResponse!.state!.country.id;
 
-      listStates = widget.profileModel.statesResponse!.states!
-          .map((item) => item.name as String)
-          .toList();
-
-      selectedValueStates = widget.profileModel.userResponse!.city!.state.name;
-      selectedIdState = widget.profileModel.userResponse!.city!.state.id;
+      selectedValueStates = widget.profileModel.userResponse!.state!.name;
+      selectedIdState = widget.profileModel.userResponse!.state!.id;
     } else {
       widget.profileModel.countryResponse!.countries!.forEach((element) {
         if (element.name == selectedValueCounty) {
           selectedIdCounty = element.id;
-          widget.onSelectedCountry(selectedIdCounty);
+        }
+      });
+      widget.profileModel.statesResponse!.states!.forEach((element) {
+        if (element.name == selectedValueStates) {
+          selectedIdState = element.id;
         }
       });
     }
@@ -399,7 +402,7 @@ class _FormProfileState extends State<FormProfile> {
                 emailController.text,
                 selectedValueGender!,
                 "$_selectedYear-$_selectedMonth-$_selectedDay",
-                selectedIdCounty,
+                selectedIdState,
               );
 
               widget.onRegister(user);

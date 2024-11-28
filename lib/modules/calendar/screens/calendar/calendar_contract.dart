@@ -29,6 +29,9 @@ abstract class Presenter implements ViewBinding<CalendarViewContract> {
 
   /// Busca a quantidade de meditações realizadas na semana
   Future<CalendarModel> getCalendar(String date, CalendarType type);
+
+  /// Direciona para a tela de configurações
+  Future<void> socialShare();
 }
 
 abstract class Repository {
@@ -55,4 +58,7 @@ abstract class Repository {
   /// Busca a quantidade de meditações realizadas no ano
   Future<(YearCalendarResponse?, CustomError?)> requestCalendarYear(
       String date);
+
+  /// Busca o token da API
+  Future<(String?, CustomError?)> getTokenApi();
 }
