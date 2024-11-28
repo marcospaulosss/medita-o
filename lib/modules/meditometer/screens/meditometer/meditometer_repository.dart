@@ -127,4 +127,19 @@ class MeditometerRepository implements Repository {
           code: ErrorCodes.getMeError, stackTrace: StackTrace.current);
     }
   }
+
+  /// Busca a imagem para compartilhamento nas redes sociais
+  @override
+  Future<(String?, CustomError?)> getTokenApi() async {
+    try {
+      String token = await _secureStorage.tokenAPI;
+      return (token, null);
+    } catch (e) {
+      return (
+        null,
+        _error.sendErrorToCrashlytics(
+            code: ErrorCodes.getTokenApiError, stackTrace: StackTrace.current)
+      );
+    }
+  }
 }

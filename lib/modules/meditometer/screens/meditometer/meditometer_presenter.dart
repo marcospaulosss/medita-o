@@ -1,7 +1,9 @@
+import 'package:cinco_minutos_meditacao/core/environment/manager.dart';
 import 'package:cinco_minutos_meditacao/core/routers/app_router.dart';
 import 'package:cinco_minutos_meditacao/core/routers/app_router.gr.dart';
 import 'package:cinco_minutos_meditacao/modules/meditometer/screens/meditometer/meditometer_contract.dart';
 import 'package:cinco_minutos_meditacao/modules/meditometer/screens/meditometer/meditometer_model.dart';
+import 'package:cinco_minutos_meditacao/shared/helpers/social_share.dart';
 import 'package:cinco_minutos_meditacao/shared/models/error.dart';
 
 class MeditometerPresenter implements Presenter {
@@ -15,10 +17,14 @@ class MeditometerPresenter implements Presenter {
   /// Router
   final AppRouter _router;
 
+  /// variável de ambiente
+  final EnvironmentManager environmentManager;
+
   /// - [repository] : Repositório
   /// - [router] : Router
+  /// - [environmentManager] : variável de ambiente
   /// construtor
-  MeditometerPresenter(this._repository, this._router);
+  MeditometerPresenter(this._repository, this._router, this.environmentManager);
 
   /// Model para contrução da tela
   MeditometerModel model = MeditometerModel();
@@ -85,8 +91,21 @@ class MeditometerPresenter implements Presenter {
     });
   }
 
+  /// Direciona para a tela de sobre o app
   @override
   void goToAbout() {
     _router.goTo(const GuidedMeditationRoute());
+  }
+
+  /// compartilha a imagem
+  @override
+  Future<void> socialShare() async {
+    var (token, err) = await _repository.getTokenApi();
+    if (err != null) {
+      view!.showError(err.getErrorMessage);
+      return;
+    }
+
+    socialShareImage("${environmentManager.apiBaseUrl}/share/calendar", token!);
   }
 }

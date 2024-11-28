@@ -129,14 +129,13 @@ class MockProfilePresenter extends _i1.Mock implements _i3.ProfilePresenter {
       ) as _i5.Future<void>);
 
   @override
-  _i5.Future<void> getStates(dynamic countryId) => (super.noSuchMethod(
+  _i5.Future<List<String>> getStates(dynamic countryId) => (super.noSuchMethod(
         Invocation.method(
           #getStates,
           [countryId],
         ),
-        returnValue: _i5.Future<void>.value(),
-        returnValueForMissingStub: _i5.Future<void>.value(),
-      ) as _i5.Future<void>);
+        returnValue: _i5.Future<List<String>>.value(<String>[]),
+      ) as _i5.Future<List<String>>);
 
   @override
   _i5.Future<void> updateUser(_i7.UserRequest? user) => (super.noSuchMethod(

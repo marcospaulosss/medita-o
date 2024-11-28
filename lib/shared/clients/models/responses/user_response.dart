@@ -59,8 +59,8 @@ class UserResponse {
   String? birthdate;
 
   /// cidade
-  @JsonKey(name: 'city')
-  City? city;
+  @JsonKey(name: 'state')
+  State? state;
 
   /// - [id] : id do usuário
   /// - [name] : nome do usuário
@@ -73,7 +73,7 @@ class UserResponse {
   /// - [updatedAt] : data de atualização
   /// - [genre] : gênero
   /// - [birthdate] : data de nascimento
-  /// - [city] : cidade
+  /// - [state] : estado
   /// construtor
   UserResponse(
     this.id,
@@ -87,7 +87,7 @@ class UserResponse {
     this.updatedAt,
     this.genre,
     this.birthdate,
-    this.city,
+    this.state,
   );
 
   factory UserResponse.fromJson(Map<String, dynamic> json) =>
@@ -97,31 +97,6 @@ class UserResponse {
 
   /// Retorna o valor adapatado para exibição.
   String adapterGenre() => (genre == 'M') ? 'Masculino' : 'Feminino';
-}
-
-@JsonSerializable()
-class City {
-  /// id da cidade
-  @JsonKey(name: 'id')
-  int id;
-
-  /// nome da cidade
-  @JsonKey(name: 'name')
-  String name;
-
-  /// nome do estado
-  @JsonKey(name: 'state')
-  State state;
-
-  City(
-    this.id,
-    this.name,
-    this.state,
-  );
-
-  factory City.fromJson(Map<String, dynamic> json) => _$CityFromJson(json);
-
-  Map<String, dynamic> toJson() => _$CityToJson(this);
 }
 
 @JsonSerializable()

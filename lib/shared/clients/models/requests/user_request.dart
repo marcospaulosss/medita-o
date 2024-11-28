@@ -25,15 +25,15 @@ class UserRequest {
   String? birthdate;
 
   /// cidade
-  @JsonKey(name: 'city_id')
-  int? city;
+  @JsonKey(name: 'state_id')
+  int? state;
 
   /// - [id] : id do usuário
   /// - [name] : nome do usuário
   /// - [email] : email do usuário
   /// - [genre] : gênero
   /// - [birthdate] : data de nascimento
-  /// - [city] : cidade
+  /// - [state] : estado
   /// construtor
   UserRequest(
     this.id,
@@ -41,7 +41,7 @@ class UserRequest {
     this.email,
     this.genre,
     this.birthdate,
-    this.city,
+    this.state,
   );
 
   factory UserRequest.fromJson(Map<String, dynamic> json) =>

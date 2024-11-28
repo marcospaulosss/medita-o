@@ -18,9 +18,9 @@ UserResponse _$UserResponseFromJson(Map<String, dynamic> json) => UserResponse(
       json['updated_at'] as String?,
       json['genre'] as String?,
       json['birthdate'] as String?,
-      json['city'] == null
+      json['state'] == null
           ? null
-          : City.fromJson(json['city'] as Map<String, dynamic>),
+          : State.fromJson(json['state'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$UserResponseToJson(UserResponse instance) =>
@@ -36,18 +36,6 @@ Map<String, dynamic> _$UserResponseToJson(UserResponse instance) =>
       'updated_at': instance.updatedAt,
       'genre': instance.genre,
       'birthdate': instance.birthdate,
-      'city': instance.city,
-    };
-
-City _$CityFromJson(Map<String, dynamic> json) => City(
-      (json['id'] as num).toInt(),
-      json['name'] as String,
-      State.fromJson(json['state'] as Map<String, dynamic>),
-    );
-
-Map<String, dynamic> _$CityToJson(City instance) => <String, dynamic>{
-      'id': instance.id,
-      'name': instance.name,
       'state': instance.state,
     };
 

@@ -1,3 +1,4 @@
+import 'package:cinco_minutos_meditacao/core/environment/manager.dart';
 import 'package:cinco_minutos_meditacao/core/routers/app_router.dart';
 import 'package:cinco_minutos_meditacao/core/routers/app_router.gr.dart';
 import 'package:cinco_minutos_meditacao/modules/calendar/screens/calendar/calendar_contract.dart';
@@ -5,6 +6,7 @@ import 'package:cinco_minutos_meditacao/modules/calendar/screens/calendar/calend
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/month_calendar_response.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/week_calendar_response.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/year_calendar_response.dart';
+import 'package:cinco_minutos_meditacao/shared/helpers/social_share.dart';
 import 'package:cinco_minutos_meditacao/shared/models/error.dart';
 import 'package:intl/intl.dart';
 
@@ -19,10 +21,14 @@ class CalendarPresenter implements Presenter {
   /// Router
   final AppRouter _router;
 
+  /// variável de ambiente
+  final EnvironmentManager environmentManager;
+
   /// - [repository] : Repositório
   /// - [router] : Router
+  /// - [environmentManager] : variável de ambiente
   /// construtor
-  CalendarPresenter(this._repository, this._router);
+  CalendarPresenter(this._repository, this._router, this.environmentManager);
 
   /// Model para contrução da tela
   CalendarModel model = CalendarModel();
@@ -175,5 +181,16 @@ class CalendarPresenter implements Presenter {
     model.yearCalendarResponse = yearCalendar;
 
     return model;
+  }
+
+  @override
+  Future<void> socialShare() async {
+    var (token, err) = await _repository.getTokenApi();
+    if (err != null) {
+      view!.showError(err.getErrorMessage);
+      return;
+    }
+
+    socialShareImage("${environmentManager.apiBaseUrl}/share/calendar", token!);
   }
 }

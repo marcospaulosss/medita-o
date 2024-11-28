@@ -110,4 +110,14 @@ class MockMeditometerPresenter extends _i1.Mock
         ),
         returnValueForMissingStub: null,
       );
+
+  @override
+  _i5.Future<void> socialShare() => (super.noSuchMethod(
+        Invocation.method(
+          #socialShare,
+          [],
+        ),
+        returnValue: _i5.Future<void>.value(),
+        returnValueForMissingStub: _i5.Future<void>.value(),
+      ) as _i5.Future<void>);
 }
