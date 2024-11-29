@@ -5,14 +5,16 @@ import 'package:cinco_minutos_meditacao/modules/calendar/shared/strings/localiza
 import 'package:cinco_minutos_meditacao/modules/common/shared/strings/localization/common_strings.dart';
 import 'package:cinco_minutos_meditacao/modules/meditate/shared/strings/localization/meditate_strings.dart';
 import 'package:cinco_minutos_meditacao/modules/meditometer/shared/strings/localization/meditometer_strings.dart';
+import 'package:cinco_minutos_meditacao/modules/share/shared/strings/localization/share_strings.dart';
 import 'package:cinco_minutos_meditacao/shared/Theme/app_colors.dart';
 import 'package:cinco_minutos_meditacao/shared/components/bottom_nav_bar.dart';
 import 'package:cinco_minutos_meditacao/shared/helpers/bottom_navigation_bar.dart';
 import 'package:cinco_minutos_meditacao/shared/helpers/custom_navigator_observer.dart';
-import 'package:cinco_minutos_meditacao/shared/strings/localization/shared_strings.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+
+import 'shared/strings/localization/shared_strings.dart';
 
 class App extends StatefulWidget {
   App({super.key});
@@ -98,6 +100,7 @@ class _AppState extends State<App> {
         MeditateStrings.delegate,
         MeditometerStrings.delegate,
         CalendarStrings.delegate,
+        ShareStrings.delegate,
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
