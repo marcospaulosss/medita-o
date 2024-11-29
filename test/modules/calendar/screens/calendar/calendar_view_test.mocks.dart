@@ -3,14 +3,15 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i5;
+import 'dart:async' as _i6;
 
+import 'package:cinco_minutos_meditacao/core/environment/manager.dart' as _i2;
 import 'package:cinco_minutos_meditacao/modules/calendar/screens/calendar/calendar_contract.dart'
-    as _i4;
+    as _i5;
 import 'package:cinco_minutos_meditacao/modules/calendar/screens/calendar/calendar_model.dart'
-    as _i2;
-import 'package:cinco_minutos_meditacao/modules/calendar/screens/calendar/calendar_presenter.dart'
     as _i3;
+import 'package:cinco_minutos_meditacao/modules/calendar/screens/calendar/calendar_presenter.dart'
+    as _i4;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: type=lint
@@ -26,8 +27,19 @@ import 'package:mockito/mockito.dart' as _i1;
 // ignore_for_file: camel_case_types
 // ignore_for_file: subtype_of_sealed_class
 
-class _FakeCalendarModel_0 extends _i1.SmartFake implements _i2.CalendarModel {
-  _FakeCalendarModel_0(
+class _FakeEnvironmentManager_0 extends _i1.SmartFake
+    implements _i2.EnvironmentManager {
+  _FakeEnvironmentManager_0(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeCalendarModel_1 extends _i1.SmartFake implements _i3.CalendarModel {
+  _FakeCalendarModel_1(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -39,13 +51,13 @@ class _FakeCalendarModel_0 extends _i1.SmartFake implements _i2.CalendarModel {
 /// A class which mocks [CalendarPresenter].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockCalendarPresenter extends _i1.Mock implements _i3.CalendarPresenter {
+class MockCalendarPresenter extends _i1.Mock implements _i4.CalendarPresenter {
   MockCalendarPresenter() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  set view(_i4.CalendarViewContract? _view) => super.noSuchMethod(
+  set view(_i5.CalendarViewContract? _view) => super.noSuchMethod(
         Invocation.setter(
           #view,
           _view,
@@ -54,16 +66,25 @@ class MockCalendarPresenter extends _i1.Mock implements _i3.CalendarPresenter {
       );
 
   @override
-  _i2.CalendarModel get model => (super.noSuchMethod(
+  _i2.EnvironmentManager get environmentManager => (super.noSuchMethod(
+        Invocation.getter(#environmentManager),
+        returnValue: _FakeEnvironmentManager_0(
+          this,
+          Invocation.getter(#environmentManager),
+        ),
+      ) as _i2.EnvironmentManager);
+
+  @override
+  _i3.CalendarModel get model => (super.noSuchMethod(
         Invocation.getter(#model),
-        returnValue: _FakeCalendarModel_0(
+        returnValue: _FakeCalendarModel_1(
           this,
           Invocation.getter(#model),
         ),
-      ) as _i2.CalendarModel);
+      ) as _i3.CalendarModel);
 
   @override
-  set model(_i2.CalendarModel? _model) => super.noSuchMethod(
+  set model(_i3.CalendarModel? _model) => super.noSuchMethod(
         Invocation.setter(
           #model,
           _model,
@@ -81,29 +102,29 @@ class MockCalendarPresenter extends _i1.Mock implements _i3.CalendarPresenter {
       );
 
   @override
-  _i5.Future<void> initPresenter() => (super.noSuchMethod(
+  _i6.Future<void> initPresenter() => (super.noSuchMethod(
         Invocation.method(
           #initPresenter,
           [],
         ),
-        returnValue: _i5.Future<void>.value(),
-        returnValueForMissingStub: _i5.Future<void>.value(),
-      ) as _i5.Future<void>);
+        returnValue: _i6.Future<void>.value(),
+        returnValueForMissingStub: _i6.Future<void>.value(),
+      ) as _i6.Future<void>);
 
   @override
-  _i5.Future<void> updateImageProfile() => (super.noSuchMethod(
+  _i6.Future<void> updateImageProfile() => (super.noSuchMethod(
         Invocation.method(
           #updateImageProfile,
           [],
         ),
-        returnValue: _i5.Future<void>.value(),
-        returnValueForMissingStub: _i5.Future<void>.value(),
-      ) as _i5.Future<void>);
+        returnValue: _i6.Future<void>.value(),
+        returnValueForMissingStub: _i6.Future<void>.value(),
+      ) as _i6.Future<void>);
 
   @override
-  _i5.Future<_i2.CalendarModel> getCalendar(
+  _i6.Future<_i3.CalendarModel> getCalendar(
     String? date,
-    _i2.CalendarType? type,
+    _i3.CalendarType? type,
   ) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -113,7 +134,7 @@ class MockCalendarPresenter extends _i1.Mock implements _i3.CalendarPresenter {
             type,
           ],
         ),
-        returnValue: _i5.Future<_i2.CalendarModel>.value(_FakeCalendarModel_0(
+        returnValue: _i6.Future<_i3.CalendarModel>.value(_FakeCalendarModel_1(
           this,
           Invocation.method(
             #getCalendar,
@@ -123,5 +144,15 @@ class MockCalendarPresenter extends _i1.Mock implements _i3.CalendarPresenter {
             ],
           ),
         )),
-      ) as _i5.Future<_i2.CalendarModel>);
+      ) as _i6.Future<_i3.CalendarModel>);
+
+  @override
+  _i6.Future<void> socialShare() => (super.noSuchMethod(
+        Invocation.method(
+          #socialShare,
+          [],
+        ),
+        returnValue: _i6.Future<void>.value(),
+        returnValueForMissingStub: _i6.Future<void>.value(),
+      ) as _i6.Future<void>);
 }

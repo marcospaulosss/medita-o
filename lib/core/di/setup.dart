@@ -10,6 +10,7 @@ import 'package:cinco_minutos_meditacao/modules/meditate/di/setup.dart'
     as meditate;
 import 'package:cinco_minutos_meditacao/modules/meditometer/di/setup.dart'
     as meditometer;
+import 'package:cinco_minutos_meditacao/modules/share/di/setup.dart' as share;
 
 abstract class DI {
   /// Resolve e retorna a instância do app.
@@ -23,5 +24,6 @@ abstract class DI {
     meditate.setupInjectors();
     meditometer.setupInjectors();
     calendar.setupInjectors();
+    share.setupInjectors();
   }
 }

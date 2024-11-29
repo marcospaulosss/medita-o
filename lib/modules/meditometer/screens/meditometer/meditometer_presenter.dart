@@ -3,7 +3,6 @@ import 'package:cinco_minutos_meditacao/core/routers/app_router.dart';
 import 'package:cinco_minutos_meditacao/core/routers/app_router.gr.dart';
 import 'package:cinco_minutos_meditacao/modules/meditometer/screens/meditometer/meditometer_contract.dart';
 import 'package:cinco_minutos_meditacao/modules/meditometer/screens/meditometer/meditometer_model.dart';
-import 'package:cinco_minutos_meditacao/shared/helpers/social_share.dart';
 import 'package:cinco_minutos_meditacao/shared/models/error.dart';
 
 class MeditometerPresenter implements Presenter {
@@ -99,13 +98,7 @@ class MeditometerPresenter implements Presenter {
 
   /// compartilha a imagem
   @override
-  Future<void> socialShare() async {
-    var (token, err) = await _repository.getTokenApi();
-    if (err != null) {
-      view!.showError(err.getErrorMessage);
-      return;
-    }
-
-    socialShareImage("${environmentManager.apiBaseUrl}/share/calendar", token!);
+  void goToSocialShare() {
+    _router.goTo(const ShareRoute());
   }
 }

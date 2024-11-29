@@ -296,4 +296,15 @@ class MockCalendarRepository extends _i1.Mock
                 .Future<(_i10.YearCalendarResponse?, _i13.CustomError?)>.value(
                 (null, null)),
           ) as _i12.Future<(_i10.YearCalendarResponse?, _i13.CustomError?)>);
+
+  @override
+  _i12.Future<(String?, _i13.CustomError?)> getTokenApi() =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getTokenApi,
+          [],
+        ),
+        returnValue:
+            _i12.Future<(String?, _i13.CustomError?)>.value((null, null)),
+      ) as _i12.Future<(String?, _i13.CustomError?)>);
 }

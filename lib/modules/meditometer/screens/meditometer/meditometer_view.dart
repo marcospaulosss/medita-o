@@ -170,7 +170,7 @@ class MeditometerViewState extends State<MeditometerView>
             ),
             const SizedBox(height: 24),
             IconLabelButton(
-              onTap: () => presenter.socialShare(),
+              onTap: () => presenter.goToSocialShare(),
               decoration: BoxDecoration(
                 color: AppColors.germanderSpeedwell,
                 borderRadius: BorderRadius.circular(12),
