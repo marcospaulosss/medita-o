@@ -6,19 +6,18 @@
 import 'dart:async' as _i3;
 import 'dart:io' as _i7;
 
-import 'package:auto_route/auto_route.dart' as _i10;
-import 'package:cinco_minutos_meditacao/core/routers/app_router.dart' as _i9;
+import 'package:auto_route/auto_route.dart' as _i9;
+import 'package:cinco_minutos_meditacao/core/routers/app_router.dart' as _i8;
 import 'package:cinco_minutos_meditacao/modules/meditometer/screens/meditometer/meditometer_contract.dart'
     as _i2;
 import 'package:cinco_minutos_meditacao/modules/meditometer/screens/meditometer/meditometer_model.dart'
-    as _i11;
+    as _i10;
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/meditations_response.dart'
     as _i6;
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/user_response.dart'
     as _i4;
 import 'package:cinco_minutos_meditacao/shared/models/error.dart' as _i5;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:mockito/src/dummies.dart' as _i8;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -84,37 +83,32 @@ class MockRepository extends _i1.Mock implements _i2.Repository {
       ) as _i3.Future<_i5.CustomError?>);
 
   @override
-  _i3.Future<String> getImageSocialShare() => (super.noSuchMethod(
+  _i3.Future<(String?, _i5.CustomError?)> getTokenApi() => (super.noSuchMethod(
         Invocation.method(
-          #getImageSocialShare,
+          #getTokenApi,
           [],
         ),
-        returnValue: _i3.Future<String>.value(_i8.dummyValue<String>(
-          this,
-          Invocation.method(
-            #getImageSocialShare,
-            [],
-          ),
-        )),
-      ) as _i3.Future<String>);
+        returnValue:
+            _i3.Future<(String?, _i5.CustomError?)>.value((null, null)),
+      ) as _i3.Future<(String?, _i5.CustomError?)>);
 }
 
 /// A class which mocks [AppRouter].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockAppRouter extends _i1.Mock implements _i9.AppRouter {
+class MockAppRouter extends _i1.Mock implements _i8.AppRouter {
   MockAppRouter() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  List<_i10.AutoRoute> get routes => (super.noSuchMethod(
+  List<_i9.AutoRoute> get routes => (super.noSuchMethod(
         Invocation.getter(#routes),
-        returnValue: <_i10.AutoRoute>[],
-      ) as List<_i10.AutoRoute>);
+        returnValue: <_i9.AutoRoute>[],
+      ) as List<_i9.AutoRoute>);
 
   @override
-  void goToReplace(_i10.PageRouteInfo<dynamic>? route) => super.noSuchMethod(
+  void goToReplace(_i9.PageRouteInfo<dynamic>? route) => super.noSuchMethod(
         Invocation.method(
           #goToReplace,
           [route],
@@ -124,8 +118,8 @@ class MockAppRouter extends _i1.Mock implements _i9.AppRouter {
 
   @override
   void goTo(
-    _i10.PageRouteInfo<dynamic>? route, {
-    _i9.OnCloseRoute? onClose,
+    _i9.PageRouteInfo<dynamic>? route, {
+    _i8.OnCloseRoute? onClose,
   }) =>
       super.noSuchMethod(
         Invocation.method(
@@ -156,7 +150,7 @@ class MockMeditometerViewContract extends _i1.Mock
       );
 
   @override
-  void showNormalState(_i11.MeditometerModel? response) => super.noSuchMethod(
+  void showNormalState(_i10.MeditometerModel? response) => super.noSuchMethod(
         Invocation.method(
           #showNormalState,
           [response],

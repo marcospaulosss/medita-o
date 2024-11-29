@@ -1,0 +1,7 @@
+arb-dir: .
+template-arb-file: share_pt.arb
+output-dir: ./localization
+output-localization-file: share_strings.dart
+output-class: ShareStrings
+nullable-getter: false
+synthetic-package: false
