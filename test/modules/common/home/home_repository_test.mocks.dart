@@ -29,6 +29,8 @@ import 'package:cinco_minutos_meditacao/shared/clients/models/responses/month_ca
     as _i7;
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/register_response.dart'
     as _i3;
+import 'package:cinco_minutos_meditacao/shared/clients/models/responses/share_response.dart'
+    as _i23;
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/states_response.dart'
     as _i10;
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/user_response.dart'
@@ -38,7 +40,7 @@ import 'package:cinco_minutos_meditacao/shared/clients/models/responses/week_cal
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/year_calendar_response.dart'
     as _i8;
 import 'package:cinco_minutos_meditacao/shared/models/error.dart' as _i11;
-import 'package:dio/dio.dart' as _i23;
+import 'package:dio/dio.dart' as _i24;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:mockito/src/dummies.dart' as _i16;
 
@@ -563,13 +565,13 @@ class MockClientApi extends _i1.Mock implements _i17.ClientApi {
       ) as _i15.Future<_i10.StatesResponse>);
 
   @override
-  _i15.Future<dynamic> getShareCalendar() => (super.noSuchMethod(
+  _i15.Future<List<_i23.Share>> getImagesShare() => (super.noSuchMethod(
         Invocation.method(
-          #getShareCalendar,
+          #getImagesShare,
           [],
         ),
-        returnValue: _i15.Future<dynamic>.value(),
-      ) as _i15.Future<dynamic>);
+        returnValue: _i15.Future<List<_i23.Share>>.value(<_i23.Share>[]),
+      ) as _i15.Future<List<_i23.Share>>);
 }
 
 /// A class which mocks [CustomError].
@@ -621,7 +623,7 @@ class MockCustomError extends _i1.Mock implements _i11.CustomError {
     String? message,
     _i11.ErrorCodes? code,
     StackTrace? stackTrace,
-    _i23.DioException? dioException,
+    _i24.DioException? dioException,
   }) =>
       (super.noSuchMethod(
         Invocation.method(

@@ -9,7 +9,7 @@ import 'dart:io' as _i19;
 import 'package:cinco_minutos_meditacao/core/analytics/event.dart' as _i13;
 import 'package:cinco_minutos_meditacao/core/analytics/manager.dart' as _i12;
 import 'package:cinco_minutos_meditacao/core/wrappers/secure_storage.dart'
-    as _i23;
+    as _i24;
 import 'package:cinco_minutos_meditacao/shared/clients/client_api.dart' as _i14;
 import 'package:cinco_minutos_meditacao/shared/clients/models/requests/auth_request.dart'
     as _i17;
@@ -29,6 +29,8 @@ import 'package:cinco_minutos_meditacao/shared/clients/models/responses/month_ca
     as _i7;
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/register_response.dart'
     as _i3;
+import 'package:cinco_minutos_meditacao/shared/clients/models/responses/share_response.dart'
+    as _i21;
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/states_response.dart'
     as _i10;
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/user_response.dart'
@@ -38,9 +40,9 @@ import 'package:cinco_minutos_meditacao/shared/clients/models/responses/week_cal
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/year_calendar_response.dart'
     as _i8;
 import 'package:cinco_minutos_meditacao/shared/models/error.dart' as _i11;
-import 'package:dio/dio.dart' as _i22;
+import 'package:dio/dio.dart' as _i23;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:mockito/src/dummies.dart' as _i21;
+import 'package:mockito/src/dummies.dart' as _i22;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -414,13 +416,13 @@ class MockClientApi extends _i1.Mock implements _i14.ClientApi {
       ) as _i15.Future<_i10.StatesResponse>);
 
   @override
-  _i15.Future<dynamic> getShareCalendar() => (super.noSuchMethod(
+  _i15.Future<List<_i21.Share>> getImagesShare() => (super.noSuchMethod(
         Invocation.method(
-          #getShareCalendar,
+          #getImagesShare,
           [],
         ),
-        returnValue: _i15.Future<dynamic>.value(),
-      ) as _i15.Future<dynamic>);
+        returnValue: _i15.Future<List<_i21.Share>>.value(<_i21.Share>[]),
+      ) as _i15.Future<List<_i21.Share>>);
 }
 
 /// A class which mocks [CustomError].
@@ -461,7 +463,7 @@ class MockCustomError extends _i1.Mock implements _i11.CustomError {
   @override
   String get getErrorMessage => (super.noSuchMethod(
         Invocation.getter(#getErrorMessage),
-        returnValue: _i21.dummyValue<String>(
+        returnValue: _i22.dummyValue<String>(
           this,
           Invocation.getter(#getErrorMessage),
         ),
@@ -472,7 +474,7 @@ class MockCustomError extends _i1.Mock implements _i11.CustomError {
     String? message,
     _i11.ErrorCodes? code,
     StackTrace? stackTrace,
-    _i22.DioException? dioException,
+    _i23.DioException? dioException,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -504,7 +506,7 @@ class MockCustomError extends _i1.Mock implements _i11.CustomError {
 /// A class which mocks [SecureStorage].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockSecureStorage extends _i1.Mock implements _i23.SecureStorage {
+class MockSecureStorage extends _i1.Mock implements _i24.SecureStorage {
   MockSecureStorage() {
     _i1.throwOnMissingStub(this);
   }
@@ -512,7 +514,7 @@ class MockSecureStorage extends _i1.Mock implements _i23.SecureStorage {
   @override
   _i15.Future<String> get tokenAPI => (super.noSuchMethod(
         Invocation.getter(#tokenAPI),
-        returnValue: _i15.Future<String>.value(_i21.dummyValue<String>(
+        returnValue: _i15.Future<String>.value(_i22.dummyValue<String>(
           this,
           Invocation.getter(#tokenAPI),
         )),
@@ -527,7 +529,7 @@ class MockSecureStorage extends _i1.Mock implements _i23.SecureStorage {
   @override
   _i15.Future<String> get userId => (super.noSuchMethod(
         Invocation.getter(#userId),
-        returnValue: _i15.Future<String>.value(_i21.dummyValue<String>(
+        returnValue: _i15.Future<String>.value(_i22.dummyValue<String>(
           this,
           Invocation.getter(#userId),
         )),
@@ -536,7 +538,7 @@ class MockSecureStorage extends _i1.Mock implements _i23.SecureStorage {
   @override
   _i15.Future<String> get userName => (super.noSuchMethod(
         Invocation.getter(#userName),
-        returnValue: _i15.Future<String>.value(_i21.dummyValue<String>(
+        returnValue: _i15.Future<String>.value(_i22.dummyValue<String>(
           this,
           Invocation.getter(#userName),
         )),
@@ -545,7 +547,7 @@ class MockSecureStorage extends _i1.Mock implements _i23.SecureStorage {
   @override
   _i15.Future<String> get userEmail => (super.noSuchMethod(
         Invocation.getter(#userEmail),
-        returnValue: _i15.Future<String>.value(_i21.dummyValue<String>(
+        returnValue: _i15.Future<String>.value(_i22.dummyValue<String>(
           this,
           Invocation.getter(#userEmail),
         )),
@@ -554,7 +556,7 @@ class MockSecureStorage extends _i1.Mock implements _i23.SecureStorage {
   @override
   _i15.Future<String> get googleId => (super.noSuchMethod(
         Invocation.getter(#googleId),
-        returnValue: _i15.Future<String>.value(_i21.dummyValue<String>(
+        returnValue: _i15.Future<String>.value(_i22.dummyValue<String>(
           this,
           Invocation.getter(#googleId),
         )),
@@ -563,7 +565,7 @@ class MockSecureStorage extends _i1.Mock implements _i23.SecureStorage {
   @override
   _i15.Future<String> get profilePhoto => (super.noSuchMethod(
         Invocation.getter(#profilePhoto),
-        returnValue: _i15.Future<String>.value(_i21.dummyValue<String>(
+        returnValue: _i15.Future<String>.value(_i22.dummyValue<String>(
           this,
           Invocation.getter(#profilePhoto),
         )),

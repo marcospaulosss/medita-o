@@ -6,7 +6,6 @@ import 'package:cinco_minutos_meditacao/modules/calendar/screens/calendar/calend
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/month_calendar_response.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/week_calendar_response.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/year_calendar_response.dart';
-import 'package:cinco_minutos_meditacao/shared/helpers/social_share.dart';
 import 'package:cinco_minutos_meditacao/shared/models/error.dart';
 import 'package:intl/intl.dart';
 
@@ -191,6 +190,6 @@ class CalendarPresenter implements Presenter {
       return;
     }
 
-    socialShareImage("${environmentManager.apiBaseUrl}/share/calendar", token!);
+    // socialShareImage("${environmentManager.apiBaseUrl}/share/calendar", token!);
   }
 }

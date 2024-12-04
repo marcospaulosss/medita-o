@@ -25,7 +25,7 @@ class SharePresenter implements Presenter {
   SharePresenter(this._repository, this._router, this.environmentManager);
 
   /// Model para contrução da tela
-  ShareModel model = ShareModel();
+  ShareModel model = ShareModel(share: []);
 
   /// evento disparado ao abrir a tela
   void onOpenScreen() {
@@ -39,18 +39,47 @@ class SharePresenter implements Presenter {
 
     view!.showLoading();
 
+    await saveImagesShare();
+
     view!.showNormalState(model);
   }
 
-  /// compartilha a imagem
-  @override
-  Future<void> socialShare() async {
-    var (token, err) = await _repository.getTokenApi();
+  /// saveImagesShare - Salva as imagens para compartilhamento
+  Future<void> saveImagesShare() async {
+    var (response, err) = await _repository.getImages();
     if (err != null) {
       view!.showError(err.getErrorMessage);
       return;
     }
+    
+    model.share = [];
+    for (var element in response!) {
+      var (name, filePath, error) = await convertImageAndSaveImage(
+          element.name ?? "image.jpg", element.image!);
+      if (error != null) {
+        view!.showError(error.getErrorMessage);
+        return;
+      }
+      model.share!.add(Share(
+        imageName: name,
+        imagePath: filePath,
+        share: element,
+      ));
+    }
 
-    socialShareImage("${environmentManager.apiBaseUrl}/share/calendar", token!);
+    view!.showNormalState(model);
+  }
+
+  /// socialShare - compartilha a imagem
+  @override
+  Future<void> socialShare(ShareModel model, int index) async {
+    var err = await socialShareImage(
+      model.share![index].imageName!,
+      model.share![index].imagePath,
+    );
+    if (err != null) {
+      view!.showError(err.getErrorMessage);
+      return;
+    }
   }
 }
