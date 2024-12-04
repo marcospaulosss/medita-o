@@ -11,6 +11,7 @@ import 'package:cinco_minutos_meditacao/shared/clients/models/responses/countrie
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/meditations_response.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/month_calendar_response.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/register_response.dart';
+import 'package:cinco_minutos_meditacao/shared/clients/models/responses/share_response.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/states_response.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/user_response.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/week_calendar_response.dart';
@@ -107,6 +108,6 @@ abstract class ClientApi {
 
   /// - [ Share ] : Cliente de compartilhamento
   /// Obtem o paizes disponíveis
-  @GET('/share/calendar')
-  Future<dynamic> getShareCalendar();
+  @GET('/share')
+  Future<ShareResponse> getImagesShare();
 }

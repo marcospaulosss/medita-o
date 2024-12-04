@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:auto_route/auto_route.dart';
 import 'package:cinco_minutos_meditacao/core/di/helpers.dart';
 import 'package:cinco_minutos_meditacao/modules/meditometer/shared/strings/localization/meditometer_strings.dart';
@@ -5,7 +7,6 @@ import 'package:cinco_minutos_meditacao/modules/share/screens/meditometer/share_
 import 'package:cinco_minutos_meditacao/modules/share/screens/meditometer/share_model.dart';
 import 'package:cinco_minutos_meditacao/modules/share/screens/meditometer/share_presenter.dart';
 import 'package:cinco_minutos_meditacao/shared/Theme/app_colors.dart';
-import 'package:cinco_minutos_meditacao/shared/Theme/app_images.dart';
 import 'package:cinco_minutos_meditacao/shared/components/app_background.dart';
 import 'package:cinco_minutos_meditacao/shared/components/generic_error_container.dart';
 import 'package:cinco_minutos_meditacao/shared/components/icon_label_button.dart';
@@ -40,29 +41,7 @@ class ShareViewState extends State<ShareView> implements ShareViewContract {
   /// Model para contrução da tela
   late ShareModel model = ShareModel();
   final controller = PageController(viewportFraction: 1.0);
-  final pages = List.generate(
-      6,
-      (index) => Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(16),
-              color: Colors.grey.shade300,
-            ),
-            child: Container(
-              height: 280,
-              child: Center(
-                  child: Text(
-                "Page $index",
-                style: TextStyle(color: Colors.indigo),
-              )),
-            ),
-          ));
-
-  int _currentIndex = 0;
-  final List<String> imgList = [
-    AppImages.balloon,
-    AppImages.banner,
-    AppImages.favorite,
-  ];
+  var pages = [];
 
   @override
   void initState() {
@@ -107,32 +86,38 @@ class ShareViewState extends State<ShareView> implements ShareViewContract {
             const SizedBox(height: 38),
             buildCarrosel(),
             const SizedBox(height: 38),
-            IconLabelButton(
-              onTap: () => presenter.socialShare(),
-              decoration: BoxDecoration(
-                color: AppColors.germanderSpeedwell,
-                borderRadius: BorderRadius.circular(12),
-              ),
-              icon: const Icon(
-                Icons.share_outlined,
-                color: AppColors.white,
-                size: 25,
-              ),
-              label: Text(
-                MeditometerStrings.of(context).share,
-                style: const TextStyle(
-                  color: AppColors.white,
-                  fontSize: 19,
-                  fontWeight: FontWeight.w700,
-                ),
-              ),
-              width: double.infinity,
-              height: 43,
-              spaceBetween: 4,
-            ),
+            buildButtonShare(),
           ],
         ),
       ),
+    );
+  }
+
+  IconLabelButton buildButtonShare() {
+    return IconLabelButton(
+      onTap: () {
+        presenter.socialShare(model, controller.page!.toInt());
+      },
+      decoration: BoxDecoration(
+        color: AppColors.germanderSpeedwell,
+        borderRadius: BorderRadius.circular(12),
+      ),
+      icon: const Icon(
+        Icons.share_outlined,
+        color: AppColors.white,
+        size: 25,
+      ),
+      label: Text(
+        MeditometerStrings.of(context).share,
+        style: const TextStyle(
+          color: AppColors.white,
+          fontSize: 19,
+          fontWeight: FontWeight.w700,
+        ),
+      ),
+      width: double.infinity,
+      height: 43,
+      spaceBetween: 4,
     );
   }
 
@@ -151,7 +136,7 @@ class ShareViewState extends State<ShareView> implements ShareViewContract {
         const SizedBox(height: 40),
         SmoothPageIndicator(
           controller: controller,
-          count: pages.length,
+          count: model.share!.length,
           effect: CustomizableEffect(
             spacing: 12,
             dotDecoration: DotDecoration(
@@ -232,6 +217,17 @@ class ShareViewState extends State<ShareView> implements ShareViewContract {
     );
   }
 
+  generateCarousel() {
+    pages = List.generate(
+      model.share!.length,
+      (index) => Image.file(
+        filterQuality: FilterQuality.high,
+        File(model.share![index].imagePath!),
+        fit: BoxFit.cover, // Ajuste o modo de exibição conforme necessário
+      ),
+    );
+  }
+
   /// Mostra o estado de carregamento
   @override
   void showLoading() {
@@ -244,6 +240,8 @@ class ShareViewState extends State<ShareView> implements ShareViewContract {
     setState(() {
       model = response;
     });
+    generateCarousel();
+
     stateController.showNormalState();
   }
 
