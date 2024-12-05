@@ -31,7 +31,7 @@ abstract class Presenter implements ViewBinding<CalendarViewContract> {
   Future<CalendarModel> getCalendar(String date, CalendarType type);
 
   /// Direciona para a tela de configurações
-  Future<void> socialShare();
+  Future<void> goToSocialShare(String calendarType);
 }
 
 abstract class Repository {

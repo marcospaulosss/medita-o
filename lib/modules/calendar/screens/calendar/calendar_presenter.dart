@@ -3,6 +3,7 @@ import 'package:cinco_minutos_meditacao/core/routers/app_router.dart';
 import 'package:cinco_minutos_meditacao/core/routers/app_router.gr.dart';
 import 'package:cinco_minutos_meditacao/modules/calendar/screens/calendar/calendar_contract.dart';
 import 'package:cinco_minutos_meditacao/modules/calendar/screens/calendar/calendar_model.dart';
+import 'package:cinco_minutos_meditacao/modules/share/screens/meditometer/share_model.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/month_calendar_response.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/week_calendar_response.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/year_calendar_response.dart';
@@ -183,13 +184,19 @@ class CalendarPresenter implements Presenter {
   }
 
   @override
-  Future<void> socialShare() async {
-    var (token, err) = await _repository.getTokenApi();
-    if (err != null) {
-      view!.showError(err.getErrorMessage);
-      return;
+  Future<void> goToSocialShare(String calendarType) async {
+    switch (calendarType) {
+      case "week":
+        _router.goTo(ShareRoute(params: ShareModel(type: ShareType.week)));
+        break;
+      case "month":
+        _router.goTo(ShareRoute(params: ShareModel(type: ShareType.month)));
+        break;
+      case "year":
+        _router.goTo(ShareRoute(params: ShareModel(type: ShareType.year)));
+        break;
+      default:
+        _router.goTo(ShareRoute(params: ShareModel(type: ShareType.week)));
     }
-
-    // socialShareImage("${environmentManager.apiBaseUrl}/share/calendar", token!);
   }
 }

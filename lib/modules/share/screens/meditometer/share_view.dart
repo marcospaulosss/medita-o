@@ -6,6 +6,7 @@ import 'package:cinco_minutos_meditacao/modules/meditometer/shared/strings/local
 import 'package:cinco_minutos_meditacao/modules/share/screens/meditometer/share_contract.dart';
 import 'package:cinco_minutos_meditacao/modules/share/screens/meditometer/share_model.dart';
 import 'package:cinco_minutos_meditacao/modules/share/screens/meditometer/share_presenter.dart';
+import 'package:cinco_minutos_meditacao/modules/share/shared/strings/localization/share_strings.dart';
 import 'package:cinco_minutos_meditacao/shared/Theme/app_colors.dart';
 import 'package:cinco_minutos_meditacao/shared/components/app_background.dart';
 import 'package:cinco_minutos_meditacao/shared/components/generic_error_container.dart';
@@ -18,9 +19,15 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 @RoutePage()
 class ShareView extends StatefulWidget {
+  /// Modelo de compartilhamento
+  final ShareModel params;
+
+  /// - [key] : Chave de identificação do widget
+  /// - [params] : Modelo de compartilhamento
   /// Construtor
   const ShareView({
     super.key,
+    required this.params,
   });
 
   @override
@@ -40,6 +47,8 @@ class ShareViewState extends State<ShareView> implements ShareViewContract {
 
   /// Model para contrução da tela
   late ShareModel model = ShareModel();
+
+  /// Controle do carrossel
   final controller = PageController(viewportFraction: 1.0);
   var pages = [];
 
@@ -174,10 +183,10 @@ class ShareViewState extends State<ShareView> implements ShareViewContract {
   }
 
   Column buildTitle() {
-    return const Column(
+    return Column(
       children: [
         Text(
-          "Compartilhe",
+          ShareStrings.of(context).share,
           style: const TextStyle(
             color: AppColors.white,
             fontSize: 28,
@@ -186,7 +195,7 @@ class ShareViewState extends State<ShareView> implements ShareViewContract {
           ),
         ),
         Text(
-          "Sua meditação do dia!",
+          ShareStrings.of(context).subtitle,
           style: const TextStyle(
             color: AppColors.white,
             fontSize: 22,
@@ -228,6 +237,17 @@ class ShareViewState extends State<ShareView> implements ShareViewContract {
     );
   }
 
+  void setImage() {
+    if (controller.hasClients) {
+      for (var i = 0; i < model.share!.length; i++) {
+        var element = model.share![i];
+        if (element.share!.name == widget.params.type!.name) {
+          controller.jumpToPage(i);
+        }
+      }
+    }
+  }
+
   /// Mostra o estado de carregamento
   @override
   void showLoading() {
@@ -243,6 +263,10 @@ class ShareViewState extends State<ShareView> implements ShareViewContract {
     generateCarousel();
 
     stateController.showNormalState();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      setImage();
+    });
   }
 
   /// Mostra o estado de erro

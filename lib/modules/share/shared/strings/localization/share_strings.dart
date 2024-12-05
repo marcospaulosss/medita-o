@@ -97,6 +97,17 @@ abstract class ShareStrings {
     Locale('pt')
   ];
 
+  /// No description provided for @share.
+  ///
+  /// In pt, this message translates to:
+  /// **'Compartilhe'**
+  String get share;
+
+  /// No description provided for @subtitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Sua meditação do dia!'**
+  String get subtitle;
 }
 
 class _ShareStringsDelegate extends LocalizationsDelegate<ShareStrings> {
