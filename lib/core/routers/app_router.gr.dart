@@ -37,10 +37,13 @@ import 'package:cinco_minutos_meditacao/modules/meditate/screens/meditate_info/m
     as _i10;
 import 'package:cinco_minutos_meditacao/modules/meditometer/screens/meditometer/meditometer_view.dart'
     as _i11;
+import 'package:cinco_minutos_meditacao/modules/share/screens/meditometer/share_model.dart'
+    as _i19;
 import 'package:cinco_minutos_meditacao/modules/share/screens/meditometer/share_view.dart'
     as _i15;
 import 'package:cinco_minutos_meditacao/shared/components/camera_view.dart'
     as _i2;
+import 'package:flutter/material.dart' as _i18;
 
 abstract class $AppRouter extends _i17.RootStackRouter {
   $AppRouter({super.navigatorKey});
@@ -132,9 +135,13 @@ abstract class $AppRouter extends _i17.RootStackRouter {
       );
     },
     ShareRoute.name: (routeData) {
+      final args = routeData.argsAs<ShareRouteArgs>();
       return _i17.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i15.ShareView(),
+        child: _i15.ShareView(
+          key: args.key,
+          params: args.params,
+        ),
       );
     },
     SplashScreenRoute.name: (routeData) {
@@ -344,16 +351,40 @@ class RegisterRoute extends _i17.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i15.ShareView]
-class ShareRoute extends _i17.PageRouteInfo<void> {
-  const ShareRoute({List<_i17.PageRouteInfo>? children})
-      : super(
+class ShareRoute extends _i17.PageRouteInfo<ShareRouteArgs> {
+  ShareRoute({
+    _i18.Key? key,
+    required _i19.ShareModel params,
+    List<_i17.PageRouteInfo>? children,
+  }) : super(
           ShareRoute.name,
+          args: ShareRouteArgs(
+            key: key,
+            params: params,
+          ),
           initialChildren: children,
         );
 
   static const String name = 'ShareRoute';
 
-  static const _i17.PageInfo<void> page = _i17.PageInfo<void>(name);
+  static const _i17.PageInfo<ShareRouteArgs> page =
+      _i17.PageInfo<ShareRouteArgs>(name);
+}
+
+class ShareRouteArgs {
+  const ShareRouteArgs({
+    this.key,
+    required this.params,
+  });
+
+  final _i18.Key? key;
+
+  final _i19.ShareModel params;
+
+  @override
+  String toString() {
+    return 'ShareRouteArgs{key: $key, params: $params}';
+  }
 }
 
 /// generated route for

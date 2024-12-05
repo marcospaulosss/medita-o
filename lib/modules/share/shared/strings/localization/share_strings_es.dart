@@ -6,5 +6,9 @@ import 'share_strings.dart';
 class ShareStringsEs extends ShareStrings {
   ShareStringsEs([String locale = 'es']) : super(locale);
 
+  @override
+  String get share => 'Compartilhe';
 
+  @override
+  String get subtitle => 'Sua meditação do dia!';
 }
