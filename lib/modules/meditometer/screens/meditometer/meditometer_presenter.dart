@@ -3,6 +3,7 @@ import 'package:cinco_minutos_meditacao/core/routers/app_router.dart';
 import 'package:cinco_minutos_meditacao/core/routers/app_router.gr.dart';
 import 'package:cinco_minutos_meditacao/modules/meditometer/screens/meditometer/meditometer_contract.dart';
 import 'package:cinco_minutos_meditacao/modules/meditometer/screens/meditometer/meditometer_model.dart';
+import 'package:cinco_minutos_meditacao/modules/share/screens/meditometer/share_model.dart';
 import 'package:cinco_minutos_meditacao/shared/models/error.dart';
 
 class MeditometerPresenter implements Presenter {
@@ -99,6 +100,6 @@ class MeditometerPresenter implements Presenter {
   /// compartilha a imagem
   @override
   void goToSocialShare() {
-    _router.goTo(const ShareRoute());
+    _router.goTo(ShareRoute(params: ShareModel()));
   }
 }

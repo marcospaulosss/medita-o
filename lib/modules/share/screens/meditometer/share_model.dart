@@ -1,13 +1,19 @@
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/share_response.dart'
     as share_response;
 
+enum ShareType { defaultShare, week, month, year }
+
 class ShareModel {
   /// lista de imagens
   List<Share>? share;
 
+  /// tipo de compartilhamento
+  ShareType? type;
+
   /// - [share] : lista de imagens
+  /// - [type] : tipo de compartilhamento
   /// construtor
-  ShareModel({this.share});
+  ShareModel({this.share, this.type});
 }
 
 class Share {

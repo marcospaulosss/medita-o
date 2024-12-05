@@ -51,9 +51,13 @@ class SharePresenter implements Presenter {
       view!.showError(err.getErrorMessage);
       return;
     }
-    
+
     model.share = [];
     for (var element in response!) {
+      if (element.image == null || element.image!.isEmpty) {
+        continue;
+      }
+
       var (name, filePath, error) = await convertImageAndSaveImage(
           element.name ?? "image.jpg", element.image!);
       if (error != null) {
