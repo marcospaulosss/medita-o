@@ -147,10 +147,10 @@ class MockCalendarPresenter extends _i1.Mock implements _i4.CalendarPresenter {
       ) as _i6.Future<_i3.CalendarModel>);
 
   @override
-  _i6.Future<void> goToSocialShare() => (super.noSuchMethod(
+  _i6.Future<void> goToSocialShare(String? calendarType) => (super.noSuchMethod(
         Invocation.method(
           #goToSocialShare,
-          [],
+          [calendarType],
         ),
         returnValue: _i6.Future<void>.value(),
         returnValueForMissingStub: _i6.Future<void>.value(),

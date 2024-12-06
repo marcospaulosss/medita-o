@@ -76,7 +76,7 @@ void main() {
                 "createdAt",
                 'masculino',
                 '1983-07-02',
-                'São Paulo'),
+                State(1, 'São Paulo', Country(1, 'Brasil'))),
             null
           ));
       when(homeRepository.requestMeditations())
@@ -124,7 +124,7 @@ void main() {
                 DateTime.now().toString(),
                 'masculino',
                 '1983-07-02',
-                'São Paulo'),
+                State(1, 'São Paulo', Country(1, 'Brasil'))),
             null
           ));
       when(homeRepository.requestMeditations())
@@ -155,7 +155,8 @@ void main() {
           DateTime.now().toString(),
           'masculino',
           '1983-07-02',
-          'São Paulo'); // Simula a resposta do usuário
+          State(1, 'São Paulo',
+              Country(1, 'Brasil'))); // Simula a resposta do usuário
 
       when(appRouter.goTo(any, onClose: anyNamed('onClose')))
           .thenAnswer((invocation) {
@@ -228,7 +229,7 @@ void main() {
             "createdAt",
             'masculino',
             '1983-07-02',
-            'São Paulo'),
+            State(1, 'São Paulo', Country(1, 'Brasil'))),
         meditationsResponse: MeditationsResponse(1, 30),
       );
 
@@ -263,7 +264,7 @@ void main() {
             "createdAt",
             'masculino',
             '1983-07-02',
-            'São Paulo'),
+            State(1, 'São Paulo', Country(1, 'Brasil'))),
         meditationsResponse: null,
       );
 

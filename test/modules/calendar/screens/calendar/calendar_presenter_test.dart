@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:cinco_minutos_meditacao/core/environment/manager.dart';
 import 'package:cinco_minutos_meditacao/core/routers/app_router.dart';
 import 'package:cinco_minutos_meditacao/modules/calendar/screens/calendar/calendar_contract.dart';
 import 'package:cinco_minutos_meditacao/modules/calendar/screens/calendar/calendar_model.dart';
@@ -17,20 +18,28 @@ import 'package:mockito/mockito.dart';
 
 import 'calendar_presenter_test.mocks.dart';
 
-@GenerateMocks(
-    [CalendarViewContract, AppRouter, CalendarModel, CalendarRepository])
+@GenerateMocks([
+  CalendarViewContract,
+  AppRouter,
+  CalendarModel,
+  CalendarRepository,
+  EnvironmentManager
+])
 void main() {
   late CalendarPresenter presenter;
   late MockCalendarRepository mockRepository;
   late MockAppRouter mockRouter;
+  late MockEnvironmentManager mockEnvironmentManager;
   late MockCalendarViewContract mockView;
 
   setUp(() {
     mockRepository = MockCalendarRepository();
     mockRouter = MockAppRouter();
     mockView = MockCalendarViewContract();
+    mockEnvironmentManager = MockEnvironmentManager();
 
-    presenter = CalendarPresenter(mockRepository, mockRouter);
+    presenter =
+        CalendarPresenter(mockRepository, mockRouter, mockEnvironmentManager);
     presenter.view = mockView;
   });
 
@@ -57,7 +66,7 @@ void main() {
         '2024-10-10',
         'masculino',
         '1983-07-02',
-        'São Paulo');
+        State(1, 'São Paulo', Country(1, 'Brasil')));
     final meditationsResponse = MeditationsResponse(1000, 5000);
     final weekCalendarResponse = WeekCalendarResponse(week: {
       '2024-10-22': {'minutes': 30},
@@ -178,7 +187,7 @@ void main() {
           '2024-10-10',
           'masculino',
           '1983-07-02',
-          'São Paulo');
+          State(1, 'São Paulo', Country(1, 'Brasil')));
       when(mockRouter.goTo(any, onClose: anyNamed('onClose')))
           .thenAnswer((invocation) async {
         final onClose =
