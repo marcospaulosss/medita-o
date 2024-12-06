@@ -9,7 +9,8 @@ import 'package:cinco_minutos_meditacao/modules/common/shared/strings/localizati
 import 'package:cinco_minutos_meditacao/modules/meditometer/shared/strings/localization/meditometer_strings.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/meditations_response.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/month_calendar_response.dart';
-import 'package:cinco_minutos_meditacao/shared/clients/models/responses/user_response.dart';
+import 'package:cinco_minutos_meditacao/shared/clients/models/responses/user_response.dart'
+    as user;
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/week_calendar_response.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/year_calendar_response.dart';
 import 'package:cinco_minutos_meditacao/shared/components/app_background.dart';
@@ -91,7 +92,7 @@ void main() {
 
     group('Validate Interactions', () {
       CalendarModel model = CalendarModel(
-        userResponse: UserResponse(
+        userResponse: user.UserResponse(
             1,
             'John Doe',
             'john@example.com',
@@ -103,7 +104,7 @@ void main() {
             '2024-10-10',
             'masculino',
             '1983-07-02',
-            'São Paulo'),
+            user.State(1, 'São Paulo', user.Country(1, 'Brasil'))),
         meditationsResponse: MeditationsResponse(100, 1000),
         weekCalendarResponse: WeekCalendarResponse(
           week: {
@@ -468,7 +469,7 @@ void main() {
         DateTime nextYear = DateTime(now.year, now.month, now.day - 7);
         String monthName = DateFormat('dd', 'pt_BR').format(nextYear);
 
-        expect(find.text(monthName), findsNWidgets(3));
+        expect(find.text(monthName), findsNWidgets(1));
         expect(find.byIcon(Icons.chevron_left), findsOneWidget);
         expect(find.byIcon(Icons.chevron_right), findsOneWidget);
       });

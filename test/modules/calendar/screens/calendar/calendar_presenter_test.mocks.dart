@@ -7,6 +7,7 @@ import 'dart:async' as _i12;
 import 'dart:io' as _i14;
 
 import 'package:auto_route/auto_route.dart' as _i5;
+import 'package:cinco_minutos_meditacao/core/environment/manager.dart' as _i15;
 import 'package:cinco_minutos_meditacao/core/routers/app_router.dart' as _i4;
 import 'package:cinco_minutos_meditacao/modules/calendar/screens/calendar/calendar_contract.dart'
     as _i2;
@@ -26,6 +27,7 @@ import 'package:cinco_minutos_meditacao/shared/clients/models/responses/year_cal
     as _i10;
 import 'package:cinco_minutos_meditacao/shared/models/error.dart' as _i13;
 import 'package:mockito/mockito.dart' as _i1;
+import 'package:mockito/src/dummies.dart' as _i16;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -307,4 +309,47 @@ class MockCalendarRepository extends _i1.Mock
         returnValue:
             _i12.Future<(String?, _i13.CustomError?)>.value((null, null)),
       ) as _i12.Future<(String?, _i13.CustomError?)>);
+}
+
+/// A class which mocks [EnvironmentManager].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockEnvironmentManager extends _i1.Mock
+    implements _i15.EnvironmentManager {
+  MockEnvironmentManager() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  String get apiBaseUrl => (super.noSuchMethod(
+        Invocation.getter(#apiBaseUrl),
+        returnValue: _i16.dummyValue<String>(
+          this,
+          Invocation.getter(#apiBaseUrl),
+        ),
+      ) as String);
+
+  @override
+  String get isProduction => (super.noSuchMethod(
+        Invocation.getter(#isProduction),
+        returnValue: _i16.dummyValue<String>(
+          this,
+          Invocation.getter(#isProduction),
+        ),
+      ) as String);
+
+  @override
+  String get(String? variable) => (super.noSuchMethod(
+        Invocation.method(
+          #get,
+          [variable],
+        ),
+        returnValue: _i16.dummyValue<String>(
+          this,
+          Invocation.method(
+            #get,
+            [variable],
+          ),
+        ),
+      ) as String);
 }

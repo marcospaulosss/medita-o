@@ -7,7 +7,8 @@ import 'package:cinco_minutos_meditacao/modules/common/shared/components/meditat
 import 'package:cinco_minutos_meditacao/modules/common/shared/strings/localization/common_strings.dart';
 import 'package:cinco_minutos_meditacao/shared/Theme/app_images.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/meditations_response.dart';
-import 'package:cinco_minutos_meditacao/shared/clients/models/responses/user_response.dart';
+import 'package:cinco_minutos_meditacao/shared/clients/models/responses/user_response.dart'
+    as user;
 import 'package:cinco_minutos_meditacao/shared/components/app_header.dart';
 import 'package:cinco_minutos_meditacao/shared/strings/localization/shared_strings.dart';
 import 'package:flutter/material.dart';
@@ -66,19 +67,20 @@ main() async {
         final homeViewState =
             tester.state(find.byType(HomeView)) as HomeViewState;
         homeViewState.showNormalState(HomeModel(
-          userResponse: UserResponse(
-              1,
-              "Marcos",
-              "marcos@gmail.com",
-              "",
-              "1",
-              "1",
-              "",
-              DateTime.now().toString(),
-              DateTime.now().toString(),
-              'masculino',
-              '1983-07-02',
-              'São Paulo'),
+          userResponse: user.UserResponse(
+            1,
+            "Marcos",
+            "marcos@gmail.com",
+            "",
+            "1",
+            "1",
+            "",
+            DateTime.now().toString(),
+            DateTime.now().toString(),
+            'masculino',
+            '1983-07-02',
+            user.State(1, 'São Paulo', user.Country(1, 'Brasil')),
+          ),
           meditationsResponse: MeditationsResponse(2, 123123),
         ));
         await tester.pumpAndSettle();
@@ -138,7 +140,7 @@ main() async {
         final homeViewState =
             tester.state(find.byType(HomeView)) as HomeViewState;
         homeViewState.showNormalState(HomeModel(
-          userResponse: UserResponse(
+          userResponse: user.UserResponse(
               1,
               "Marcos",
               "marcos@gmail.com",
@@ -150,7 +152,7 @@ main() async {
               DateTime.now().toString(),
               'masculino',
               '1983-07-02',
-              'São Paulo'),
+              user.State(1, 'São Paulo', user.Country(1, 'Brasil'))),
           meditationsResponse: MeditationsResponse(2, 123123),
         ));
         await tester.pumpAndSettle();
@@ -175,7 +177,7 @@ main() async {
         final homeViewState =
             tester.state(find.byType(HomeView)) as HomeViewState;
         homeViewState.showNormalState(HomeModel(
-          userResponse: UserResponse(
+          userResponse: user.UserResponse(
               1,
               "Marcos",
               "marcos@gmail.com",
@@ -187,7 +189,7 @@ main() async {
               DateTime.now().toString(),
               'masculino',
               '1983-07-02',
-              'São Paulo'),
+              user.State(1, 'São Paulo', user.Country(1, 'Brasil'))),
           meditationsResponse: MeditationsResponse(2, 123123),
         ));
         await tester.pumpAndSettle();
@@ -212,7 +214,7 @@ main() async {
         final homeViewState =
             tester.state(find.byType(HomeView)) as HomeViewState;
         homeViewState.showNormalState(HomeModel(
-          userResponse: UserResponse(
+          userResponse: user.UserResponse(
               1,
               "Marcos",
               "marcos@gmail.com",
@@ -224,7 +226,7 @@ main() async {
               DateTime.now().toString(),
               'masculino',
               '1983-07-02',
-              'São Paulo'),
+              user.State(1, 'São Paulo', user.Country(1, 'Brasil'))),
           meditationsResponse: MeditationsResponse(2, 123123),
         ));
         await tester.pumpAndSettle();
@@ -278,7 +280,7 @@ main() async {
         final homeViewState =
             tester.state(find.byType(HomeView)) as HomeViewState;
         homeViewState.showNormalState(HomeModel(
-          userResponse: UserResponse(
+          userResponse: user.UserResponse(
               1,
               "Marcos",
               "marcos@gmail.com",
@@ -290,7 +292,7 @@ main() async {
               DateTime.now().toString(),
               'masculino',
               '1983-07-02',
-              'São Paulo'),
+              user.State(1, 'São Paulo', user.Country(1, 'Brasil'))),
           meditationsResponse: MeditationsResponse(2, 123123),
         ));
         await tester.pump();
