@@ -7,6 +7,7 @@ import 'dart:async' as _i3;
 import 'dart:io' as _i7;
 
 import 'package:auto_route/auto_route.dart' as _i9;
+import 'package:cinco_minutos_meditacao/core/environment/manager.dart' as _i11;
 import 'package:cinco_minutos_meditacao/core/routers/app_router.dart' as _i8;
 import 'package:cinco_minutos_meditacao/modules/meditometer/screens/meditometer/meditometer_contract.dart'
     as _i2;
@@ -18,6 +19,7 @@ import 'package:cinco_minutos_meditacao/shared/clients/models/responses/user_res
     as _i4;
 import 'package:cinco_minutos_meditacao/shared/models/error.dart' as _i5;
 import 'package:mockito/mockito.dart' as _i1;
+import 'package:mockito/src/dummies.dart' as _i12;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -81,6 +83,16 @@ class MockRepository extends _i1.Mock implements _i2.Repository {
         ),
         returnValue: _i3.Future<_i5.CustomError?>.value(),
       ) as _i3.Future<_i5.CustomError?>);
+
+  @override
+  _i3.Future<(String?, _i5.CustomError?)> getTokenApi() => (super.noSuchMethod(
+        Invocation.method(
+          #getTokenApi,
+          [],
+        ),
+        returnValue:
+            _i3.Future<(String?, _i5.CustomError?)>.value((null, null)),
+      ) as _i3.Future<(String?, _i5.CustomError?)>);
 }
 
 /// A class which mocks [AppRouter].
@@ -156,4 +168,47 @@ class MockMeditometerViewContract extends _i1.Mock
         ),
         returnValueForMissingStub: null,
       );
+}
+
+/// A class which mocks [EnvironmentManager].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockEnvironmentManager extends _i1.Mock
+    implements _i11.EnvironmentManager {
+  MockEnvironmentManager() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  String get apiBaseUrl => (super.noSuchMethod(
+        Invocation.getter(#apiBaseUrl),
+        returnValue: _i12.dummyValue<String>(
+          this,
+          Invocation.getter(#apiBaseUrl),
+        ),
+      ) as String);
+
+  @override
+  String get isProduction => (super.noSuchMethod(
+        Invocation.getter(#isProduction),
+        returnValue: _i12.dummyValue<String>(
+          this,
+          Invocation.getter(#isProduction),
+        ),
+      ) as String);
+
+  @override
+  String get(String? variable) => (super.noSuchMethod(
+        Invocation.method(
+          #get,
+          [variable],
+        ),
+        returnValue: _i12.dummyValue<String>(
+          this,
+          Invocation.method(
+            #get,
+            [variable],
+          ),
+        ),
+      ) as String);
 }

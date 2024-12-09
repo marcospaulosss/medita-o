@@ -6,6 +6,7 @@ import 'package:cinco_minutos_meditacao/modules/common/screens/profile/profile_m
 import 'package:cinco_minutos_meditacao/modules/common/screens/profile/profile_presenter.dart';
 import 'package:cinco_minutos_meditacao/modules/common/shared/strings/localization/common_strings.dart';
 import 'package:cinco_minutos_meditacao/shared/Theme/app_colors.dart';
+import 'package:cinco_minutos_meditacao/shared/clients/models/requests/user_request.dart';
 import 'package:cinco_minutos_meditacao/shared/components/app_header.dart';
 import 'package:cinco_minutos_meditacao/shared/components/generic_error_container.dart';
 import 'package:cinco_minutos_meditacao/shared/components/loading.dart';
@@ -100,7 +101,9 @@ class ProfileViewState extends State<ProfileView>
             ),
           ),
           FormProfile(
-            onRegister: () {},
+            onRegister: (UserRequest user) {
+              presenter.updateUser(user);
+            },
             profileModel: model,
             onSelectedCountry: (countryId) => getCities(countryId),
           ),
@@ -174,9 +177,8 @@ class ProfileViewState extends State<ProfileView>
     );
   }
 
-  void getCities(int countryId) async {
-    await presenter.getStates(countryId);
-    setState(() {});
+  Future<List<String>?> getCities(int countryId) async {
+    return await presenter.getStates(countryId);
   }
 
   @override

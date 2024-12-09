@@ -93,7 +93,11 @@ void main() {
             DateTime.now().toString(),
             'Feminino',
             '1983-07-02',
-            'São Paulo'); // Supondo que você tenha uma classe UserResponse
+            State(
+                1,
+                'São Paulo',
+                Country(1,
+                    'Brasil'))); // Supondo que você tenha uma classe UserResponse
 
         when(repository.uploadImageProfile(any)).thenAnswer((_) async => null);
         when(repository.requestUser())

@@ -1,5 +1,6 @@
 import 'package:cinco_minutos_meditacao/core/analytics/manager.dart';
 import 'package:cinco_minutos_meditacao/core/di/helpers.dart';
+import 'package:cinco_minutos_meditacao/core/environment/manager.dart';
 import 'package:cinco_minutos_meditacao/core/routers/app_router.dart';
 import 'package:cinco_minutos_meditacao/core/wrappers/secure_storage.dart';
 import 'package:cinco_minutos_meditacao/modules/calendar/screens/calendar/calendar_presenter.dart';
@@ -13,6 +14,7 @@ abstract class CalendarInjector {
       () => CalendarPresenter(
         resolve<CalendarRepository>(),
         resolve<AppRouter>(),
+        resolve<EnvironmentManager>(),
       ),
     );
 

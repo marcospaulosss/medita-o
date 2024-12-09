@@ -4,7 +4,7 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:async' as _i15;
-import 'dart:io' as _i20;
+import 'dart:io' as _i21;
 
 import 'package:cinco_minutos_meditacao/core/analytics/event.dart' as _i13;
 import 'package:cinco_minutos_meditacao/core/analytics/manager.dart' as _i12;
@@ -16,7 +16,9 @@ import 'package:cinco_minutos_meditacao/shared/clients/models/requests/auth_requ
 import 'package:cinco_minutos_meditacao/shared/clients/models/requests/authenticate_google_request.dart'
     as _i18;
 import 'package:cinco_minutos_meditacao/shared/clients/models/requests/create_new_meditations_request.dart'
-    as _i21;
+    as _i22;
+import 'package:cinco_minutos_meditacao/shared/clients/models/requests/user_request.dart'
+    as _i20;
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/authenticate_google_response.dart'
     as _i2;
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/countries_response.dart'
@@ -27,6 +29,8 @@ import 'package:cinco_minutos_meditacao/shared/clients/models/responses/month_ca
     as _i7;
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/register_response.dart'
     as _i3;
+import 'package:cinco_minutos_meditacao/shared/clients/models/responses/share_response.dart'
+    as _i23;
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/states_response.dart'
     as _i10;
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/user_response.dart'
@@ -36,7 +40,7 @@ import 'package:cinco_minutos_meditacao/shared/clients/models/responses/week_cal
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/year_calendar_response.dart'
     as _i8;
 import 'package:cinco_minutos_meditacao/shared/models/error.dart' as _i11;
-import 'package:dio/dio.dart' as _i22;
+import 'package:dio/dio.dart' as _i24;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:mockito/src/dummies.dart' as _i16;
 
@@ -404,7 +408,17 @@ class MockClientApi extends _i1.Mock implements _i17.ClientApi {
       ) as _i15.Future<_i4.UserResponse>);
 
   @override
-  _i15.Future<dynamic> uploadPhoto(_i20.File? photo) => (super.noSuchMethod(
+  _i15.Future<void> updateUser(_i20.UserRequest? body) => (super.noSuchMethod(
+        Invocation.method(
+          #updateUser,
+          [body],
+        ),
+        returnValue: _i15.Future<void>.value(),
+        returnValueForMissingStub: _i15.Future<void>.value(),
+      ) as _i15.Future<void>);
+
+  @override
+  _i15.Future<dynamic> uploadPhoto(_i21.File? photo) => (super.noSuchMethod(
         Invocation.method(
           #uploadPhoto,
           [photo],
@@ -447,7 +461,7 @@ class MockClientApi extends _i1.Mock implements _i17.ClientApi {
 
   @override
   _i15.Future<void> createNewMeditation(
-          _i21.CreateNewMeditationsRequest? body) =>
+          _i22.CreateNewMeditationsRequest? body) =>
       (super.noSuchMethod(
         Invocation.method(
           #createNewMeditation,
@@ -549,6 +563,15 @@ class MockClientApi extends _i1.Mock implements _i17.ClientApi {
           ),
         )),
       ) as _i15.Future<_i10.StatesResponse>);
+
+  @override
+  _i15.Future<List<_i23.Share>> getImagesShare() => (super.noSuchMethod(
+        Invocation.method(
+          #getImagesShare,
+          [],
+        ),
+        returnValue: _i15.Future<List<_i23.Share>>.value(<_i23.Share>[]),
+      ) as _i15.Future<List<_i23.Share>>);
 }
 
 /// A class which mocks [CustomError].
@@ -600,7 +623,7 @@ class MockCustomError extends _i1.Mock implements _i11.CustomError {
     String? message,
     _i11.ErrorCodes? code,
     StackTrace? stackTrace,
-    _i22.DioException? dioException,
+    _i24.DioException? dioException,
   }) =>
       (super.noSuchMethod(
         Invocation.method(

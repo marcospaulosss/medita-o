@@ -62,7 +62,7 @@ void main() {
           '23/04/2024',
           'masculino',
           '1983-07-02',
-          'São Paulo');
+          State(1, 'São Paulo', Country(1, 'Brasil')));
       when(mockClientApi.user()).thenAnswer((_) async => userResponse);
 
       final result = await repository.requestUser();
