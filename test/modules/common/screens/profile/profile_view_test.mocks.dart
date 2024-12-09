@@ -11,6 +11,8 @@ import 'package:cinco_minutos_meditacao/modules/common/screens/profile/profile_m
     as _i2;
 import 'package:cinco_minutos_meditacao/modules/common/screens/profile/profile_presenter.dart'
     as _i3;
+import 'package:cinco_minutos_meditacao/shared/clients/models/requests/user_request.dart'
+    as _i7;
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/user_response.dart'
     as _i6;
 import 'package:mockito/mockito.dart' as _i1;
@@ -127,10 +129,19 @@ class MockProfilePresenter extends _i1.Mock implements _i3.ProfilePresenter {
       ) as _i5.Future<void>);
 
   @override
-  _i5.Future<void> getStates(dynamic countryId) => (super.noSuchMethod(
+  _i5.Future<List<String>> getStates(dynamic countryId) => (super.noSuchMethod(
         Invocation.method(
           #getStates,
           [countryId],
+        ),
+        returnValue: _i5.Future<List<String>>.value(<String>[]),
+      ) as _i5.Future<List<String>>);
+
+  @override
+  _i5.Future<void> updateUser(_i7.UserRequest? user) => (super.noSuchMethod(
+        Invocation.method(
+          #updateUser,
+          [user],
         ),
         returnValue: _i5.Future<void>.value(),
         returnValueForMissingStub: _i5.Future<void>.value(),

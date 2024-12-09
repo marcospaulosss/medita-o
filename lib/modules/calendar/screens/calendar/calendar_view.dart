@@ -87,9 +87,9 @@ class CalendarViewState extends State<CalendarView>
           ),
           buildTitle(),
           CalendarMeditation(
-            weekCalendar: model?.weekCalendar ?? [],
-            monthCalendar: model?.monthCalendar ?? List.filled(31, 0),
-            yearCalendar: model?.yearCalendar ?? List.filled(12, 0),
+            weekCalendar: model.weekCalendar ?? [],
+            monthCalendar: model.monthCalendar ?? List.filled(31, 0),
+            yearCalendar: model.yearCalendar ?? List.filled(12, 0),
             type: model.calendarType ?? CalendarType.week,
             getCalendar: getCalendar,
           ),
@@ -191,7 +191,8 @@ class CalendarViewState extends State<CalendarView>
             ),
             const SizedBox(height: 16),
             IconLabelButton(
-              onTap: () {},
+              onTap: () =>
+                  presenter.goToSocialShare(model.calendarType?.name ?? "week"),
               decoration: BoxDecoration(
                 color: AppColors.germanderSpeedwell,
                 borderRadius: BorderRadius.circular(12),

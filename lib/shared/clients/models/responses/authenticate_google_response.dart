@@ -49,8 +49,8 @@ class User {
   String? facebookId;
 
   /// Caminho da foto de perfil
-  @JsonKey(name: 'profile_photo_path')
-  String? profilePhotoPath;
+  // @JsonKey(name: 'profile_photo_path')
+  // String? profilePhotoPath;
 
   /// Data de criação
   @JsonKey(name: 'created_at')
@@ -67,7 +67,7 @@ class User {
     this.emailVerifiedAt,
     this.googleId,
     this.facebookId,
-    this.profilePhotoPath,
+    // this.profilePhotoPath,
     this.createdAt,
     this.updatedAt,
   );

@@ -3,6 +3,7 @@ import 'package:cinco_minutos_meditacao/modules/authentication/shared/strings/lo
 import 'package:cinco_minutos_meditacao/modules/common/screens/profile/profile_model.dart';
 import 'package:cinco_minutos_meditacao/modules/common/shared/strings/localization/common_strings.dart';
 import 'package:cinco_minutos_meditacao/shared/Theme/app_colors.dart';
+import 'package:cinco_minutos_meditacao/shared/clients/models/requests/user_request.dart';
 import 'package:cinco_minutos_meditacao/shared/components/icon_label_button.dart';
 import 'package:cinco_minutos_meditacao/shared/components/text_field_input.dart';
 import 'package:datepicker_dropdown/datepicker_dropdown.dart';
@@ -49,10 +50,12 @@ class _FormProfileState extends State<FormProfile> {
   final List<String> listGender = ['Masculino', 'Feminino'];
   String? selectedValueGender = 'Feminino';
 
+  ValueNotifier<List<String>> countryNotifier = ValueNotifier([]);
   List<String> listCountries = ['Brazil'];
   String? selectedValueCounty = 'Brazil';
   int? selectedIdCounty = 0;
 
+  ValueNotifier<List<String>> statesNotifier = ValueNotifier([]);
   List<String> listStates = ['São Paulo'];
   String? selectedValueStates = 'São Paulo';
   int? selectedIdState = 0;
@@ -75,17 +78,39 @@ class _FormProfileState extends State<FormProfile> {
         .map((item) => item.name as String)
         .toList();
 
-    widget.profileModel.countryResponse!.countries!.forEach((element) {
-      if (element.name == selectedValueCounty) {
-        selectedIdCounty = element.id;
-        widget.onSelectedCountry(selectedIdCounty);
-      }
-    });
+    listStates = widget.profileModel.statesResponse!.states!
+        .map((item) => item.name as String)
+        .toList();
+
+    if (widget.profileModel.userResponse!.state != null) {
+      selectedValueCounty =
+          widget.profileModel.userResponse!.state!.country.name;
+      selectedIdCounty = widget.profileModel.userResponse!.state!.country.id;
+
+      selectedValueStates = widget.profileModel.userResponse!.state!.name;
+      selectedIdState = widget.profileModel.userResponse!.state!.id;
+    } else {
+      widget.profileModel.countryResponse!.countries!.forEach((element) {
+        if (element.name == selectedValueCounty) {
+          selectedIdCounty = element.id;
+        }
+      });
+      widget.profileModel.statesResponse!.states!.forEach((element) {
+        if (element.name == selectedValueStates) {
+          selectedIdState = element.id;
+        }
+      });
+    }
+
+    statesNotifier.value = listStates;
+    countryNotifier.value = listCountries;
 
     if (widget.profileModel.userResponse?.birthdate != null) {
-      _selectedDay = DateTime.now().day;
-      _selectedMonth = DateTime.now().month;
-      _selectedYear = DateTime.now().year;
+      List<String> date =
+          widget.profileModel.userResponse!.birthdate!.split("-");
+      _selectedDay = int.parse(date[2]);
+      _selectedMonth = int.parse(date[1]);
+      _selectedYear = int.parse(date[0]);
     }
 
     if (widget.profileModel.userResponse?.genre != null) {
@@ -164,22 +189,34 @@ class _FormProfileState extends State<FormProfile> {
               children: [
                 Expanded(
                   flex: 5,
-                  child: _buildDropBox(
-                    label: CommonStrings.of(context).whereYouLive,
-                    list: listCountries,
-                    selectedValue: selectedValueCounty,
-                    onChanged: (String value) {
-                      widget.profileModel.countryResponse!.countries!
-                          .forEach((element) {
-                        if (element.name == value) {
-                          widget.onSelectedCountry(element.id);
+                  child: ValueListenableBuilder<List<String>>(
+                    valueListenable: countryNotifier,
+                    builder: (BuildContext context, List<String> value,
+                        Widget? child) {
+                      return _buildDropBox(
+                        label: CommonStrings.of(context).whereYouLive,
+                        list: value,
+                        selectedValue: selectedValueCounty,
+                        onChanged: (String value) {
+                          widget.profileModel.countryResponse!.countries!
+                              .forEach((element) async {
+                            if (element.name == value) {
+                              List<String> states =
+                                  await widget.onSelectedCountry(element.id);
+                              updateStates(states);
 
-                          setState(() {
-                            selectedIdCounty = element.id;
-                            selectedValueCounty = value;
+                              selectedIdCounty = element.id;
+                              selectedValueCounty = value;
+
+                              List<String> listCountries = widget
+                                  .profileModel.countryResponse!.countries!
+                                  .map((item) => item.name as String)
+                                  .toList();
+                              updateCountry(listCountries, value);
+                            }
                           });
-                        }
-                      });
+                        },
+                      );
                     },
                   ),
                 ),
@@ -188,19 +225,25 @@ class _FormProfileState extends State<FormProfile> {
                   flex: 3,
                   child: Padding(
                     padding: const EdgeInsets.only(top: 26),
-                    child: _buildDropBox(
-                      list: listStates,
-                      selectedValue: selectedValueStates,
-                      onChanged: (String value) {
-                        widget.profileModel.statesResponse!.states!
-                            .forEach((element) {
-                          if (element.name == value) {
-                            setState(() {
-                              selectedIdState = element.id;
-                              selectedValueStates = value;
+                    child: ValueListenableBuilder<List<String>>(
+                      valueListenable: statesNotifier,
+                      builder: (BuildContext context, List<String> states,
+                          Widget? child) {
+                        return _buildDropBox(
+                          list: states,
+                          selectedValue: selectedValueStates,
+                          onChanged: (String value) {
+                            widget.profileModel.statesResponse!.states!
+                                .forEach((element) {
+                              if (element.name == value) {
+                                setState(() {
+                                  selectedIdState = element.id;
+                                  selectedValueStates = value;
+                                });
+                              }
                             });
-                          }
-                        });
+                          },
+                        );
                       },
                     ),
                   ),
@@ -353,11 +396,16 @@ class _FormProfileState extends State<FormProfile> {
         IconLabelButton(
           onTap: () {
             if (_formKey.currentState!.validate()) {
-              widget.onRegister(
-                nameController.text,
+              UserRequest user = UserRequest(
+                widget.profileModel.userResponse!.id,
+                "${nameController.text} ${lastNameController.text}",
                 emailController.text,
-                lastNameController.text,
+                selectedValueGender!,
+                "$_selectedYear-$_selectedMonth-$_selectedDay",
+                selectedIdState,
               );
+
+              widget.onRegister(user);
             }
           },
           width: double.infinity,
@@ -418,5 +466,15 @@ class _FormProfileState extends State<FormProfile> {
       borderRadius: BorderRadius.circular(12),
       color: AppColors.white,
     );
+  }
+
+  void updateStates(List<String> newStates) {
+    selectedValueStates = newStates.first; // Atualize o valor selecionado
+    statesNotifier.value = newStates; // Atualize o ValueNotifier
+  }
+
+  void updateCountry(List<String> newCountry, String country) {
+    selectedValueCounty = country; // Atualize o ValueNotifier
+    countryNotifier.value = newCountry; // Atualize o ValueNotifier
   }
 }

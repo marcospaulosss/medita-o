@@ -67,13 +67,15 @@ void main() {
           '23/04/2024',
           'masculino',
           '1983-07-02',
-          'São Paulo');
+          State(1, 'São Paulo', Country(1, 'Brasil')));
       CountriesResponse countriesResponse =
           CountriesResponse([Countries(1, 'Brazil')]);
       when(mockRepository.requestUser())
           .thenAnswer((_) async => (userResponse, null));
       when(mockRepository.requestGetCountries())
           .thenAnswer((_) async => (countriesResponse, null));
+      when(mockRepository.requestGetStatesByCountryId(any))
+          .thenAnswer((_) async => (null, null));
 
       await presenter.initPresenter();
 
@@ -112,7 +114,7 @@ void main() {
           '23/04/2024',
           'masculino',
           '1983-07-02',
-          'São Paulo');
+          State(1, 'São Paulo', Country(1, 'Brasil')));
       when(mockRepository.requestUser())
           .thenAnswer((_) async => (userResponse, null));
       when(mockRepository.requestGetCountries())
@@ -141,7 +143,7 @@ void main() {
           '23/04/2024',
           'masculino',
           '1983-07-02',
-          'São Paulo');
+          State(1, 'São Paulo', Country(1, 'Brasil')));
       final result = 'image_path';
       when(mockAppRouter.goTo(any, onClose: anyNamed('onClose')))
           .thenAnswer((invocation) {
@@ -215,7 +217,6 @@ void main() {
       await presenter.getStates(1);
 
       verify(mockRepository.requestGetStatesByCountryId(any)).called(1);
-      verify(mockView.showNormalState(any)).called(1);
     });
   });
 

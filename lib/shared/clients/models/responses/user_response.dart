@@ -28,7 +28,7 @@ class UserResponse {
 
   /// email verificado
   @JsonKey(name: 'email_verified_at')
-  dynamic? emailVerifiedAt;
+  dynamic emailVerifiedAt;
 
   /// id do google
   @JsonKey(name: 'google_id')
@@ -36,7 +36,7 @@ class UserResponse {
 
   /// id do facebook
   @JsonKey(name: 'facebook_id')
-  dynamic? facebookId;
+  dynamic facebookId;
 
   /// url da foto de perfil
   @JsonKey(name: 'profile_photo_path')
@@ -59,8 +59,8 @@ class UserResponse {
   String? birthdate;
 
   /// cidade
-  @JsonKey(name: 'city')
-  String? city;
+  @JsonKey(name: 'state')
+  State? state;
 
   /// - [id] : id do usuário
   /// - [name] : nome do usuário
@@ -73,7 +73,7 @@ class UserResponse {
   /// - [updatedAt] : data de atualização
   /// - [genre] : gênero
   /// - [birthdate] : data de nascimento
-  /// - [city] : cidade
+  /// - [state] : estado
   /// construtor
   UserResponse(
     this.id,
@@ -87,11 +87,60 @@ class UserResponse {
     this.updatedAt,
     this.genre,
     this.birthdate,
-    this.city,
+    this.state,
   );
 
   factory UserResponse.fromJson(Map<String, dynamic> json) =>
       _$UserResponseFromJson(json);
 
   Map<String, dynamic> toJson() => _$UserResponseToJson(this);
+
+  /// Retorna o valor adapatado para exibição.
+  String adapterGenre() => (genre == 'M') ? 'Masculino' : 'Feminino';
+}
+
+@JsonSerializable()
+class State {
+  /// id do estado
+  @JsonKey(name: 'id')
+  int id;
+
+  /// nome do estado
+  @JsonKey(name: 'name')
+  String name;
+
+  /// país
+  @JsonKey(name: 'country')
+  Country country;
+
+  State(
+    this.id,
+    this.name,
+    this.country,
+  );
+
+  factory State.fromJson(Map<String, dynamic> json) => _$StateFromJson(json);
+
+  Map<String, dynamic> toJson() => _$StateToJson(this);
+}
+
+@JsonSerializable()
+class Country {
+  /// id do país
+  @JsonKey(name: 'id')
+  int id;
+
+  /// nome do país
+  @JsonKey(name: 'name')
+  String name;
+
+  Country(
+    this.id,
+    this.name,
+  );
+
+  factory Country.fromJson(Map<String, dynamic> json) =>
+      _$CountryFromJson(json);
+
+  Map<String, dynamic> toJson() => _$CountryToJson(this);
 }
