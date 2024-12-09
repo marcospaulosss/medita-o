@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:cinco_minutos_meditacao/core/environment/manager.dart';
 import 'package:cinco_minutos_meditacao/core/routers/app_router.dart';
 import 'package:cinco_minutos_meditacao/modules/meditometer/screens/meditometer/meditometer_contract.dart';
 import 'package:cinco_minutos_meditacao/modules/meditometer/screens/meditometer/meditometer_presenter.dart';
@@ -12,19 +13,22 @@ import 'package:mockito/mockito.dart';
 
 import 'meditometer_presenter_test.mocks.dart';
 
-@GenerateMocks([Repository, AppRouter, MeditometerViewContract])
+@GenerateMocks(
+    [Repository, AppRouter, MeditometerViewContract, EnvironmentManager])
 void main() {
   group('MeditometerPresenter', () {
     late MeditometerPresenter presenter;
     late MockRepository repository;
     late MockAppRouter router;
+    late EnvironmentManager environmentManager;
     late MockMeditometerViewContract view;
 
     setUp(() {
       repository = MockRepository();
       router = MockAppRouter();
       view = MockMeditometerViewContract();
-      presenter = MeditometerPresenter(repository, router);
+      environmentManager = MockEnvironmentManager();
+      presenter = MeditometerPresenter(repository, router, environmentManager);
       presenter.view = view;
     });
 
@@ -47,7 +51,7 @@ void main() {
           '2024-09-28',
           'Feminino',
           '1983-07-02',
-          'São Paulo');
+          State(1, 'São Paulo', Country(1, 'Brasil')));
       final meditationsResponse = MeditationsResponse(100, 1);
       when(repository.requestUser())
           .thenAnswer((_) async => (userResponse, null));
@@ -83,7 +87,7 @@ void main() {
           '2024-09-28',
           'Feminino',
           '1983-07-02',
-          'São Paulo');
+          State(1, 'São Paulo', Country(1, 'Brasil')));
       final error = CustomError();
       when(repository.requestUser())
           .thenAnswer((_) async => (userResponse, null));
@@ -109,7 +113,7 @@ void main() {
           '2024-09-28',
           'Feminino',
           '1983-07-02',
-          'São Paulo');
+          State(1, 'São Paulo', Country(1, 'Brasil')));
       when(repository.uploadImageProfile(any)).thenAnswer((_) async => null);
       when(repository.requestUser())
           .thenAnswer((_) async => (userResponse, null));
@@ -206,7 +210,11 @@ void main() {
           DateTime.now().toString(),
           'Feminino',
           '1983-07-02',
-          'São Paulo'); // Supondo que você tenha uma classe UserResponse
+          State(
+              1,
+              'São Paulo',
+              Country(1,
+                  'Brasil'))); // Supondo que você tenha uma classe UserResponse
 
       when(repository.uploadImageProfile(any)).thenAnswer((_) async => null);
       when(repository.requestUser())

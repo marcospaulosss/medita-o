@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:cinco_minutos_meditacao/modules/common/screens/profile/profile_model.dart';
+import 'package:cinco_minutos_meditacao/shared/clients/models/requests/user_request.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/countries_response.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/states_response.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/user_response.dart';
@@ -32,7 +33,10 @@ abstract class Presenter implements ViewBinding<ProfileViewContract> {
   Future<void> updateImageProfile();
 
   /// Busca os estados do país selecionado
-  Future<void> getStates(countryId);
+  Future<List<String>> getStates(countryId);
+
+  /// Atualiza os dados do usuário
+  Future<void> updateUser(UserRequest user);
 }
 
 abstract class Repository {
@@ -54,4 +58,7 @@ abstract class Repository {
   /// Busca os estados do país selecionado
   Future<(StatesResponse?, CustomError?)> requestGetStatesByCountryId(
       int countryId);
+
+  /// Atualiza os dados do usuário
+  Future<(UserResponse?, CustomError?)> requestUpdateUser(UserRequest user);
 }

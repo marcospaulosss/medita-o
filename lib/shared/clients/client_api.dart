@@ -5,11 +5,13 @@ import 'package:cinco_minutos_meditacao/shared/clients/interceptor.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/models/requests/auth_request.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/models/requests/authenticate_google_request.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/models/requests/create_new_meditations_request.dart';
+import 'package:cinco_minutos_meditacao/shared/clients/models/requests/user_request.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/authenticate_google_response.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/countries_response.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/meditations_response.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/month_calendar_response.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/register_response.dart';
+import 'package:cinco_minutos_meditacao/shared/clients/models/responses/share_response.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/states_response.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/user_response.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/week_calendar_response.dart';
@@ -59,6 +61,10 @@ abstract class ClientApi {
   @GET('/user')
   Future<UserResponse> user();
 
+  /// Obtem informações do usuário logado
+  @PATCH('/user')
+  Future<void> updateUser(@Body() UserRequest body);
+
   /// solicita a atualização da foto do usuário
   @POST('/user/photo')
   @MultiPart()
@@ -99,4 +105,9 @@ abstract class ClientApi {
   /// Obtem os estados de um país
   @GET('/states')
   Future<StatesResponse> states(@Query('country_id') int countryId);
+
+  /// - [ Share ] : Cliente de compartilhamento
+  /// Obtem o paizes disponíveis
+  @GET('/share')
+  Future<ShareResponse> getImagesShare();
 }

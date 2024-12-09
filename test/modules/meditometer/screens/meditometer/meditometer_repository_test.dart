@@ -54,7 +54,7 @@ void main() {
           '2024-09-28',
           'Feminino',
           '1983-07-02',
-          'São Paulo');
+          State(1, 'São Paulo', Country(1, 'Brasil')));
       when(clientApi.user()).thenAnswer((_) async => userResponse);
 
       final result = await repository.requestUser();

@@ -64,7 +64,7 @@ void main() {
         '2024-10-10',
         'masculino',
         '1983-07-02',
-        'São Paulo');
+        State(1, 'São Paulo', Country(1, 'Brasil')));
 
     test('should return UserResponse on success', () async {
       // Arrange

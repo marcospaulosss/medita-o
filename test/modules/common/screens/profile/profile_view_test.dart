@@ -9,7 +9,8 @@ import 'package:cinco_minutos_meditacao/modules/common/shared/strings/localizati
 import 'package:cinco_minutos_meditacao/shared/Theme/app_images.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/countries_response.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/states_response.dart';
-import 'package:cinco_minutos_meditacao/shared/clients/models/responses/user_response.dart';
+import 'package:cinco_minutos_meditacao/shared/clients/models/responses/user_response.dart'
+    as user;
 import 'package:cinco_minutos_meditacao/shared/components/app_header.dart';
 import 'package:cinco_minutos_meditacao/shared/components/text_field_input.dart';
 import 'package:cinco_minutos_meditacao/shared/strings/localization/shared_strings.dart';
@@ -63,7 +64,8 @@ main() async {
         when(presenter.initPresenter()).thenAnswer((_) {
           return Future.value();
         });
-        when(presenter.getStates(any)).thenAnswer((_) => Future.value());
+        when(presenter.getStates(any))
+            .thenAnswer((_) => Future.value(["São Paulo"]));
 
         await tester.pump();
         verify(presenter.initPresenter()).called(1);
@@ -71,7 +73,7 @@ main() async {
         final profileViewState =
             tester.state(find.byType(ProfileView)) as ProfileViewState;
         profileViewState.showNormalState(ProfileModel(
-          userResponse: UserResponse(
+          userResponse: user.UserResponse(
               1,
               "Marcos Santos",
               "marcos@gmail.com",
@@ -83,7 +85,7 @@ main() async {
               DateTime.now().toString(),
               'Masculino',
               null,
-              'Brazil'),
+              user.State(1, 'São Paulo', user.Country(1, 'Brazil'))),
           countryResponse: CountriesResponse([
             Countries(
               1,
@@ -98,7 +100,7 @@ main() async {
             States(
               1,
               2,
-              "PR",
+              "São Paulo",
             ),
             States(
               2,
@@ -165,7 +167,7 @@ main() async {
         final profileViewState =
             tester.state(find.byType(ProfileView)) as ProfileViewState;
         profileViewState.showNormalState(ProfileModel(
-          userResponse: UserResponse(
+          userResponse: user.UserResponse(
               1,
               "Marcos Santos",
               "marcos@gmail.com",
@@ -177,7 +179,7 @@ main() async {
               DateTime.now().toString(),
               'Masculino',
               '1983-07-02',
-              'São Paulo'),
+              user.State(1, 'São Paulo', user.Country(1, 'Brazil'))),
           countryResponse: CountriesResponse([
             Countries(
               1,
@@ -192,7 +194,7 @@ main() async {
             States(
               1,
               2,
-              "PR",
+              "São Paulo",
             ),
             States(
               2,
@@ -222,7 +224,7 @@ main() async {
         final profileViewState =
             tester.state(find.byType(ProfileView)) as ProfileViewState;
         profileViewState.showNormalState(ProfileModel(
-          userResponse: UserResponse(
+          userResponse: user.UserResponse(
               1,
               "Marcos Santos",
               "marcos@gmail.com",
@@ -234,7 +236,7 @@ main() async {
               DateTime.now().toString(),
               'Masculino',
               '1983-07-02',
-              'São Paulo'),
+              user.State(1, 'São Paulo', user.Country(1, 'Brazil'))),
           countryResponse: CountriesResponse([
             Countries(
               1,
@@ -249,7 +251,7 @@ main() async {
             States(
               1,
               2,
-              "PR",
+              "São Paulo",
             ),
             States(
               2,
@@ -283,7 +285,7 @@ main() async {
         final profileViewState =
             tester.state(find.byType(ProfileView)) as ProfileViewState;
         profileViewState.showNormalState(ProfileModel(
-          userResponse: UserResponse(
+          userResponse: user.UserResponse(
               1,
               "Marcos Santos",
               "marcos@gmail.com",
@@ -295,7 +297,7 @@ main() async {
               DateTime.now().toString(),
               'Masculino',
               null,
-              'São Paulo'),
+              user.State(1, 'São Paulo', user.Country(1, 'Brazil'))),
           countryResponse: CountriesResponse([
             Countries(
               1,
@@ -310,7 +312,7 @@ main() async {
             States(
               1,
               2,
-              "PR",
+              "São Paulo",
             ),
             States(
               2,
@@ -357,7 +359,7 @@ main() async {
         final profileViewState =
             tester.state(find.byType(ProfileView)) as ProfileViewState;
         profileViewState.showNormalState(ProfileModel(
-          userResponse: UserResponse(
+          userResponse: user.UserResponse(
               1,
               "Marcos Santos",
               "marcos@gmail.com",
@@ -369,7 +371,7 @@ main() async {
               DateTime.now().toString(),
               'Feminino',
               '1983-07-02',
-              'São Paulo'),
+              user.State(1, 'São Paulo', user.Country(1, 'Brazil'))),
           countryResponse: CountriesResponse([
             Countries(
               1,
@@ -384,7 +386,7 @@ main() async {
             States(
               1,
               2,
-              "PR",
+              "São Paulo",
             ),
             States(
               2,
@@ -419,7 +421,7 @@ main() async {
         final profileViewState =
             tester.state(find.byType(ProfileView)) as ProfileViewState;
         profileViewState.showNormalState(ProfileModel(
-          userResponse: UserResponse(
+          userResponse: user.UserResponse(
               1,
               "Marcos Santos",
               "marcos@gmail.com",
@@ -431,7 +433,7 @@ main() async {
               DateTime.now().toString(),
               'Masculino',
               '1983-07-02',
-              'São Paulo'),
+              user.State(1, 'São Paulo', user.Country(1, 'Brazil'))),
           countryResponse: CountriesResponse([
             Countries(
               1,
@@ -446,7 +448,7 @@ main() async {
             States(
               1,
               2,
-              "PR",
+              "São Paulo",
             ),
             States(
               2,
@@ -463,10 +465,10 @@ main() async {
 
         await tester.tap(find.text('Brazil').first);
         await tester.pumpAndSettle();
-        await tester.tap(find.text('Brazil').first);
+        await tester.tap(find.text('PR').first);
         await tester.pumpAndSettle();
 
-        expect(find.text('Brazil'), findsWidgets);
+        expect(find.text('PR'), findsWidgets);
       });
 
       testWidgets("Should validate o click in state", (tester) async {
@@ -481,7 +483,7 @@ main() async {
         final profileViewState =
             tester.state(find.byType(ProfileView)) as ProfileViewState;
         profileViewState.showNormalState(ProfileModel(
-          userResponse: UserResponse(
+          userResponse: user.UserResponse(
               1,
               "Marcos Santos",
               "marcos@gmail.com",
@@ -493,7 +495,7 @@ main() async {
               DateTime.now().toString(),
               'Feminino',
               '1983-07-02',
-              'São Paulo'),
+              user.State(1, 'São Paulo', user.Country(1, 'Brazil'))),
           countryResponse: CountriesResponse([
             Countries(
               1,
@@ -508,7 +510,7 @@ main() async {
             States(
               1,
               2,
-              "PR",
+              "São Paulo",
             ),
             States(
               2,
@@ -574,7 +576,7 @@ main() async {
         final profileViewState =
             tester.state(find.byType(ProfileView)) as ProfileViewState;
         profileViewState.showNormalState(ProfileModel(
-          userResponse: UserResponse(
+          userResponse: user.UserResponse(
               1,
               "Marcos Santos",
               "marcos@gmail.com",
@@ -586,7 +588,7 @@ main() async {
               DateTime.now().toString(),
               'Masculino',
               '1983-07-02',
-              'São Paulo'),
+              user.State(1, 'São Paulo', user.Country(1, 'Brazil'))),
           countryResponse: CountriesResponse([
             Countries(
               1,
@@ -601,7 +603,7 @@ main() async {
             States(
               1,
               2,
-              "PR",
+              "São Paulo",
             ),
             States(
               2,

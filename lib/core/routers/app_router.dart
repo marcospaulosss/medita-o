@@ -25,6 +25,7 @@ class AppRouter extends $AppRouter {
         AutoRoute(page: MeditometerRoute.page, guards: [AuthGuard()]),
         AutoRoute(page: CalendarRoute.page, guards: [AuthGuard()]),
         AutoRoute(page: ProfileRoute.page, guards: [AuthGuard()]),
+        AutoRoute(page: ShareRoute.page, guards: [AuthGuard()]),
       ];
 
   /// Direciona para a tela selecionada e remove a tela anterior

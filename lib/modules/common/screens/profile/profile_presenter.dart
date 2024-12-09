@@ -2,6 +2,7 @@ import 'package:cinco_minutos_meditacao/core/routers/app_router.dart';
 import 'package:cinco_minutos_meditacao/core/routers/app_router.gr.dart';
 import 'package:cinco_minutos_meditacao/modules/common/screens/profile/profile_contract.dart';
 import 'package:cinco_minutos_meditacao/modules/common/screens/profile/profile_model.dart';
+import 'package:cinco_minutos_meditacao/shared/clients/models/requests/user_request.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/user_response.dart';
 import 'package:cinco_minutos_meditacao/shared/models/error.dart';
 import 'package:cinco_minutos_meditacao/shared/services/auth_service.dart';
@@ -67,6 +68,29 @@ class ProfilePresenter implements Presenter {
       return;
     }
 
+    if (user.state != null) {
+      var (states, error) =
+          await _repository.requestGetStatesByCountryId(user.state!.country.id);
+      if (error != null) {
+        view?.showError(error.getErrorMessage);
+        return;
+      }
+
+      profileModel.statesResponse = states;
+    } else {
+      int? brazilId = countries!.countries!
+          .firstWhere((element) => element.name == 'Brazil')
+          .id;
+      var (states, error) =
+          await _repository.requestGetStatesByCountryId(brazilId ?? 0);
+      if (error != null) {
+        view?.showError(error.getErrorMessage);
+        return;
+      }
+
+      profileModel.statesResponse = states;
+    }
+
     profileModel.userResponse = user;
     profileModel.countryResponse = countries;
     view!.showNormalState(profileModel);
@@ -79,6 +103,8 @@ class ProfilePresenter implements Presenter {
       view?.showError(error.getErrorMessage);
       return null;
     }
+
+    user?.genre = user.adapterGenre();
 
     return user;
   }
@@ -109,15 +135,56 @@ class ProfilePresenter implements Presenter {
   }
 
   @override
-  Future<void> getStates(countryId) async {
+  Future<List<String>> getStates(countryId) async {
     var (states, error) =
         await _repository.requestGetStatesByCountryId(countryId);
+    if (error != null) {
+      view?.showError(error.getErrorMessage);
+      return [];
+    }
+
+    profileModel.statesResponse = states;
+
+    List<String> statesList =
+        states!.states!.map((item) => item.name as String).toList();
+
+    return statesList;
+  }
+
+  @override
+  Future<void> updateUser(UserRequest user) async {
+    view?.showLoading();
+
+    user.genre == 'Masculino' ? user.genre = 'M' : user.genre = 'F';
+
+    var (userResponse, error) = await _repository.requestUpdateUser(user);
     if (error != null) {
       view?.showError(error.getErrorMessage);
       return;
     }
 
-    profileModel.statesResponse = states;
+    var (countries, errorContries) = await _repository.requestGetCountries();
+    if (errorContries != null) {
+      view?.showError(errorContries.getErrorMessage);
+      return;
+    }
+
+    if (user.state != null) {
+      var (states, error) = await _repository
+          .requestGetStatesByCountryId(userResponse!.state!.country.id);
+      if (error != null) {
+        view?.showError(error.getErrorMessage);
+        return;
+      }
+
+      profileModel.statesResponse = states;
+    }
+
+    profileModel.userResponse = userResponse;
+    profileModel.countryResponse = countries;
+
+    userResponse?.genre = userResponse.adapterGenre();
+    profileModel.userResponse = userResponse;
     view!.showNormalState(profileModel);
   }
 }

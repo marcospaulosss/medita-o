@@ -29,7 +29,6 @@ User _$UserFromJson(Map<String, dynamic> json) => User(
       json['email_verified_at'] as String?,
       json['google_id'] as String?,
       json['facebook_id'] as String?,
-      json['profile_photo_path'] as String?,
       json['created_at'] as String?,
       json['updated_at'] as String,
     );
@@ -41,7 +40,6 @@ Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
       'email_verified_at': instance.emailVerifiedAt,
       'google_id': instance.googleId,
       'facebook_id': instance.facebookId,
-      'profile_photo_path': instance.profilePhotoPath,
       'created_at': instance.createdAt,
       'updated_at': instance.updatedAt,
     };
