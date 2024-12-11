@@ -8,6 +8,7 @@ import 'package:cinco_minutos_meditacao/shared/clients/models/requests/create_ne
 import 'package:cinco_minutos_meditacao/shared/clients/models/requests/user_request.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/authenticate_google_response.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/countries_response.dart';
+import 'package:cinco_minutos_meditacao/shared/clients/models/responses/get_banners_response.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/meditations_response.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/month_calendar_response.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/register_response.dart';
@@ -110,4 +111,9 @@ abstract class ClientApi {
   /// Obtem o paizes disponíveis
   @GET('/share')
   Future<ShareResponse> getImagesShare();
+
+  /// - [ banners ] : Cliente de banners
+  /// Obtem os banners disponíveis
+  @GET('/banners')
+  Future<GetBannersResponse> getBanners();
 }

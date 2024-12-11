@@ -11,10 +11,12 @@ import 'package:cinco_minutos_meditacao/modules/common/screens/home/home_model.d
     as _i2;
 import 'package:cinco_minutos_meditacao/modules/common/screens/home/home_presenter.dart'
     as _i3;
-import 'package:cinco_minutos_meditacao/shared/clients/models/responses/meditations_response.dart'
-    as _i7;
-import 'package:cinco_minutos_meditacao/shared/clients/models/responses/user_response.dart'
+import 'package:cinco_minutos_meditacao/shared/clients/models/responses/get_banners_response.dart'
     as _i6;
+import 'package:cinco_minutos_meditacao/shared/clients/models/responses/meditations_response.dart'
+    as _i8;
+import 'package:cinco_minutos_meditacao/shared/clients/models/responses/user_response.dart'
+    as _i7;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: type=lint
@@ -119,13 +121,22 @@ class MockHomePresenter extends _i1.Mock implements _i3.HomePresenter {
       ) as _i5.Future<void>);
 
   @override
-  _i5.Future<_i6.UserResponse?> getMe() => (super.noSuchMethod(
+  _i5.Future<_i6.GetBannersResponse?> getBanners() => (super.noSuchMethod(
+        Invocation.method(
+          #getBanners,
+          [],
+        ),
+        returnValue: _i5.Future<_i6.GetBannersResponse?>.value(),
+      ) as _i5.Future<_i6.GetBannersResponse?>);
+
+  @override
+  _i5.Future<_i7.UserResponse?> getMe() => (super.noSuchMethod(
         Invocation.method(
           #getMe,
           [],
         ),
-        returnValue: _i5.Future<_i6.UserResponse?>.value(),
-      ) as _i5.Future<_i6.UserResponse?>);
+        returnValue: _i5.Future<_i7.UserResponse?>.value(),
+      ) as _i5.Future<_i7.UserResponse?>);
 
   @override
   _i5.Future<void> updateImageProfile() => (super.noSuchMethod(
@@ -138,13 +149,13 @@ class MockHomePresenter extends _i1.Mock implements _i3.HomePresenter {
       ) as _i5.Future<void>);
 
   @override
-  _i5.Future<_i7.MeditationsResponse?> getMeditions() => (super.noSuchMethod(
+  _i5.Future<_i8.MeditationsResponse?> getMeditions() => (super.noSuchMethod(
         Invocation.method(
           #getMeditions,
           [],
         ),
-        returnValue: _i5.Future<_i7.MeditationsResponse?>.value(),
-      ) as _i5.Future<_i7.MeditationsResponse?>);
+        returnValue: _i5.Future<_i8.MeditationsResponse?>.value(),
+      ) as _i5.Future<_i8.MeditationsResponse?>);
 
   @override
   void goToMeditateInfo(_i2.HomeModel? model) => super.noSuchMethod(
