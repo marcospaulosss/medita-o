@@ -2,6 +2,7 @@ import 'package:cinco_minutos_meditacao/core/routers/app_router.dart';
 import 'package:cinco_minutos_meditacao/core/routers/app_router.gr.dart';
 import 'package:cinco_minutos_meditacao/modules/common/screens/home/home_contract.dart';
 import 'package:cinco_minutos_meditacao/modules/common/screens/home/home_model.dart';
+import 'package:cinco_minutos_meditacao/shared/clients/models/responses/get_banners_response.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/meditations_response.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/user_response.dart';
 import 'package:cinco_minutos_meditacao/shared/models/error.dart';
@@ -55,11 +56,24 @@ class HomePresenter implements Presenter {
     view!.showLoading();
     UserResponse? user = await getMe();
     MeditationsResponse? meditations = await getMeditions();
-    if (user != null && meditations != null) {
+    GetBannersResponse? banners = await getBanners();
+
+    if (user != null && meditations != null && banners != null) {
       homeModel.userResponse = user;
       homeModel.meditationsResponse = meditations;
+      homeModel.bannersResponse = banners;
       view!.showNormalState(homeModel);
     }
+  }
+
+  Future<GetBannersResponse?> getBanners() async {
+    var (bannerResonse, errBanner) = await _repository.requestBanners();
+    if (errBanner != null) {
+      view!.showError(errBanner.getErrorMessage);
+      return null;
+    }
+
+    return bannerResonse;
   }
 
   /// Busca informações do usuário
