@@ -225,6 +225,16 @@ void main() {
     });
 
     test('loginFacebook should call loginFacebook on authService', () async {
+      when(mockAuthService.loginFacebook())
+          .thenAnswer((_) async => (null, null));
+      when(mockCustomError.message)
+          .thenReturn("Erro ao realizar login com o Facebook");
+      when(mockCustomError.sendErrorToCrashlytics(
+              message: anyNamed("message"),
+              code: anyNamed("code"),
+              stackTrace: anyNamed("stackTrace")))
+          .thenReturn(CustomError());
+
       await presenter.loginFacebook();
 
       verify(mockAuthService.loginFacebook()).called(1);
