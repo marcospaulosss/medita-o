@@ -311,14 +311,15 @@ class MockRepository extends _i1.Mock implements _i12.Repository {
       ) as _i5.Future<Object?>);
 
   @override
-  _i5.Future<Object?> authenticateUserByFacebook(_i7.AccessToken? credential) =>
+  _i5.Future<_i3.CustomError?> authenticateUserByFacebook(
+          _i7.AccessToken? credential) =>
       (super.noSuchMethod(
         Invocation.method(
           #authenticateUserByFacebook,
           [credential],
         ),
-        returnValue: _i5.Future<Object?>.value(),
-      ) as _i5.Future<Object?>);
+        returnValue: _i5.Future<_i3.CustomError?>.value(),
+      ) as _i5.Future<_i3.CustomError?>);
 
   @override
   _i5.Future<_i3.CustomError?> authenticateUserByEmailPassword(
