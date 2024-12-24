@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:cinco_minutos_meditacao/core/environment/manager.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/interceptor.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/models/requests/auth_request.dart';
+import 'package:cinco_minutos_meditacao/shared/clients/models/requests/authenticate_facebook_request.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/models/requests/authenticate_google_request.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/models/requests/create_new_meditations_request.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/models/requests/user_request.dart';
@@ -46,6 +47,11 @@ abstract class ClientApi {
   @POST('/auth/google')
   Future<AuthenticateGoogleResponse> authGoogle(
       @Body() AuthenticateGoogleRequest token);
+
+  /// Solicita a autenticação do usuário utilizando o Facebook
+  @POST('/auth/facebook')
+  Future<AuthenticateGoogleResponse> authFacebook(
+      @Body() AuthenticateFacebookRequest token);
 
   /// - [Auth] : Cliente de autenticação
   /// Solicita a autenticação do usuário utilizando email e senha no servidor
