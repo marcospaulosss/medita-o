@@ -2,6 +2,7 @@ import 'package:cinco_minutos_meditacao/shared/clients/models/requests/auth_requ
 import 'package:cinco_minutos_meditacao/shared/helpers/view_binding.dart';
 import 'package:cinco_minutos_meditacao/shared/models/error.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 
 abstract class LoginViewContract {
   /// Exibe tela de erro generica
@@ -46,6 +47,9 @@ abstract class Repository {
 
   /// Autentica o usuário utilizando o Google
   Future<Object?> authenticateUserByGoogle(AuthCredential credential);
+
+  /// Autentica o usuário utilizando o Facebook
+  Future<CustomError?> authenticateUserByFacebook(AccessToken credential);
 
   /// Autentica o usuário utilizando e-mail e senha
   Future<CustomError?> authenticateUserByEmailPassword(AuthRequest authRequest);
