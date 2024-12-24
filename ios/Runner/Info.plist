@@ -30,9 +30,14 @@
             <key>CFBundleURLSchemes</key>
             <array>
                 <string>$(REVERSED_CLIENT_ID)</string>
+                <string>fb1450158732291421</string>
             </array>
         </dict>
     </array>
+    <key>FacebookAppID</key>
+    <string>1450158732291421</string>
+    <key>FacebookDisplayName</key>
+    <string>CincoMinutos</string>
     <key>CFBundleVersion</key>
     <string>$(FLUTTER_BUILD_NUMBER)</string>
     <key>ITSAppUsesNonExemptEncryption</key>

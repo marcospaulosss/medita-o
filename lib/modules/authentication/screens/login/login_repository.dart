@@ -6,6 +6,7 @@ import 'package:cinco_minutos_meditacao/modules/authentication/analytics/events.
 import 'package:cinco_minutos_meditacao/modules/authentication/screens/login/login_contracts.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/client_api.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/models/requests/auth_request.dart';
+import 'package:cinco_minutos_meditacao/shared/clients/models/requests/authenticate_facebook_request.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/models/requests/authenticate_google_request.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/authenticate_google_response.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/register_response.dart';
@@ -13,6 +14,7 @@ import 'package:cinco_minutos_meditacao/shared/models/error.dart';
 import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_facebook_auth_platform_interface/src/access_token.dart';
 
 class LoginRepository extends Repository {
   /// Gerenciador de analytics
@@ -104,6 +106,45 @@ class LoginRepository extends Repository {
       return error.sendErrorToCrashlytics(
           message: "Erro ao realizar login com e-mail e senha - 500",
           code: ErrorCodes.loginEmailPasswordError,
+          stackTrace: StackTrace.current);
+    }
+  }
+
+  /// authenticateUserByFacebook autentica o usuário utilizando o Facebook
+  @override
+  Future<CustomError?> authenticateUserByFacebook(
+      AccessToken credential) async {
+    AuthenticateFacebookRequest request =
+        AuthenticateFacebookRequest(idToken: credential.tokenString);
+
+    try {
+      AuthenticateGoogleResponse response =
+          await _clientApi.authFacebook(request);
+
+      await _secureStorage.setTokenAPI(response.token!);
+      await _secureStorage.setIsLogged(true);
+
+      return null;
+    } on TimeoutException {
+      return error.sendErrorToCrashlytics(
+          code: ErrorCodes.timeoutException, stackTrace: StackTrace.current);
+    } on DioException catch (e) {
+      if (e.response != null && e.response!.statusCode == 401) {
+        await _secureStorage.setIsLogged(false);
+
+        return null;
+      }
+
+      return error.sendErrorToCrashlytics(
+          message:
+              "Erro ao realizar login com facebook - ${e.response?.statusCode}",
+          code: ErrorCodes.loginFacebookError,
+          stackTrace: e.stackTrace,
+          dioException: e);
+    } catch (e) {
+      return error.sendErrorToCrashlytics(
+          message: "Erro ao realizar login com facebook - 500",
+          code: ErrorCodes.loginFacebookError,
           stackTrace: StackTrace.current);
     }
   }

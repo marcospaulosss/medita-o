@@ -72,7 +72,27 @@ class LoginPresenter extends Presenter {
   /// Login utilizando o Facebook
   @override
   Future<void> loginFacebook() async {
-    _authService.loginFacebook();
+    var (credential, error) = await _authService.loginFacebook();
+    if (error != null) {
+      view?.showError("Erro ao realizar login com o Facebook");
+      return;
+    }
+    if (credential == null || credential.tokenString.isEmpty) {
+      _customError.sendErrorToCrashlytics(
+          code: ErrorCodes.loginFacebookError, stackTrace: StackTrace.current);
+
+      view?.showError(_customError.message!);
+
+      return;
+    }
+
+    var err = await _repository.authenticateUserByFacebook(credential);
+    if (err != null) {
+      view?.showError(error!.getErrorMessage);
+      return;
+    }
+
+    goToHome();
   }
 
   @override
