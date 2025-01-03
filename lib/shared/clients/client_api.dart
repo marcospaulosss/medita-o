@@ -3,11 +3,13 @@ import 'dart:io';
 import 'package:cinco_minutos_meditacao/core/environment/manager.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/interceptor.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/models/requests/auth_request.dart';
+import 'package:cinco_minutos_meditacao/shared/clients/models/requests/authenticate_facebook_request.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/models/requests/authenticate_google_request.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/models/requests/create_new_meditations_request.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/models/requests/user_request.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/authenticate_google_response.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/countries_response.dart';
+import 'package:cinco_minutos_meditacao/shared/clients/models/responses/get_banners_response.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/meditations_response.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/month_calendar_response.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/register_response.dart';
@@ -45,6 +47,11 @@ abstract class ClientApi {
   @POST('/auth/google')
   Future<AuthenticateGoogleResponse> authGoogle(
       @Body() AuthenticateGoogleRequest token);
+
+  /// Solicita a autenticação do usuário utilizando o Facebook
+  @POST('/auth/facebook')
+  Future<AuthenticateGoogleResponse> authFacebook(
+      @Body() AuthenticateFacebookRequest token);
 
   /// - [Auth] : Cliente de autenticação
   /// Solicita a autenticação do usuário utilizando email e senha no servidor
@@ -110,4 +117,9 @@ abstract class ClientApi {
   /// Obtem o paizes disponíveis
   @GET('/share')
   Future<ShareResponse> getImagesShare();
+
+  /// - [ banners ] : Cliente de banners
+  /// Obtem os banners disponíveis
+  @GET('/banners')
+  Future<GetBannersResponse> getBanners();
 }

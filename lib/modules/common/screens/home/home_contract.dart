@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:cinco_minutos_meditacao/modules/common/screens/home/home_model.dart';
+import 'package:cinco_minutos_meditacao/shared/clients/models/responses/get_banners_response.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/meditations_response.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/user_response.dart';
 import 'package:cinco_minutos_meditacao/shared/helpers/view_binding.dart';
@@ -58,4 +59,7 @@ abstract class Repository {
 
   /// Busca a quantidade de meditações realizadas no mundo
   Future<(MeditationsResponse?, CustomError?)> requestMeditations();
+
+  /// Busca os banners
+  Future<(GetBannersResponse?, CustomError?)> requestBanners();
 }

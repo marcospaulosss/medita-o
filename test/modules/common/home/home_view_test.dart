@@ -6,6 +6,7 @@ import 'package:cinco_minutos_meditacao/modules/common/screens/home/home_view.da
 import 'package:cinco_minutos_meditacao/modules/common/shared/components/meditate.dart';
 import 'package:cinco_minutos_meditacao/modules/common/shared/strings/localization/common_strings.dart';
 import 'package:cinco_minutos_meditacao/shared/Theme/app_images.dart';
+import 'package:cinco_minutos_meditacao/shared/clients/models/responses/get_banners_response.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/meditations_response.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/user_response.dart'
     as user;
@@ -82,6 +83,9 @@ main() async {
             user.State(1, 'São Paulo', user.Country(1, 'Brasil')),
           ),
           meditationsResponse: MeditationsResponse(2, 123123),
+          bannersResponse: GetBannersResponse(
+            Banners(null, null, null, null, null, null),
+          ),
         ));
         await tester.pumpAndSettle();
 
