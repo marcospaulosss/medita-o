@@ -6,6 +6,7 @@ import 'package:cinco_minutos_meditacao/modules/common/screens/home/home_contrac
 import 'package:cinco_minutos_meditacao/modules/common/screens/home/home_model.dart';
 import 'package:cinco_minutos_meditacao/modules/common/screens/home/home_presenter.dart';
 import 'package:cinco_minutos_meditacao/modules/common/screens/home/home_repository.dart';
+import 'package:cinco_minutos_meditacao/shared/clients/models/responses/get_banners_response.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/meditations_response.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/user_response.dart';
 import 'package:cinco_minutos_meditacao/shared/models/error.dart';
@@ -81,6 +82,12 @@ void main() {
           ));
       when(homeRepository.requestMeditations())
           .thenAnswer((_) async => (MeditationsResponse(1, 30), null));
+      when(homeRepository.requestBanners()).thenAnswer((_) async => (
+            GetBannersResponse(
+              Banners(null, null, null, null, null, null),
+            ),
+            null
+          ));
 
       // Act
       await presenter.initPresenter();
@@ -98,6 +105,12 @@ void main() {
           .thenAnswer((_) async => (null, CustomError()));
       when(homeRepository.requestMeditations())
           .thenAnswer((_) async => (null, null));
+      when(homeRepository.requestBanners()).thenAnswer((_) async => (
+            GetBannersResponse(
+              Banners(null, null, null, null, null, null),
+            ),
+            null
+          ));
 
       // Act
       await presenter.initPresenter();
@@ -129,6 +142,12 @@ void main() {
           ));
       when(homeRepository.requestMeditations())
           .thenAnswer((_) async => (null, CustomError()));
+      when(homeRepository.requestBanners()).thenAnswer((_) async => (
+            GetBannersResponse(
+              Banners(null, null, null, null, null, null),
+            ),
+            null
+          ));
 
       // Act
       await presenter.initPresenter();
