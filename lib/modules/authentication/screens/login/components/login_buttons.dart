@@ -46,19 +46,19 @@ class LoginButtons extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 6.42),
-        // IconLabelButton(
-        //   onTap: requestLoginFacebook,
-        //   width: double.infinity,
-        //   height: 55,
-        //   image: SvgPicture.asset(
-        //     'assets/images/icons/facebook_logo.svg',
-        //     height: 30,
-        //   ),
-        //   label: Text(
-        //     AuthenticationStrings.of(context).yourFacebookAccount,
-        //     style: buildTextStyleDefault,
-        //   ),
-        // ),
+        IconLabelButton(
+          onTap: requestLoginFacebook,
+          width: double.infinity,
+          height: 55,
+          image: SvgPicture.asset(
+            'assets/images/icons/facebook_logo.svg',
+            height: 30,
+          ),
+          label: Text(
+            AuthenticationStrings.of(context).yourFacebookAccount,
+            style: buildTextStyleDefault,
+          ),
+        ),
       ],
     );
   }

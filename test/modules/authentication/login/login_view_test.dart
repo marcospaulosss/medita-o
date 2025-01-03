@@ -71,8 +71,9 @@ void main() async {
         await tester.pump();
 
         expect(find.textContaining('Ou entre usando'), findsOneWidget);
-        expect(find.byType(SvgPicture), findsNWidgets(1));
+        expect(find.byType(SvgPicture), findsNWidgets(2));
         expect(find.text('Sua conta Google'), findsOneWidget);
+        expect(find.text('Sua conta Facebook'), findsOneWidget);
       });
 
       testWidgets("Should verify when show error screen", (tester) async {

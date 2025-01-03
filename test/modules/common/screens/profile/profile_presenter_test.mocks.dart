@@ -4,27 +4,28 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:async' as _i4;
-import 'dart:io' as _i9;
+import 'dart:io' as _i10;
 
-import 'package:auto_route/auto_route.dart' as _i14;
-import 'package:cinco_minutos_meditacao/core/routers/app_router.dart' as _i13;
+import 'package:auto_route/auto_route.dart' as _i15;
+import 'package:cinco_minutos_meditacao/core/routers/app_router.dart' as _i14;
 import 'package:cinco_minutos_meditacao/modules/common/screens/profile/profile_contract.dart'
-    as _i6;
+    as _i8;
 import 'package:cinco_minutos_meditacao/modules/common/screens/profile/profile_model.dart'
-    as _i15;
+    as _i16;
 import 'package:cinco_minutos_meditacao/shared/clients/models/requests/user_request.dart'
-    as _i12;
+    as _i13;
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/countries_response.dart'
-    as _i10;
-import 'package:cinco_minutos_meditacao/shared/clients/models/responses/states_response.dart'
     as _i11;
+import 'package:cinco_minutos_meditacao/shared/clients/models/responses/states_response.dart'
+    as _i12;
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/user_response.dart'
-    as _i7;
-import 'package:cinco_minutos_meditacao/shared/models/error.dart' as _i8;
+    as _i9;
+import 'package:cinco_minutos_meditacao/shared/models/error.dart' as _i7;
 import 'package:cinco_minutos_meditacao/shared/services/auth_service.dart'
     as _i3;
 import 'package:firebase_auth/firebase_auth.dart' as _i5;
 import 'package:firebase_core/firebase_core.dart' as _i2;
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart' as _i6;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: type=lint
@@ -88,14 +89,15 @@ class MockAuthService extends _i1.Mock implements _i3.AuthService {
       ) as _i4.Future<(_i5.AuthCredential?, Object?)>);
 
   @override
-  _i4.Future<void> loginFacebook() => (super.noSuchMethod(
+  _i4.Future<(_i6.AccessToken?, _i7.CustomError?)> loginFacebook() =>
+      (super.noSuchMethod(
         Invocation.method(
           #loginFacebook,
           [],
         ),
-        returnValue: _i4.Future<void>.value(),
-        returnValueForMissingStub: _i4.Future<void>.value(),
-      ) as _i4.Future<void>);
+        returnValue: _i4.Future<(_i6.AccessToken?, _i7.CustomError?)>.value(
+            (null, null)),
+      ) as _i4.Future<(_i6.AccessToken?, _i7.CustomError?)>);
 
   @override
   _i4.Future<Object?> logout() => (super.noSuchMethod(
@@ -110,7 +112,7 @@ class MockAuthService extends _i1.Mock implements _i3.AuthService {
 /// A class which mocks [Repository].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockRepository extends _i1.Mock implements _i6.Repository {
+class MockRepository extends _i1.Mock implements _i8.Repository {
   MockRepository() {
     _i1.throwOnMissingStub(this);
   }
@@ -134,79 +136,79 @@ class MockRepository extends _i1.Mock implements _i6.Repository {
       );
 
   @override
-  _i4.Future<(_i7.UserResponse?, _i8.CustomError?)> requestUser() =>
+  _i4.Future<(_i9.UserResponse?, _i7.CustomError?)> requestUser() =>
       (super.noSuchMethod(
         Invocation.method(
           #requestUser,
           [],
         ),
-        returnValue: _i4.Future<(_i7.UserResponse?, _i8.CustomError?)>.value(
+        returnValue: _i4.Future<(_i9.UserResponse?, _i7.CustomError?)>.value(
             (null, null)),
-      ) as _i4.Future<(_i7.UserResponse?, _i8.CustomError?)>);
+      ) as _i4.Future<(_i9.UserResponse?, _i7.CustomError?)>);
 
   @override
-  _i4.Future<_i8.CustomError?> uploadImageProfile(_i9.File? file) =>
+  _i4.Future<_i7.CustomError?> uploadImageProfile(_i10.File? file) =>
       (super.noSuchMethod(
         Invocation.method(
           #uploadImageProfile,
           [file],
         ),
-        returnValue: _i4.Future<_i8.CustomError?>.value(),
-      ) as _i4.Future<_i8.CustomError?>);
+        returnValue: _i4.Future<_i7.CustomError?>.value(),
+      ) as _i4.Future<_i7.CustomError?>);
 
   @override
-  _i4.Future<(_i10.CountriesResponse?, _i8.CustomError?)>
+  _i4.Future<(_i11.CountriesResponse?, _i7.CustomError?)>
       requestGetCountries() => (super.noSuchMethod(
             Invocation.method(
               #requestGetCountries,
               [],
             ),
             returnValue:
-                _i4.Future<(_i10.CountriesResponse?, _i8.CustomError?)>.value(
+                _i4.Future<(_i11.CountriesResponse?, _i7.CustomError?)>.value(
                     (null, null)),
-          ) as _i4.Future<(_i10.CountriesResponse?, _i8.CustomError?)>);
+          ) as _i4.Future<(_i11.CountriesResponse?, _i7.CustomError?)>);
 
   @override
-  _i4.Future<(_i11.StatesResponse?, _i8.CustomError?)>
+  _i4.Future<(_i12.StatesResponse?, _i7.CustomError?)>
       requestGetStatesByCountryId(int? countryId) => (super.noSuchMethod(
             Invocation.method(
               #requestGetStatesByCountryId,
               [countryId],
             ),
             returnValue:
-                _i4.Future<(_i11.StatesResponse?, _i8.CustomError?)>.value(
+                _i4.Future<(_i12.StatesResponse?, _i7.CustomError?)>.value(
                     (null, null)),
-          ) as _i4.Future<(_i11.StatesResponse?, _i8.CustomError?)>);
+          ) as _i4.Future<(_i12.StatesResponse?, _i7.CustomError?)>);
 
   @override
-  _i4.Future<(_i7.UserResponse?, _i8.CustomError?)> requestUpdateUser(
-          _i12.UserRequest? user) =>
+  _i4.Future<(_i9.UserResponse?, _i7.CustomError?)> requestUpdateUser(
+          _i13.UserRequest? user) =>
       (super.noSuchMethod(
         Invocation.method(
           #requestUpdateUser,
           [user],
         ),
-        returnValue: _i4.Future<(_i7.UserResponse?, _i8.CustomError?)>.value(
+        returnValue: _i4.Future<(_i9.UserResponse?, _i7.CustomError?)>.value(
             (null, null)),
-      ) as _i4.Future<(_i7.UserResponse?, _i8.CustomError?)>);
+      ) as _i4.Future<(_i9.UserResponse?, _i7.CustomError?)>);
 }
 
 /// A class which mocks [AppRouter].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockAppRouter extends _i1.Mock implements _i13.AppRouter {
+class MockAppRouter extends _i1.Mock implements _i14.AppRouter {
   MockAppRouter() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  List<_i14.AutoRoute> get routes => (super.noSuchMethod(
+  List<_i15.AutoRoute> get routes => (super.noSuchMethod(
         Invocation.getter(#routes),
-        returnValue: <_i14.AutoRoute>[],
-      ) as List<_i14.AutoRoute>);
+        returnValue: <_i15.AutoRoute>[],
+      ) as List<_i15.AutoRoute>);
 
   @override
-  void goToReplace(_i14.PageRouteInfo<dynamic>? route) => super.noSuchMethod(
+  void goToReplace(_i15.PageRouteInfo<dynamic>? route) => super.noSuchMethod(
         Invocation.method(
           #goToReplace,
           [route],
@@ -216,8 +218,8 @@ class MockAppRouter extends _i1.Mock implements _i13.AppRouter {
 
   @override
   void goTo(
-    _i14.PageRouteInfo<dynamic>? route, {
-    _i13.OnCloseRoute? onClose,
+    _i15.PageRouteInfo<dynamic>? route, {
+    _i14.OnCloseRoute? onClose,
   }) =>
       super.noSuchMethod(
         Invocation.method(
@@ -233,7 +235,7 @@ class MockAppRouter extends _i1.Mock implements _i13.AppRouter {
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockProfileViewContract extends _i1.Mock
-    implements _i6.ProfileViewContract {
+    implements _i8.ProfileViewContract {
   MockProfileViewContract() {
     _i1.throwOnMissingStub(this);
   }
@@ -248,7 +250,7 @@ class MockProfileViewContract extends _i1.Mock
       );
 
   @override
-  void showNormalState(_i15.ProfileModel? model) => super.noSuchMethod(
+  void showNormalState(_i16.ProfileModel? model) => super.noSuchMethod(
         Invocation.method(
           #showNormalState,
           [model],

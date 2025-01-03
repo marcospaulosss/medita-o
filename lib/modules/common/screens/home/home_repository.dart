@@ -6,6 +6,7 @@ import 'package:cinco_minutos_meditacao/core/wrappers/secure_storage.dart';
 import 'package:cinco_minutos_meditacao/modules/common/analytics/events.dart';
 import 'package:cinco_minutos_meditacao/modules/common/screens/home/home_contract.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/client_api.dart';
+import 'package:cinco_minutos_meditacao/shared/clients/models/responses/get_banners_response.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/meditations_response.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/models/responses/user_response.dart';
 import 'package:cinco_minutos_meditacao/shared/models/error.dart';
@@ -129,6 +130,36 @@ class HomeRepository implements Repository {
         null,
         _error.sendErrorToCrashlytics(
             code: ErrorCodes.getMeditionsError, stackTrace: StackTrace.current)
+      );
+    }
+  }
+
+  @override
+  Future<(GetBannersResponse?, CustomError?)> requestBanners() async {
+    try {
+      GetBannersResponse response = await _clientApi.getBanners();
+
+      return (response, null);
+    } on TimeoutException {
+      return (
+        null,
+        _error.sendErrorToCrashlytics(
+            code: ErrorCodes.timeoutException, stackTrace: StackTrace.current)
+      );
+    } on DioException catch (e) {
+      return (
+        null,
+        _error.sendErrorToCrashlytics(
+          code: ErrorCodes.getBannersError,
+          stackTrace: StackTrace.current,
+          dioException: e,
+        )
+      );
+    } catch (e) {
+      return (
+        null,
+        _error.sendErrorToCrashlytics(
+            code: ErrorCodes.getBannersError, stackTrace: StackTrace.current)
       );
     }
   }

@@ -21,6 +21,7 @@ enum ErrorCodes {
   updateProfileError,
   getTokenApiError,
   socialShareError,
+  getBannersError,
 }
 
 class CustomError extends Error {
@@ -58,6 +59,7 @@ class CustomError extends Error {
     ErrorCodes.updateProfileError: "Erro ao atualizar o perfil.",
     ErrorCodes.getTokenApiError: "Erro ao buscar o token da API.",
     ErrorCodes.socialShareError: "Erro ao compartilhar imagem.",
+    ErrorCodes.getBannersError: "Erro ao buscar os banners.",
   };
 
   CustomError sendErrorToCrashlytics(

@@ -73,6 +73,11 @@ android {
         versionName flutterVersionName
 
         multiDexEnabled true
+
+        manifestPlaceholders = [
+                facebookAppId        : "1450158732291421",
+                fbLoginProtocolScheme: "fb1450158732291421"
+        ]
     }
 
     signingConfigs {
