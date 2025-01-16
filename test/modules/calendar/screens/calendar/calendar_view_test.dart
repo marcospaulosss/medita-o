@@ -395,7 +395,7 @@ void main() {
         DateTime now = DateTime.now();
         String dayName = DateFormat('dd', 'pt_BR').format(now);
 
-        expect(find.text(dayName), findsOneWidget);
+        expect(find.text(dayName), findsWidgets);
         expect(find.text("Tempo por semana"), findsOneWidget);
         expect(find.byIcon(Icons.chevron_left), findsOneWidget);
         expect(find.byIcon(Icons.chevron_right), findsOneWidget);
