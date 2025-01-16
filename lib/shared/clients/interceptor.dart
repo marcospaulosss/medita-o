@@ -38,6 +38,8 @@ class TokenInterceptor extends Interceptor {
 
     _secureStorage.setAllToNull();
 
-    _appRouter.goToReplace(const SplashScreenRoute());
+    _appRouter.goToReplace(const LoginRoute());
+
+    return super.onError(err, handler);
   }
 }
