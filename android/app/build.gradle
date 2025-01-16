@@ -82,10 +82,6 @@ android {
 
     signingConfigs {
         debug {
-            storeFile file('../../../../.android/debug.keystore')
-            storePassword 'android'
-            keyAlias 'androiddebugkey'
-            keyPassword 'android'
         }
         release {
             def storeFilePath = System.getenv("ANDROID_STORE_FILE") ?: localProperties['storeFile']
