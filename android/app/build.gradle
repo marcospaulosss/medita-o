@@ -81,7 +81,8 @@ android {
     }
 
     signingConfigs {
-        debug {}
+        debug {
+        }
         release {
             def storeFilePath = System.getenv("ANDROID_STORE_FILE") ?: localProperties['storeFile']
             if (storeFilePath != null && !storeFilePath.isEmpty()) {
