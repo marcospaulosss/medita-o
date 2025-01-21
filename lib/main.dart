@@ -1,6 +1,5 @@
 import 'package:cinco_minutos_meditacao/core/di/setup.dart';
 import 'package:cinco_minutos_meditacao/core/firebase/firebase_options.dart';
-import 'package:cinco_minutos_meditacao/core/flavors/flavors.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
