@@ -1,4 +1,4 @@
-name: Android distribution Store
+name: Android distribution Store Local
 
 on:
   workflow_dispatch:
