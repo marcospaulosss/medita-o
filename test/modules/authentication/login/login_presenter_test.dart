@@ -1,3 +1,4 @@
+import 'package:cinco_minutos_meditacao/core/environment/manager.dart';
 import 'package:cinco_minutos_meditacao/core/routers/app_router.dart';
 import 'package:cinco_minutos_meditacao/modules/authentication/screens/login/login_contracts.dart';
 import 'package:cinco_minutos_meditacao/modules/authentication/screens/login/login_presenter.dart';
@@ -10,14 +11,21 @@ import 'package:mockito/mockito.dart';
 
 import 'login_presenter_test.mocks.dart';
 
-@GenerateMocks(
-    [AuthService, CustomError, AppRouter, LoginViewContract, Repository])
+@GenerateMocks([
+  AuthService,
+  CustomError,
+  AppRouter,
+  LoginViewContract,
+  Repository,
+  EnvironmentManager
+])
 void main() {
   late MockAuthService mockAuthService;
   late MockCustomError mockCustomError;
   late MockAppRouter mockAppRouter;
   late MockLoginViewContract mockView;
   late MockRepository mockRepository;
+  late MockEnvironmentManager mockEnvironmentManager;
   late LoginPresenter presenter;
 
   setUp(() {
@@ -26,8 +34,9 @@ void main() {
     mockAppRouter = MockAppRouter();
     mockView = MockLoginViewContract();
     mockRepository = MockRepository();
-    presenter = LoginPresenter(
-        mockAuthService, mockCustomError, mockAppRouter, mockRepository);
+    mockEnvironmentManager = MockEnvironmentManager();
+    presenter = LoginPresenter(mockAuthService, mockCustomError, mockAppRouter,
+        mockRepository, mockEnvironmentManager);
     presenter.view = mockView;
   });
 

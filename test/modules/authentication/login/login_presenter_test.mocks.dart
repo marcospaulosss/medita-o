@@ -6,6 +6,7 @@
 import 'dart:async' as _i5;
 
 import 'package:auto_route/auto_route.dart' as _i11;
+import 'package:cinco_minutos_meditacao/core/environment/manager.dart' as _i14;
 import 'package:cinco_minutos_meditacao/core/routers/app_router.dart' as _i10;
 import 'package:cinco_minutos_meditacao/modules/authentication/screens/login/login_contracts.dart'
     as _i12;
@@ -331,4 +332,56 @@ class MockRepository extends _i1.Mock implements _i12.Repository {
         ),
         returnValue: _i5.Future<_i3.CustomError?>.value(),
       ) as _i5.Future<_i3.CustomError?>);
+}
+
+/// A class which mocks [EnvironmentManager].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockEnvironmentManager extends _i1.Mock
+    implements _i14.EnvironmentManager {
+  MockEnvironmentManager() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  String get apiBaseUrl => (super.noSuchMethod(
+        Invocation.getter(#apiBaseUrl),
+        returnValue: _i8.dummyValue<String>(
+          this,
+          Invocation.getter(#apiBaseUrl),
+        ),
+      ) as String);
+
+  @override
+  String get isProduction => (super.noSuchMethod(
+        Invocation.getter(#isProduction),
+        returnValue: _i8.dummyValue<String>(
+          this,
+          Invocation.getter(#isProduction),
+        ),
+      ) as String);
+
+  @override
+  String get forgotPasswordUrl => (super.noSuchMethod(
+        Invocation.getter(#forgotPasswordUrl),
+        returnValue: _i8.dummyValue<String>(
+          this,
+          Invocation.getter(#forgotPasswordUrl),
+        ),
+      ) as String);
+
+  @override
+  String get(String? variable) => (super.noSuchMethod(
+        Invocation.method(
+          #get,
+          [variable],
+        ),
+        returnValue: _i8.dummyValue<String>(
+          this,
+          Invocation.method(
+            #get,
+            [variable],
+          ),
+        ),
+      ) as String);
 }
