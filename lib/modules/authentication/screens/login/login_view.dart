@@ -88,6 +88,7 @@ class LoginViewState extends State<LoginView> implements LoginViewContract {
                 ),
                 FormLogin(
                   errorEmailInvalid: errorEmailInvalid,
+                  forgotPassword: () => presenter.goToForgotPassword(),
                   onLogin: requestLoginEmailPassword,
                   onRegister: () => goToRegister(),
                 ),

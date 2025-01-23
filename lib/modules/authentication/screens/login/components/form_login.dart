@@ -12,6 +12,9 @@ class FormLogin extends StatefulWidget {
   /// Mensagem de erro de e-mail inválido
   bool errorEmailInvalid = false;
 
+  /// Função que será chamada ao esquecer a senha
+  final Function forgotPassword;
+
   /// Função que será chamada ao realizar o login
   final Function onLogin;
 
@@ -20,12 +23,14 @@ class FormLogin extends StatefulWidget {
 
   /// - [key] : Chave de identificação do widget
   /// - [errorEmailInvalid] : Mensagem de erro de e-mail inválido
+  /// - [forgotPassword] : Função que será chamada ao esquecer a senha
   /// - [onLogin] : Função que será chamada ao realizar o login
   /// - [onRegister] : Função que será chamada ao realizar o registro
   /// construtor
   FormLogin({
     super.key,
     required this.errorEmailInvalid,
+    required this.forgotPassword,
     required this.onLogin,
     required this.onRegister,
   });
@@ -147,7 +152,6 @@ class _FormLoginState extends State<FormLogin> {
                   opticalSize: 1,
                 ),
                 onTap: () {
-                  print("Lembrar Senha");
                   setState(() {
                     rememberPassword = !rememberPassword;
                   });
@@ -162,7 +166,7 @@ class _FormLoginState extends State<FormLogin> {
                 ),
               ),
               Link(
-                onTap: () => print("Esqueci minha senha"),
+                onTap: () => widget.forgotPassword(),
                 text: AuthenticationStrings.of(context).forgotPassword,
               ),
             ],
