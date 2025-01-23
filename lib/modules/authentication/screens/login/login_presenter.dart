@@ -1,9 +1,11 @@
+import 'package:cinco_minutos_meditacao/core/environment/manager.dart';
 import 'package:cinco_minutos_meditacao/core/routers/app_router.dart';
 import 'package:cinco_minutos_meditacao/core/routers/app_router.gr.dart';
 import 'package:cinco_minutos_meditacao/modules/authentication/screens/login/login_contracts.dart';
 import 'package:cinco_minutos_meditacao/shared/clients/models/requests/auth_request.dart';
 import 'package:cinco_minutos_meditacao/shared/models/error.dart';
 import 'package:cinco_minutos_meditacao/shared/services/auth_service.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class LoginPresenter extends Presenter {
   /// View
@@ -16,6 +18,9 @@ class LoginPresenter extends Presenter {
   /// Erro customizado
   final CustomError _customError;
 
+  /// controle das variáveis de ambiente
+  final EnvironmentManager _environmentManager;
+
   /// Router
   final AppRouter _router;
 
@@ -23,10 +28,12 @@ class LoginPresenter extends Presenter {
   final Repository _repository;
 
   /// - [authService] : Serviço de autenticação
+  /// - [customError] : Erro customizado
+  /// - [environmentManager] : controle das variáveis de ambiente
   /// - [router] : Router
   /// - [repository] : Repositório
-  LoginPresenter(
-      this._authService, this._customError, this._router, this._repository);
+  LoginPresenter(this._authService, this._customError, this._router,
+      this._repository, this._environmentManager);
 
   /// Login utilizando o Google
   @override
@@ -128,5 +135,20 @@ class LoginPresenter extends Presenter {
   @override
   void goToRegister() {
     _router.goTo(const RegisterRoute());
+  }
+
+  @override
+  Future<void> goToForgotPassword() async {
+    if (await canLaunch(_environmentManager.forgotPasswordUrl)) {
+      await launch(_environmentManager.forgotPasswordUrl);
+    } else {
+      _customError.sendErrorToCrashlytics(
+          code: ErrorCodes.loginEmailPasswordError,
+          stackTrace: StackTrace.current);
+
+      view?.showError(_customError.message!);
+
+      return;
+    }
   }
 }
