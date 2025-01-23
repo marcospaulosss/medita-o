@@ -39,6 +39,9 @@ abstract class Presenter implements ViewBinding<LoginViewContract> {
 
   /// Direciona para a tela de registro
   void goToRegister();
+
+  /// Direciona para a tela de esqueci minha senha
+  void goToForgotPassword();
 }
 
 abstract class Repository {

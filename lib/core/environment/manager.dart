@@ -13,4 +13,7 @@ class EnvironmentManager {
 
   /// Retorna a chave para utilizar google maps android
   String get isProduction => dotenv.get("PRODUCTION");
+
+  /// Retorna a url de esqueci minha senha
+  String get forgotPasswordUrl => dotenv.get("FORGOT_PASSWORD_URL");
 }

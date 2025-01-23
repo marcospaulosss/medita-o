@@ -339,6 +339,15 @@ class MockEnvironmentManager extends _i1.Mock
       ) as String);
 
   @override
+  String get forgotPasswordUrl => (super.noSuchMethod(
+        Invocation.getter(#forgotPasswordUrl),
+        returnValue: _i16.dummyValue<String>(
+          this,
+          Invocation.getter(#forgotPasswordUrl),
+        ),
+      ) as String);
+
+  @override
   String get(String? variable) => (super.noSuchMethod(
         Invocation.method(
           #get,
