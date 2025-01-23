@@ -28,9 +28,9 @@ jobs:
           ANDROID_STORE_FILE: ${{ secrets.ANDROID_STORE_FILE }}
           JSON_KEY: ${{ secrets.JSON_KEY }}
 
-      - name: Setup JDK 11
+      - name: Setup JDK 17
         run: |
-          export JAVA_HOME=/Library/Java/JavaVirtualMachines/liberica-jdk-11.jdk/Contents/Home
+          export JAVA_HOME=/opt/homebrew/opt/openjdk@17
           echo "JAVA_HOME is set to $JAVA_HOME"
 
       - name: Setup flutter e builda projeto LOCALMENTE
