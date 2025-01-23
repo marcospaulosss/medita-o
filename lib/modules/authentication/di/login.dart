@@ -1,5 +1,6 @@
 import 'package:cinco_minutos_meditacao/core/analytics/manager.dart';
 import 'package:cinco_minutos_meditacao/core/di/helpers.dart';
+import 'package:cinco_minutos_meditacao/core/environment/manager.dart';
 import 'package:cinco_minutos_meditacao/core/routers/app_router.dart';
 import 'package:cinco_minutos_meditacao/core/wrappers/secure_storage.dart';
 import 'package:cinco_minutos_meditacao/modules/authentication/screens/login/login_presenter.dart';
@@ -16,6 +17,7 @@ abstract class LoginInjector {
         resolve<CustomError>(),
         resolve<AppRouter>(),
         resolve<LoginRepository>(),
+        resolve<EnvironmentManager>(),
       ),
     );
 
