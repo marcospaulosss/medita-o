@@ -1,2 +1,8 @@
 {
+  "youMeditated": "You meditated:",
+  "minutes": "Minutes this ",
+  "week": "week",
+  "month": "month",
+  "year": "year",
+  "calendarTitle": "Weather per week"
 }

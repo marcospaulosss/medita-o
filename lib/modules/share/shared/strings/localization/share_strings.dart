@@ -7,6 +7,7 @@ import 'package:intl/intl.dart' as intl;
 
 import 'share_strings_en.dart';
 import 'share_strings_es.dart';
+import 'share_strings_it.dart';
 import 'share_strings_pt.dart';
 
 // ignore_for_file: type=lint
@@ -94,6 +95,7 @@ abstract class ShareStrings {
   static const List<Locale> supportedLocales = <Locale>[
     Locale('en'),
     Locale('es'),
+    Locale('it'),
     Locale('pt')
   ];
 
@@ -119,7 +121,7 @@ class _ShareStringsDelegate extends LocalizationsDelegate<ShareStrings> {
   }
 
   @override
-  bool isSupported(Locale locale) => <String>['en', 'es', 'pt'].contains(locale.languageCode);
+  bool isSupported(Locale locale) => <String>['en', 'es', 'it', 'pt'].contains(locale.languageCode);
 
   @override
   bool shouldReload(_ShareStringsDelegate old) => false;
@@ -132,6 +134,7 @@ ShareStrings lookupShareStrings(Locale locale) {
   switch (locale.languageCode) {
     case 'en': return ShareStringsEn();
     case 'es': return ShareStringsEs();
+    case 'it': return ShareStringsIt();
     case 'pt': return ShareStringsPt();
   }
 

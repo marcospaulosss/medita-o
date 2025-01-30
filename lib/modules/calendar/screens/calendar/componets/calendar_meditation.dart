@@ -1,4 +1,5 @@
 import 'package:cinco_minutos_meditacao/modules/calendar/screens/calendar/calendar_model.dart';
+import 'package:cinco_minutos_meditacao/modules/calendar/shared/strings/localization/calendar_strings.dart';
 import 'package:cinco_minutos_meditacao/shared/Theme/app_colors.dart';
 import 'package:cinco_minutos_meditacao/shared/Theme/app_images.dart';
 import 'package:flutter/material.dart';
@@ -74,16 +75,16 @@ class _CalendarMeditationState extends State<CalendarMeditation> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        _buildToggleButton('Semana'),
+        _buildToggleButton('Semana', CalendarStrings.of(context).week),
         const SizedBox(width: 4),
-        _buildToggleButton('Mês'),
+        _buildToggleButton('Mês', CalendarStrings.of(context).month),
         const SizedBox(width: 4),
-        _buildToggleButton('Ano'),
+        _buildToggleButton('Ano', CalendarStrings.of(context).year),
       ],
     );
   }
 
-  Widget _buildToggleButton(String text) {
+  Widget _buildToggleButton(String text, String titleCalendarName) {
     bool isSelected = _currentView == text;
     return GestureDetector(
       onTap: () {
@@ -112,7 +113,8 @@ class _CalendarMeditationState extends State<CalendarMeditation> {
           ),
         ),
         child: Text(
-          text,
+          titleCalendarName,
+          overflow: TextOverflow.ellipsis,
           style: TextStyle(
             color: isSelected ? AppColors.blueNCS : AppColors.blueMana,
             fontWeight: FontWeight.w700,
@@ -144,7 +146,7 @@ class _CalendarMeditationState extends State<CalendarMeditation> {
   Widget _buildCalendarHeader() {
     String title;
     if (_currentView == 'Semana') {
-      title = 'Tempo por semana';
+      title = CalendarStrings.of(context).calendarTitle;
     } else if (_currentView == 'Mês') {
       title = DateFormat('MMMM | yy', 'pt_BR').format(_focusedDate);
     } else {

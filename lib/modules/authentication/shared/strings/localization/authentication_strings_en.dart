@@ -34,19 +34,19 @@ class AuthenticationStringsEn extends AuthenticationStrings {
   String get signIn => 'Sign In';
 
   @override
-  String get orEnterUsing => '  Or enter using  ';
+  String get orEnterUsing => ' Or enter using ';
 
   @override
   String get meditateWithoutLogin => 'Meditate without Login';
 
   @override
-  String get createOne => 'Create one';
+  String get createOne => 'Create one ';
 
   @override
   String get account => 'account';
 
   @override
-  String get invalidEmail => 'invalid email';
+  String get invalidEmail => 'Invalid Email';
 
   @override
   String get name => 'Name';
@@ -64,17 +64,17 @@ class AuthenticationStringsEn extends AuthenticationStrings {
   String get passwordsDontMatch => 'Passwords don\'t match';
 
   @override
-  String get invalidParameters => 'Parâmetros inválidos';
+  String get invalidParameters => 'Invalid parameters';
 
   @override
-  String get accountCreatedSuccessfully => 'Conta criada com Sucesso!';
+  String get accountCreatedSuccessfully => 'Account created successfully!';
 
   @override
-  String get completeYourRegistration => 'Complete seu cadastro';
+  String get completeYourRegistration => 'Complete your registration';
 
   @override
-  String get haveAccessContent => ' e tenha acesso a todos os conteúdos.';
+  String get haveAccessContent => ' and have access to all content.';
 
   @override
-  String get startMeditating => 'Comece a Meditar';
+  String get startMeditating => 'Start Meditating';
 }
