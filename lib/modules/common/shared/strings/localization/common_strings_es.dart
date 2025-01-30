@@ -7,65 +7,65 @@ class CommonStringsEs extends CommonStrings {
   CommonStringsEs([String locale = 'es']) : super(locale);
 
   @override
-  String get homeHeaderDescription1 => '¡Dedica tu tiempo a la paz mundial ahora mismo!';
+  String get homeHeaderDescription1 => 'Sume su tiempo por la paz mundial ahora mismo!';
 
   @override
-  String get meditate5Minutes => 'Medita 5 \nMinutos';
+  String get meditate5Minutes => 'Medite 5 \nMinutos';
 
   @override
   String get fiveMinutes => '5 min';
 
   @override
-  String get learnMethod => 'Aprender \nmétodo';
+  String get learnMethod => 'Aprenda el \nmétodo';
 
   @override
-  String get guidedMeditate => '\nMeditación guiada';
+  String get guidedMeditate => 'Meditación \nguiada';
 
   @override
-  String get meditateTime => 'Medita en\ntu tiempo';
+  String get meditateTime => 'Medite en \nsu tiempo';
 
   @override
-  String get profileHeaderDescription1 => 'Clique aqui e complete o seu perfil!';
+  String get profileHeaderDescription1 => '¡Haz clic aquí y completa tu perfil!';
 
   @override
-  String get profileUpdateInfo => 'Atualize seus dados de perfil e acompanhe seus minutos meditados!';
+  String get profileUpdateInfo => '¡Actualiza los datos de tu perfil y realiza un seguimiento de tus minutos meditados!';
 
   @override
-  String get profileFormName => 'Nome';
+  String get profileFormName => 'Nombre';
 
   @override
-  String get profileFormLastName => 'Sobrenome';
+  String get profileFormLastName => 'Apellido';
 
   @override
-  String get gender => 'Gênero';
+  String get gender => 'Género';
 
   @override
-  String get whereYouLive => 'Onde Reside';
+  String get whereYouLive => 'Dónde reside';
 
   @override
-  String get privacyPolicy1 => 'Ao salvar os seus dados você concorda com a nossa ';
+  String get privacyPolicy1 => 'Al guardar sus datos usted acepta nuestras ';
 
   @override
-  String get privacyPolicy2 => 'Política de Privacidade';
+  String get privacyPolicy2 => 'Políticas de Privacidad';
 
   @override
-  String get exitApp => 'SAIR DO APP';
+  String get exitApp => 'SALIR DE LA APP';
 
   @override
-  String get dateBirth => 'Data de Nascimento';
+  String get dateBirth => 'Fecha de Nacimiento';
 
   @override
-  String get datePickerLocation => 'pt_BR';
+  String get datePickerLocation => 'es_ES';
 
   @override
-  String get day => 'Dia';
+  String get day => 'Día';
 
   @override
-  String get month => 'Mês';
+  String get month => 'Mes';
 
   @override
-  String get year => 'Ano';
+  String get year => 'Año';
 
   @override
-  String get profileLabelButton => 'Salvar Dados';
+  String get profileLabelButton => 'Guardar los datos';
 }

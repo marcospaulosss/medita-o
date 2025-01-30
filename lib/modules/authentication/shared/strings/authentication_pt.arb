@@ -17,7 +17,6 @@
   "confirmPassword": "Confirmar Senha",
   "createAccount": "Criar Conta",
   "requiredField": "Campo obrigatório",
-  "invalidEmail": "email inválido",
   "passwordsDontMatch": "Senhas não conferem",
   "invalidParameters": "Parâmetros inválidos",
   "accountCreatedSuccessfully": "Conta criada com Sucesso!",

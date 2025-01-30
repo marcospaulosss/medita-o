@@ -20,4 +20,7 @@ class CalendarStringsPt extends CalendarStrings {
 
   @override
   String get year => 'ano';
+
+  @override
+  String get calendarTitle => 'Tempo por semana';
 }

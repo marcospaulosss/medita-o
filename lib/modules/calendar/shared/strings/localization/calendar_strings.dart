@@ -7,6 +7,7 @@ import 'package:intl/intl.dart' as intl;
 
 import 'calendar_strings_en.dart';
 import 'calendar_strings_es.dart';
+import 'calendar_strings_it.dart';
 import 'calendar_strings_pt.dart';
 
 // ignore_for_file: type=lint
@@ -94,6 +95,7 @@ abstract class CalendarStrings {
   static const List<Locale> supportedLocales = <Locale>[
     Locale('en'),
     Locale('es'),
+    Locale('it'),
     Locale('pt')
   ];
 
@@ -126,6 +128,12 @@ abstract class CalendarStrings {
   /// In pt, this message translates to:
   /// **'ano'**
   String get year;
+
+  /// No description provided for @calendarTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Tempo por semana'**
+  String get calendarTitle;
 }
 
 class _CalendarStringsDelegate extends LocalizationsDelegate<CalendarStrings> {
@@ -137,7 +145,7 @@ class _CalendarStringsDelegate extends LocalizationsDelegate<CalendarStrings> {
   }
 
   @override
-  bool isSupported(Locale locale) => <String>['en', 'es', 'pt'].contains(locale.languageCode);
+  bool isSupported(Locale locale) => <String>['en', 'es', 'it', 'pt'].contains(locale.languageCode);
 
   @override
   bool shouldReload(_CalendarStringsDelegate old) => false;
@@ -150,6 +158,7 @@ CalendarStrings lookupCalendarStrings(Locale locale) {
   switch (locale.languageCode) {
     case 'en': return CalendarStringsEn();
     case 'es': return CalendarStringsEs();
+    case 'it': return CalendarStringsIt();
     case 'pt': return CalendarStringsPt();
   }
 
