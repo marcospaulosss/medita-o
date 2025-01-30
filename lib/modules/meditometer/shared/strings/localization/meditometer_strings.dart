@@ -7,6 +7,7 @@ import 'package:intl/intl.dart' as intl;
 
 import 'meditometer_strings_en.dart';
 import 'meditometer_strings_es.dart';
+import 'meditometer_strings_it.dart';
 import 'meditometer_strings_pt.dart';
 
 // ignore_for_file: type=lint
@@ -94,6 +95,7 @@ abstract class MeditometerStrings {
   static const List<Locale> supportedLocales = <Locale>[
     Locale('en'),
     Locale('es'),
+    Locale('it'),
     Locale('pt')
   ];
 
@@ -191,7 +193,7 @@ class _MeditometerStringsDelegate extends LocalizationsDelegate<MeditometerStrin
   }
 
   @override
-  bool isSupported(Locale locale) => <String>['en', 'es', 'pt'].contains(locale.languageCode);
+  bool isSupported(Locale locale) => <String>['en', 'es', 'it', 'pt'].contains(locale.languageCode);
 
   @override
   bool shouldReload(_MeditometerStringsDelegate old) => false;
@@ -204,6 +206,7 @@ MeditometerStrings lookupMeditometerStrings(Locale locale) {
   switch (locale.languageCode) {
     case 'en': return MeditometerStringsEn();
     case 'es': return MeditometerStringsEs();
+    case 'it': return MeditometerStringsIt();
     case 'pt': return MeditometerStringsPt();
   }
 

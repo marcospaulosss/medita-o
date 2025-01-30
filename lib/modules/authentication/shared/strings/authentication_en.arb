@@ -8,15 +8,19 @@
   "rememberPassword": "Remember password",
   "forgotPassword": "I forgot my password",
   "signIn": "Sign In",
-  "orEnterUsing": "  Or enter using  ",
+  "orEnterUsing": " Or enter using ",
   "meditateWithoutLogin": "Meditate without Login",
-  "createOne": "Create one",
+  "createOne": "Create one ",
   "account": "account",
   "invalidEmail": "Invalid Email",
   "name": "Name",
   "confirmPassword": "Confirm Password",
   "createAccount": "Create Account",
   "requiredField": "Required field",
-  "invalidEmail": "invalid email",
-  "passwordsDontMatch": "Passwords don't match"
+  "passwordsDontMatch": "Passwords don't match",
+  "invalidParameters": "Invalid parameters",
+  "accountCreatedSuccessfully": "Account created successfully!",
+  "completeYourRegistration": "Complete your registration",
+  "haveAccessContent": " and have access to all content.",
+  "startMeditating": "Start Meditating"
 }
