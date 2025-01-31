@@ -23,4 +23,13 @@ class CalendarStringsPt extends CalendarStrings {
 
   @override
   String get calendarTitle => 'Tempo por semana';
+
+  @override
+  String get weekToUpper => 'Semana';
+
+  @override
+  String get monthToUpper => 'Mês';
+
+  @override
+  String get yearToUpper => 'Ano';
 }

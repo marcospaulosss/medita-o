@@ -134,6 +134,24 @@ abstract class CalendarStrings {
   /// In pt, this message translates to:
   /// **'Tempo por semana'**
   String get calendarTitle;
+
+  /// No description provided for @weekToUpper.
+  ///
+  /// In pt, this message translates to:
+  /// **'Semana'**
+  String get weekToUpper;
+
+  /// No description provided for @monthToUpper.
+  ///
+  /// In pt, this message translates to:
+  /// **'Mês'**
+  String get monthToUpper;
+
+  /// No description provided for @yearToUpper.
+  ///
+  /// In pt, this message translates to:
+  /// **'Ano'**
+  String get yearToUpper;
 }
 
 class _CalendarStringsDelegate extends LocalizationsDelegate<CalendarStrings> {

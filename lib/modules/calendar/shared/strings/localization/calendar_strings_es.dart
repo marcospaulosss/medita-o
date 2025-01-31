@@ -16,11 +16,20 @@ class CalendarStringsEs extends CalendarStrings {
   String get week => 'semana';
 
   @override
-  String get month => 'Mese';
+  String get month => 'mese';
 
   @override
-  String get year => 'Año';
+  String get year => 'año';
 
   @override
   String get calendarTitle => 'Tiempo por semana';
+
+  @override
+  String get weekToUpper => 'Semana';
+
+  @override
+  String get monthToUpper => 'Mese';
+
+  @override
+  String get yearToUpper => 'Anno';
 }
