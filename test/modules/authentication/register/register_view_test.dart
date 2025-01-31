@@ -97,7 +97,7 @@ void main() {
         await tester.pumpAndSettle();
 
         verify(presenter.onOpenScreen()).called(1);
-        expect(find.text('email inválido'), findsOneWidget);
+        expect(find.text('E-mail inválido'), findsOneWidget);
       });
 
       testWidgets(

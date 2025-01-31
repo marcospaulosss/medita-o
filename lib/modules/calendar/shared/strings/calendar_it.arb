@@ -2,7 +2,10 @@
   "youMeditated": "Hai meditato:",
   "minutes": "minuti ",
   "week": "settimana",
-  "month": "Mese",
-  "year": "Anno",
-  "calendarTitle": "Tempo settimanale"
+  "month": "mese",
+  "year": "anno",
+  "calendarTitle": "Tempo settimanale",
+  "weekToUpper": "Settimana",
+  "monthToUpper": "Mese",
+  "yearToUpper": "Anno"
 }
