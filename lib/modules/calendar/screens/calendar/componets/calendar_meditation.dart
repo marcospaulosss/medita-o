@@ -75,11 +75,11 @@ class _CalendarMeditationState extends State<CalendarMeditation> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        _buildToggleButton('Semana', CalendarStrings.of(context).week),
+        _buildToggleButton('Semana', CalendarStrings.of(context).weekToUpper),
         const SizedBox(width: 4),
-        _buildToggleButton('Mês', CalendarStrings.of(context).month),
+        _buildToggleButton('Mês', CalendarStrings.of(context).monthToUpper),
         const SizedBox(width: 4),
-        _buildToggleButton('Ano', CalendarStrings.of(context).year),
+        _buildToggleButton('Ano', CalendarStrings.of(context).yearToUpper),
       ],
     );
   }

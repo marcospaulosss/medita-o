@@ -23,4 +23,13 @@ class CalendarStringsEn extends CalendarStrings {
 
   @override
   String get calendarTitle => 'Weather per week';
+
+  @override
+  String get weekToUpper => 'Week';
+
+  @override
+  String get monthToUpper => 'Month';
+
+  @override
+  String get yearToUpper => 'Year';
 }

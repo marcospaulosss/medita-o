@@ -53,12 +53,14 @@ class Meditate extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
-                  CommonStrings.of(context).fiveMinutes,
-                  style: const TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w800,
-                    color: AppColors.philippineGray,
+                Flexible(
+                  child: Text(
+                    CommonStrings.of(context).fiveMinutes,
+                    style: const TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w800,
+                      color: AppColors.philippineGray,
+                    ),
                   ),
                 ),
                 const SizedBox(width: 50),
