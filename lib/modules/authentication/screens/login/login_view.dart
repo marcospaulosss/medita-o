@@ -97,6 +97,7 @@ class LoginViewState extends State<LoginView> implements LoginViewContract {
                   requestLoginGoogle: requestLoginGoogle,
                   requestLoginFacebook: requestLoginFacebook,
                 ),
+                const SizedBox(height: 20),
               ],
             ),
           ),

@@ -7,6 +7,7 @@ import 'package:intl/intl.dart' as intl;
 
 import 'common_strings_en.dart';
 import 'common_strings_es.dart';
+import 'common_strings_it.dart';
 import 'common_strings_pt.dart';
 
 // ignore_for_file: type=lint
@@ -94,6 +95,7 @@ abstract class CommonStrings {
   static const List<Locale> supportedLocales = <Locale>[
     Locale('en'),
     Locale('es'),
+    Locale('it'),
     Locale('pt')
   ];
 
@@ -233,7 +235,7 @@ class _CommonStringsDelegate extends LocalizationsDelegate<CommonStrings> {
   }
 
   @override
-  bool isSupported(Locale locale) => <String>['en', 'es', 'pt'].contains(locale.languageCode);
+  bool isSupported(Locale locale) => <String>['en', 'es', 'it', 'pt'].contains(locale.languageCode);
 
   @override
   bool shouldReload(_CommonStringsDelegate old) => false;
@@ -246,6 +248,7 @@ CommonStrings lookupCommonStrings(Locale locale) {
   switch (locale.languageCode) {
     case 'en': return CommonStringsEn();
     case 'es': return CommonStringsEs();
+    case 'it': return CommonStringsIt();
     case 'pt': return CommonStringsPt();
   }
 

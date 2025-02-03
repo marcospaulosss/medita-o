@@ -7,8 +7,8 @@ class ShareStringsEn extends ShareStrings {
   ShareStringsEn([String locale = 'en']) : super(locale);
 
   @override
-  String get share => 'Compartilhe';
+  String get share => 'Share';
 
   @override
-  String get subtitle => 'Sua meditação do dia!';
+  String get subtitle => 'Your meditation for the day!';
 }

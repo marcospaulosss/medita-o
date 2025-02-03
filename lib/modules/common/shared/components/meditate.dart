@@ -26,6 +26,7 @@ class Meditate extends StatelessWidget {
       onTap: () => onTap(),
       child: Container(
         height: 150,
+        width: 151,
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(10),
@@ -35,12 +36,15 @@ class Meditate extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              title,
-              style: const TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w700,
-                color: AppColors.dimGray,
+            Flexible(
+              child: Text(
+                title,
+                overflow: TextOverflow.ellipsis,
+                style: const TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w700,
+                  color: AppColors.dimGray,
+                ),
               ),
             ),
             const SizedBox(height: 11),
@@ -49,12 +53,14 @@ class Meditate extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
-                  CommonStrings.of(context).fiveMinutes,
-                  style: const TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w800,
-                    color: AppColors.philippineGray,
+                Flexible(
+                  child: Text(
+                    CommonStrings.of(context).fiveMinutes,
+                    style: const TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w800,
+                      color: AppColors.philippineGray,
+                    ),
                   ),
                 ),
                 const SizedBox(width: 50),

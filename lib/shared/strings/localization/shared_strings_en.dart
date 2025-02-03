@@ -7,29 +7,29 @@ class SharedStringsEn extends SharedStrings {
   SharedStringsEn([String locale = 'en']) : super(locale);
 
   @override
-  String get genericErrorRetry => 'Tentar novamente';
+  String get genericErrorRetry => 'Try again';
 
   @override
-  String get genericErrorTitle => 'Tivemos um problema.';
+  String get genericErrorTitle => 'We had a problem.';
 
   @override
-  String get genericErrorSubTitle => 'Encontramos um problema ao carregar os dados. Por favor, tente novamente.';
+  String get genericErrorSubTitle => 'We encountered a problem loading data. Please try again.';
 
   @override
-  String get meditometer => 'Meditômetro';
+  String get meditometer => 'Meditometer';
 
   @override
-  String get realTime => 'EM TEMPO REAL';
+  String get realTime => 'IN REAL TIME';
 
   @override
-  String get millions => 'milhões ';
+  String get millions => 'millions';
 
   @override
-  String get minutesMeditatedWorld => 'de Minutos meditados no mundo';
+  String get minutesMeditatedWorld => 'from MinutesMeditatedWorld';
 
   @override
-  String get countriesReached => 'PAÍSES ALCANÇADOS';
+  String get countriesReached => 'COUNTRIES REACHED';
 
   @override
-  String get hello => 'Olá';
+  String get hello => 'Hello';
 }

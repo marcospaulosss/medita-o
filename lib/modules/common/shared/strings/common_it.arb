@@ -1,0 +1,23 @@
+{
+  "homeHeaderDescription1": "Aggiungi subito il tuo tempo per la pace nel mondo!",
+  "meditate5Minutes": "Meditare in 5 \nMinuti",
+  "fiveMinutes": "5 min",
+  "learnMethod": "Impara il \nmetodo",
+  "guidedMeditate": "Meditazione \nguidata",
+  "meditateTime": "Medita nel \ntuo tempo",
+  "profileHeaderDescription1": "Clicca qui e completa il tuo profilo!",
+  "profileUpdateInfo": "Aggiorna i dati del tuo profilo e monitora i tuoi minuti di meditazione!",
+  "profileFormName": "Nome",
+  "profileFormLastName": "Cognome",
+  "gender": "genere",
+  "whereYouLive": "Dove vivi?",
+  "privacyPolicy1": "Salvando i tuoi dati acconsenti al nostro ",
+  "privacyPolicy2": "politica sulla riservatezza",
+  "exitApp": "esci dall'app",
+  "dateBirth": "data di nascita",
+  "datePickerLocation": "it_IT",
+  "day": "Giorno",
+  "month": "Mese",
+  "year": "Anno",
+  "profileLabelButton": "Salva dati"
+}

@@ -3,5 +3,9 @@
   "minutes": "Minutos esta ",
   "week": "semana",
   "month": "mês",
-  "year": "ano"
+  "year": "ano",
+  "calendarTitle": "Tempo por semana",
+  "weekToUpper": "Semana",
+  "monthToUpper": "Mês",
+  "yearToUpper": "Ano"
 }
