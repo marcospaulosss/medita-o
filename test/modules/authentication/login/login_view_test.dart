@@ -277,7 +277,7 @@ void main() async {
         await tester.tap(find.textContaining("Fazer Login"));
         await tester.pumpAndSettle();
 
-        expect(find.textContaining("email inválido"), findsOneWidget);
+        expect(find.textContaining("E-mail inválido"), findsOneWidget);
       });
 
       testWidgets("Should show error when click in login and password is empty",

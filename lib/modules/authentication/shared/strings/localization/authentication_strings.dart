@@ -7,6 +7,7 @@ import 'package:intl/intl.dart' as intl;
 
 import 'authentication_strings_en.dart';
 import 'authentication_strings_es.dart';
+import 'authentication_strings_it.dart';
 import 'authentication_strings_pt.dart';
 
 // ignore_for_file: type=lint
@@ -94,6 +95,7 @@ abstract class AuthenticationStrings {
   static const List<Locale> supportedLocales = <Locale>[
     Locale('en'),
     Locale('es'),
+    Locale('it'),
     Locale('pt')
   ];
 
@@ -178,7 +180,7 @@ abstract class AuthenticationStrings {
   /// No description provided for @invalidEmail.
   ///
   /// In pt, this message translates to:
-  /// **'email inválido'**
+  /// **'E-mail inválido'**
   String get invalidEmail;
 
   /// No description provided for @name.
@@ -251,7 +253,7 @@ class _AuthenticationStringsDelegate extends LocalizationsDelegate<Authenticatio
   }
 
   @override
-  bool isSupported(Locale locale) => <String>['en', 'es', 'pt'].contains(locale.languageCode);
+  bool isSupported(Locale locale) => <String>['en', 'es', 'it', 'pt'].contains(locale.languageCode);
 
   @override
   bool shouldReload(_AuthenticationStringsDelegate old) => false;
@@ -264,6 +266,7 @@ AuthenticationStrings lookupAuthenticationStrings(Locale locale) {
   switch (locale.languageCode) {
     case 'en': return AuthenticationStringsEn();
     case 'es': return AuthenticationStringsEs();
+    case 'it': return AuthenticationStringsIt();
     case 'pt': return AuthenticationStringsPt();
   }
 

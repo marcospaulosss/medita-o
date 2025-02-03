@@ -10,13 +10,13 @@ class AuthenticationStringsEs extends AuthenticationStrings {
   String get yourGoogleAccount => 'Su cuenta de Google';
 
   @override
-  String get yourFacebookAccount => 'Tu cuenta de Facebook';
+  String get yourFacebookAccount => 'Su cuenta de Facebook';
 
   @override
-  String get exampleEmail => 'ejemplo@correo electrónico.com';
+  String get exampleEmail => 'ejemplo@email.com';
 
   @override
-  String get email => 'Correo electrónico';
+  String get email => 'E-mail';
 
   @override
   String get obscurePassword => '***********';
@@ -31,25 +31,25 @@ class AuthenticationStringsEs extends AuthenticationStrings {
   String get forgotPassword => 'Olvidé mi contraseña';
 
   @override
-  String get signIn => 'Iniciar sesión';
+  String get signIn => 'Acceso';
 
   @override
-  String get orEnterUsing => '  O ingresa usando  ';
+  String get orEnterUsing => '  O entre usando  ';
 
   @override
-  String get meditateWithoutLogin => 'Medita sin iniciar sesión';
+  String get meditateWithoutLogin => 'Meditar sin iniciar sesión';
 
   @override
-  String get createOne => 'Crear uno';
+  String get createOne => 'crear una ';
 
   @override
   String get account => 'cuenta';
 
   @override
-  String get invalidEmail => 'correo electrónico no válido';
+  String get invalidEmail => 'E-mail inválido';
 
   @override
-  String get name => 'nombre';
+  String get name => 'Nombre';
 
   @override
   String get confirmPassword => 'Confirmar contraseña';
@@ -64,17 +64,17 @@ class AuthenticationStringsEs extends AuthenticationStrings {
   String get passwordsDontMatch => 'Las contraseñas no coinciden';
 
   @override
-  String get invalidParameters => 'Parâmetros inválidos';
+  String get invalidParameters => 'Parámetros inválidos';
 
   @override
-  String get accountCreatedSuccessfully => 'Conta criada com Sucesso!';
+  String get accountCreatedSuccessfully => 'Cuenta creada con éxito';
 
   @override
-  String get completeYourRegistration => 'Complete seu cadastro';
+  String get completeYourRegistration => 'Complete su registro';
 
   @override
-  String get haveAccessContent => ' e tenha acesso a todos os conteúdos.';
+  String get haveAccessContent => 'y tenga acceso a todos los contenidos';
 
   @override
-  String get startMeditating => 'Comece a Meditar';
+  String get startMeditating => 'Comience a Meditar';
 }

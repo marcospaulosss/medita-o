@@ -7,17 +7,29 @@ class CalendarStringsEn extends CalendarStrings {
   CalendarStringsEn([String locale = 'en']) : super(locale);
 
   @override
-  String get youMeditated => 'Você meditou:';
+  String get youMeditated => 'You meditated:';
 
   @override
-  String get minutes => 'Minutos esta ';
+  String get minutes => 'Minutes this ';
 
   @override
-  String get week => 'semana';
+  String get week => 'week';
 
   @override
-  String get month => 'mês';
+  String get month => 'month';
 
   @override
-  String get year => 'ano';
+  String get year => 'year';
+
+  @override
+  String get calendarTitle => 'Weather per week';
+
+  @override
+  String get weekToUpper => 'Week';
+
+  @override
+  String get monthToUpper => 'Month';
+
+  @override
+  String get yearToUpper => 'Year';
 }

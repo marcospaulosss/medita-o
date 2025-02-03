@@ -46,7 +46,7 @@ class AuthenticationStringsPt extends AuthenticationStrings {
   String get account => 'conta';
 
   @override
-  String get invalidEmail => 'email inválido';
+  String get invalidEmail => 'E-mail inválido';
 
   @override
   String get name => 'Nome';
