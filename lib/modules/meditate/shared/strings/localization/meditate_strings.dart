@@ -7,6 +7,7 @@ import 'package:intl/intl.dart' as intl;
 
 import 'meditate_strings_en.dart';
 import 'meditate_strings_es.dart';
+import 'meditate_strings_it.dart';
 import 'meditate_strings_pt.dart';
 
 // ignore_for_file: type=lint
@@ -94,6 +95,7 @@ abstract class MeditateStrings {
   static const List<Locale> supportedLocales = <Locale>[
     Locale('en'),
     Locale('es'),
+    Locale('it'),
     Locale('pt')
   ];
 
@@ -275,7 +277,7 @@ class _MeditateStringsDelegate extends LocalizationsDelegate<MeditateStrings> {
   }
 
   @override
-  bool isSupported(Locale locale) => <String>['en', 'es', 'pt'].contains(locale.languageCode);
+  bool isSupported(Locale locale) => <String>['en', 'es', 'it', 'pt'].contains(locale.languageCode);
 
   @override
   bool shouldReload(_MeditateStringsDelegate old) => false;
@@ -288,6 +290,7 @@ MeditateStrings lookupMeditateStrings(Locale locale) {
   switch (locale.languageCode) {
     case 'en': return MeditateStringsEn();
     case 'es': return MeditateStringsEs();
+    case 'it': return MeditateStringsIt();
     case 'pt': return MeditateStringsPt();
   }
 

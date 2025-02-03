@@ -165,9 +165,12 @@ class _FormLoginState extends State<FormLogin> {
                   ),
                 ),
               ),
-              Link(
-                onTap: () => widget.forgotPassword(),
-                text: AuthenticationStrings.of(context).forgotPassword,
+              const SizedBox(width: 10),
+              Flexible(
+                child: Link(
+                  onTap: () => widget.forgotPassword(),
+                  text: AuthenticationStrings.of(context).forgotPassword,
+                ),
               ),
             ],
           ),

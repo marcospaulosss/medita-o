@@ -7,44 +7,44 @@ class MeditometerStringsEs extends MeditometerStrings {
   MeditometerStringsEs([String locale = 'es']) : super(locale);
 
   @override
-  String get meditometerTitle => 'Cada vez que você medita, soma seu tempo pela paz mundial.';
+  String get meditometerTitle => 'Cada vez que usted medita, suma su tiempo para la paz mundial';
 
   @override
-  String get meditometer => 'MEDITÔMETRO';
+  String get meditometer => 'MEDITÓMETRO';
 
   @override
-  String get inRealTime => 'EM TEMPO REAL';
+  String get inRealTime => 'EN TIEMPO REAL';
 
   @override
-  String get minutesMeditated => 'MINUTOS MEDITADOS NO MUNDO';
+  String get minutesMeditated => 'MINUTOS MEDITADOS EN EL MUNDO';
 
   @override
-  String get share => 'Compartilhar';
+  String get share => 'Compartir';
 
   @override
-  String get meditometerCardDescription1 => 'Este é o contador mundial de minutos meditados através do aplicativo.';
+  String get meditometerCardDescription1 => 'Este es el contador mundial de minutos meditados mediante la aplicación';
 
   @override
-  String get meditometerParagraph1 => 'O aplicativo ';
+  String get meditometerParagraph1 => 'La aplicación';
 
   @override
-  String get meditometerParagraph2 => '“5 Minutos Eu Medito“ ';
+  String get meditometerParagraph2 => '5 Minutos Yo Medito';
 
   @override
-  String get meditometerParagraph3 => 'foi lançado pela fundadora da Organização Mundial ';
+  String get meditometerParagraph3 => 'fue lanzado por la fundadora de la Organización Mundial ';
 
   @override
-  String get meditometerParagraph4 => 'Mãos Sem Fronteiras';
+  String get meditometerParagraph4 => 'Manos Sin Fronteras';
 
   @override
-  String get meditometerParagraph5 => ', La Jardinera, e é utilizado em mais de 80 países.';
+  String get meditometerParagraph5 => ', La Jardinera, y es utilizado en más de 80 países';
 
   @override
-  String get meditometerParagraph6 => 'O app tem como propósito compartilhar o método 3-5-3 de meditação de maneira prática, simples e eficaz.';
+  String get meditometerParagraph6 => 'La aplicación tiene como proposito compartir el método 3-5-3 de meditación de manera práctica, simple y eficaz';
 
   @override
-  String get meditometerParagraph7 => 'Somente 5 minutos ao dia são suficientes para conquistar os benefícios de bem-estar.';
+  String get meditometerParagraph7 => 'Solamente 5 minutos al día son suficientes para conqueistar los beneficios de bien-estar.';
 
   @override
-  String get aboutProgram => 'Saiba mais sobre a causa!';
+  String get aboutProgram => 'Conozca más sobre la causa';
 }

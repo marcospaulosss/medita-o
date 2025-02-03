@@ -22,50 +22,50 @@ class CommonStringsEn extends CommonStrings {
   String get guidedMeditate => 'Guided \nMeditation';
 
   @override
-  String get meditateTime => 'Meditate in\nyour time';
+  String get meditateTime => 'Meditate in \nyour time';
 
   @override
-  String get profileHeaderDescription1 => 'Clique aqui e complete o seu perfil!';
+  String get profileHeaderDescription1 => 'Click here and complete your profile!';
 
   @override
-  String get profileUpdateInfo => 'Atualize seus dados de perfil e acompanhe seus minutos meditados!';
+  String get profileUpdateInfo => 'Update your profile data and track your meditated minutes!';
 
   @override
-  String get profileFormName => 'Nome';
+  String get profileFormName => 'Name';
 
   @override
-  String get profileFormLastName => 'Sobrenome';
+  String get profileFormLastName => 'Last Name';
 
   @override
-  String get gender => 'Gênero';
+  String get gender => 'Gender';
 
   @override
-  String get whereYouLive => 'Onde Reside';
+  String get whereYouLive => 'Where You Live';
 
   @override
-  String get privacyPolicy1 => 'Ao salvar os seus dados você concorda com a nossa ';
+  String get privacyPolicy1 => 'By saving your data you agree to our ';
 
   @override
-  String get privacyPolicy2 => 'Política de Privacidade';
+  String get privacyPolicy2 => 'Privacy Policy';
 
   @override
-  String get exitApp => 'SAIR DO APP';
+  String get exitApp => 'EXIT APP';
 
   @override
-  String get dateBirth => 'Data de Nascimento';
+  String get dateBirth => 'Date of Birth';
 
   @override
-  String get datePickerLocation => 'pt_BR';
+  String get datePickerLocation => 'en_US';
 
   @override
-  String get day => 'Dia';
+  String get day => 'Day';
 
   @override
-  String get month => 'Mês';
+  String get month => 'Month';
 
   @override
-  String get year => 'Ano';
+  String get year => 'Year';
 
   @override
-  String get profileLabelButton => 'Salvar Dados';
+  String get profileLabelButton => 'Save Data';
 }

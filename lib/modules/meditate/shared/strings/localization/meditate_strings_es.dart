@@ -7,37 +7,37 @@ class MeditateStringsEs extends MeditateStrings {
   MeditateStringsEs([String locale = 'es']) : super(locale);
 
   @override
-  String get alreadyAdded => 'Você já somou ';
+  String get alreadyAdded => 'Usted ya sumó';
 
   @override
   String get minutes => 'minutos';
 
   @override
-  String get worldPeace => 'pela paz mundial!';
+  String get worldPeace => 'por la paz mundial';
 
   @override
   String get methodTitle => 'Método 3 5 3';
 
   @override
-  String get methodDescriptionPhrase1 => 'Sente-se com a coluna reta.';
+  String get methodDescriptionPhrase1 => 'Siéntese con la columna recta';
 
   @override
-  String get methodDescriptionPhrase2 => 'De olhos abertos faça ';
+  String get methodDescriptionPhrase2 => 'Con los ojos abiertos haga';
 
   @override
-  String get methodDescriptionPhrase3 => 'respirações puxando o ar pelo nariz e soltando pela boca.';
+  String get methodDescriptionPhrase3 => 'respiraciones absorbiendo aire por la nariz y expulsando por la boca.';
 
   @override
-  String get methodDescriptionPhrase4 => 'Aperte o play na tela para iniciar a meditação e feche os olhos. Durante ';
+  String get methodDescriptionPhrase4 => 'Presione play en la pantalla para iniciar la meditación y cierre los ojos. Durante';
 
   @override
-  String get methodDescriptionPhrase5 => 'minutos concentre-se na trilha sonora. Ao final, abra os olhos e faça mais ';
+  String get methodDescriptionPhrase5 => 'minutos concéntrese en la banda sonora. Al final, abra los ojos y haga más ';
 
   @override
-  String get methodDescriptionPhrase6 => 'respirações profundas.';
+  String get methodDescriptionPhrase6 => 'respiraciones profundas.';
 
   @override
-  String get threeBreaths => '3 ';
+  String get threeBreaths => '3';
 
   @override
   String get fiveMinutes => '5 ';
@@ -46,46 +46,46 @@ class MeditateStringsEs extends MeditateStrings {
   String get learnMeditate => 'Aprenda a meditar';
 
   @override
-  String get tapStartMeditation => 'Clique no botão para começar';
+  String get tapStartMeditation => 'Haga clic en el botón para comenzar';
 
   @override
-  String get learnMethod => 'Aprenda o método        ';
+  String get learnMethod => 'Aprenda el método        ';
 
   @override
-  String get remindMeditate => 'Lembre-me de meditar';
+  String get remindMeditate => 'Recuérdame meditar';
 
   @override
   String get fiveMinutesTitle => '5 minutos';
 
   @override
-  String get inYourTime => 'No seu tempo';
+  String get inYourTime => 'En su tiempo';
 
   @override
-  String get aboutGuidedMeditation => 'SOBRE';
+  String get aboutGuidedMeditation => 'sobre';
 
   @override
-  String get titleGuidedMeditation => 'Essa meditação foi guiada por La Jardinera (Fubdadora da Organização Mãos sem Fronteiras - www.msfint.com)';
+  String get titleGuidedMeditation => 'Esa meditación fue guiada por La Jardinera (Fundadora de la Organización Manos Sin Fronteras, www.msfint.com)';
 
   @override
-  String get descriptionGuidedMeditation => 'Essa meditação guiada é para liberar tensões acumuladas diariamente, com a prática, é possível alcançar estado de descanso profundo. Pode ser feita sentado, ou deitado, o importante é estar confortável. Assim que estiver em posição, faça 3 respirações, inspirando pelo nariz e expirando pela boca, de forma lenta e profunda. Assim, com a coluna reta, a respiração suave e lenta, olhos fechados, sinta a Paz e Harmonia.';
+  String get descriptionGuidedMeditation => 'Esta meditación guiada es para liberar tensiones acumuladas diariamente, con la práctica es posible crear un estado de descanso profundo. Puede hacerse sentado o acostado. Lo importante es estar confortable.Cuando esté en esa posición, haga 3 respiraciones inhalando por la nariz y exhalando por la boca, de forma lenta y profunda. Así, con la columna recta, la respiración suave y lenta, los ojos cerrados, sienta la Paz y Armonía.';
 
   @override
-  String get guidedMeditationProgramTitle => 'meditaçao guiada LA JARDINERA';
+  String get guidedMeditationProgramTitle => 'Meditación guiada LA JARDINERA';
 
   @override
-  String get seeTranslation => 'Ver tradução';
+  String get seeTranslation => 'Ver traducción';
 
   @override
-  String get learnMore => 'Saiba mais';
+  String get learnMore => 'Conozca más';
 
   @override
-  String get donationTitle => 'SUA DOAÇÃO AJUDA A PAZ SER CADA VEZ MAIS MUNDIAL!';
+  String get donationTitle => 'SU DONACIÓN AYUDA A QUE LA PAZ SEA CADA VEZ MÁS MUNDIAL';
 
   @override
-  String get donationDescription => 'Todas as doações recebidas ajudam o Instituto Mãos Sem Fronteiras a capacitarem mais voluntários e levarem a paz para cada vez mais pessoas.';
+  String get donationDescription => 'Todas las donaciones recibidas ayudan a Manos Sin Fronteras a capacitar más voluntarios y llevar la paz a más y más personas.';
 
   @override
-  String get donate => 'DOAR';
+  String get donate => 'donar';
 
   @override
   String get donationFooterDescription => 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\\\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.';
