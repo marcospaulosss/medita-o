@@ -1,0 +1,23 @@
+{
+  "homeHeaderDescription1": "Fügen Sie Ihre Zeit für den Weltfrieden gleich jetzt hinzu!",
+  "meditate5Minutes": "Meditieren Sie 5 Minuten",
+  "fiveMinutes": "5 Min",
+  "learnMethod": "Lernen Sie die Methode",
+  "guidedMeditate": "Geführte Meditation ",
+  "meditateTime": "Meditieren Sie in Ihrer eigenen Zeit",
+  "profileHeaderDescription1": "Klicken Sie hier und vervollständigen Sie Ihr Profil!",
+  "profileUpdateInfo": "Aktualisieren Sie Ihre Profildaten und verfolgen Sie Ihre meditierten Minuten!",
+  "profileFormName": "Name",
+  "profileFormLastName": "Nachname",
+  "gender": "Geschlecht",
+  "whereYouLive": "Wo wohnen Sie?",
+  "privacyPolicy1": "Mit der Speicherung Ihrer Daten erklären Sie sich mit unserer",
+  "privacyPolicy2": "Datenschutzerklärung einverstanden.",
+  "exitApp": "App beenden",
+  "dateBirth": "Geburtsdatum",
+  "datePickerLocation": "de_DE",
+  "day": "Tag",
+  "month": "Monat",
+  "year": "Jahr",
+  "profileLabelButton": "Daten speichern"
+}

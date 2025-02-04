@@ -1,0 +1,11 @@
+{
+  "genericErrorRetry": "Erneut versuchen",
+  "genericErrorTitle": "Wir haben einen Fehler erhalten",
+  "genericErrorSubTitle": "Es ist ein Problem beim Laden der Daten aufgetreten. Bitte versuchen Sie es erneut.",
+  "meditometer": "Meditometer",
+  "realTime": "IN ECHTZEIT",
+  "millions": "Millionen",
+  "minutesMeditatedWorld": "Minuten, die in der Welt meditiert werden",
+  "countriesReached": "Länder die wir erreicht haben",
+  "hello": "Hallo!"
+}
