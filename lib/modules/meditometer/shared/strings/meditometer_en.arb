@@ -1,16 +1,16 @@
 {
-  "meditometerTitle": "Every time you meditate, you add time to world peace.",
+  "meditometerTitle": "Each time you meditate, you are adding minutes towards world peace",
   "meditometer": "MEDITOMETER",
-  "inRealTime": "IN REAL TIME",
+  "inRealTime": "REAL TIME",
   "minutesMeditated": "MINUTES MEDITATED IN THE WORLD",
   "share": "Share",
-  "meditometerCardDescription1": "This is the worldwide counter of minutes meditated through the app.",
+  "meditometerCardDescription1": "This is the global counter of minutes meditated using the application",
   "meditometerParagraph1": "The application",
   "meditometerParagraph2": "“5 Minutes I Meditate“ ",
-  "meditometerParagraph3": "was launched by the founder of the World Organization",
-  "meditometerParagraph4": "Hands Without Borders",
-  "meditometerParagraph5": ", La Jardinera, and is used in more than 80 countries.",
-  "meditometerParagraph6": "The app aims to share the 3-5-3 meditation method in a practical, simple and effective way.",
-  "meditometerParagraph7": "Just 5 minutes a day is enough to achieve the benefits of well-being.",
-  "aboutProgram": "Learn more about the cause!"
+  "meditometerParagraph3": "It was launched by the founder of the International Organisation",
+  "meditometerParagraph4": "Manos Sin Fronteras (Hands Without Borders)",
+  "meditometerParagraph5": ", La Jardinera, and it has been used in more than 80 countries.",
+  "meditometerParagraph6": "The app has as a purpose to share the meditation method 3-5-3 in a practical, simple and efficient way..",
+  "meditometerParagraph7": "Only 5 minutes per day are enough to experience the wellbeing benefits.",
+  "aboutProgram": "Learn more about our cause!"
 }
