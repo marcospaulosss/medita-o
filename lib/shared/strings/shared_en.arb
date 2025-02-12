@@ -1,11 +1,11 @@
 {
   "genericErrorRetry": "Try again",
-  "genericErrorTitle": "We had a problem.",
-  "genericErrorSubTitle": "We encountered a problem loading data. Please try again.",
+  "genericErrorTitle": "There was a problem.",
+  "genericErrorSubTitle": "We found a problem loading the data, please try again.",
   "meditometer": "Meditometer",
-  "realTime": "IN REAL TIME",
-  "millions": "millions",
-  "minutesMeditatedWorld": "from MinutesMeditatedWorld",
+  "realTime": "REAL TIME",
+  "millions": "Millions",
+  "minutesMeditatedWorld": "Of meditated minutes in the world",
   "countriesReached": "COUNTRIES REACHED",
   "hello": "Hello"
 }

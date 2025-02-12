@@ -10,22 +10,22 @@ class SharedStringsEn extends SharedStrings {
   String get genericErrorRetry => 'Try again';
 
   @override
-  String get genericErrorTitle => 'We had a problem.';
+  String get genericErrorTitle => 'There was a problem.';
 
   @override
-  String get genericErrorSubTitle => 'We encountered a problem loading data. Please try again.';
+  String get genericErrorSubTitle => 'We found a problem loading the data, please try again.';
 
   @override
   String get meditometer => 'Meditometer';
 
   @override
-  String get realTime => 'IN REAL TIME';
+  String get realTime => 'REAL TIME';
 
   @override
-  String get millions => 'millions';
+  String get millions => 'Millions';
 
   @override
-  String get minutesMeditatedWorld => 'from MinutesMeditatedWorld';
+  String get minutesMeditatedWorld => 'Of meditated minutes in the world';
 
   @override
   String get countriesReached => 'COUNTRIES REACHED';
