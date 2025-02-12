@@ -102,6 +102,9 @@ android {
         release {
             signingConfig signingConfigs.release
         }
+        storeRelease {
+            signingConfig signingConfigs.release
+        }
     }
 }
 
