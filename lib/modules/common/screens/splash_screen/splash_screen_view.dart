@@ -23,7 +23,7 @@ class SplashScreenViewState extends State<SplashScreenView> {
   void initState() {
     initPlatformState();
 
-    Future.delayed(const Duration(seconds: 5)).then((value) {
+    Future.delayed(const Duration(seconds: 6)).then((value) {
       if (mounted) {
         AutoRouter.of(context).replace(const HomeRoute());
       }
@@ -59,10 +59,12 @@ class SplashScreenViewState extends State<SplashScreenView> {
         deviceData = readAndroidBuildData(await deviceInfoPlugin.androidInfo);
         initialization();
         return;
+      } else {
+        Future.delayed(const Duration(seconds: 3)).then((value) {
+          FlutterNativeSplash.remove();
+          if (mounted) AutoRouter.of(context).replace(const HomeRoute());
+        });
       }
-
-      FlutterNativeSplash.remove();
-      if (mounted) AutoRouter.of(context).replace(const HomeRoute());
     } on PlatformException {
       return;
     }
