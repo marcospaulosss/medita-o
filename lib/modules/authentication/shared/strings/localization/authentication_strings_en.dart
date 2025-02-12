@@ -28,16 +28,16 @@ class AuthenticationStringsEn extends AuthenticationStrings {
   String get rememberPassword => 'Remember password';
 
   @override
-  String get forgotPassword => 'I forgot my password';
+  String get forgotPassword => 'Forgot my password';
 
   @override
-  String get signIn => 'Sign In';
+  String get signIn => 'Login';
 
   @override
   String get orEnterUsing => ' Or enter using ';
 
   @override
-  String get meditateWithoutLogin => 'Meditate without Login';
+  String get meditateWithoutLogin => 'Meditate without logging in';
 
   @override
   String get createOne => 'Create one ';
@@ -52,29 +52,29 @@ class AuthenticationStringsEn extends AuthenticationStrings {
   String get name => 'Name';
 
   @override
-  String get confirmPassword => 'Confirm Password';
+  String get confirmPassword => 'Confirm your password';
 
   @override
   String get createAccount => 'Create Account';
 
   @override
-  String get requiredField => 'Required field';
+  String get requiredField => 'Mandatory field';
 
   @override
-  String get passwordsDontMatch => 'Passwords don\'t match';
+  String get passwordsDontMatch => 'Passwords do not match';
 
   @override
-  String get invalidParameters => 'Invalid parameters';
+  String get invalidParameters => 'Invalid Information Provided';
 
   @override
-  String get accountCreatedSuccessfully => 'Account created successfully!';
+  String get accountCreatedSuccessfully => 'Account Created Successfully!';
 
   @override
   String get completeYourRegistration => 'Complete your registration';
 
   @override
-  String get haveAccessContent => ' and have access to all content.';
+  String get haveAccessContent => 'get access to all content.';
 
   @override
-  String get startMeditating => 'Start Meditating';
+  String get startMeditating => 'Start to meditate';
 }
