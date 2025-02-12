@@ -5,8 +5,10 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:intl/intl.dart' as intl;
 
+import 'common_strings_de.dart';
 import 'common_strings_en.dart';
 import 'common_strings_es.dart';
+import 'common_strings_fr.dart';
 import 'common_strings_it.dart';
 import 'common_strings_pt.dart';
 
@@ -93,8 +95,10 @@ abstract class CommonStrings {
 
   /// A list of this localizations delegate's supported locales.
   static const List<Locale> supportedLocales = <Locale>[
+    Locale('de'),
     Locale('en'),
     Locale('es'),
+    Locale('fr'),
     Locale('it'),
     Locale('pt')
   ];
@@ -235,7 +239,7 @@ class _CommonStringsDelegate extends LocalizationsDelegate<CommonStrings> {
   }
 
   @override
-  bool isSupported(Locale locale) => <String>['en', 'es', 'it', 'pt'].contains(locale.languageCode);
+  bool isSupported(Locale locale) => <String>['de', 'en', 'es', 'fr', 'it', 'pt'].contains(locale.languageCode);
 
   @override
   bool shouldReload(_CommonStringsDelegate old) => false;
@@ -246,8 +250,10 @@ CommonStrings lookupCommonStrings(Locale locale) {
 
   // Lookup logic when only language code is specified.
   switch (locale.languageCode) {
+    case 'de': return CommonStringsDe();
     case 'en': return CommonStringsEn();
     case 'es': return CommonStringsEs();
+    case 'fr': return CommonStringsFr();
     case 'it': return CommonStringsIt();
     case 'pt': return CommonStringsPt();
   }

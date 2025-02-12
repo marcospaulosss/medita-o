@@ -5,8 +5,10 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:intl/intl.dart' as intl;
 
+import 'calendar_strings_de.dart';
 import 'calendar_strings_en.dart';
 import 'calendar_strings_es.dart';
+import 'calendar_strings_fr.dart';
 import 'calendar_strings_it.dart';
 import 'calendar_strings_pt.dart';
 
@@ -93,8 +95,10 @@ abstract class CalendarStrings {
 
   /// A list of this localizations delegate's supported locales.
   static const List<Locale> supportedLocales = <Locale>[
+    Locale('de'),
     Locale('en'),
     Locale('es'),
+    Locale('fr'),
     Locale('it'),
     Locale('pt')
   ];
@@ -163,7 +167,7 @@ class _CalendarStringsDelegate extends LocalizationsDelegate<CalendarStrings> {
   }
 
   @override
-  bool isSupported(Locale locale) => <String>['en', 'es', 'it', 'pt'].contains(locale.languageCode);
+  bool isSupported(Locale locale) => <String>['de', 'en', 'es', 'fr', 'it', 'pt'].contains(locale.languageCode);
 
   @override
   bool shouldReload(_CalendarStringsDelegate old) => false;
@@ -174,8 +178,10 @@ CalendarStrings lookupCalendarStrings(Locale locale) {
 
   // Lookup logic when only language code is specified.
   switch (locale.languageCode) {
+    case 'de': return CalendarStringsDe();
     case 'en': return CalendarStringsEn();
     case 'es': return CalendarStringsEs();
+    case 'fr': return CalendarStringsFr();
     case 'it': return CalendarStringsIt();
     case 'pt': return CalendarStringsPt();
   }

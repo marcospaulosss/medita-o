@@ -5,8 +5,10 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:intl/intl.dart' as intl;
 
+import 'share_strings_de.dart';
 import 'share_strings_en.dart';
 import 'share_strings_es.dart';
+import 'share_strings_fr.dart';
 import 'share_strings_it.dart';
 import 'share_strings_pt.dart';
 
@@ -93,8 +95,10 @@ abstract class ShareStrings {
 
   /// A list of this localizations delegate's supported locales.
   static const List<Locale> supportedLocales = <Locale>[
+    Locale('de'),
     Locale('en'),
     Locale('es'),
+    Locale('fr'),
     Locale('it'),
     Locale('pt')
   ];
@@ -121,7 +125,7 @@ class _ShareStringsDelegate extends LocalizationsDelegate<ShareStrings> {
   }
 
   @override
-  bool isSupported(Locale locale) => <String>['en', 'es', 'it', 'pt'].contains(locale.languageCode);
+  bool isSupported(Locale locale) => <String>['de', 'en', 'es', 'fr', 'it', 'pt'].contains(locale.languageCode);
 
   @override
   bool shouldReload(_ShareStringsDelegate old) => false;
@@ -132,8 +136,10 @@ ShareStrings lookupShareStrings(Locale locale) {
 
   // Lookup logic when only language code is specified.
   switch (locale.languageCode) {
+    case 'de': return ShareStringsDe();
     case 'en': return ShareStringsEn();
     case 'es': return ShareStringsEs();
+    case 'fr': return ShareStringsFr();
     case 'it': return ShareStringsIt();
     case 'pt': return ShareStringsPt();
   }
