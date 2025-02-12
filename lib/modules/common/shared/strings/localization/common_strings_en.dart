@@ -7,7 +7,7 @@ class CommonStringsEn extends CommonStrings {
   CommonStringsEn([String locale = 'en']) : super(locale);
 
   @override
-  String get homeHeaderDescription1 => 'Spend your time for world peace right now!';
+  String get homeHeaderDescription1 => 'Add your time toward global peace now!!';
 
   @override
   String get meditate5Minutes => 'Meditate 5 \nMinutes';
@@ -16,13 +16,13 @@ class CommonStringsEn extends CommonStrings {
   String get fiveMinutes => '5 min';
 
   @override
-  String get learnMethod => 'Learn \nmethod';
+  String get learnMethod => 'Learn the method';
 
   @override
   String get guidedMeditate => 'Guided \nMeditation';
 
   @override
-  String get meditateTime => 'Meditate in \nyour time';
+  String get meditateTime => 'Meditate with \nyour time';
 
   @override
   String get profileHeaderDescription1 => 'Click here and complete your profile!';
@@ -40,16 +40,16 @@ class CommonStringsEn extends CommonStrings {
   String get gender => 'Gender';
 
   @override
-  String get whereYouLive => 'Where You Live';
+  String get whereYouLive => 'Where do you live';
 
   @override
-  String get privacyPolicy1 => 'By saving your data you agree to our ';
+  String get privacyPolicy1 => 'By saving your data, you agree to our ';
 
   @override
   String get privacyPolicy2 => 'Privacy Policy';
 
   @override
-  String get exitApp => 'EXIT APP';
+  String get exitApp => 'EXIT THE APP';
 
   @override
   String get dateBirth => 'Date of Birth';

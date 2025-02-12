@@ -7,7 +7,7 @@ class CalendarStringsEn extends CalendarStrings {
   CalendarStringsEn([String locale = 'en']) : super(locale);
 
   @override
-  String get youMeditated => 'You meditated:';
+  String get youMeditated => 'You have meditated:';
 
   @override
   String get minutes => 'Minutes this ';

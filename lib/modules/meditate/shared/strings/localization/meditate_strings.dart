@@ -5,8 +5,10 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:intl/intl.dart' as intl;
 
+import 'meditate_strings_de.dart';
 import 'meditate_strings_en.dart';
 import 'meditate_strings_es.dart';
+import 'meditate_strings_fr.dart';
 import 'meditate_strings_it.dart';
 import 'meditate_strings_pt.dart';
 
@@ -93,8 +95,10 @@ abstract class MeditateStrings {
 
   /// A list of this localizations delegate's supported locales.
   static const List<Locale> supportedLocales = <Locale>[
+    Locale('de'),
     Locale('en'),
     Locale('es'),
+    Locale('fr'),
     Locale('it'),
     Locale('pt')
   ];
@@ -277,7 +281,7 @@ class _MeditateStringsDelegate extends LocalizationsDelegate<MeditateStrings> {
   }
 
   @override
-  bool isSupported(Locale locale) => <String>['en', 'es', 'it', 'pt'].contains(locale.languageCode);
+  bool isSupported(Locale locale) => <String>['de', 'en', 'es', 'fr', 'it', 'pt'].contains(locale.languageCode);
 
   @override
   bool shouldReload(_MeditateStringsDelegate old) => false;
@@ -288,8 +292,10 @@ MeditateStrings lookupMeditateStrings(Locale locale) {
 
   // Lookup logic when only language code is specified.
   switch (locale.languageCode) {
+    case 'de': return MeditateStringsDe();
     case 'en': return MeditateStringsEn();
     case 'es': return MeditateStringsEs();
+    case 'fr': return MeditateStringsFr();
     case 'it': return MeditateStringsIt();
     case 'pt': return MeditateStringsPt();
   }
