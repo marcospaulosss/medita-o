@@ -5,8 +5,10 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:intl/intl.dart' as intl;
 
+import 'authentication_strings_de.dart';
 import 'authentication_strings_en.dart';
 import 'authentication_strings_es.dart';
+import 'authentication_strings_fr.dart';
 import 'authentication_strings_it.dart';
 import 'authentication_strings_pt.dart';
 
@@ -93,8 +95,10 @@ abstract class AuthenticationStrings {
 
   /// A list of this localizations delegate's supported locales.
   static const List<Locale> supportedLocales = <Locale>[
+    Locale('de'),
     Locale('en'),
     Locale('es'),
+    Locale('fr'),
     Locale('it'),
     Locale('pt')
   ];
@@ -253,7 +257,7 @@ class _AuthenticationStringsDelegate extends LocalizationsDelegate<Authenticatio
   }
 
   @override
-  bool isSupported(Locale locale) => <String>['en', 'es', 'it', 'pt'].contains(locale.languageCode);
+  bool isSupported(Locale locale) => <String>['de', 'en', 'es', 'fr', 'it', 'pt'].contains(locale.languageCode);
 
   @override
   bool shouldReload(_AuthenticationStringsDelegate old) => false;
@@ -264,8 +268,10 @@ AuthenticationStrings lookupAuthenticationStrings(Locale locale) {
 
   // Lookup logic when only language code is specified.
   switch (locale.languageCode) {
+    case 'de': return AuthenticationStringsDe();
     case 'en': return AuthenticationStringsEn();
     case 'es': return AuthenticationStringsEs();
+    case 'fr': return AuthenticationStringsFr();
     case 'it': return AuthenticationStringsIt();
     case 'pt': return AuthenticationStringsPt();
   }
