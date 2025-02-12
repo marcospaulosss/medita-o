@@ -1,5 +1,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:cinco_minutos_meditacao/core/routers/app_router.gr.dart';
+import 'package:cinco_minutos_meditacao/shared/Theme/app_colors.dart';
+import 'package:cinco_minutos_meditacao/shared/Theme/app_images.dart';
+import 'package:cinco_minutos_meditacao/shared/components/background_default.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -40,14 +43,52 @@ class SplashScreenViewState extends State<SplashScreenView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: SizedBox(
-          width: double.maxFinite,
-          height: double.infinity,
-          child: Image.asset(
-            'assets/images/splash_screen.png',
-            fit: BoxFit.fill,
+      body: BackgroundDefault(
+        child: SafeArea(
+          child: Container(
+            alignment: Alignment.center,
+            padding: const EdgeInsets.symmetric(vertical: 40),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Image.asset(AppImages.balloon),
+                const Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 80),
+                  child: Column(
+                    children: [
+                      Text(
+                        "Este é um aplicativo criado para desenvolver seu bem-estar e somar minutos para a",
+                        style: TextStyle(
+                          fontSize: 16,
+                          color: AppColors.black,
+                          fontWeight: FontWeight.w500,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                      Text(
+                        "paz mundial",
+                        style: TextStyle(
+                          fontSize: 25,
+                          color: AppColors.black,
+                          fontWeight: FontWeight.w700,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                    ],
+                  ),
+                ),
+                Image.asset(AppImages.calendarBalloonBlue),
+              ],
+            ),
           ),
+          // child: SizedBox(
+          //   width: double.maxFinite,
+          //   height: double.infinity,
+          //   child: Image.asset(
+          //     'assets/images/splash_screen.png',
+          //     fit: BoxFit.fill,
+          //   ),
+          // ),
         ),
       ),
     );
