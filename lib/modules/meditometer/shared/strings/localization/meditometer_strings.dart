@@ -5,8 +5,10 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:intl/intl.dart' as intl;
 
+import 'meditometer_strings_de.dart';
 import 'meditometer_strings_en.dart';
 import 'meditometer_strings_es.dart';
+import 'meditometer_strings_fr.dart';
 import 'meditometer_strings_it.dart';
 import 'meditometer_strings_pt.dart';
 
@@ -93,8 +95,10 @@ abstract class MeditometerStrings {
 
   /// A list of this localizations delegate's supported locales.
   static const List<Locale> supportedLocales = <Locale>[
+    Locale('de'),
     Locale('en'),
     Locale('es'),
+    Locale('fr'),
     Locale('it'),
     Locale('pt')
   ];
@@ -193,7 +197,7 @@ class _MeditometerStringsDelegate extends LocalizationsDelegate<MeditometerStrin
   }
 
   @override
-  bool isSupported(Locale locale) => <String>['en', 'es', 'it', 'pt'].contains(locale.languageCode);
+  bool isSupported(Locale locale) => <String>['de', 'en', 'es', 'fr', 'it', 'pt'].contains(locale.languageCode);
 
   @override
   bool shouldReload(_MeditometerStringsDelegate old) => false;
@@ -204,8 +208,10 @@ MeditometerStrings lookupMeditometerStrings(Locale locale) {
 
   // Lookup logic when only language code is specified.
   switch (locale.languageCode) {
+    case 'de': return MeditometerStringsDe();
     case 'en': return MeditometerStringsEn();
     case 'es': return MeditometerStringsEs();
+    case 'fr': return MeditometerStringsFr();
     case 'it': return MeditometerStringsIt();
     case 'pt': return MeditometerStringsPt();
   }
