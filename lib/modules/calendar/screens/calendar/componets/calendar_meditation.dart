@@ -163,12 +163,16 @@ class _CalendarMeditationState extends State<CalendarMeditation> {
           ),
           onPressed: _previousPeriod,
         ),
-        Text(
-          title,
-          style: const TextStyle(
-            fontWeight: FontWeight.w700,
-            fontSize: 20,
-            color: AppColors.blueMana,
+        Flexible(
+          child: Text(
+            title,
+            style: const TextStyle(
+              fontWeight: FontWeight.w700,
+              fontSize: 20,
+              color: AppColors.blueMana,
+            ),
+            overflow: TextOverflow.ellipsis,
+            maxLines: 1,
           ),
         ),
         IconButton(
@@ -265,6 +269,7 @@ class _CalendarMeditationState extends State<CalendarMeditation> {
           minutes > 0
               ? AppImages.calendarBalloonBlue
               : AppImages.calendarBalloon,
+          width: 30,
         ),
         Center(
           child: Text(
@@ -335,7 +340,7 @@ class _CalendarMeditationState extends State<CalendarMeditation> {
                       const SizedBox(height: 1),
                       SizedBox(
                         width: constraints.maxWidth * 0.85,
-                        height: constraints.maxHeight * 0.60,
+                        height: constraints.maxHeight * 0.50,
                         child: _buildDayBalloon(minutes),
                       ),
                     ],
@@ -386,7 +391,7 @@ class _CalendarMeditationState extends State<CalendarMeditation> {
         ),
         SizedBox(
           width: 50,
-          height: 45,
+          height: 40,
           child: Stack(
             alignment: Alignment.center,
             children: [

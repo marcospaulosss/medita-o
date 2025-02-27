@@ -168,7 +168,9 @@ class CalendarViewState extends State<CalendarView>
                     ),
                     RichText(
                       text: TextSpan(
-                        text: CalendarStrings.of(context).minutes,
+                        text: (model.calendarType == CalendarType.week)
+                            ? CalendarStrings.of(context).minutes
+                            : CalendarStrings.of(context).minutes2,
                         style: const TextStyle(
                           fontSize: 19,
                           color: AppColors.blueMana,
