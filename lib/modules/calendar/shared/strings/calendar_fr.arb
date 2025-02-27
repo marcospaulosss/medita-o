@@ -1,6 +1,7 @@
 {
   "youMeditated": "Vous avez médité:",
-  "minutes": "minutes",
+  "minutes": "minutes cette ",
+  "minutes2": "Min ce ",
   "week": "semaine",
   "month": "mois",
   "year": "année",
