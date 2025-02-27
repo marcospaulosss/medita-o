@@ -10,7 +10,10 @@ class CalendarStringsIt extends CalendarStrings {
   String get youMeditated => 'Hai meditato:';
 
   @override
-  String get minutes => 'minuti ';
+  String get minutes => 'Min questa';
+
+  @override
+  String get minutes2 => 'Min di questo';
 
   @override
   String get week => 'settimana';
