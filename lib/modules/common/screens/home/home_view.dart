@@ -86,7 +86,7 @@ class HomeViewState extends State<HomeView> implements HomeViewContract {
   /// Corpo da tela
   Padding buildBody(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 61, left: 40, right: 40, bottom: 33),
+      padding: const EdgeInsets.only(top: 61, bottom: 33),
       child: Column(
         children: [
           buildMeditate(context),
@@ -121,7 +121,7 @@ class HomeViewState extends State<HomeView> implements HomeViewContract {
     return Column(
       children: [
         Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Meditate(
               key: const Key("meditate5Minutes"),
@@ -138,7 +138,7 @@ class HomeViewState extends State<HomeView> implements HomeViewContract {
         ),
         const SizedBox(height: 14),
         Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Meditate(
               key: const Key("guidedMeditate"),

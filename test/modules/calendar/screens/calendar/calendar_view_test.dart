@@ -84,7 +84,7 @@ void main() {
         expect(find.text("Tempo por semana"), findsOneWidget);
         expect(find.text("0"), findsWidgets);
         expect(find.text("Você meditou:"), findsOneWidget);
-        expect(find.textContaining("Minutos esta", findRichText: true),
+        expect(find.textContaining("Min este", findRichText: true),
             findsOneWidget);
         expect(find.text("Compartilhar"), findsOneWidget);
       });

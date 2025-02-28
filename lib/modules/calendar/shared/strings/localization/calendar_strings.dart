@@ -112,8 +112,14 @@ abstract class CalendarStrings {
   /// No description provided for @minutes.
   ///
   /// In pt, this message translates to:
-  /// **'Minutos esta '**
+  /// **'Min esta '**
   String get minutes;
+
+  /// No description provided for @minutes2.
+  ///
+  /// In pt, this message translates to:
+  /// **'Min este '**
+  String get minutes2;
 
   /// No description provided for @week.
   ///

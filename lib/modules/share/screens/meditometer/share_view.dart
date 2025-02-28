@@ -232,7 +232,7 @@ class ShareViewState extends State<ShareView> implements ShareViewContract {
       (index) => Image.file(
         filterQuality: FilterQuality.high,
         File(model.share![index].imagePath!),
-        fit: BoxFit.cover, // Ajuste o modo de exibição conforme necessário
+        fit: BoxFit.fill, // Ajuste o modo de exibição conforme necessário
       ),
     );
   }
