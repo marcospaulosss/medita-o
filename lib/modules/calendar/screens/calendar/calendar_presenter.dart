@@ -78,6 +78,7 @@ class CalendarPresenter implements Presenter {
 
     model.weekCalendar = meditationsWeek;
     model.weekCalendarResponse = weekCalendar;
+    model.calendarType = CalendarType.week;
 
     view!.showNormalState(model);
   }

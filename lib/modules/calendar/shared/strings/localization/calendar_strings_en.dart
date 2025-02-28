@@ -13,6 +13,9 @@ class CalendarStringsEn extends CalendarStrings {
   String get minutes => 'Minutes this ';
 
   @override
+  String get minutes2 => 'Minutes this ';
+
+  @override
   String get week => 'week';
 
   @override
