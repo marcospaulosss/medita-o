@@ -50,8 +50,26 @@ jobs:
 
       - name: Setup Firebase files
         run: |
+          if [ -z "${{ secrets.SERVICE_CREDENTIALS_FILE_HOMOLOG }}" ]; then
+            echo "Error: SERVICE_CREDENTIALS_FILE_HOMOLOG secret is empty"
+            exit 1
+          fi
+          
+          # Criar diretório se não existir
           mkdir -p android/app
-          echo "${{ secrets.SERVICE_CREDENTIALS_FILE_HOMOLOG }}" | base64 --decode > android/app/google-services.json
+          
+          # Tentar decodificar e validar o JSON
+          if echo "${{ secrets.SERVICE_CREDENTIALS_FILE_HOMOLOG }}" | base64 -d > android/app/google-services.json 2>/dev/null; then
+            if jq empty android/app/google-services.json 2>/dev/null; then
+              echo "Firebase configuration file successfully decoded and validated"
+            else
+              echo "Error: Invalid JSON format in decoded file"
+              exit 1
+            fi
+          else
+            echo "Error: Failed to decode base64 content"
+            exit 1
+          fi
 
       - name: Build projeto
         run: |
@@ -64,17 +82,22 @@ jobs:
           ./gradlew clean
           ./gradlew signingReport
           cd ..
-          flutter build apk --debug --flavor dev -t lib/core/flavors/main_dev.dart -v
+          flutter build apk --release --flavor dev -t lib/core/flavors/main_dev.dart -v
 
       - name: Check build artifacts
         run: |
           ls -la build/app/outputs/flutter-apk/
+          
+      - name: Upload APK artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: app-dev-release
+          path: build/app/outputs/flutter-apk/app-dev-release.apk
+          retention-days: 5
 
       - name: Deploy do Firebase
         run: |
-          ls -la build/app/outputs/flutter-apk
           cd android
-          ls -la app/src/dev/
           bundle exec fastlane firebase
         env:
           FIREBASE_TESTER_GROUPS: ${{ secrets.FIREBASE_TESTER_GROUPS }}
