@@ -246,6 +246,30 @@ abstract class AuthenticationStrings {
   /// In pt, this message translates to:
   /// **'Comece a Meditar'**
   String get startMeditating;
+
+  /// No description provided for @welcomeTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'O 5 minutos Eu Medito continua'**
+  String get welcomeTitle;
+
+  /// No description provided for @welcomeSubtitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'100% gratuito'**
+  String get welcomeSubtitle;
+
+  /// No description provided for @welcomeMessage.
+  ///
+  /// In pt, this message translates to:
+  /// **'Faça login para conferir as novidades!'**
+  String get welcomeMessage;
+
+  /// No description provided for @enter.
+  ///
+  /// In pt, this message translates to:
+  /// **'Entrar'**
+  String get enter;
 }
 
 class _AuthenticationStringsDelegate extends LocalizationsDelegate<AuthenticationStrings> {

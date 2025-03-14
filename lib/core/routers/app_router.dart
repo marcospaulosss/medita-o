@@ -9,9 +9,10 @@ typedef OnCloseRoute = void Function(dynamic value);
 class AppRouter extends $AppRouter {
   @override
   List<AutoRoute> get routes => [
+        AutoRoute(page: WelcomeRoute.page, initial: true),
         AutoRoute(page: LoginRoute.page),
         AutoRoute(page: RegisterRoute.page),
-        AutoRoute(page: HomeRoute.page, initial: true, guards: [AuthGuard()]),
+        AutoRoute(page: HomeRoute.page, guards: [AuthGuard()]),
         AutoRoute(page: RegisterSuccessRoute.page, guards: [AuthGuard()]),
         AutoRoute(page: CameraRoute.page, guards: [AuthGuard()]),
         AutoRoute(page: MeditateInfoRoute.page, guards: [AuthGuard()]),
