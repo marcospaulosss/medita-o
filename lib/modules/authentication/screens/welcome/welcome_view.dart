@@ -1,10 +1,12 @@
-import 'package:auto_route/annotations.dart';
 import 'package:auto_route/auto_route.dart';
-import 'package:cinco_minutos_meditacao/core/routers/app_router.gr.dart';
+import 'package:cinco_minutos_meditacao/core/di/helpers.dart';
+import 'package:cinco_minutos_meditacao/modules/authentication/screens/welcome/welcome_contracts.dart';
+import 'package:cinco_minutos_meditacao/modules/authentication/screens/welcome/welcome_presenter.dart';
 import 'package:cinco_minutos_meditacao/modules/authentication/shared/strings/localization/authentication_strings.dart';
 import 'package:cinco_minutos_meditacao/shared/Theme/app_colors.dart';
 import 'package:cinco_minutos_meditacao/shared/Theme/app_images.dart';
 import 'package:cinco_minutos_meditacao/shared/components/background_default.dart';
+import 'package:cinco_minutos_meditacao/shared/helpers/view_binding.dart';
 import 'package:flutter/material.dart';
 
 /// Widget que representa a tela de boas-vindas do aplicativo.
@@ -19,9 +21,21 @@ import 'package:flutter/material.dart';
 /// A tela utiliza o sistema de rotas [AutoRoute] para navegação e
 /// suporta internacionalização através de [AuthenticationStrings].
 @RoutePage()
-class WelcomeView extends StatelessWidget {
+class WelcomeView extends StatefulWidget {
   /// Cria uma instância imutável de [WelcomeView].
   const WelcomeView({super.key});
+
+  @override
+  State<WelcomeView> createState() => _WelcomeViewState();
+}
+
+class _WelcomeViewState extends State<WelcomeView>
+    implements WelcomeViewContract {
+  /// Presenter responsável pela lógica de negócios
+  final Presenter _presenter = resolve<WelcomePresenter>();
+
+  /// Flag que indica se está carregando
+  bool _isLoading = false;
 
   /// Padding horizontal padrão da tela.
   static const double _horizontalPadding = 24.0;
@@ -46,6 +60,23 @@ class WelcomeView extends StatelessWidget {
 
   /// Tamanho do texto do botão.
   static const double _buttonTextSize = 19.0;
+
+  /// Flag que indica se o presenter já foi inicializado
+  bool _isPresenterInitialized = false;
+
+  @override
+  void initState() {
+    _presenter.bindView(this);
+    _presenter.onOpenScreen();
+
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _presenter.unbindView();
+    super.dispose();
+  }
 
   /// Estilo de texto padrão usado nos textos da tela.
   ///
@@ -73,26 +104,38 @@ class WelcomeView extends StatelessWidget {
   Widget build(BuildContext context) {
     final strings = AuthenticationStrings.of(context);
 
-    return Scaffold(
-      body: BackgroundDefault(
-        child: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: _horizontalPadding),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                _buildLogo(),
-                const SizedBox(height: _verticalSpacing),
-                _buildTitle(strings),
-                const SizedBox(height: _smallVerticalSpacing),
-                _buildSubtitle(strings),
-                const SizedBox(height: _verticalSpacing),
-                _buildEnterButton(context, strings),
-              ],
+    return Stack(
+      children: [
+        Scaffold(
+          body: BackgroundDefault(
+            child: SafeArea(
+              child: Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: _horizontalPadding),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    _buildLogo(),
+                    const SizedBox(height: _verticalSpacing),
+                    _buildTitle(strings),
+                    const SizedBox(height: _smallVerticalSpacing),
+                    _buildSubtitle(strings),
+                    const SizedBox(height: _verticalSpacing),
+                    _buildEnterButton(strings),
+                  ],
+                ),
+              ),
             ),
           ),
         ),
-      ),
+        if (_isLoading)
+          const ColoredBox(
+            color: Colors.black26,
+            child: Center(
+              child: CircularProgressIndicator(),
+            ),
+          ),
+      ],
     );
   }
 
@@ -167,17 +210,16 @@ class WelcomeView extends StatelessWidget {
   /// Ao ser pressionado, navega para [LoginRoute] usando [AutoRouter].
   ///
   /// Parameters:
-  ///   context: O [BuildContext] atual para navegação.
   ///   strings: Instância de [AuthenticationStrings] para acessar
   ///           as strings traduzidas.
   ///
   /// Returns:
   ///   Um [Widget] de botão que ocupa toda a largura disponível.
-  Widget _buildEnterButton(BuildContext context, AuthenticationStrings strings) {
+  Widget _buildEnterButton(AuthenticationStrings strings) {
     return SizedBox(
       width: double.infinity,
       child: ElevatedButton(
-        onPressed: () => context.router.replace(const LoginRoute()),
+        onPressed: _isLoading ? null : () => _presenter.navigateToLogin(),
         style: ElevatedButton.styleFrom(
           backgroundColor: const Color(0xFF7CC5FF),
           foregroundColor: Colors.white,
@@ -196,4 +238,4 @@ class WelcomeView extends StatelessWidget {
       ),
     );
   }
-} 
+}
