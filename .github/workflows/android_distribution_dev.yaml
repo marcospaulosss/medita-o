@@ -48,6 +48,17 @@ jobs:
           flutter-version: '3.22.1'
           channel: 'stable'
 
+      - name: Verify project structure
+        run: |
+          echo "Project structure:"
+          ls -la
+          echo "\nAndroid directory contents:"
+          ls -la android || echo "Android directory not found!"
+          echo "\nGradle files:"
+          find . -name "gradlew" -type f
+          echo "\nFlutter config:"
+          flutter doctor -v
+
       - name: Setup Firebase files
         run: |
           if [ -z "${{ secrets.SERVICE_CREDENTIALS_FILE_HOMOLOG }}" ]; then
@@ -89,15 +100,32 @@ jobs:
 
       - name: Build projeto
         run: |
+          # Preparar ambiente Flutter
           chmod +x localization
           flutter clean
           flutter pub get
           ./localization
           flutter packages pub run build_runner build --delete-conflicting-outputs
+          
+          # Preparar ambiente Android
           cd android
+          
+          # Verificar se gradlew existe
+          if [ ! -f "gradlew" ]; then
+            echo "Error: gradlew file not found"
+            echo "Contents of android directory:"
+            ls -la
+            exit 1
+          fi
+          
+          # Dar permissão de execução ao gradlew
+          chmod +x gradlew
+          
+          # Executar tarefas do Gradle
           ./gradlew clean
           ./gradlew signingReport
           cd ..
+          
           # Build APK
           echo "Building APK..."
           flutter build apk --release --flavor dev -t lib/core/flavors/main_dev.dart -v
@@ -105,8 +133,8 @@ jobs:
           # Verificar se o APK foi gerado
           if [ ! -f "build/app/outputs/flutter-apk/app-dev-release.apk" ]; then
             echo "Error: APK file not found at expected location"
-            echo "Contents of build/app/outputs/flutter-apk/:"
-            ls -la build/app/outputs/flutter-apk/
+            echo "Contents of build directory:"
+            find build -name "*.apk" -type f
             exit 1
           fi
           
