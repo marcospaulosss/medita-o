@@ -11,54 +11,88 @@ import 'package:flutter/material.dart';
 
 /// Widget que representa a tela de boas-vindas do aplicativo.
 ///
-/// Esta é a primeira tela que o usuário vê ao abrir o aplicativo.
-/// Ela contém:
-/// * Uma imagem de logo
-/// * Um título de boas-vindas
-/// * Uma mensagem destacando que o app é gratuito
-/// * Um botão para entrar no aplicativo
+/// Esta é a primeira tela que o usuário visualiza ao abrir o aplicativo pela primeira vez.
+/// Implementa o padrão MVP (Model-View-Presenter) através do [WelcomeViewContract]
+/// e utiliza injeção de dependências para gerenciar suas dependências.
 ///
-/// A tela utiliza o sistema de rotas [AutoRoute] para navegação e
-/// suporta internacionalização através de [AuthenticationStrings].
+/// Características principais:
+/// * Design minimalista e acolhedor
+/// * Suporte completo a internacionalização
+/// * Implementação de acessibilidade
+/// * Feedback visual durante carregamentos
+///
+/// Componentes visuais:
+/// * Logo do aplicativo centralizado
+/// * Título de boas-vindas personalizado
+/// * Mensagem destacando que o app é gratuito
+/// * Botão de entrada com feedback visual
+///
+/// A tela utiliza:
+/// * [AutoRoute] para navegação type-safe
+/// * [AuthenticationStrings] para internacionalização
+/// * [BackgroundDefault] para estilização consistente
+/// * [AppColors] para paleta de cores padronizada
 @RoutePage()
 class WelcomeView extends StatefulWidget {
   /// Cria uma instância imutável de [WelcomeView].
+  ///
+  /// Esta tela não aceita parâmetros externos pois é a tela inicial
+  /// do fluxo de autenticação.
   const WelcomeView({super.key});
 
   @override
   State<WelcomeView> createState() => _WelcomeViewState();
 }
 
+/// Estado interno da tela de boas-vindas.
+///
+/// Esta classe implementa [WelcomeViewContract] para estabelecer
+/// a comunicação bidirecional com o presenter, seguindo o padrão MVP.
+///
+/// Responsabilidades:
+/// * Gerenciar o ciclo de vida da view
+/// * Construir e atualizar a interface do usuário
+/// * Responder a interações do usuário
+/// * Manter o estado visual da tela
 class _WelcomeViewState extends State<WelcomeView>
     implements WelcomeViewContract {
-  /// Presenter responsável pela lógica de negócios
+  /// Presenter responsável pela lógica de negócios.
+  ///
+  /// Obtido através de injeção de dependências usando [resolve].
+  /// Gerencia todas as operações não-visuais da tela.
   final Presenter _presenter = resolve<WelcomePresenter>();
 
-  /// Flag que indica se está carregando
+  /// Indica se há uma operação de carregamento em andamento.
+  ///
+  /// Quando true, exibe um indicador de progresso e desabilita interações.
   bool _isLoading = false;
 
-  /// Padding horizontal padrão da tela.
+  /// Padding horizontal padrão aplicado aos elementos da tela.
+  ///
+  /// Valor fixo de 24.0 pixels para manter consistência visual.
   static const double _horizontalPadding = 24.0;
 
-  /// Altura da imagem do logo.
+  /// Altura fixa da imagem do logo do aplicativo.
+  ///
+  /// Mantém as proporções da imagem consistentes em diferentes dispositivos.
   static const double _imageHeight = 200.0;
 
-  /// Espaçamento vertical padrão entre elementos.
+  /// Espaçamento vertical padrão entre elementos principais.
   static const double _verticalSpacing = 30.0;
 
-  /// Espaçamento vertical menor entre elementos.
+  /// Espaçamento vertical reduzido para elementos relacionados.
   static const double _smallVerticalSpacing = 5.0;
 
-  /// Padding vertical do botão de entrar.
+  /// Padding vertical aplicado ao botão de entrada.
   static const double _buttonVerticalPadding = 16.0;
 
-  /// Raio da borda do botão de entrar.
+  /// Raio da borda do botão de entrada.
   static const double _buttonBorderRadius = 12.0;
 
-  /// Tamanho padrão do texto para títulos e mensagens.
+  /// Tamanho de fonte padrão para textos informativos.
   static const double _textSize = 20.0;
 
-  /// Tamanho do texto do botão.
+  /// Tamanho de fonte específico para o texto do botão.
   static const double _buttonTextSize = 19.0;
 
   /// Flag que indica se o presenter já foi inicializado
@@ -78,23 +112,24 @@ class _WelcomeViewState extends State<WelcomeView>
     super.dispose();
   }
 
-  /// Estilo de texto padrão usado nos textos da tela.
+  /// Estilo de texto base para conteúdo informativo.
   ///
-  /// Aplica:
-  /// * Tamanho de fonte [_textSize]
-  /// * Cor cinza [AppColors.dimGray]
-  /// * Peso da fonte light (300)
+  /// Características:
+  /// * Tamanho de fonte padronizado [_textSize]
+  /// * Cor cinza suave [AppColors.dimGray]
+  /// * Peso da fonte light para melhor legibilidade
   TextStyle get _defaultTextStyle => const TextStyle(
         fontSize: _textSize,
         color: AppColors.dimGray,
         fontWeight: FontWeight.w300,
       );
 
-  /// Estilo de texto para destacar partes importantes do texto.
+  /// Estilo de texto para elementos destacados.
   ///
-  /// Aplica:
-  /// * Cor azul [AppColors.germanderSpeedwell]
-  /// * Peso da fonte bold (700)
+  /// Características:
+  /// * Cor azul vibrante [AppColors.germanderSpeedwell]
+  /// * Peso da fonte bold para maior destaque
+  /// * Mantém o tamanho de fonte do estilo base
   TextStyle get _highlightTextStyle => const TextStyle(
         color: AppColors.germanderSpeedwell,
         fontWeight: FontWeight.w700,
@@ -141,12 +176,14 @@ class _WelcomeViewState extends State<WelcomeView>
 
   /// Constrói o widget do logo do aplicativo.
   ///
-  /// Utiliza [AppImages.balloon] como imagem e aplica semântica
-  /// para acessibilidade.
+  /// Características:
+  /// * Utiliza a imagem [AppImages.balloon] como logo
+  /// * Mantém altura fixa definida por [_imageHeight]
+  /// * Implementa semântica para acessibilidade
+  /// * Centraliza automaticamente na tela
   ///
   /// Returns:
-  ///   Um [Widget] contendo a imagem do logo com altura definida
-  ///   por [_imageHeight].
+  ///   Um [Widget] semanticamente acessível contendo o logo
   Widget _buildLogo() {
     return Semantics(
       label: 'Logo 5 Minutos Eu Medito',
@@ -157,16 +194,18 @@ class _WelcomeViewState extends State<WelcomeView>
     );
   }
 
-  /// Constrói o título principal da tela de boas-vindas.
+  /// Constrói o título principal da tela.
   ///
-  /// Utiliza [AuthenticationStrings] para internacionalização.
+  /// Características:
+  /// * Texto centralizado
+  /// * Utiliza [_defaultTextStyle] para consistência visual
+  /// * Suporte completo a internacionalização
   ///
   /// Parameters:
-  ///   strings: Instância de [AuthenticationStrings] para acessar
-  ///           as strings traduzidas.
+  ///   strings: Provedor de strings localizadas para o módulo de autenticação
   ///
   /// Returns:
-  ///   Um [Widget] de texto rico centralizado com o título.
+  ///   Um [RichText] centralizado contendo o título localizado
   Widget _buildTitle(AuthenticationStrings strings) {
     return RichText(
       textAlign: TextAlign.center,
@@ -179,16 +218,19 @@ class _WelcomeViewState extends State<WelcomeView>
     );
   }
 
-  /// Constrói o subtítulo da tela com destaque para "100% gratuito".
+  /// Constrói o subtítulo com destaque para gratuidade.
   ///
-  /// Combina texto normal com texto destacado usando [_highlightTextStyle].
+  /// Características:
+  /// * Combina texto normal e destacado
+  /// * Centralização automática
+  /// * Suporte a internacionalização
+  /// * Estilização diferenciada para parte destacada
   ///
   /// Parameters:
-  ///   strings: Instância de [AuthenticationStrings] para acessar
-  ///           as strings traduzidas.
+  ///   strings: Provedor de strings localizadas para o módulo de autenticação
   ///
   /// Returns:
-  ///   Um [Widget] de texto rico centralizado com o subtítulo.
+  ///   Um [RichText] com estilização composta para o subtítulo
   Widget _buildSubtitle(AuthenticationStrings strings) {
     return RichText(
       textAlign: TextAlign.center,
@@ -205,16 +247,25 @@ class _WelcomeViewState extends State<WelcomeView>
     );
   }
 
-  /// Constrói o botão de entrada do aplicativo.
+  /// Constrói o botão principal de entrada.
   ///
-  /// Ao ser pressionado, navega para [LoginRoute] usando [AutoRouter].
+  /// Características:
+  /// * Ocupa toda a largura disponível
+  /// * Cor de fundo personalizada
+  /// * Feedback visual durante carregamento
+  /// * Bordas arredondadas
+  /// * Texto em negrito
+  ///
+  /// Comportamento:
+  /// * Desabilita durante carregamento
+  /// * Utiliza [_presenter] para navegação
+  /// * Suporta internacionalização
   ///
   /// Parameters:
-  ///   strings: Instância de [AuthenticationStrings] para acessar
-  ///           as strings traduzidas.
+  ///   strings: Provedor de strings localizadas para o módulo de autenticação
   ///
   /// Returns:
-  ///   Um [Widget] de botão que ocupa toda a largura disponível.
+  ///   Um [Widget] de botão estilizado e responsivo
   Widget _buildEnterButton(AuthenticationStrings strings) {
     return SizedBox(
       width: double.infinity,
