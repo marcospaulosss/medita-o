@@ -42,6 +42,11 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
+      - name: Setup Gradle
+        uses: gradle/gradle-build-action@v2
+        with:
+          gradle-version: 8.4
+
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
@@ -110,12 +115,30 @@ jobs:
           # Preparar ambiente Android
           cd android
           
-          # Verificar se gradlew existe
+          # Verificar e gerar gradlew se necessário
           if [ ! -f "gradlew" ]; then
-            echo "Error: gradlew file not found"
+            echo "Gradle wrapper não encontrado. Gerando..."
+            gradle wrapper
+            if [ ! -f "gradlew" ]; then
+              echo "Tentando gerar wrapper com comando alternativo..."
+              gradle init
+              gradle wrapper
+            fi
+          fi
+          
+          # Verificar novamente se gradlew existe
+          if [ ! -f "gradlew" ]; then
+            echo "Error: Não foi possível gerar o gradlew"
             echo "Contents of android directory:"
             ls -la
-            exit 1
+            echo "Tentando regenerar arquivos da plataforma..."
+            cd ..
+            flutter create --platforms=android .
+            cd android
+            if [ ! -f "gradlew" ]; then
+              echo "Falha ao gerar gradlew mesmo após regenerar plataforma"
+              exit 1
+            fi
           fi
           
           # Dar permissão de execução ao gradlew
