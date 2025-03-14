@@ -47,20 +47,28 @@ jobs:
         with:
           flutter-version: '3.22.1'
           channel: 'stable'
-          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Setup Firebase files
-        run: echo "${{ secrets.SERVICE_CREDENTIALS_FILE_HOMOLOG }}" | base64 --decode > android/app/google-services.json
+        run: |
+          mkdir -p android/app
+          echo "${{ secrets.SERVICE_CREDENTIALS_FILE_HOMOLOG }}" | base64 --decode > android/app/google-services.json
 
       - name: Build projeto
         run: |
-          cd android
-          ./gradlew signingReport
+          chmod +x localization
           flutter clean
           flutter pub get
           ./localization
           flutter packages pub run build_runner build --delete-conflicting-outputs
+          cd android
+          ./gradlew clean
+          ./gradlew signingReport
+          cd ..
           flutter build apk --debug --flavor dev -t lib/core/flavors/main_dev.dart -v
+
+      - name: Check build artifacts
+        run: |
+          ls -la build/app/outputs/flutter-apk/
 
       - name: Deploy do Firebase
         run: |
