@@ -58,8 +58,8 @@ jobs:
         with:
           flutter-version: '3.22.1'
           channel: 'stable'
-          token: ${{ secrets.GITHUB_TOKEN }}
       - run: |
+          chmod +x localization
           flutter clean
           rm -rf ios/Pods
           rm ios/Podfile.lock
@@ -67,11 +67,15 @@ jobs:
           ./localization
           flutter packages pub run build_runner build --delete-conflicting-outputs
           cd ios
-          gem update cocoapods
+          gem update cocoapods --no-document
           pod deintegrate
           pod install
           cd ..
           flutter build ipa --export-options-plist lib/core/export_plist/Info_dev.plist --flavor dev -t lib/core/flavors/main_dev.dart
+
+      - name: Check build artifacts
+        run: |
+          ls -la build/ios/ipa
 
       - name: Deploy para testflight
         run: |
