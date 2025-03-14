@@ -42,11 +42,6 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
-      - name: Setup Gradle
-        uses: gradle/gradle-build-action@v2
-        with:
-          gradle-version: 8.4
-
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
@@ -112,46 +107,28 @@ jobs:
           ./localization
           flutter packages pub run build_runner build --delete-conflicting-outputs
           
-          # Preparar ambiente Android
+          # Preparar ambiente Android e gerar wrapper
           cd android
+          echo "Gerando wrapper do Gradle via Flutter..."
+          cd ..
+          flutter config --android-gradle-version=8.4
+          flutter pub get
           
-          # Configurar JAVA_HOME para o Gradle
-          export JAVA_HOME=$JAVA_HOME_17_X64
-          echo "Using JAVA_HOME: $JAVA_HOME"
-          
-          # Verificar e gerar gradlew se necessário
+          # Verificar se o wrapper foi gerado
+          cd android
           if [ ! -f "gradlew" ]; then
-            echo "Gradle wrapper não encontrado. Gerando..."
-            # Usar o Gradle com JAVA_HOME explícito
-            JAVA_HOME=$JAVA_HOME_17_X64 gradle wrapper
-            if [ ! -f "gradlew" ]; then
-              echo "Tentando gerar wrapper com comando alternativo..."
-              JAVA_HOME=$JAVA_HOME_17_X64 gradle init
-              JAVA_HOME=$JAVA_HOME_17_X64 gradle wrapper
-            fi
-          fi
-          
-          # Verificar novamente se gradlew existe
-          if [ ! -f "gradlew" ]; then
-            echo "Error: Não foi possível gerar o gradlew"
-            echo "Contents of android directory:"
-            ls -la
             echo "Tentando regenerar arquivos da plataforma..."
             cd ..
             flutter create --platforms=android .
             cd android
-            if [ ! -f "gradlew" ]; then
-              echo "Falha ao gerar gradlew mesmo após regenerar plataforma"
-              exit 1
-            fi
           fi
           
           # Dar permissão de execução ao gradlew
           chmod +x gradlew
           
-          # Executar tarefas do Gradle com JAVA_HOME explícito
-          JAVA_HOME=$JAVA_HOME_17_X64 ./gradlew clean
-          JAVA_HOME=$JAVA_HOME_17_X64 ./gradlew signingReport
+          # Executar tarefas do Gradle
+          ./gradlew clean --stacktrace
+          ./gradlew signingReport --stacktrace
           cd ..
           
           # Build APK
