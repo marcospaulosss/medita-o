@@ -115,14 +115,19 @@ jobs:
           # Preparar ambiente Android
           cd android
           
+          # Configurar JAVA_HOME para o Gradle
+          export JAVA_HOME=$JAVA_HOME_17_X64
+          echo "Using JAVA_HOME: $JAVA_HOME"
+          
           # Verificar e gerar gradlew se necessário
           if [ ! -f "gradlew" ]; then
             echo "Gradle wrapper não encontrado. Gerando..."
-            gradle wrapper
+            # Usar o Gradle com JAVA_HOME explícito
+            JAVA_HOME=$JAVA_HOME_17_X64 gradle wrapper
             if [ ! -f "gradlew" ]; then
               echo "Tentando gerar wrapper com comando alternativo..."
-              gradle init
-              gradle wrapper
+              JAVA_HOME=$JAVA_HOME_17_X64 gradle init
+              JAVA_HOME=$JAVA_HOME_17_X64 gradle wrapper
             fi
           fi
           
@@ -144,9 +149,9 @@ jobs:
           # Dar permissão de execução ao gradlew
           chmod +x gradlew
           
-          # Executar tarefas do Gradle
-          ./gradlew clean
-          ./gradlew signingReport
+          # Executar tarefas do Gradle com JAVA_HOME explícito
+          JAVA_HOME=$JAVA_HOME_17_X64 ./gradlew clean
+          JAVA_HOME=$JAVA_HOME_17_X64 ./gradlew signingReport
           cd ..
           
           # Build APK
