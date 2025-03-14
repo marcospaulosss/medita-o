@@ -66,12 +66,32 @@ jobs:
           flutter pub get
           ./localization
           flutter packages pub run build_runner build --delete-conflicting-outputs
+          
+          # Criar diretório e arquivo LaunchImage
+          mkdir -p ios/Runner/Assets.xcassets/LaunchImage.imageset
+          echo '{
+            "images" : [
+              {
+                "idiom" : "universal",
+                "filename" : "LaunchImage.png",
+                "scale" : "1x"
+              }
+            ],
+            "info" : {
+              "version" : 1,
+              "author" : "xcode"
+            }
+          }' > ios/Runner/Assets.xcassets/LaunchImage.imageset/Contents.json
+          
+          # Copiar imagem de splash screen
+          cp assets/images/splash_screen.png ios/Runner/Assets.xcassets/LaunchImage.imageset/LaunchImage.png
+          
           cd ios
           gem update cocoapods --no-document
           pod deintegrate
           pod install
           cd ..
-          flutter build ipa --export-options-plist lib/core/export_plist/Info_dev.plist --flavor dev -t lib/core/flavors/main_dev.dart
+          flutter build ipa --export-options-plist lib/core/export_plist/Info_dev.plist --flavor dev -t lib/core/flavors/main_dev.dart --no-tree-shake-icons
 
       - name: Check build artifacts
         run: |
