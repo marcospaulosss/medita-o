@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:integration_test/integration_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:get_it/get_it.dart';
@@ -11,14 +12,11 @@ import 'package:cinco_minutos_meditacao/modules/authentication/screens/welcome/w
 import 'package:cinco_minutos_meditacao/modules/authentication/screens/welcome/welcome_repository.dart';
 
 import '../../../../test_app.dart';
-import 'welcome_integration_test.mocks.dart';
+import '../../../../../test/modules/authentication/screens/welcome/welcome_widget_test.mocks.dart';
 
-@GenerateMocks([
-  AppRouter,
-  AnalyticsManager,
-  SecureStorage,
-])
+@GenerateMocks([AppRouter, AnalyticsManager, SecureStorage])
 void main() {
+  IntegrationTestWidgetsFlutterBinding.ensureInitialized();
   late MockAppRouter mockRouter;
   late MockAnalyticsManager mockAnalyticsManager;
   late MockSecureStorage mockSecureStorage;
