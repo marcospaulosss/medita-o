@@ -58,18 +58,34 @@ jobs:
           # Criar diretório se não existir
           mkdir -p android/app
           
+          # Salvar o conteúdo em um arquivo temporário
+          echo "${{ secrets.SERVICE_CREDENTIALS_FILE_HOMOLOG }}" > temp_encoded.txt
+          
+          # Remover caracteres inválidos e espaços em branco
+          tr -d '\r\n ' < temp_encoded.txt > temp_clean.txt
+          
           # Tentar decodificar e validar o JSON
-          if echo "${{ secrets.SERVICE_CREDENTIALS_FILE_HOMOLOG }}" | base64 -d > android/app/google-services.json 2>/dev/null; then
+          if cat temp_clean.txt | base64 -d > android/app/google-services.json 2>/dev/null; then
             if jq empty android/app/google-services.json 2>/dev/null; then
               echo "Firebase configuration file successfully decoded and validated"
+              echo "File size: $(ls -lh android/app/google-services.json | awk '{print $5}')"
+              echo "File contents preview (first 3 lines):"
+              head -n 3 android/app/google-services.json
             else
               echo "Error: Invalid JSON format in decoded file"
               exit 1
             fi
           else
             echo "Error: Failed to decode base64 content"
+            echo "Debug info:"
+            echo "- Encoded content length: $(wc -c < temp_clean.txt)"
+            echo "- First few characters: $(head -c 20 temp_clean.txt)"
+            rm -f temp_encoded.txt temp_clean.txt
             exit 1
           fi
+          
+          # Limpar arquivos temporários
+          rm -f temp_encoded.txt temp_clean.txt
 
       - name: Build projeto
         run: |
