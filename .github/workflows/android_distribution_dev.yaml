@@ -82,20 +82,36 @@ jobs:
           ./gradlew clean
           ./gradlew signingReport
           cd ..
+          # Build APK
+          echo "Building APK..."
           flutter build apk --release --flavor dev -t lib/core/flavors/main_dev.dart -v
+          
+          # Verificar se o APK foi gerado
+          if [ ! -f "build/app/outputs/flutter-apk/app-dev-release.apk" ]; then
+            echo "Error: APK file not found at expected location"
+            echo "Contents of build/app/outputs/flutter-apk/:"
+            ls -la build/app/outputs/flutter-apk/
+            exit 1
+          fi
+          
+          echo "APK build successful!"
+          echo "APK size: $(ls -lh build/app/outputs/flutter-apk/app-dev-release.apk | awk '{print $5}')"
 
       - name: Check build artifacts
         run: |
-          ls -la build/app/outputs/flutter-apk/
+          echo "Listing all APK files:"
+          find build/app/outputs/flutter-apk -name "*.apk" -type f -exec ls -lh {} \;
           
       - name: Upload APK artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: app-dev-release
           path: build/app/outputs/flutter-apk/app-dev-release.apk
           retention-days: 5
+          if-no-files-found: error
 
       - name: Deploy do Firebase
+        if: success()
         run: |
           cd android
           bundle exec fastlane firebase
