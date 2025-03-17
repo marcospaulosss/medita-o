@@ -48,17 +48,6 @@ jobs:
           flutter-version: '3.22.1'
           channel: 'stable'
 
-      - name: Verify project structure
-        run: |
-          echo "Project structure:"
-          ls -la
-          echo "\nAndroid directory contents:"
-          ls -la android || echo "Android directory not found!"
-          echo "\nGradle files:"
-          find . -name "gradlew" -type f
-          echo "\nFlutter config:"
-          flutter doctor -v
-
       - name: Setup Firebase files
         run: |
           if [ -z "${{ secrets.SERVICE_CREDENTIALS_FILE_HOMOLOG }}" ]; then
@@ -107,17 +96,25 @@ jobs:
           ./localization
           flutter packages pub run build_runner build --delete-conflicting-outputs
           
-          # Preparar ambiente Android e gerar wrapper
-          cd android
-          echo "Gerando wrapper do Gradle via Flutter..."
-          cd ..
-          flutter config --android-gradle-version=8.4
-          flutter pub get
+          # Preparar ambiente Android
+          echo "Verificando ambiente Android..."
+          flutter doctor -v
           
-          # Verificar se o wrapper foi gerado
+          # Verificar se o diretório Android existe
+          if [ ! -d "android" ]; then
+            echo "Diretório Android não encontrado. Criando..."
+            flutter create --platforms=android .
+          fi
+          
           cd android
+          
+          # Verificar conteúdo do diretório Android
+          echo "Conteúdo do diretório Android:"
+          ls -la
+          
+          # Verificar se gradlew existe
           if [ ! -f "gradlew" ]; then
-            echo "Tentando regenerar arquivos da plataforma..."
+            echo "Gradlew não encontrado. Tentando regenerar arquivos da plataforma..."
             cd ..
             flutter create --platforms=android .
             cd android
@@ -126,9 +123,10 @@ jobs:
           # Dar permissão de execução ao gradlew
           chmod +x gradlew
           
-          # Executar tarefas do Gradle
-          ./gradlew clean --stacktrace
-          ./gradlew signingReport --stacktrace
+          # Executar tarefas do Gradle com debug
+          echo "Executando tarefas do Gradle..."
+          ./gradlew clean --info --stacktrace
+          ./gradlew signingReport --info --stacktrace
           cd ..
           
           # Build APK
@@ -150,7 +148,7 @@ jobs:
         run: |
           echo "Listing all APK files:"
           find build/app/outputs/flutter-apk -name "*.apk" -type f -exec ls -lh {} \;
-          
+
       - name: Upload APK artifact
         uses: actions/upload-artifact@v4
         with:
