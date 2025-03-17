@@ -92,6 +92,7 @@ jobs:
           # Preparar ambiente Flutter
           chmod +x localization
           chmod +x android/run-gradle.sh
+          ./android/run-gradle.sh
           flutter clean
           flutter pub get
           ./localization
