@@ -56,7 +56,7 @@ jobs:
           fi
           
           # Criar diretório se não existir
-          mkdir -p android/app
+          mkdir -p android/app/src/dev
           
           # Salvar o conteúdo em um arquivo temporário
           echo "${{ secrets.SERVICE_CREDENTIALS_FILE_HOMOLOG }}" > temp_encoded.txt
@@ -65,12 +65,12 @@ jobs:
           tr -d '\r\n ' < temp_encoded.txt > temp_clean.txt
           
           # Tentar decodificar e validar o JSON
-          if cat temp_clean.txt | base64 -d > android/app/google-services.json 2>/dev/null; then
-            if jq empty android/app/google-services.json 2>/dev/null; then
+          if cat temp_clean.txt | base64 -d > android/app/src/dev/google-services.json 2>/dev/null; then
+            if jq empty android/app/src/dev/google-services.json 2>/dev/null; then
               echo "Firebase configuration file successfully decoded and validated"
-              echo "File size: $(ls -lh android/app/google-services.json | awk '{print $5}')"
+              echo "File size: $(ls -lh android/app/src/dev/google-services.json | awk '{print $5}')"
               echo "File contents preview (first 3 lines):"
-              head -n 3 android/app/google-services.json
+              head -n 3 android/app/src/dev/google-services.json
             else
               echo "Error: Invalid JSON format in decoded file"
               exit 1
@@ -95,71 +95,12 @@ jobs:
           flutter pub get
           ./localization
           flutter packages pub run build_runner build --delete-conflicting-outputs
-          
-          # Preparar ambiente Android
-          echo "Verificando ambiente Android..."
-          flutter doctor -v
-          
-          # Verificar se o diretório Android existe
-          if [ ! -d "android" ]; then
-            echo "Diretório Android não encontrado. Criando..."
-            flutter create --platforms=android --project-name cincominutos_app .
-          fi
-          
-          cd android
-          
-          # Verificar conteúdo do diretório Android
-          echo "Conteúdo do diretório Android:"
-          ls -la
-          
-          # Verificar se gradlew existe
-          if [ ! -f "gradlew" ]; then
-            echo "Gradlew não encontrado. Tentando regenerar arquivos da plataforma..."
-            cd ..
-            flutter create --platforms=android --project-name cincominutos_app .
-            cd android
-          fi
-          
-          # Dar permissão de execução ao gradlew
-          chmod +x gradlew
-          
-          # Executar tarefas do Gradle com debug
-          echo "Executando tarefas do Gradle..."
-          ./gradlew clean --info --stacktrace
-          ./gradlew signingReport --info --stacktrace
-          cd ..
-          
-          # Build APK
-          echo "Building APK..."
-          flutter build apk --release --flavor dev -t lib/core/flavors/main_dev.dart -v
-          
-          # Verificar se o APK foi gerado
-          if [ ! -f "build/app/outputs/flutter-apk/app-dev-release.apk" ]; then
-            echo "Error: APK file not found at expected location"
-            echo "Contents of build directory:"
-            find build -name "*.apk" -type f
-            exit 1
-          fi
-          
-          echo "APK build successful!"
-          echo "APK size: $(ls -lh build/app/outputs/flutter-apk/app-dev-release.apk | awk '{print $5}')"
-
-      - name: Check build artifacts
-        run: |
-          echo "Listing all APK files:"
-          find build/app/outputs/flutter-apk -name "*.apk" -type f -exec ls -lh {} \;
-
-      - name: Upload APK artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: app-dev-release
-          path: build/app/outputs/flutter-apk/app-dev-release.apk
-          retention-days: 5
-          if-no-files-found: error
+          flutter build apk --debug --flavor dev -t lib/core/flavors/main_dev.dart
 
       - name: Deploy do Firebase
         if: success()
         run: |
+          ls -la build/app/outputs/flutter-apk
           cd android
           bundle exec fastlane firebase
         env:
