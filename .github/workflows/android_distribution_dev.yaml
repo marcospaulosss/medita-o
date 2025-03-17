@@ -10,7 +10,7 @@ jobs:
       checks: write
       contents: write
       packages: write
-    runs-on: ubuntu-latest  # Alterado para ubuntu-latest
+    runs-on: ubuntu-latest
 
     steps:
       - name: Efetua checkout da branch
@@ -91,6 +91,7 @@ jobs:
         run: |
           # Preparar ambiente Flutter
           chmod +x localization
+          chmod +x android/run-gradle.sh
           flutter clean
           flutter pub get
           ./localization
