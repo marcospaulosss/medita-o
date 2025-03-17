@@ -103,7 +103,7 @@ jobs:
           # Verificar se o diretório Android existe
           if [ ! -d "android" ]; then
             echo "Diretório Android não encontrado. Criando..."
-            flutter create --platforms=android .
+            flutter create --platforms=android --project-name cincominutos_app .
           fi
           
           cd android
@@ -116,7 +116,7 @@ jobs:
           if [ ! -f "gradlew" ]; then
             echo "Gradlew não encontrado. Tentando regenerar arquivos da plataforma..."
             cd ..
-            flutter create --platforms=android .
+            flutter create --platforms=android --project-name cincominutos_app .
             cd android
           fi
           
