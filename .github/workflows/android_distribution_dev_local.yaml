@@ -16,6 +16,14 @@ jobs:
       - name: Efetua checkout da branch
         uses: actions/checkout@v3
 
+      - name: Setup Java
+        run: |
+          # Detecta o caminho do Java instalado
+          JAVA_PATH=$(/usr/libexec/java_home -v 17)
+          echo "JAVA_HOME=$JAVA_PATH" >> $GITHUB_ENV
+          echo "PATH=$JAVA_PATH/bin:$PATH" >> $GITHUB_ENV
+          echo "Java path configurado: $JAVA_PATH"
+
       - name: Setup Fastlane
         run: |
           cd android
@@ -28,8 +36,6 @@ jobs:
           ./localization
           flutter packages pub run build_runner build --delete-conflicting-outputs
           flutter build apk --debug --flavor dev -t lib/core/flavors/main_dev.dart
-        env:
-          JAVA_HOME: /opt/homebrew/opt/openjdk@17
 
       - name: Deploy do firebase
         run: |
