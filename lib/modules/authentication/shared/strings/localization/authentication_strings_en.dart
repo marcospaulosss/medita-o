@@ -77,4 +77,16 @@ class AuthenticationStringsEn extends AuthenticationStrings {
 
   @override
   String get startMeditating => 'Start to meditate';
+
+  @override
+  String get welcomeTitle => '5 Minutes I Meditate continues';
+
+  @override
+  String get welcomeSubtitle => '100% free';
+
+  @override
+  String get welcomeMessage => 'Login to check out what\'s new!';
+
+  @override
+  String get enter => 'Enter';
 }
