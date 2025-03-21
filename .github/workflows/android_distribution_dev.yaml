@@ -10,7 +10,7 @@ jobs:
       checks: write
       contents: write
       packages: write
-    runs-on: ubuntu-latest  # Alterado para ubuntu-latest
+    runs-on: ubuntu-latest
 
     steps:
       - name: Efetua checkout da branch
@@ -47,26 +47,61 @@ jobs:
         with:
           flutter-version: '3.22.1'
           channel: 'stable'
-          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Setup Firebase files
-        run: echo "${{ secrets.SERVICE_CREDENTIALS_FILE_HOMOLOG }}" | base64 --decode > android/app/google-services.json
+        run: |
+          if [ -z "${{ secrets.SERVICE_CREDENTIALS_FILE_HOMOLOG }}" ]; then
+            echo "Error: SERVICE_CREDENTIALS_FILE_HOMOLOG secret is empty"
+            exit 1
+          fi
+          
+          # Criar diretório se não existir
+          mkdir -p android/app/src/dev
+          
+          # Salvar o conteúdo em um arquivo temporário
+          echo "${{ secrets.SERVICE_CREDENTIALS_FILE_HOMOLOG }}" > temp_encoded.txt
+          
+          # Remover caracteres inválidos e espaços em branco
+          tr -d '\r\n ' < temp_encoded.txt > temp_clean.txt
+          
+          # Tentar decodificar e validar o JSON
+          if cat temp_clean.txt | base64 -d > android/app/src/dev/google-services.json 2>/dev/null; then
+            if jq empty android/app/src/dev/google-services.json 2>/dev/null; then
+              echo "Firebase configuration file successfully decoded and validated"
+              echo "File size: $(ls -lh android/app/src/dev/google-services.json | awk '{print $5}')"
+              echo "File contents preview (first 3 lines):"
+              head -n 3 android/app/src/dev/google-services.json
+            else
+              echo "Error: Invalid JSON format in decoded file"
+              exit 1
+            fi
+          else
+            echo "Error: Failed to decode base64 content"
+            echo "Debug info:"
+            echo "- Encoded content length: $(wc -c < temp_clean.txt)"
+            echo "- First few characters: $(head -c 20 temp_clean.txt)"
+            rm -f temp_encoded.txt temp_clean.txt
+            exit 1
+          fi
+          
+          # Limpar arquivos temporários
+          rm -f temp_encoded.txt temp_clean.txt
 
       - name: Build projeto
         run: |
-          cd android
-          ./gradlew signingReport
+          # Preparar ambiente Flutter
+          chmod +x localization
           flutter clean
           flutter pub get
           ./localization
           flutter packages pub run build_runner build --delete-conflicting-outputs
-          flutter build apk --debug --flavor dev -t lib/core/flavors/main_dev.dart -v
+          flutter build apk --debug --flavor dev -t lib/core/flavors/main_dev.dart
 
       - name: Deploy do Firebase
+        if: success()
         run: |
           ls -la build/app/outputs/flutter-apk
           cd android
-          ls -la app/src/dev/
           bundle exec fastlane firebase
         env:
           FIREBASE_TESTER_GROUPS: ${{ secrets.FIREBASE_TESTER_GROUPS }}
