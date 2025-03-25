@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:async';
 
 import 'package:auto_route/auto_route.dart';
 import 'package:camera/camera.dart';
@@ -24,7 +25,10 @@ import 'package:path_provider/path_provider.dart';
 /// O componente retorna um [File] contendo a imagem selecionada/capturada.
 @RoutePage()
 class CameraView extends StatefulWidget {
-  const CameraView({super.key});
+  /// Controlador da câmera para testes
+  final CameraController? testController;
+
+  const CameraView({super.key, this.testController});
 
   @override
   State<CameraView> createState() => _CameraViewState();
@@ -35,7 +39,7 @@ class CameraView extends StatefulWidget {
 /// Gerencia o ciclo de vida da câmera, captura de imagens e interações do usuário.
 class _CameraViewState extends State<CameraView> {
   /// Controlador da câmera que gerencia a captura de imagens
-  late CameraController _controller;
+  CameraController? _controller;
 
   /// Lista de câmeras disponíveis no dispositivo
   late List<CameraDescription> cameras;
@@ -64,23 +68,35 @@ class _CameraViewState extends State<CameraView> {
   @override
   void initState() {
     super.initState();
-    _initializeCamera();
+    if (widget.testController != null) {
+      _controller = widget.testController;
+      isCameraInitialized = true;
+    } else {
+      _initializeCamera();
+    }
   }
 
   @override
   void dispose() {
-    _cleanupResources();
+    if (_controller != null) {
+      _cleanupResources();
+    }
     super.dispose();
   }
 
   /// Limpa recursos temporários e libera a câmera.
   ///
   /// Este método é chamado durante o dispose do widget e:
-  /// - Libera o controlador da câmera
+  /// - Libera o controlador da câmera (se existir)
   /// - Remove arquivos temporários criados durante a compressão
   /// - Registra erros de limpeza no Crashlytics
+  ///
+  /// O método verifica a existência do controlador antes de tentar liberá-lo,
+  /// evitando erros de null safety.
   void _cleanupResources() {
-    _controller.dispose();
+    if (_controller != null) {
+      _controller!.dispose();
+    }
     for (var filePath in _tempFiles) {
       try {
         final file = File(filePath);
@@ -125,30 +141,63 @@ class _CameraViewState extends State<CameraView> {
   /// Inicializa a câmera do dispositivo.
   ///
   /// Este método:
-  /// - Obtém a lista de câmeras disponíveis
-  /// - Configura a câmera frontal como padrão
-  /// - Inicializa o controlador da câmera com resolução baixa para melhor performance
-  /// - Trata erros de inicialização
+  /// - Verifica se há câmeras disponíveis no dispositivo
+  /// - Configura a câmera frontal como padrão (ou a primeira disponível)
+  /// - Inicializa o controlador da câmera com configurações otimizadas:
+  ///   - Resolução média para melhor qualidade
+  ///   - Áudio desabilitado para melhor performance
+  /// - Define um timeout de 10 segundos para evitar travamentos
+  /// - Trata erros de inicialização e permissões
+  ///
+  /// Em caso de erro:
+  /// - Registra o erro no Crashlytics
+  /// - Exibe uma mensagem amigável ao usuário
+  /// - Navega de volta para a tela anterior
   Future<void> _initializeCamera() async {
     try {
+      // Verifica se há câmeras disponíveis
       cameras = await availableCameras();
+      if (cameras.isEmpty) {
+        throw Exception('Nenhuma câmera disponível no dispositivo');
+      }
+
+      // Tenta encontrar a câmera frontal primeiro
       currentCamera = cameras.firstWhere(
         (camera) => camera.lensDirection == CameraLensDirection.front,
         orElse: () => cameras.first,
       );
 
+      // Inicializa o controlador com configurações otimizadas
       _controller = CameraController(
         currentCamera,
-        ResolutionPreset.low, // Mudado para low para melhor performance
+        ResolutionPreset.medium, // Mudado para medium para melhor qualidade
+        enableAudio: false, // Desabilita áudio pois não é necessário
       );
 
-      await _controller.initialize();
+      // Inicializa a câmera com timeout
+      await _controller!.initialize().timeout(
+        const Duration(seconds: 10),
+        onTimeout: () {
+          throw TimeoutException('Timeout ao inicializar a câmera');
+        },
+      );
+
+      if (!mounted) return;
+
       setState(() {
         isCameraInitialized = true;
       });
     } catch (e) {
+      debugPrint('Erro ao inicializar câmera: $e');
       error.sendErrorToCrashlytics(
-          code: ErrorCodes.cameraError, stackTrace: StackTrace.current);
+        message: 'Erro ao acessar a câmera: $e',
+        code: ErrorCodes.cameraError,
+        stackTrace: StackTrace.current,
+      );
+      
+      if (!mounted) return;
+      
+      _showErrorDialog('Erro ao acessar a câmera. Por favor, verifique as permissões e tente novamente.');
       _navigateBack(error);
     }
   }
@@ -167,13 +216,13 @@ class _CameraViewState extends State<CameraView> {
         orElse: () => currentCamera,
       );
 
-      await _controller.dispose();
+      await _controller!.dispose();
       _controller = CameraController(
         newCamera,
         ResolutionPreset.low,
       );
 
-      await _controller.initialize();
+      await _controller!.initialize();
       setState(() {
         currentCamera = newCamera;
       });
@@ -192,7 +241,7 @@ class _CameraViewState extends State<CameraView> {
   /// - Comprime a imagem capturada
   /// - Exibe diálogo de pré-visualização
   Future<void> _takePicture() async {
-    if (!_controller.value.isInitialized) {
+    if (!_controller!.value.isInitialized) {
       _showErrorDialog('Câmera não inicializada');
       error.sendErrorToCrashlytics(
         message: 'Câmera não inicializada',
@@ -201,7 +250,7 @@ class _CameraViewState extends State<CameraView> {
     }
 
     try {
-      final XFile? picture = await _controller.takePicture();
+      final XFile? picture = await _controller!.takePicture();
       if (picture != null) {
         final compressedImage = await _compressImage(File(picture.path));
         setState(() {
@@ -304,9 +353,9 @@ class _CameraViewState extends State<CameraView> {
   Future<void> _toggleFlash() async {
     try {
       if (_isFlashOn) {
-        await _controller.setFlashMode(FlashMode.off);
+        await _controller!.setFlashMode(FlashMode.off);
       } else {
-        await _controller.setFlashMode(FlashMode.torch);
+        await _controller!.setFlashMode(FlashMode.torch);
       }
       setState(() {
         _isFlashOn = !_isFlashOn;
@@ -363,7 +412,7 @@ class _CameraViewState extends State<CameraView> {
                   bottom: 200,
                   child: AspectRatio(
                     aspectRatio: 3 / 4,
-                    child: CameraPreview(_controller),
+                    child: CameraPreview(_controller!),
                   ),
                 ),
                 Positioned(

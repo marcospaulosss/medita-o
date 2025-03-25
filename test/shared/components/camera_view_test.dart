@@ -81,7 +81,7 @@ void main() {
         focusPointSupported: true,
         description: const CameraDescription(
           name: 'Test Camera',
-          lensDirection: CameraLensDirection.back,
+          lensDirection: CameraLensDirection.front,
           sensorOrientation: 0,
         ),
       ),
@@ -117,15 +117,14 @@ void main() {
   /// Espera encontrar uma instância do widget CameraView na árvore de widgets
   testWidgets('CameraView deve inicializar corretamente',
       (WidgetTester tester) async {
-    await tester.pumpWidget(
-      MaterialApp(
-        home: Scaffold(
-          body: CameraView(),
-        ),
+    // Cria um widget wrapper que injeta o CameraController mockado
+    final widget = MaterialApp(
+      home: Scaffold(
+        body: CameraView(testController: mockCameraController),
       ),
     );
 
-    // Aguarda a inicialização da câmera
+    await tester.pumpWidget(widget);
     await tester.pump(const Duration(seconds: 1));
 
     expect(find.byType(CameraView), findsOneWidget);
@@ -135,15 +134,14 @@ void main() {
   /// Espera encontrar uma instância do widget CameraPreview na árvore de widgets
   testWidgets('CameraView deve mostrar preview da câmera após inicialização',
       (WidgetTester tester) async {
-    await tester.pumpWidget(
-      MaterialApp(
-        home: Scaffold(
-          body: CameraView(),
-        ),
+    // Cria um widget wrapper que injeta o CameraController mockado
+    final widget = MaterialApp(
+      home: Scaffold(
+        body: CameraView(testController: mockCameraController),
       ),
     );
 
-    // Aguarda a inicialização da câmera
+    await tester.pumpWidget(widget);
     await tester.pump(const Duration(seconds: 1));
 
     expect(find.byType(CameraPreview), findsOneWidget);
@@ -154,15 +152,14 @@ void main() {
   /// 2. Verifica se o método setFlashMode foi chamado com o modo torch
   testWidgets('CameraView deve alternar flash corretamente',
       (WidgetTester tester) async {
-    await tester.pumpWidget(
-      MaterialApp(
-        home: Scaffold(
-          body: CameraView(),
-        ),
+    // Cria um widget wrapper que injeta o CameraController mockado
+    final widget = MaterialApp(
+      home: Scaffold(
+        body: CameraView(testController: mockCameraController),
       ),
     );
 
-    // Aguarda a inicialização da câmera
+    await tester.pumpWidget(widget);
     await tester.pump(const Duration(seconds: 1));
 
     // Encontra e toca no botão de flash
