@@ -15,14 +15,14 @@ import 'package:cinco_minutos_meditacao/modules/authentication/screens/register/
     as _i14;
 import 'package:cinco_minutos_meditacao/modules/authentication/screens/register_success/register_success_view.dart'
     as _i13;
+import 'package:cinco_minutos_meditacao/modules/authentication/screens/welcome/welcome_view.dart'
+    as _i16;
 import 'package:cinco_minutos_meditacao/modules/calendar/screens/calendar/calendar_view.dart'
     as _i1;
 import 'package:cinco_minutos_meditacao/modules/common/screens/home/home_view.dart'
     as _i7;
 import 'package:cinco_minutos_meditacao/modules/common/screens/profile/profile_view.dart'
     as _i12;
-import 'package:cinco_minutos_meditacao/modules/common/screens/splash_screen/splash_screen_view.dart'
-    as _i16;
 import 'package:cinco_minutos_meditacao/modules/meditate/screens/donation/donation_view.dart'
     as _i3;
 import 'package:cinco_minutos_meditacao/modules/meditate/screens/five_minutes/five_minutes_view.dart'
@@ -144,10 +144,10 @@ abstract class $AppRouter extends _i17.RootStackRouter {
         ),
       );
     },
-    SplashScreenRoute.name: (routeData) {
+    WelcomeRoute.name: (routeData) {
       return _i17.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i16.SplashScreenView(),
+        child: const _i16.WelcomeView(),
       );
     },
   };
@@ -388,15 +388,15 @@ class ShareRouteArgs {
 }
 
 /// generated route for
-/// [_i16.SplashScreenView]
-class SplashScreenRoute extends _i17.PageRouteInfo<void> {
-  const SplashScreenRoute({List<_i17.PageRouteInfo>? children})
+/// [_i16.WelcomeView]
+class WelcomeRoute extends _i17.PageRouteInfo<void> {
+  const WelcomeRoute({List<_i17.PageRouteInfo>? children})
       : super(
-          SplashScreenRoute.name,
+          WelcomeRoute.name,
           initialChildren: children,
         );
 
-  static const String name = 'SplashScreenRoute';
+  static const String name = 'WelcomeRoute';
 
   static const _i17.PageInfo<void> page = _i17.PageInfo<void>(name);
 }

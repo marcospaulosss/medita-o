@@ -1,0 +1,52 @@
+{
+    // Use o IntelliSense para saber mais sobre os atributos possíveis.
+    // Focalizar para exibir as descrições dos atributos existentes.
+    // Para obter mais informações, acesse: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+    
+        {
+            "name": "cincominutos-app",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "cincominutos-app (profile mode)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "cincominutos-app (release mode)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },
+        {
+            "name": "strings",
+            "cwd": "lib/shared/strings",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "cincominutos-app",
+            "cwd": "actions-runner/_work/cincominutos-app/cincominutos-app",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "cincominutos-app (profile mode)",
+            "cwd": "actions-runner/_work/cincominutos-app/cincominutos-app",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "cincominutos-app (release mode)",
+            "cwd": "actions-runner/_work/cincominutos-app/cincominutos-app",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        }
+    ]
+}
