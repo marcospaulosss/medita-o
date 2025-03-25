@@ -22,5 +22,9 @@
   "accountCreatedSuccessfully": "Konto erfolgreich erstellt!",
   "completeYourRegistration": "Anmeldung abschließen",
   "haveAccessContent": "Zugang zu allen Inhalten haben",
-  "startMeditating": "Beginnen Sie zu meditieren"
+  "startMeditating": "Beginnen Sie zu meditieren",
+  "welcomeTitle": "5 Minuten Ich Meditiere geht weiter",
+  "welcomeSubtitle": "100% kostenlos",
+  "welcomeMessage": "Melden Sie sich an, um die Neuigkeiten zu sehen!",
+  "enter": "Eintreten"
 }
