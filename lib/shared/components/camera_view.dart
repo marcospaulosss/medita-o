@@ -314,8 +314,8 @@ class _CameraViewState extends State<CameraView> {
   /// Retorna um [File] contendo a imagem comprimida.
   ///
   /// Configurações de compressão:
-  /// - Qualidade: 85%
-  /// - Dimensões mínimas: 1080x1440 pixels
+  /// - Qualidade: 100%
+  /// - Dimensões mínimas: 354x472 pixels
   /// - Formato: JPG
   /// - Remove metadados EXIF
   Future<File> _compressImage(File file) async {
@@ -327,9 +327,9 @@ class _CameraViewState extends State<CameraView> {
       final result = await FlutterImageCompress.compressAndGetFile(
         file.absolute.path,
         targetPath,
-        quality: 85,
-        minWidth: 1080,
-        minHeight: 1440,
+        quality: 100,
+        minWidth: 354,
+        minHeight: 472,
         rotate: 0,
         keepExif: false,
       );
