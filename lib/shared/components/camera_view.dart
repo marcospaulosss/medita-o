@@ -170,7 +170,7 @@ class _CameraViewState extends State<CameraView> {
       // Inicializa o controlador com configurações otimizadas
       _controller = CameraController(
         currentCamera,
-        ResolutionPreset.medium, // Mudado para medium para melhor qualidade
+        ResolutionPreset.high, // Mudado para medium para melhor qualidade
         enableAudio: false, // Desabilita áudio pois não é necessário
       );
 
@@ -315,7 +315,7 @@ class _CameraViewState extends State<CameraView> {
   ///
   /// Configurações de compressão:
   /// - Qualidade: 85%
-  /// - Dimensões mínimas: 1024x1024 pixels
+  /// - Dimensões mínimas: 1080x1440 pixels
   /// - Formato: JPG
   /// - Remove metadados EXIF
   Future<File> _compressImage(File file) async {
@@ -328,8 +328,8 @@ class _CameraViewState extends State<CameraView> {
         file.absolute.path,
         targetPath,
         quality: 85,
-        minWidth: 1024,
-        minHeight: 1024,
+        minWidth: 1080,
+        minHeight: 1440,
         rotate: 0,
         keepExif: false,
       );
