@@ -90,7 +90,7 @@ class HomePresenter implements Presenter {
   /// Atualiza a imagem de perfil do usuário
   @override
   Future<void> updateImageProfile() async {
-    _router.goTo(const CameraRoute(), onClose: (result) async {
+    _router.goTo(CameraRoute(), onClose: (result) async {
       if (result == null) {
         return;
       }
