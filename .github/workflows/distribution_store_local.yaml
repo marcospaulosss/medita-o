@@ -10,7 +10,9 @@ jobs:
   ios_distribution_local:
     needs: tests
     uses: polvo-labs/cincominutos-app/.github/workflows/ios_distribution_store_local.yaml@main
+    secrets: inherit
 
   android_distribution_local:
     needs: tests
     uses: polvo-labs/cincominutos-app/.github/workflows/android_distribution_store_local.yaml@main
+    secrets: inherit
