@@ -122,7 +122,7 @@ class GuidedMeditationViewState extends State<GuidedMeditationView>
       fontSize: 16,
       fontWeight: FontWeight.w400,
       color: AppColors.steelWoolColor,
-      fontFamily: 'Apertura',
+      fontFamily: 'Hebo',
     );
   }
 }
