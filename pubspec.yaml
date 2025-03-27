@@ -2,7 +2,7 @@ name: cinco_minutos_meditacao
 description: A new Flutter project.
 publish_to: 'none'
 
-version: 4.13.4+65
+version: 4.13.6+67
 
 environment:
   sdk: '>=3.0.6 <4.0.0'
