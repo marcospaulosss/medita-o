@@ -77,6 +77,7 @@ class ProfileViewState extends State<ProfileView>
                 description1: CommonStrings.of(context).homeHeaderDescription1,
                 photo: model.userResponse!.profilePhotoPath,
                 updateImage: () => presenter.updateImageProfile(),
+                colorName: AppColors.frankBlue,
               ),
             ),
             buildBody(),
