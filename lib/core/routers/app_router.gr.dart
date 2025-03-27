@@ -9,6 +9,7 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:auto_route/auto_route.dart' as _i17;
+import 'package:camera/camera.dart' as _i19;
 import 'package:cinco_minutos_meditacao/modules/authentication/screens/login/login_view.dart'
     as _i9;
 import 'package:cinco_minutos_meditacao/modules/authentication/screens/register/register_view.dart'
@@ -38,7 +39,7 @@ import 'package:cinco_minutos_meditacao/modules/meditate/screens/meditate_info/m
 import 'package:cinco_minutos_meditacao/modules/meditometer/screens/meditometer/meditometer_view.dart'
     as _i11;
 import 'package:cinco_minutos_meditacao/modules/share/screens/meditometer/share_model.dart'
-    as _i19;
+    as _i20;
 import 'package:cinco_minutos_meditacao/modules/share/screens/meditometer/share_view.dart'
     as _i15;
 import 'package:cinco_minutos_meditacao/shared/components/camera_view.dart'
@@ -57,9 +58,14 @@ abstract class $AppRouter extends _i17.RootStackRouter {
       );
     },
     CameraRoute.name: (routeData) {
+      final args = routeData.argsAs<CameraRouteArgs>(
+          orElse: () => const CameraRouteArgs());
       return _i17.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i2.CameraView(),
+        child: _i2.CameraView(
+          key: args.key,
+          testController: args.testController,
+        ),
       );
     },
     DonationRoute.name: (routeData) {
@@ -169,16 +175,40 @@ class CalendarRoute extends _i17.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i2.CameraView]
-class CameraRoute extends _i17.PageRouteInfo<void> {
-  const CameraRoute({List<_i17.PageRouteInfo>? children})
-      : super(
+class CameraRoute extends _i17.PageRouteInfo<CameraRouteArgs> {
+  CameraRoute({
+    _i18.Key? key,
+    _i19.CameraController? testController,
+    List<_i17.PageRouteInfo>? children,
+  }) : super(
           CameraRoute.name,
+          args: CameraRouteArgs(
+            key: key,
+            testController: testController,
+          ),
           initialChildren: children,
         );
 
   static const String name = 'CameraRoute';
 
-  static const _i17.PageInfo<void> page = _i17.PageInfo<void>(name);
+  static const _i17.PageInfo<CameraRouteArgs> page =
+      _i17.PageInfo<CameraRouteArgs>(name);
+}
+
+class CameraRouteArgs {
+  const CameraRouteArgs({
+    this.key,
+    this.testController,
+  });
+
+  final _i18.Key? key;
+
+  final _i19.CameraController? testController;
+
+  @override
+  String toString() {
+    return 'CameraRouteArgs{key: $key, testController: $testController}';
+  }
 }
 
 /// generated route for
@@ -354,7 +384,7 @@ class RegisterRoute extends _i17.PageRouteInfo<void> {
 class ShareRoute extends _i17.PageRouteInfo<ShareRouteArgs> {
   ShareRoute({
     _i18.Key? key,
-    required _i19.ShareModel params,
+    required _i20.ShareModel params,
     List<_i17.PageRouteInfo>? children,
   }) : super(
           ShareRoute.name,
@@ -379,7 +409,7 @@ class ShareRouteArgs {
 
   final _i18.Key? key;
 
-  final _i19.ShareModel params;
+  final _i20.ShareModel params;
 
   @override
   String toString() {
