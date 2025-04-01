@@ -95,7 +95,7 @@ class MeditateInfoViewState extends State<MeditateInfoView>
   /// Corpo da tela
   Padding buildBody(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(top: 13, left: 40, right: 40, bottom: 33),
+      padding: const EdgeInsets.only(top: 13, left: 40, right: 40, bottom: 33),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,

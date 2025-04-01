@@ -91,24 +91,19 @@ class HomeViewState extends State<HomeView> implements HomeViewContract {
         children: [
           buildMeditate(context),
           const SizedBox(height: 33),
-          ClipRRect(
-            borderRadius: BorderRadius.circular(20.0), // Define o raio da borda
-            child: model.bannersResponse?.banners?.image != null
-                ? Image.network(
-                    model.bannersResponse!.banners!.image!,
-                    width: 350.0, // Define a largura da imagem
-                    height: 115.0, // Define a altura da imagem
-                    fit:
-                        BoxFit.cover, // Ajusta a imagem para cobrir toda a área
-                  )
-                : Image.asset(
-                    AppImages.banner,
-                    width: 350.0, // Define a largura da imagem
-                    height: 115.0, // Define a altura da imagem
-                    fit:
-                        BoxFit.cover, // Ajusta a imagem para cobrir toda a área
-                  ),
-          ),
+          model.bannersResponse?.banners?.image != null
+              ? Image.network(
+                  model.bannersResponse!.banners!.image!,
+                  width: 350.0, // Define a largura da imagem
+                  height: 115.0, // Define a altura da imagem
+                  fit: BoxFit.cover, // Ajusta a imagem para cobrir toda a área
+                )
+              : Image.asset(
+                  AppImages.banner,
+                  width: 350.0, // Define a largura da imagem
+                  height: 115.0, // Define a altura da imagem
+                  fit: BoxFit.cover, // Ajusta a imagem para cobrir toda a área
+                ),
           const SizedBox(height: 40),
           Meditometer(meditationsResponse: model.meditationsResponse),
         ],
