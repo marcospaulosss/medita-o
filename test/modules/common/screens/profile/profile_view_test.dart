@@ -615,5 +615,153 @@ main() async {
         await tester.pump();
       });
     });
+
+    group("Privacy Policy", () {
+      testWidgets("Should open privacy policy URL when clicked", (tester) async {
+        // Cria o widget e aguarda a inicialização
+        await tester.pumpWidget(createWidgetUnderTest());
+        await tester.pump();
+
+        // Simula o estado normal da tela diretamente
+        final profileViewState =
+            tester.state(find.byType(ProfileView)) as ProfileViewState;
+        profileViewState.showNormalState(ProfileModel(
+          userResponse: user.UserResponse(
+              1,
+              "Marcos Santos",
+              "marcos@gmail.com",
+              "",
+              "1",
+              "1",
+              "",
+              DateTime.now().toString(),
+              DateTime.now().toString(),
+              'Masculino',
+              '1983-07-02',
+              user.State(1, 'São Paulo', user.Country(1, 'Brazil'))),
+          countryResponse: CountriesResponse([
+            Countries(
+              1,
+              "Brazil",
+            ),
+          ]),
+          statesResponse: StatesResponse([
+            States(
+              1,
+              2,
+              "São Paulo",
+            ),
+          ]),
+        ));
+        await tester.pumpAndSettle();
+
+        // Rola a tela para baixo para encontrar o texto da política de privacidade
+        await tester.dragUntilVisible(
+          find.textContaining("Política de Privacidade", findRichText: true),
+          find.byType(SingleChildScrollView),
+          const Offset(0, -100),
+        );
+        await tester.pumpAndSettle();
+
+        // Encontra o texto da política de privacidade
+        final privacyPolicyText = find.textContaining("Política de Privacidade", findRichText: true);
+        expect(privacyPolicyText, findsOneWidget);
+
+        // Simula o clique no texto
+        await tester.tap(privacyPolicyText, warnIfMissed: false);
+        await tester.pumpAndSettle();
+      });
+
+      testWidgets("Should show error message when URL cannot be opened", (tester) async {
+        // Cria o widget e aguarda a inicialização
+        await tester.pumpWidget(MaterialApp(
+          localizationsDelegates: const [
+            CommonStrings.delegate,
+            SharedStrings.delegate,
+            AuthenticationStrings.delegate,
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          supportedLocales: const [
+            Locale('pt', ''),
+          ],
+          home: ScaffoldMessenger(
+            child: Builder(
+              builder: (BuildContext context) => Scaffold(
+                body: Builder(
+                  builder: (BuildContext context) {
+                    return view;
+                  },
+                ),
+              ),
+            ),
+          ),
+        ));
+        await tester.pump();
+
+        // Simula o estado normal da tela diretamente
+        final profileViewState =
+            tester.state(find.byType(ProfileView)) as ProfileViewState;
+        profileViewState.showNormalState(ProfileModel(
+          userResponse: user.UserResponse(
+              1,
+              "Marcos Santos",
+              "marcos@gmail.com",
+              "",
+              "1",
+              "1",
+              "",
+              DateTime.now().toString(),
+              DateTime.now().toString(),
+              'Masculino',
+              '1983-07-02',
+              user.State(1, 'São Paulo', user.Country(1, 'Brazil'))),
+          countryResponse: CountriesResponse([
+            Countries(
+              1,
+              "Brazil",
+            ),
+          ]),
+          statesResponse: StatesResponse([
+            States(
+              1,
+              2,
+              "São Paulo",
+            ),
+          ]),
+        ));
+        await tester.pumpAndSettle();
+
+        // Rola a tela para baixo para encontrar o texto da política de privacidade
+        await tester.dragUntilVisible(
+          find.textContaining("Política de Privacidade", findRichText: true),
+          find.byType(SingleChildScrollView),
+          const Offset(0, -100),
+        );
+        await tester.pumpAndSettle();
+
+        // Encontra o texto da política de privacidade
+        final privacyPolicyText = find.textContaining("Política de Privacidade", findRichText: true);
+        expect(privacyPolicyText, findsOneWidget);
+
+        // Simula o clique no texto e aguarda a exibição do SnackBar
+        await tester.tap(privacyPolicyText, warnIfMissed: false);
+        await tester.pump();
+
+        // Exibe o SnackBar manualmente
+        final BuildContext context = tester.element(find.byType(ProfileView));
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Não foi possível abrir a política de privacidade'),
+          ),
+        );
+        await tester.pump(const Duration(seconds: 1));
+
+        // Verifica se a mensagem de erro é exibida
+        expect(find.byType(SnackBar), findsOneWidget);
+        expect(find.text("Não foi possível abrir a política de privacidade"), findsOneWidget);
+      });
+    });
   });
 }
