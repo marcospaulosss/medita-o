@@ -28,8 +28,8 @@ class Loading extends StatelessWidget {
   /// Construtor.
   const Loading({
     this.description = "Carregando...",
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {

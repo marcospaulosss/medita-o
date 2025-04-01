@@ -1,6 +1,7 @@
 /// Testes para o componente CameraView
 /// Este arquivo contém testes de widget para verificar o comportamento do componente CameraView,
 /// que é responsável por gerenciar a câmera e a captura de imagens no aplicativo.
+library;
 
 import 'package:camera/camera.dart';
 import 'package:cinco_minutos_meditacao/shared/components/camera_view.dart';
@@ -64,11 +65,11 @@ void main() {
     )).thenReturn(mockError);
 
     // Configura o comportamento do mock do controlador da câmera
-    when(mockCameraController.initialize()).thenAnswer((_) async => null);
+    when(mockCameraController.initialize()).thenAnswer((_) async {});
     when(mockCameraController.value).thenReturn(
-      CameraValue(
+      const CameraValue(
         isInitialized: true,
-        previewSize: const Size(100, 100),
+        previewSize: Size(100, 100),
         deviceOrientation: DeviceOrientation.portraitUp,
         exposureMode: ExposureMode.auto,
         focusMode: FocusMode.auto,
@@ -79,15 +80,15 @@ void main() {
         flashMode: FlashMode.off,
         exposurePointSupported: true,
         focusPointSupported: true,
-        description: const CameraDescription(
+        description: CameraDescription(
           name: 'Test Camera',
           lensDirection: CameraLensDirection.front,
           sensorOrientation: 0,
         ),
       ),
     );
-    when(mockCameraController.dispose()).thenAnswer((_) async => null);
-    when(mockCameraController.setFlashMode(any)).thenAnswer((_) async => null);
+    when(mockCameraController.dispose()).thenAnswer((_) async {});
+    when(mockCameraController.setFlashMode(any)).thenAnswer((_) async {});
     when(mockCameraController.takePicture()).thenAnswer((_) async => mockXFile);
     when(mockCameraController.buildPreview()).thenReturn(
       Container(

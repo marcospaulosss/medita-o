@@ -42,7 +42,7 @@ void main() {
 
   group('sendOpenScreenEvent', () {
     test('should send event to analytics', () {
-      when(mockAnalytics.sendEvent(any)).thenAnswer((_) async => null);
+      when(mockAnalytics.sendEvent(any)).thenAnswer((_) async {});
       // Act
       repository.sendOpenScreenEvent();
 
