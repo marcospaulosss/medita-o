@@ -55,7 +55,7 @@ class CommonStringsEn extends CommonStrings {
   String get dateBirth => 'Date of Birth';
 
   @override
-  String get datePickerLocation => 'en_US';
+  String get datePickerLocation => 'en';
 
   @override
   String get day => 'Day';
