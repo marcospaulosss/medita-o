@@ -1,5 +1,4 @@
 
-import 'package:flutter/foundation.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'auth_request.g.dart';

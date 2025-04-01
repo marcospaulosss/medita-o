@@ -40,7 +40,7 @@ void main() {
 
     test('should request register meditate completed', () async {
       when(secureStorage.userId).thenAnswer((_) async => '1');
-      when(clientApi.createNewMeditation(any)).thenAnswer((_) async => null);
+      when(clientApi.createNewMeditation(any)).thenAnswer((_) async {});
 
       await repository.requestRegisterMeditateCompleted(5);
 

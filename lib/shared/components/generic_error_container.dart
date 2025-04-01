@@ -16,8 +16,7 @@ class GenericErrorContainer extends StatefulWidget {
   /// Se [onRetry] não for informado, o botão não será exibido.
   /// Se [message] não for informado, a mensagem padrão será exibida.
   ///
-  const GenericErrorContainer({Key? key, this.onRetry, this.message})
-      : super(key: key);
+  const GenericErrorContainer({super.key, this.onRetry, this.message});
 
   @override
   State<GenericErrorContainer> createState() => _GenericErrorContainerState();

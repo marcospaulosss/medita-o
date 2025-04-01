@@ -29,13 +29,13 @@ class MultiStateContainer extends StatelessWidget {
   /// [errorStateBuilder] representa o que será exibido quando não for possível carregar o conteúdo do container;
   ///
   const MultiStateContainer({
-    Key? key,
+    super.key,
     required this.controller,
     required this.normalStateBuilder,
     required this.loadingStateBuilder,
     this.successStateBuilder,
     required this.errorStateBuilder,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

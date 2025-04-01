@@ -20,12 +20,12 @@ class TestApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      localizationsDelegates: const [
+    return const MaterialApp(
+      localizationsDelegates: [
         ...AuthenticationStrings.localizationsDelegates,
       ],
       supportedLocales: AuthenticationStrings.supportedLocales,
-      home: const WelcomeView(),
+      home: WelcomeView(),
     );
   }
 } 

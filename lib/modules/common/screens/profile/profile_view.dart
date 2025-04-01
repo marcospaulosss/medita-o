@@ -13,6 +13,7 @@ import 'package:cinco_minutos_meditacao/shared/components/loading.dart';
 import 'package:cinco_minutos_meditacao/shared/helpers/multi_state_container/export.dart';
 import 'package:cinco_minutos_meditacao/shared/helpers/view_binding.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 @RoutePage()
 class ProfileView extends StatefulWidget {
@@ -146,8 +147,17 @@ class ProfileViewState extends State<ProfileView>
           ],
         ),
       ),
-      onTap: () {
-        debugPrint("Política de Privacidade");
+      onTap: () async {
+        final Uri url = Uri.parse(CommonStrings.of(context).privacyPolicy);
+        if (!await launchUrl(url)) {
+          if (context.mounted) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(
+                content: Text('Não foi possível abrir a política de privacidade'),
+              ),
+            );
+          }
+        }
       },
     );
   }
