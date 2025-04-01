@@ -1,5 +1,5 @@
-import 'dart:io';
 import 'dart:async';
+import 'dart:io';
 
 import 'package:auto_route/auto_route.dart';
 import 'package:camera/camera.dart';
@@ -7,8 +7,8 @@ import 'package:cinco_minutos_meditacao/core/di/helpers.dart';
 import 'package:cinco_minutos_meditacao/shared/Theme/app_colors.dart';
 import 'package:cinco_minutos_meditacao/shared/models/error.dart';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
 
 /// Um widget que fornece uma interface para captura de imagens usando a câmera do dispositivo
@@ -107,7 +107,9 @@ class _CameraViewState extends State<CameraView> {
         debugPrint('Erro ao deletar arquivo temporário: $e');
         error.sendErrorToCrashlytics(
           message: 'Erro ao deletar arquivo temporário: $e',
-          code: ErrorCodes.cameraError, stackTrace: StackTrace.current,);
+          code: ErrorCodes.cameraError,
+          stackTrace: StackTrace.current,
+        );
       }
     }
   }
@@ -170,7 +172,7 @@ class _CameraViewState extends State<CameraView> {
       // Inicializa o controlador com configurações otimizadas
       _controller = CameraController(
         currentCamera,
-        ResolutionPreset.high, // Mudado para medium para melhor qualidade
+        ResolutionPreset.veryHigh, // Mudado para medium para melhor qualidade
         enableAudio: false, // Desabilita áudio pois não é necessário
       );
 
@@ -194,10 +196,11 @@ class _CameraViewState extends State<CameraView> {
         code: ErrorCodes.cameraError,
         stackTrace: StackTrace.current,
       );
-      
+
       if (!mounted) return;
-      
-      _showErrorDialog('Erro ao acessar a câmera. Por favor, verifique as permissões e tente novamente.');
+
+      _showErrorDialog(
+          'Erro ao acessar a câmera. Por favor, verifique as permissões e tente novamente.');
       _navigateBack(error);
     }
   }
@@ -245,7 +248,9 @@ class _CameraViewState extends State<CameraView> {
       _showErrorDialog('Câmera não inicializada');
       error.sendErrorToCrashlytics(
         message: 'Câmera não inicializada',
-          code: ErrorCodes.cameraError, stackTrace: StackTrace.current,);
+        code: ErrorCodes.cameraError,
+        stackTrace: StackTrace.current,
+      );
       return;
     }
 
@@ -277,7 +282,7 @@ class _CameraViewState extends State<CameraView> {
     try {
       final XFile? pickedFile =
           await _picker.pickImage(source: ImageSource.gallery);
-      
+
       if (pickedFile != null) {
         // Validação do tipo de arquivo
         if (!pickedFile.path.toLowerCase().endsWith('.jpg') &&
@@ -321,9 +326,10 @@ class _CameraViewState extends State<CameraView> {
   Future<File> _compressImage(File file) async {
     try {
       final dir = await getTemporaryDirectory();
-      final targetPath = dir.absolute.path + "/${DateTime.now().millisecondsSinceEpoch}.jpg";
+      final targetPath =
+          dir.absolute.path + "/${DateTime.now().millisecondsSinceEpoch}.jpg";
       _tempFiles.add(targetPath);
-      
+
       final result = await FlutterImageCompress.compressAndGetFile(
         file.absolute.path,
         targetPath,
@@ -410,6 +416,8 @@ class _CameraViewState extends State<CameraView> {
                 Positioned.fill(
                   top: 110,
                   bottom: 200,
+                  left: 30,
+                  right: 30,
                   child: AspectRatio(
                     aspectRatio: 3 / 4,
                     child: CameraPreview(_controller!),
