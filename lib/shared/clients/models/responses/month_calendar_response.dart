@@ -9,7 +9,7 @@ part 'month_calendar_response.g.dart';
 @JsonSerializable()
 class MonthCalendarResponse {
   @JsonKey(name: "month")
-  dynamic? month;
+  dynamic month;
 
   @JsonKey(name: "total")
   int? total;

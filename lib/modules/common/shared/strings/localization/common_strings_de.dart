@@ -49,6 +49,9 @@ class CommonStringsDe extends CommonStrings {
   String get privacyPolicy2 => 'Datenschutzerklärung einverstanden.';
 
   @override
+  String get privacyPolicy => 'https://www.eumedito.org/en/privacy-policy/';
+
+  @override
   String get exitApp => 'App beenden';
 
   @override
