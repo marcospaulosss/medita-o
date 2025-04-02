@@ -141,7 +141,7 @@ void main() {
     });
 
     test('should show error when uploadImageProfile fails', () async {
-      final result = 'image_path';
+      const result = 'image_path';
       final customError = CustomError();
 
       when(router.goTo(any, onClose: anyNamed('onClose')))
@@ -160,7 +160,7 @@ void main() {
     });
 
     test('should show error when uploadImageProfile fails', () async {
-      final result = 'image_path';
+      const result = 'image_path';
       final customError = CustomError();
 
       when(router.goTo(any, onClose: anyNamed('onClose')))
@@ -179,7 +179,7 @@ void main() {
     });
 
     test('should show error when requestUser fails', () async {
-      final result = 'image_path';
+      const result = 'image_path';
       final customError = CustomError();
 
       when(router.goTo(any, onClose: anyNamed('onClose')))
@@ -197,7 +197,7 @@ void main() {
     });
 
     test('should update profile image successfully', () async {
-      final result = 'image_path';
+      const result = 'image_path';
       final userResponse = UserResponse(
           1,
           'teste',
@@ -219,7 +219,7 @@ void main() {
       when(repository.uploadImageProfile(any)).thenAnswer((_) async => null);
       when(repository.requestUser())
           .thenAnswer((_) async => (userResponse, null));
-      when(view!.showNormalState(any)).thenAnswer((_) {});
+      when(view.showNormalState(any)).thenAnswer((_) {});
       when(router.goTo(any, onClose: anyNamed('onClose')))
           .thenAnswer((invocation) {
         final onClose = invocation.namedArguments[const Symbol('onClose')]

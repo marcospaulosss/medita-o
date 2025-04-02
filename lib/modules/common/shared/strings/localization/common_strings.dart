@@ -187,6 +187,12 @@ abstract class CommonStrings {
   /// **'Política de Privacidade'**
   String get privacyPolicy2;
 
+  /// No description provided for @privacyPolicy.
+  ///
+  /// In pt, this message translates to:
+  /// **'https://www.eumedito.org/politica-de-privacidade/'**
+  String get privacyPolicy;
+
   /// No description provided for @exitApp.
   ///
   /// In pt, this message translates to:

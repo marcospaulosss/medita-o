@@ -41,7 +41,7 @@ class _FormProfileState extends State<FormProfile> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController nameController = TextEditingController();
   final TextEditingController lastNameController = TextEditingController();
-  AutovalidateMode _autovalidate = AutovalidateMode.disabled;
+  final AutovalidateMode _autovalidate = AutovalidateMode.disabled;
 
   int? _selectedDay;
   int? _selectedMonth;
@@ -90,16 +90,16 @@ class _FormProfileState extends State<FormProfile> {
       selectedValueStates = widget.profileModel.userResponse!.state!.name;
       selectedIdState = widget.profileModel.userResponse!.state!.id;
     } else {
-      widget.profileModel.countryResponse!.countries!.forEach((element) {
+      for (var element in widget.profileModel.countryResponse!.countries!) {
         if (element.name == selectedValueCounty) {
           selectedIdCounty = element.id;
         }
-      });
-      widget.profileModel.statesResponse!.states!.forEach((element) {
+      }
+      for (var element in widget.profileModel.statesResponse!.states!) {
         if (element.name == selectedValueStates) {
           selectedIdState = element.id;
         }
-      });
+      }
     }
 
     statesNotifier.value = listStates;
@@ -233,15 +233,14 @@ class _FormProfileState extends State<FormProfile> {
                           list: states,
                           selectedValue: selectedValueStates,
                           onChanged: (String value) {
-                            widget.profileModel.statesResponse!.states!
-                                .forEach((element) {
+                            for (var element in widget.profileModel.statesResponse!.states!) {
                               if (element.name == value) {
                                 setState(() {
                                   selectedIdState = element.id;
                                   selectedValueStates = value;
                                 });
                               }
-                            });
+                            }
                           },
                         );
                       },

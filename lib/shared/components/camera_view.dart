@@ -255,7 +255,7 @@ class _CameraViewState extends State<CameraView> {
     }
 
     try {
-      final XFile? picture = await _controller!.takePicture();
+      final XFile picture = await _controller!.takePicture();
       if (picture != null) {
         final compressedImage = await _compressImage(File(picture.path));
         setState(() {
@@ -327,7 +327,7 @@ class _CameraViewState extends State<CameraView> {
     try {
       final dir = await getTemporaryDirectory();
       final targetPath =
-          dir.absolute.path + "/${DateTime.now().millisecondsSinceEpoch}.jpg";
+          "${dir.absolute.path}/${DateTime.now().millisecondsSinceEpoch}.jpg";
       _tempFiles.add(targetPath);
 
       final result = await FlutterImageCompress.compressAndGetFile(

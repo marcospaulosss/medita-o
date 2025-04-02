@@ -48,7 +48,9 @@ void main() {
 
     test("logOut", () {
       // Arrange
-      when(authService.logout()).thenAnswer((_) async {});
+      when(authService.logout()).thenAnswer((_) async {
+        return null;
+      });
       when(homeRepository.logOut()).thenAnswer((_) async {});
       when(appRouter.goToReplace(const LoginRoute())).thenAnswer((_) async {});
 

@@ -13,6 +13,7 @@
   "whereYouLive": "Où habitez-vous?",
   "privacyPolicy1": "En enregistrant vos données, vous acceptez notre",
   "privacyPolicy2": "Politique de confidentialité",
+  "privacyPolicy": "https://www.eumedito.org/en/privacy-policy/",
   "exitApp": "QUITTER L'APPLICATION",
   "dateBirth": "date de naissance",
   "datePickerLocation": "fr_FR",
