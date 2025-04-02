@@ -180,3 +180,40 @@ flutter config --jdk-dir /Library/Java/JavaVirtualMachines/liberica-jdk-11.jdk/C
 
 Go to System Settings → General → Storage → Developer
 Delete "Developer Caches"
+
+## Testes de Integração
+
+O projeto utiliza testes de integração para validar o comportamento completo das telas e fluxos do aplicativo. Os testes são escritos usando o pacote `integration_test` do Flutter.
+
+### Executando os Testes de Integração
+
+Para executar os testes de integração, você pode usar o seguinte comando:
+
+```shell
+flutter test integration_test/modules/authentication/welcome_test.dart
+```
+
+Este comando irá executar os testes da tela de boas-vindas. Os testes incluem:
+- Verificação da renderização dos elementos principais
+- Validação do estilo visual
+- Testes de interatividade
+- Verificação de responsividade
+
+### Estrutura dos Testes
+
+Os testes de integração estão organizados em módulos, seguindo a mesma estrutura do aplicativo:
+
+```
+integration_test/
+  ├── modules/
+  │   └── authentication/
+  │       └── welcome_test.dart
+  └── app_test.dart
+```
+
+### Requisitos
+
+Para executar os testes de integração, você precisa:
+1. Ter um emulador ou dispositivo físico conectado
+2. Ter o Firebase configurado corretamente
+3. Ter todas as dependências instaladas (`flutter pub get`)
