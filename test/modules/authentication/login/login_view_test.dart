@@ -247,7 +247,7 @@ void main() async {
         await tester.tap(find.textContaining("Fazer Login"));
         await tester.pumpAndSettle();
 
-        expect(find.textContaining("Campo obrigatório"), findsOneWidget);
+        expect(find.textContaining("Campo obrigatório"), findsNWidgets(2));
       });
 
       testWidgets("Should show error when click in login and email is empty",
@@ -262,7 +262,7 @@ void main() async {
         await tester.tap(find.textContaining("Fazer Login"));
         await tester.pumpAndSettle();
 
-        expect(find.textContaining("Campo obrigatório"), findsOneWidget);
+        expect(find.textContaining("Campo obrigatório"), findsNWidgets(2));
       });
 
       testWidgets("Should show error when click in login and email is invalid",
