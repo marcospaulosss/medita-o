@@ -125,6 +125,7 @@ class _FormLoginState extends State<FormLogin> {
                   size: 20,
                 ),
               ),
+              validator: (value) => Validators.required(context, value),
             ),
             const SizedBox(height: 20),
             buildQuestionsLogin(),
