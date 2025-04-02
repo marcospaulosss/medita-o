@@ -5,7 +5,6 @@ import 'package:cinco_minutos_meditacao/core/routers/app_router.dart';
 import 'package:cinco_minutos_meditacao/core/routers/app_router.gr.dart';
 import 'package:cinco_minutos_meditacao/modules/authentication/screens/welcome/welcome_contracts.dart';
 import 'package:cinco_minutos_meditacao/modules/authentication/screens/welcome/welcome_presenter.dart';
-import 'package:cinco_minutos_meditacao/modules/authentication/screens/welcome/welcome_repository.dart';
 
 import 'welcome_presenter_test.mocks.dart';
 

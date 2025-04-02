@@ -144,7 +144,7 @@ void main() {
           'masculino',
           '1983-07-02',
           State(1, 'São Paulo', Country(1, 'Brasil')));
-      final result = 'image_path';
+      const result = 'image_path';
       when(mockAppRouter.goTo(any, onClose: anyNamed('onClose')))
           .thenAnswer((invocation) {
         final onClose = invocation.namedArguments[const Symbol('onClose')]
@@ -168,7 +168,7 @@ void main() {
     test('updateImageProfile should handle errors during image upload',
         () async {
       final error = CustomError();
-      final result = 'image_path';
+      const result = 'image_path';
 
       when(mockAppRouter.goTo(any, onClose: anyNamed('onClose')))
           .thenAnswer((invocation) {

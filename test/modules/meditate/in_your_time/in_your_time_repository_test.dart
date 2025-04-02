@@ -69,7 +69,7 @@ void main() {
         () async {
       when(secureStorage.userId).thenAnswer((_) async => '1');
       when(clientApi.createNewMeditation(any))
-          .thenThrow(DioError(requestOptions: RequestOptions(path: '')));
+          .thenThrow(DioException(requestOptions: RequestOptions(path: '')));
       when(error.sendErrorToCrashlytics(
         code: ErrorCodes.createNewMeditationError,
         stackTrace: anyNamed('stackTrace'),

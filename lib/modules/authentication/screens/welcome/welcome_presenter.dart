@@ -1,8 +1,6 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:cinco_minutos_meditacao/core/routers/app_router.dart';
 import 'package:cinco_minutos_meditacao/core/routers/app_router.gr.dart';
 import 'package:cinco_minutos_meditacao/modules/authentication/screens/welcome/welcome_contracts.dart';
-import 'package:cinco_minutos_meditacao/modules/authentication/screens/welcome/welcome_repository.dart';
 
 /// Presenter responsável pela lógica de negócios da tela de boas-vindas.
 ///

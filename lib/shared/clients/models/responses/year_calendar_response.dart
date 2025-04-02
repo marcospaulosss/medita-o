@@ -5,7 +5,7 @@ part 'year_calendar_response.g.dart';
 @JsonSerializable()
 class YearCalendarResponse {
   @JsonKey(name: "year")
-  dynamic? year;
+  dynamic year;
 
   @JsonKey(name: "total")
   int? total;

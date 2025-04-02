@@ -3,7 +3,6 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:cinco_minutos_meditacao/core/analytics/manager.dart';
 import 'package:cinco_minutos_meditacao/core/wrappers/secure_storage.dart';
-import 'package:cinco_minutos_meditacao/modules/authentication/analytics/events.dart';
 import 'package:cinco_minutos_meditacao/modules/authentication/screens/welcome/welcome_repository.dart';
 
 import 'welcome_repository_test.mocks.dart';

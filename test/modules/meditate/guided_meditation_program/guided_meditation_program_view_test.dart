@@ -187,7 +187,9 @@ void main() {
         when(presenter.onOpenScreen()).thenAnswer((_) {});
 
         final mockAudioPlayer = MockAudioPlayer();
-        when(mockAudioPlayer.setAudioSource(any)).thenAnswer((_) async {});
+        when(mockAudioPlayer.setAudioSource(any)).thenAnswer((_) async {
+          return null;
+        });
         when(mockAudioPlayer.play()).thenAnswer((_) async {});
         when(mockAudioPlayer.pause()).thenAnswer((_) async {});
         when(mockAudioPlayer.processingStateStream).thenAnswer(

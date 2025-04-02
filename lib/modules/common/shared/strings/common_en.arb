@@ -13,6 +13,7 @@
   "whereYouLive": "Where do you live",
   "privacyPolicy1": "By saving your data, you agree to our ",
   "privacyPolicy2": "Privacy Policy",
+  "privacyPolicy": "https://www.eumedito.org/en/privacy-policy/",
   "exitApp": "EXIT THE APP",
   "dateBirth": "Date of Birth",
   "datePickerLocation": "en",

@@ -65,7 +65,7 @@ class _WelcomeViewState extends State<WelcomeView>
   /// Indica se há uma operação de carregamento em andamento.
   ///
   /// Quando true, exibe um indicador de progresso e desabilita interações.
-  bool _isLoading = false;
+  final bool _isLoading = false;
 
   /// Padding horizontal padrão aplicado aos elementos da tela.
   ///
@@ -96,7 +96,7 @@ class _WelcomeViewState extends State<WelcomeView>
   static const double _buttonTextSize = 19.0;
 
   /// Flag que indica se o presenter já foi inicializado
-  bool _isPresenterInitialized = false;
+  final bool _isPresenterInitialized = false;
 
   @override
   void initState() {

@@ -13,7 +13,18 @@ import 'package:cinco_minutos_meditacao/shared/components/loading.dart';
 import 'package:cinco_minutos_meditacao/shared/helpers/multi_state_container/export.dart';
 import 'package:cinco_minutos_meditacao/shared/helpers/view_binding.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
+/// Tela de perfil do usuário que permite visualizar e editar informações pessoais.
+/// 
+/// Esta tela exibe:
+/// - Foto de perfil do usuário
+/// - Informações básicas (nome, sobrenome, email)
+/// - Data de nascimento
+/// - Gênero
+/// - Localização (país e estado)
+/// - Link para política de privacidade
+/// - Opção para sair do aplicativo
 @RoutePage()
 class ProfileView extends StatefulWidget {
   const ProfileView({super.key});
@@ -22,19 +33,25 @@ class ProfileView extends StatefulWidget {
   State<ProfileView> createState() => ProfileViewState();
 }
 
+/// Estado da tela de perfil que implementa a interface [ProfileViewContract].
+/// 
+/// Gerencia o estado da tela, incluindo:
+/// - Controle de estados (normal, loading, erro)
+/// - Interação com o presenter
+/// - Atualização da UI
 @visibleForTesting
 class ProfileViewState extends State<ProfileView>
     implements ProfileViewContract {
-  /// Presenter
+  /// Presenter responsável pela lógica de negócios
   Presenter presenter = resolve<ProfilePresenter>();
 
-  /// Controlador do estado da tela
+  /// Controlador do estado da tela que gerencia os diferentes estados (normal, loading, erro)
   final stateController = MultiStateContainerController();
 
-  /// Mensagem de erro
+  /// Mensagem de erro a ser exibida quando ocorrer uma falha
   late String messageError = "";
 
-  /// modelo da tela
+  /// Modelo que contém os dados do perfil do usuário
   ProfileModel model = ProfileModel();
 
   @override
@@ -64,6 +81,7 @@ class ProfileViewState extends State<ProfileView>
     );
   }
 
+  /// Constrói o scaffold principal da tela com o cabeçalho e o corpo
   Widget buildScaffold(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.backgroundBlue.withOpacity(0.0),
@@ -87,6 +105,7 @@ class ProfileViewState extends State<ProfileView>
     );
   }
 
+  /// Constrói o corpo principal da tela com o formulário e opções adicionais
   Widget buildBody() {
     return Padding(
       padding: const EdgeInsets.only(left: 40.0, bottom: 40, right: 40),
@@ -120,6 +139,10 @@ class ProfileViewState extends State<ProfileView>
     );
   }
 
+  /// Constrói o widget da política de privacidade com link clicável
+  /// 
+  /// Ao ser clicado, tenta abrir a URL da política de privacidade.
+  /// Se não conseguir abrir, exibe uma mensagem de erro via SnackBar.
   Widget _buildPrivacyPolicy() {
     return GestureDetector(
       child: RichText(
@@ -146,12 +169,22 @@ class ProfileViewState extends State<ProfileView>
           ],
         ),
       ),
-      onTap: () {
-        debugPrint("Política de Privacidade");
+      onTap: () async {
+        final Uri url = Uri.parse(CommonStrings.of(context).privacyPolicy);
+        if (!await launchUrl(url)) {
+          if (context.mounted) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(
+                content: Text('Não foi possível abrir a política de privacidade'),
+              ),
+            );
+          }
+        }
       },
     );
   }
 
+  /// Constrói o widget de saída do aplicativo
   Widget _buildExitApp() {
     return GestureDetector(
       child: Row(
@@ -178,6 +211,10 @@ class ProfileViewState extends State<ProfileView>
     );
   }
 
+  /// Busca as cidades/estados para um determinado país
+  /// 
+  /// [countryId] ID do país selecionado
+  /// Retorna uma lista de cidades/estados ou null se não houver dados
   Future<List<String>?> getCities(int countryId) async {
     return await presenter.getStates(countryId);
   }

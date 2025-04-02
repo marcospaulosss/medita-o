@@ -133,7 +133,7 @@ class CalendarPresenter implements Presenter {
         int numberOfDaysInYear = 12;
         List<int> meditationsYear = List.filled(numberOfDaysInYear, 0);
         if (yearCalendar!.year != null && yearCalendar.year!.isNotEmpty) {
-          yearCalendar!.year!.forEach((year, data) {
+          yearCalendar.year!.forEach((year, data) {
             // Converter o dia para um índice (subtrair 1 porque a lista começa em 0)
             int yearIndex = int.parse(year) - 1;
             // Atualizar a lista com os minutos do dia específico
@@ -153,7 +153,7 @@ class CalendarPresenter implements Presenter {
         int numberOfDaysInMonth = 31;
         List<int> meditationsMonth = List.filled(numberOfDaysInMonth, 0);
         if (monthCalendar!.month != null && monthCalendar.month!.isNotEmpty) {
-          monthCalendar!.month!.forEach((day, data) {
+          monthCalendar.month!.forEach((day, data) {
             // Converter o dia para um índice (subtrair 1 porque a lista começa em 0)
             int dayIndex = int.parse(day) - 1;
             // Atualizar a lista com os minutos do dia específico

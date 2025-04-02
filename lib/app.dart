@@ -17,7 +17,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'shared/strings/localization/shared_strings.dart';
 
 class App extends StatefulWidget {
-  App({super.key});
+  const App({super.key});
 
   static FirebaseAnalytics analytics = FirebaseAnalytics.instance;
   static FirebaseAnalyticsObserver observer =
@@ -63,7 +63,7 @@ class _AppState extends State<App> {
       debugShowCheckedModeBanner: false,
       builder: (context, child) {
         return MediaQuery(
-          data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
+          data: MediaQuery.of(context).copyWith(textScaler: TextScaler.linear(1.0)),
           child: Scaffold(
             body: child!,
             backgroundColor: AppColors.azureishWhite,
