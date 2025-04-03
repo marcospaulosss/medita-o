@@ -34,10 +34,22 @@ class _PlayerState extends State<Player> {
 
   bool get _isPlaying => _player.playing;
 
+  String _formatDuration(Duration? duration) {
+    if (duration == null) return "00:00";
+    String twoDigits(int n) => n.toString().padLeft(2, "0");
+    String twoDigitMinutes = twoDigits(duration.inMinutes.remainder(60));
+    String twoDigitSeconds = twoDigits(duration.inSeconds.remainder(60));
+    return "$twoDigitMinutes:$twoDigitSeconds";
+  }
+
+  Duration _getRemainingTime() {
+    if (_duration == null || _position == null) return Duration.zero;
+    return _duration! - _position!;
+  }
+
   @override
   void initState() {
     super.initState();
-
     _initPlayer();
   }
 
@@ -108,18 +120,33 @@ class _PlayerState extends State<Player> {
                   shape: const CircleBorder(),
                   child: Padding(
                     padding: const EdgeInsets.all(20.0),
-                    child: Icon(
-                      _isPlaying ? Icons.pause : Icons.play_arrow,
-                      size: 100,
-                      color: AppColors.vividCerulean,
-                      shadows: [
-                        Shadow(
-                          offset: const Offset(0, 3),
-                          blurRadius: 6.0,
-                          color: Colors.black.withOpacity(0.5),
-                        ),
-                      ],
-                    ),
+                    child: _isPlaying
+                        ? Container(
+                          alignment: Alignment.center,
+                          width: 100,
+                          height: 100,
+                            child: Text(
+                              _formatDuration(_getRemainingTime()),
+                              style: const TextStyle(
+                                fontSize: 30,
+                                fontWeight: FontWeight.w700,
+                                color: AppColors.vividCerulean,
+                                fontFamily: 'Heebo',
+                              ),
+                            ),
+                          )
+                        : Icon(
+                            Icons.play_arrow,
+                            size: 100,
+                            color: AppColors.vividCerulean,
+                            shadows: [
+                              Shadow(
+                                offset: const Offset(0, 3),
+                                blurRadius: 6.0,
+                                color: Colors.black.withOpacity(0.5),
+                              ),
+                            ],
+                          ),
                   ),
                 ),
               ),

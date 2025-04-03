@@ -112,7 +112,7 @@ void main() {
         (WidgetTester tester) async {
       // Act
       await tester.pumpWidget(MaterialApp.router(
-        localizationsDelegates: [
+        localizationsDelegates: const [
           ...AuthenticationStrings.localizationsDelegates,
         ],
         supportedLocales: AuthenticationStrings.supportedLocales,
@@ -133,12 +133,12 @@ void main() {
     testWidgets('deve mostrar erro ao tentar fazer login com email inválido',
         (WidgetTester tester) async {
       // Act
-      await tester.pumpWidget(MaterialApp(
+      await tester.pumpWidget(const MaterialApp(
         localizationsDelegates: [
           ...AuthenticationStrings.localizationsDelegates,
         ],
         supportedLocales: AuthenticationStrings.supportedLocales,
-        home: const LoginView(),
+        home: LoginView(),
       ));
       await tester.pumpAndSettle();
 
@@ -155,12 +155,12 @@ void main() {
     testWidgets('deve mostrar erro ao tentar fazer login com senha vazia',
         (WidgetTester tester) async {
       // Act
-      await tester.pumpWidget(MaterialApp(
+      await tester.pumpWidget(const MaterialApp(
         localizationsDelegates: [
           ...AuthenticationStrings.localizationsDelegates,
         ],
         supportedLocales: AuthenticationStrings.supportedLocales,
-        home: const LoginView(),
+        home: LoginView(),
       ));
       await tester.pumpAndSettle();
 

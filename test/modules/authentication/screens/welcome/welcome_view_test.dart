@@ -3,11 +3,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:get_it/get_it.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:cinco_minutos_meditacao/modules/authentication/screens/welcome/welcome_view.dart';
 import 'package:cinco_minutos_meditacao/modules/authentication/screens/welcome/welcome_presenter.dart';
-import 'package:cinco_minutos_meditacao/modules/authentication/screens/welcome/welcome_contracts.dart';
-import 'package:cinco_minutos_meditacao/shared/Theme/app_images.dart';
 import 'package:cinco_minutos_meditacao/modules/authentication/shared/strings/localization/authentication_strings.dart';
 
 import 'welcome_view_test.mocks.dart';
