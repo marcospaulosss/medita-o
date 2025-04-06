@@ -5,16 +5,28 @@ import 'package:cinco_minutos_meditacao/shared/Theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:just_audio/just_audio.dart';
 
+/// Widget que representa um player de áudio personalizado com timer regressivo.
+///
+/// Este componente oferece as seguintes funcionalidades:
+/// * Exibição de um botão de play/pause
+/// * Timer regressivo que mostra o tempo restante do áudio
+/// * Anel de progresso circular que indica o progresso da reprodução
+/// * Controle de reprodução com gestos de toque
+///
+/// O player alterna entre dois estados visuais:
+/// 1. Quando pausado: exibe um ícone de play
+/// 2. Quando em reprodução: exibe um timer regressivo no formato MM:SS
 class Player extends StatefulWidget {
-  /// Player de áudio
+  /// Instância do AudioPlayer responsável pela reprodução do áudio
   final AudioPlayer player;
 
-  /// Função de parar
+  /// Callback executado quando a reprodução do áudio é finalizada
   final Function onStop;
 
-  /// - [player] Player de áudio
-  /// - [onStop] Função de parar
-  /// Construtor
+  /// Cria um novo Player
+  /// 
+  /// [player] é a instância do AudioPlayer que será controlada
+  /// [onStop] é a função chamada quando o áudio termina de tocar
   const Player({
     required this.player,
     required this.onStop,
@@ -32,15 +44,38 @@ class _PlayerState extends State<Player> {
   Duration? _duration;
   Duration? _position;
 
+  /// Indica se o áudio está atualmente em reprodução
   bool get _isPlaying => _player.playing;
+
+  /// Formata uma duração para o formato MM:SS
+  /// 
+  /// Retorna uma string no formato "00:00" se a duração for nula
+  String _formatDuration(Duration? duration) {
+    if (duration == null) return "00:00";
+    String twoDigits(int n) => n.toString().padLeft(2, "0");
+    String twoDigitMinutes = twoDigits(duration.inMinutes.remainder(60));
+    String twoDigitSeconds = twoDigits(duration.inSeconds.remainder(60));
+    return "$twoDigitMinutes:$twoDigitSeconds";
+  }
+
+  /// Calcula o tempo restante do áudio
+  /// 
+  /// Retorna a diferença entre a duração total e a posição atual
+  Duration _getRemainingTime() {
+    if (_duration == null || _position == null) return Duration.zero;
+    return _duration! - _position!;
+  }
 
   @override
   void initState() {
     super.initState();
-
     _initPlayer();
   }
 
+  /// Inicializa os listeners do player para monitorar:
+  /// * Duração total do áudio
+  /// * Posição atual da reprodução
+  /// * Estado do player (completo, em reprodução, etc)
   Future<void> _initPlayer() async {
     _player.durationStream.listen((duration) {
       setState(() {
@@ -61,6 +96,9 @@ class _PlayerState extends State<Player> {
     });
   }
 
+  /// Manipula o evento de conclusão do áudio
+  /// 
+  /// Reseta a posição para zero, para o player e executa o callback [onStop]
   Future<void> _onAudioComplete() async {
     setState(() {
       _position = Duration.zero;
@@ -108,18 +146,33 @@ class _PlayerState extends State<Player> {
                   shape: const CircleBorder(),
                   child: Padding(
                     padding: const EdgeInsets.all(20.0),
-                    child: Icon(
-                      _isPlaying ? Icons.pause : Icons.play_arrow,
-                      size: 100,
-                      color: AppColors.vividCerulean,
-                      shadows: [
-                        Shadow(
-                          offset: const Offset(0, 3),
-                          blurRadius: 6.0,
-                          color: Colors.black.withOpacity(0.5),
-                        ),
-                      ],
-                    ),
+                    child: _isPlaying
+                        ? Container(
+                            alignment: Alignment.center,
+                            width: 100,
+                            height: 100,
+                            child: Text(
+                              _formatDuration(_getRemainingTime()),
+                              style: const TextStyle(
+                                fontSize: 30,
+                                fontWeight: FontWeight.w700,
+                                color: AppColors.vividCerulean,
+                                fontFamily: 'Heebo',
+                              ),
+                            ),
+                          )
+                        : Icon(
+                            Icons.play_arrow,
+                            size: 100,
+                            color: AppColors.vividCerulean,
+                            shadows: [
+                              Shadow(
+                                offset: const Offset(0, 3),
+                                blurRadius: 6.0,
+                                color: Colors.black.withOpacity(0.5),
+                              ),
+                            ],
+                          ),
                   ),
                 ),
               ),
@@ -156,10 +209,12 @@ class _PlayerState extends State<Player> {
     );
   }
 
+  /// Inicia a reprodução do áudio
   Future<void> _play() async {
     await _player.play();
   }
 
+  /// Pausa a reprodução do áudio
   Future<void> _pause() async {
     await _player.pause();
   }
