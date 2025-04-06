@@ -20,6 +20,9 @@ abstract class Presenter implements ViewBinding<InYourTimeContract> {
 
   /// Submete a meditação concluída
   void submitMeditateCompleted(int time);
+
+  /// Direciona para a tela de compartilhamento
+  void goToShare();
 }
 
 abstract class Repository {
