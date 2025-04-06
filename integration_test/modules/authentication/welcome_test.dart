@@ -52,12 +52,12 @@ void main() {
   });
 
   Widget createTestableWidget() {
-    return MaterialApp(
+    return const MaterialApp(
       localizationsDelegates: [
         ...AuthenticationStrings.localizationsDelegates,
       ],
       supportedLocales: AuthenticationStrings.supportedLocales,
-      home: const WelcomeView(),
+      home: WelcomeView(),
     );
   }
 

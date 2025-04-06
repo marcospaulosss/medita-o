@@ -18,5 +18,5 @@ void setupInjectors() {
   registerSingleton<AuthService>(AuthService());
   registerSingleton<AnalyticsManager>(AnalyticsManager());
   registerSingleton<AppRouter>(AppRouter());
-  registerSingleton<App>(App());
+  registerSingleton<App>(const App());
 }

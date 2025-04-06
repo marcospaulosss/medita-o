@@ -256,14 +256,12 @@ class _CameraViewState extends State<CameraView> {
 
     try {
       final XFile picture = await _controller!.takePicture();
-      if (picture != null) {
-        final compressedImage = await _compressImage(File(picture.path));
-        setState(() {
-          _image = compressedImage;
-        });
-        _showPreviewDialog(compressedImage);
-      }
-    } catch (e) {
+      final compressedImage = await _compressImage(File(picture.path));
+      setState(() {
+        _image = compressedImage;
+      });
+      _showPreviewDialog(compressedImage);
+        } catch (e) {
       error.sendErrorToCrashlytics(
           code: ErrorCodes.cameraError, stackTrace: StackTrace.current);
       _showErrorDialog('Erro ao capturar imagem');
