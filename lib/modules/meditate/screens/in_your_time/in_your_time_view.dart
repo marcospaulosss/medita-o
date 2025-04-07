@@ -170,7 +170,9 @@ class InYourTimeViewState extends State<InYourTimeView>
       track,
     ));
 
-    setState(() {});
+    if (mounted) {
+      setState(() {});
+    }
   }
 
   /// Submete a meditação como concluída

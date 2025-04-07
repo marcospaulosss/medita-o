@@ -60,4 +60,13 @@ class MockInYourTimePresenter extends _i1.Mock
         returnValue: _i4.Future<void>.value(),
         returnValueForMissingStub: _i4.Future<void>.value(),
       ) as _i4.Future<void>);
+
+  @override
+  void goToShare() => super.noSuchMethod(
+        Invocation.method(
+          #goToShare,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
 }
