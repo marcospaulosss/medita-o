@@ -78,15 +78,19 @@ class _PlayerState extends State<Player> {
   /// * Estado do player (completo, em reprodução, etc)
   Future<void> _initPlayer() async {
     _player.durationStream.listen((duration) {
-      setState(() {
-        _duration = duration;
-      });
+      if (mounted) {
+        setState(() {
+          _duration = duration;
+        });
+      }
     });
 
     _player.positionStream.listen((position) {
-      setState(() {
-        _position = position;
-      });
+      if (mounted) {
+        setState(() {
+          _position = position;
+        });
+      }
     });
 
     _player.playerStateStream.listen((state) {
@@ -100,9 +104,11 @@ class _PlayerState extends State<Player> {
   /// 
   /// Reseta a posição para zero, para o player e executa o callback [onStop]
   Future<void> _onAudioComplete() async {
-    setState(() {
-      _position = Duration.zero;
-    });
+    if (mounted) {
+      setState(() {
+        _position = Duration.zero;
+      });
+    }
     await _player.stop();
     widget.onStop();
   }
