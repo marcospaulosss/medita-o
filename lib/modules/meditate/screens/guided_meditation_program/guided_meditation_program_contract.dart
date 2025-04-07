@@ -25,7 +25,9 @@ abstract class Presenter
   /// Submete a meditação concluída
   void submitMeditateCompleted(int time);
 
-  /// Direciona para a tela de compartilhamento
+  /// Direciona para a tela de compartilhamento após a conclusão da meditação guiada.
+  /// Este método é chamado automaticamente após o registro da meditação concluída,
+  /// permitindo que o usuário compartilhe sua conquista nas redes sociais.
   void goToShare();
 }
 
