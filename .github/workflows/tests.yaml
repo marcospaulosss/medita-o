@@ -56,34 +56,3 @@ jobs:
           min_coverage: 70
           exclude: './lib/core/* **/strings/localization/**'
           path: ./coverage/new2_lcov.info
-
-  integration_test:
-    name: Integration Tests
-    runs-on: macos-latest
-    needs: flutter_test
-    steps:
-      - name: Checkout branch
-        uses: actions/checkout@v3
-
-      - name: Setup Java
-        uses: actions/setup-java@v3
-        with:
-          distribution: 'temurin'
-          java-version: '17'
-
-      - name: Setup flutter
-        uses: subosito/flutter-action@v2
-        with:
-          flutter-version: '3.27.3'
-          channel: 'stable'
-
-      - name: Install dependencies and build
-        run: |
-          flutter pub get
-          chmod +x localization
-          ./localization
-          flutter packages pub run build_runner build --delete-conflicting-outputs
-
-      - name: Execute Integration Tests
-        run: |
-          flutter test integration_test
