@@ -102,6 +102,15 @@ class MockGuidedMeditationProgramPresenter extends _i1.Mock
         returnValue: _i5.Future<void>.value(),
         returnValueForMissingStub: _i5.Future<void>.value(),
       ) as _i5.Future<void>);
+
+  @override
+  void goToShare() => super.noSuchMethod(
+        Invocation.method(
+          #goToShare,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
 }
 
 /// A class which mocks [AudioPlayer].
