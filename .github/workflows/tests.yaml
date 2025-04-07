@@ -86,5 +86,4 @@ jobs:
 
       - name: Execute Integration Tests
         run: |
-          flutter test integration_test/modules/authentication/screens/welcome/welcome_integration_test.dart
-          flutter test integration_test/app_test.dart
+          flutter test integration_test
