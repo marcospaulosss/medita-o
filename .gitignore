@@ -62,3 +62,5 @@ node_modules/
 externals/
 
 **/minutos-3ae7f-fde6e0b502d4.json
+**/AuthKey_*.p8
+**/minutos-3ae7f-*.json
